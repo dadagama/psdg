@@ -2,6 +2,7 @@
 require_once "DistribucionUniformeAleatoria.inc";
 class DistribucionExponencial
 {
+	var $x;
 	var $_lambda;
 	var $_distribucionUniforme;
 	
