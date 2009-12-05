@@ -1,4 +1,5 @@
 <?php
+require_once("Conexion.inc");
 /**
  * Interfaz para estandarizar las conexiones a Bases de datos.
  * @author	dadagama
@@ -48,7 +49,7 @@ abstract class ConexionBD extends Conexion
    * @param	$instruccionSQL	Instrucción sql a ejecutar.
    * @see	ejecutarSQL()
    */
-  function inicializarSQL($instruccionSQL);
+  abstract function inicializarSQL($instruccionSQL);
   
   /**
    * Ejecuta la instrucción de la variable _sql de la clase en la base de datos 
@@ -62,7 +63,7 @@ abstract class ConexionBD extends Conexion
    * @see		inicializarSQL($instruccionSQL)
    * @see		obtenerResultadoComoArreglo()
    */
-  function ejecutarSQL($arregloParametros = "");
+  abstract function ejecutarSQL();
   
   /**
    * Transforma el resulset de la clase en un arreglo asociativo y lo retorna.
@@ -72,7 +73,7 @@ abstract class ConexionBD extends Conexion
    * @return 	array	Arreglo asociativo que representa un registro de la 
    * 					consulta. [nombreCampo] => [valorCampo].
    */
-  function obtenerResultadoComoArreglo();
+  abstract function obtenerResultadoComoArreglo();
   
   
 }

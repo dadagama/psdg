@@ -28,26 +28,26 @@ abstract class Conexion
    * @param		&$arregloParametros	Puntero al arreglo asociativo con los 
    * 								parametros de conexión.
    */
-  function inicializarParametrosDeConexion(&$arregloParametros);
+  abstract function inicializarParametrosDeConexion($arregloParametros);
   
   /**
    * Efectua esta conexión con la fuente externa.
    * @return	boolean	Verdadero si logra conectar, Falso en caso 
    * 					contrario.
    */
-  function conectar();
+  abstract function conectar();
   
   /**
    * Termina esta conexión con la fuente externa.
    * @return	boolean	Verdadero si logra desconectar, Falso en caso contrario.
    */
-  function desconectar();
+  abstract function desconectar();
   
   /**
    * Retorna el arreglo que contiene los datos necesarios para realizar esta
    * conexión con la fuente externa.
    * @return	array
    */
-  function obtenerParametrosConexion();
+  abstract function obtenerParametrosConexion();
 }
 ?>
