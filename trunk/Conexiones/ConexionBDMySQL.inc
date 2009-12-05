@@ -1,4 +1,5 @@
 <?php
+require_once("ConexionBD.inc");
 class ConexionBDMySQL extends ConexionBD
 {
   function inicializarParametrosDeConexion($arregloParametros)
@@ -6,7 +7,7 @@ class ConexionBDMySQL extends ConexionBD
      $this->_parametrosConexion = $arregloParametros;
   }
   
-  function conectar($arregloParametros)
+  function conectar()
   {
     $servidor = $this->_parametrosConexion['nombreServidor'];
     $usuario  = $this->_parametrosConexion['nombreUsuario'];
@@ -29,7 +30,7 @@ class ConexionBDMySQL extends ConexionBD
     $this->_sql = $instruccionSQL;
   }
   
-  function ejecutarSQL($arregloParametros = "")
+  function ejecutarSQL()
   {
     $this->_resultSet = mysql_query($this->_sql, $this->_conexion);
   }
