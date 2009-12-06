@@ -1,31 +1,18 @@
-var x;
-x=$(document);
-x.ready(inicializarEventos);
+var doc;
+doc=$(document);
+doc.ready(inicializarEventos);
 
 function inicializarEventos()
 {
-  var x;
-  x=$("#btn_login");
-  x.click(presionEnlace);
+  var btn_login;
+  btn_login = $("#btn_login");
+  btn_login.click(iniciar_sesion);
 }
 
-function presionEnlace()
+function iniciar_sesion()
 {
-  var v = $("#usu_login").attr("value");
-  alert('login='+v);
-  $.ajax({
-           async:true,
-           type: "POST",
-           dataType: "html",
-           contentType: "application/x-www-form-urlencoded",
-           url:"index2.php",
-           data:"usu_login="+v,
-           beforeSend:inicioEnvio,
-           success:llegadaDatos,
-           timeout:10000,
-           error:problemas
-         });
-  return false;
+  alert('hola');
+  $("#div_sesion").slideToggle("slow");
 }
 
 function inicioEnvio()

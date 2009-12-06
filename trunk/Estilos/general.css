@@ -9,33 +9,41 @@ body
 {
 	margin-top: 165px;
 	width: 			1024px;
-	/*border:		 	solid 1px #d2bfb6;temporal*/
+	/*border:		 	solid 1px #d2bfb6;*/
 }
 
 #div_sesion
 {
 	width: 						300px;
 	text-align: 			center;
-	/*background-color: #fff;temporal*/
 	margin: 					0 auto;
+	/*background-color: #fff;*/
 }
 
 #barra_de_estado
 {
-	width: 				1004px;
+	width: 				1024px;
 	height: 			20px;
 	position: 		fixed;
 	bottom: 			0px;
 	background: 	#0089ce;
-	color:				#ff0;
+	color:				#fff;
 	font-family:	Arial,Helvetica,sans-serif;
-	padding-left:	20px;
+
 	font-size: 		14px;
-	display: table;
+	display: 			table;
 }
 
-.xx
+#status
 {
-	display: table-cell; 
+	display: 				table-cell; 
 	vertical-align: middle;
+}
+
+#lbl_loading
+{
+	display: 				table-cell; 
+	vertical-align: middle;
+	text-align: 		center;
+	width:					50px;
 }
