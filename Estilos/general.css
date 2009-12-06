@@ -1,0 +1,41 @@
+body
+{
+	background: 				url("../Imagenes/psdg.png");
+	background-repeat:	no-repeat;
+	margin-left: 				0px;
+}
+
+#div_cuerpo
+{
+	margin-top: 165px;
+	width: 			1024px;
+	/*border:		 	solid 1px #d2bfb6;temporal*/
+}
+
+#div_sesion
+{
+	width: 						300px;
+	text-align: 			center;
+	/*background-color: #fff;temporal*/
+	margin: 					0 auto;
+}
+
+#barra_de_estado
+{
+	width: 				1004px;
+	height: 			20px;
+	position: 		fixed;
+	bottom: 			0px;
+	background: 	#0089ce;
+	color:				#ff0;
+	font-family:	Arial,Helvetica,sans-serif;
+	padding-left:	20px;
+	font-size: 		14px;
+	display: table;
+}
+
+.xx
+{
+	display: table-cell; 
+	vertical-align: middle;
+}

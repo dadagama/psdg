@@ -1,0 +1,37 @@
+.lbl_formulario
+{
+	width: 				50%;
+	float: 				left;
+	text-align: 	left;
+	display: 			block;
+	font-size: 		15px;
+	font-family: 	Arial,Helvetica,sans-serif;
+	color: 				#2a7bb3;
+	margin-top: 	5px;
+	line-height: 	25px;
+}
+
+.inp_formulario
+{
+	width: 				50%;
+	float: 				left;
+	margin-top:		5px;
+	line-height:	25px;
+}
+
+.boton
+{
+	margin-top: 5px;
+}
+
+fieldset
+{
+	border: 1px solid #d2bfb6;
+}
+
+legend
+{
+	color: 				#2a7bb3;
+	font-family:	Arial,Helvetica,sans-serif;
+	font-size: 		14px;
+}
