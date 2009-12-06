@@ -1,5 +1,5 @@
 <?php
-if($_REQUEST['usu_login'] && $_REQUEST['usu_password'])
+if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']))
 {
 	echo "<div id='div_conexiones'>
 					<fieldset class='div_formulario'>

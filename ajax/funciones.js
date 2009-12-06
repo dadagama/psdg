@@ -18,12 +18,12 @@ function verificar_datos_sesion()
 				type: 		"POST",
 				dataType:	"html",
 				contentType:"application/x-www-form-urlencoded",
-				url:		"index2.php",
+				url:		"servidor.php",
 				data:		"usu_login="+usu_login+"&usu_password="+usu_password,
 				beforeSend:	ajax_send,
 				success:	iniciar_sesion,
-				timeout:	3000,
-				error:		ajax_error
+				timeout:	4000,
+				error:		ajax_error("Hubo un error al establecer conexión con el servidor.")
 			}); 
 	return false;
 }
