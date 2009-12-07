@@ -1,27 +1,55 @@
-.lbl_formulario
+.tabla
 {
-	width: 				50%;
-	float: 				left;
-	text-align: 	left;
-	display: 			block;
+	display: table;
+	width: 100%;
+	/*border: 1px dashed #f00;*/
+}
+
+.tabla_centrada
+{
+	display: inline-table;
+}
+
+.fila
+{
+	display: table-row;
+}
+
+.celda
+{
+	display: table-cell;
+	/*border: 1px solid #0f0;*/
+	vertical-align:middle;
+	margin-top: 5px;
+	text-align: 	right;
+}
+
+.centrado
+{
+	text-align: center;
+}
+
+.alto_30
+{
+	height: 30px;
+}
+
+.ancho_50
+{
+	width: 50px;
+}
+
+.ancho_100
+{
+	width: 100px;
+}
+
+.etiqueta
+{
 	font-size: 		15px;
 	font-family: 	Arial,Helvetica,sans-serif;
-	color: 				#2a7bb3;
-	margin-top: 	5px;
-	line-height: 	25px;
-}
-
-.inp_formulario
-{
-	width: 				50%;
-	float: 				left;
-	margin-top:		5px;
-	line-height:	25px;
-}
-
-.boton
-{
-	margin-top: 5px;
+	color: 			#2a7bb3;
+	padding: 		0 5px 10px 0;vertical-align:middle;
 }
 
 fieldset
@@ -31,7 +59,7 @@ fieldset
 
 legend
 {
-	color: 				#2a7bb3;
+	color: 			#2a7bb3;
 	font-family:	Arial,Helvetica,sans-serif;
 	font-size: 		14px;
 }
