@@ -1,23 +1,26 @@
 function validarCampoNoVacio(campoNoVacio, nombreCampo, mostrarMensaje) 
 {
-  var letra = false;
-  for (var i = 0; i < campoNoVacio.val().length; i++ ) 
-  {
-    if ( campoNoVacio.val().charAt(i) != " " ) 
-    {
-      letra = true;
-    }
-  }
-  if(!letra)
-  {
-    if(mostrarMensaje)
-      alert("Contenido del campo ["+nombreCampo+"] no puede estar vacío.");
-    return false;
-  }
-  else
-  {
-    return true;
-  }
+	var letra = false;
+	for (var i = 0; i < campoNoVacio.val().length; i++ ) 
+	{
+		if ( campoNoVacio.val().charAt(i) != " " ) 
+		{
+			letra = true;
+		}
+	}
+	if(!letra)
+	{
+		if(mostrarMensaje)
+		{
+			var mensaje = lang_js[4].replace("%v", nombreCampo);
+			alert(mensaje);
+		}
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 function validarCampoFecha(campoFecha, nombreCampo, admitirVacio)
@@ -25,7 +28,7 @@ function validarCampoFecha(campoFecha, nombreCampo, admitirVacio)
   //alert("validando "+nombreCampo);
   if (!admitirVacio && !(campoFecha.value.length > 0))
   { 
-    alert("Contenido del campo ["+nombreCampo+"] no puede estar vacío.");
+    alert("El campo ["+nombreCampo+"] no puede estar vacío.");
     return false;
   }  
   
