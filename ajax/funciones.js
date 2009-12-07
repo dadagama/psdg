@@ -71,6 +71,12 @@ function iniciar_sesion(div_conexiones)
 function ocultar(elemento)
 {
 	$("#"+elemento).fadeOut("slow");
+	setTimeout('eliminar("'+elemento+'")',2000);
+}
+
+function eliminar(elemento)
+{
+	$("#"+elemento).remove();
 }
 
 function mostrar(elemento)
