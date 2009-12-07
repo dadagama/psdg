@@ -1,7 +1,17 @@
 <?php
+session_start();
+	
 if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']) && isset($_REQUEST['lang']))
 {
-	echo "<div id='div_conexiones'>
+	//si existe usuario
+	if(true)
+	{
+		require_once ("../controladores/traductor.inc");
+		//$traductor = new Traductor($_REQUEST['lang']);
+		$_SESSION['lang'] = $_REQUEST['lang'];
+		$_SESSION["usu_login"] = $_REQUEST['usu_login'];
+		
+		echo "<div id='div_conexiones'>
 					<fieldset>
 						<legend><label>Conexión</label></legend>
 						<div class='tabla'>
@@ -40,10 +50,15 @@ if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']) && isset($_
 											</div>
 										</div>
 									</div>
+								</div>
 							</div>
 						</div>
 					</fieldset>
 				</div>";
+	}
+	else 
+		echo "-1";
+		
 }
 else
 	echo "-1";
