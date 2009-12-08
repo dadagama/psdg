@@ -5,5 +5,7 @@ var lang_es = new Array(
 	"Iniciar sesión",//3
 	"El campo [%v] no puede estar vacío.",//4
 	"Nombre de usuario ó contraseña incorrecta.",//5
-	"Enviando información..."//6
+	"Enviando información...",//6
+	"OK",//7
+	"Error: Tiempo de conexión agotado."//8
 );
