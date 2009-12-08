@@ -5,5 +5,7 @@ var lang_en = new Array(
 	"Sign in",//3
 	"[%v] field must not be empty.",//4
 	"Incorrect user or password.",//5
-	"Sending data..."//6
+	"Sending data...",//6
+	"OK",//7
+	"Connection timeout error."//8
 );
