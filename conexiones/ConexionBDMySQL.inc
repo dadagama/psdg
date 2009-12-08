@@ -2,7 +2,7 @@
 require_once("ConexionBD.inc");
 class ConexionBDMySQL extends ConexionBD
 {
-  function inicializarParametrosDeConexion($arregloParametros)
+  function __construct($arregloParametros)
   {
      $this->_parametrosConexion = $arregloParametros;
   }
@@ -25,14 +25,14 @@ class ConexionBDMySQL extends ConexionBD
     return mysql_close($this->_conexion);
   }
   
-  function inicializarSQL($instruccionSQL)
+  /*function inicializarSQL()
   {
     $this->_sql = $instruccionSQL;
-  }
+  }*/
   
-  function ejecutarSQL()
+  function ejecutarSQL($instruccionSQL)
   {
-    $this->_resultSet = mysql_query($this->_sql, $this->_conexion);
+    $this->_resultSet = mysql_query(/*$this->_sql*/$instruccionSQL, $this->_conexion);
   }
   
   function obtenerResultadoComoArreglo()

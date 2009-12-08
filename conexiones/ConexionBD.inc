@@ -49,21 +49,21 @@ abstract class ConexionBD extends Conexion
    * @param	$instruccionSQL	Instrucción sql a ejecutar.
    * @see	ejecutarSQL()
    */
-  abstract function inicializarSQL($instruccionSQL);
+  /*abstract function inicializarSQL();*/
   
   /**
-   * Ejecuta la instrucción de la variable _sql de la clase en la base de datos 
+   * Ejecuta la instrucción sql en la base de datos 
    * y guarda el resultado en la variable _resultSet de la clase.
+   * @param		$sql	Instrucción sql a ejecutar.
    * @return	resource|boolean	Para SELECT, SHOW, DESCRIBE y EXPLAIN 
    * 								retorna un resultset que se asigna a la 
    * 								variable _resultSet de la clase ó Falso en 
    * 								caso de error. Para INSERT, UPDATE, DELETE y 
    * 								DROP retorna Verdadero si es satisfactoria ó 
    * 								Falso en caso de error.
-   * @see		inicializarSQL($instruccionSQL)
    * @see		obtenerResultadoComoArreglo()
    */
-  abstract function ejecutarSQL();
+  abstract function ejecutarSQL($sql);
   
   /**
    * Transforma el resulset de la clase en un arreglo asociativo y lo retorna.

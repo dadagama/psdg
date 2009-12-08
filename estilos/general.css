@@ -36,11 +36,19 @@ body
 	width: 250;
 }
 
-#div_conexiones
+#div_conexion
 {
 	width: 300;
 	text-align: center;
 	margin: 0 auto;
+}
+
+#div_conexiones
+{
+	width: 500;
+	text-align: center;
+	margin: 0 auto;
+	border: 1px solid #f0f0f0;
 }
 
 #barra_de_estado

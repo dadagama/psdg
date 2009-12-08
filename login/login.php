@@ -6,55 +6,108 @@ if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']) && isset($_
 	//si existe usuario
 	if(true)
 	{
-		//require_once ("../controladores/traductor.inc");
-		//$traductor = new Traductor($_REQUEST['lang']);
 		$_SESSION['lang'] = $_REQUEST['lang'];
 		$_SESSION["usu_login"] = $_REQUEST['usu_login'];
 		
-		echo "<div id='div_conexiones'>
-					<fieldset>
-						<legend><label>Conexión</label></legend>
-						<div class='tabla'>
-							<div class='fila'>
-								<div class='tabla_centrada'>
-									<div class='fila'>
-										<div class='celda alto_30'>
-											<label class='etiqueta'>Nombre conexión:</label>
-										</div>
-										<div class='celda alto_30'>
-											<input type='text' id='con_nombre' maxlength='50' class='ancho_100'/>
-										</div>
-									</div>
-									<div class='fila'>
-										<div class='celda alto_30'>
-											<label class='etiqueta'>Usuario:</label>
-										</div>
-										<div class='celda alto_30'>
-											<input type='text' id='con_usuario' maxlength='50' class='ancho_100'/>
-										</div>
-									</div>
-									<div class='fila'>
-										<div class='celda alto_30'>
-											<label class='etiqueta'>Contraseña:</label>
-										</div>
-										<div class='celda alto_30'>
-											<input type='password' id='con_password' maxlength='50' class='ancho_100'/>
-										</div>
-									</div>
-									<div class='fila'>
-										<div class='tabla_centrada'>
-											<div class='fila'>
-												<div class='celda alto_30'>
-													<input type='button' value='Establecer' id='btn_establecer'/>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				</div>";
+		require_once("../herramientas/GeneradorHtml.inc");
+		$html = new GeneradorHtml($_SESSION['lang']);
+		
+		//DIV CONEXION
+		$html->tag("div", array("id"=>"div_conexion"));
+			$html->tag("fieldset");
+			
+				$html->tag("legend");
+					$html->tag("label");
+						$html->printText("lbl_conexion");
+					$html->end("label");
+				$html->end("legend");
+				
+				//TABLA FORMULARIO
+				$html->tag("div", array("class"=>"tabla"));
+				
+					//FORMULARIO
+					$html->tag("div", array("class"=>"fila"));
+						$html->tag("div", array("class"=>"tabla_centrada"));
+						
+							//CAMPO NOMBRE CONEXION
+							$html->tag("div", array("class"=>"fila"));
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("label", array("class"=>"etiqueta"));
+										$html->printText("lbl_con_nombre");
+									$html->end("label");
+								$html->end("div");
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("input", array("class"=>"ancho_100", "id"=>"con_nombre", "type"=>"text", "size"=>"50", "title"=>$html->getText('ttp_con_nombre')));
+								$html->end("div");
+							$html->end("div");
+							
+							//CAMPO USUARIO CONEXION
+							$html->tag("div", array("class"=>"fila"));
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("label", array("class"=>"etiqueta"));
+										$html->printText("lbl_con_usuario");
+									$html->end("label");
+								$html->end("div");
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("input", array("class"=>"ancho_100", "id"=>"con_usuario", "type"=>"text", "size"=>"50", "title"=>$html->getText("ttp_con_usuario")));
+								$html->end("div");
+							$html->end("div");
+							
+							//CAMPO CONTRASEÑA CONEXION
+							$html->tag("div", array("class"=>"fila"));
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("label", array("class"=>"etiqueta"));
+										$html->printText("lbl_con_password");
+									$html->end("label");
+								$html->end("div");
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("input", array("class"=>"ancho_100", "id"=>"con_password", "type"=>"text", "size"=>"50", "title"=>$html->getText('ttp_con_password')));
+								$html->end("div");
+							$html->end("div");
+						$html->end("div");
+					$html->end("div");
+					
+					//BOTON FORMULARIO
+					$html->tag("div", array("class"=>"fila"));
+						$html->tag("div", array("class"=>"tabla_centrada"));
+							$html->tag("div", array("class"=>"fila"));
+								$html->tag("div", array("class"=>"celda alto_30"));
+									$html->tag("input", array("id"=>"btn_establecer", "type"=>"button", "value"=>$html->getText("btn_establecer")));
+								$html->end("div");
+							$html->end("div");
+						$html->end("div");
+					$html->end("div");
+					//FIN BOTON FORMULARIO
+					
+				$html->end("div");
+				//FIN TABLA FORMULARIO
+				
+			$html->end("fieldset"); 
+		$html->end("div");
+		//FIN DIV CONEXION
+		
+		
+		//DIV DE CONEXIONES
+		/*$html->tag("div", array("id"=>"div_conexiones"));
+			$html->tag("fieldset");
+			
+				$html->tag("legend");
+					$html->tag("label");
+						$html->printText("lbl_conexiones_establecidas");
+					$html->end("label");
+				$html->end("legend");
+				//TABLA
+				$html->tag("div", array("class"=>"tabla"));
+					$html->tag("div", array("class"=>"fila"));
+							$html->tag("div", array("class"=>"tabla_centrada"));
+								$html->tag("div", array("class"=>"fila"));
+									$html->tag("div", array("class"=>"celda alto_30"));
+										$html->tag("label", array("class"=>"etiqueta"));
+											$html->printText("lbl_con_nombre");
+											
+			$html->end("fieldset");
+		$html->end("div");*/ 
+		//FIN DIV DE CONEXIONES
 	}
 	else 
 		echo "-1";

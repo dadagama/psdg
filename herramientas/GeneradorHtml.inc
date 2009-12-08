@@ -1,54 +1,34 @@
 <?php
-public class GeneradorHtml
+require_once ("../herramientas/Traductor.inc");
+
+class GeneradorHtml
 {
-	function div($id="", $name="", $class="")
-	{
-		echo "<div id='$id' name='$name' class='$class'>";
-	}
+	var $traductor;
 	
-	function label($id="", $name="", $class="")
+	function __construct($lang)
 	{
-		echo "<label id='$id' name='$name' class='$class'>";
+		$this->traductor = new Traductor($lang);
 	}
 
-	function fieldset($id="", $name="", $class="")
+	function printText($texto)
 	{
-		echo "<fieldset id='$id' name='$name' class='$class'>";
+		echo stripslashes($this->traductor->traducir($texto));
 	}
 	
-	function legend($id="", $name="", $class="")
+	function getText($texto)
 	{
-		echo "<legend id='$id' name='$name' class='$class'>";
-	}
-	
-	function input($id="", $name="", $class="", $type="", $value="", $disabled="")
-	{
-		echo "<input id='$id' name='$name' class='$class' type='$type' value='$value' $disabled>";
-	}
-	
-	function form($id="", $name="", $class="", $action="", $method="")
-	{
-		echo "<form id='$id' name='$name' class='$class' action='$action' method='$method'>";
+		return $this->traductor->traducir($texto);
 	}
 
-	function select($id="", $name="", $class="", $multiple="", $size="1", $disabled="")
+	function tag($tag, $arrayAtributosAsociativos="", $arrayAtributos="")
 	{
-		echo "<select id='$id' name='$name' class='$class' $multiple size='$size' $disabled>";
-	}
-	
-	function optgroup($label="")
-	{
-		echo "<optgroup label='$label'>";
-	}
-	
-	function option($value="", $selected="", $disabled="")
-	{
-		echo "<option value='$value' $selected $disabled>";
-	}
-	
-	function textarea($disabled="")
-	{
-		echo "<textarea $disabled>";
+		if($arrayAtributosAsociativos)
+			foreach($arrayAtributosAsociativos as $tipo => $valor)
+				$atributosAsociativos .= " $tipo=\"$valor\"";
+		if($arrayAtributos)
+			foreach($arrayAtributos as $pos => $valor)
+				$atributos .= " $valor";
+		echo "<".stripslashes($tag)." ".stripslashes($atributosAsociativos)." ".stripslashes($atributos).">";
 	}
 	
 	function br()
@@ -56,22 +36,7 @@ public class GeneradorHtml
 		echo "<br/>";
 	}
 	
-	function li()
-	{
-		echo "<li>";
-	}
-
-	function ol()
-	{
-		echo "<ol>";
-	}
-	
-	function ul()
-	{
-		echo "<ul/>";
-	}
-	
-	function fin($tipo)
+	function end($tipo)
 	{
 		echo "</$tipo>";
 	}

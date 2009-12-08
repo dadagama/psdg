@@ -28,7 +28,9 @@ abstract class Conexion
    * @param		&$arregloParametros	Puntero al arreglo asociativo con los 
    * 								parametros de conexión.
    */
-  abstract function inicializarParametrosDeConexion($arregloParametros);
+  //abstract function inicializarParametrosDeConexion($arregloParametros);
+  //Los parametros de conexion se inicializaran atraves del constructor de la
+  //clase respectiva
   
   /**
    * Efectua esta conexión con la fuente externa.
