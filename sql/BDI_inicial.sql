@@ -17,6 +17,14 @@ CREATE TABLE IF NOT EXISTS `PSDG_idioma` (
 ) ENGINE= InnoDB COMMENT = 'Almacena las traducciones de las etiquetas';
 
 /*ESPAÑOL*/
+INSERT INTO PSDG_idioma VALUES('lbl_login','es','Iniciar Sesión');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Usuario:');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_password','es','Contraseña:');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_login','es','Digite su nombre de usuario');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_password','es','Digite su contraseña');
+INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','es','Inglés');
+INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','es','Español');
+INSERT INTO PSDG_idioma VALUES('btn_login','es','Iniciar Sesión');
 INSERT INTO PSDG_idioma VALUES('lbl_conexion','es','Conexión');
 INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','es','Nombre conexión:');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre','es','Nombre que identifica la conexión en la aplicación');
@@ -26,6 +34,14 @@ INSERT INTO PSDG_idioma VALUES('lbl_con_password','es','Contraseña:');
 INSERT INTO PSDG_idioma VALUES('ttp_con_password','es','Contraseña del usuario en la Base de datos');
 INSERT INTO PSDG_idioma VALUES('btn_establecer','es','Establecer');
 /*INGLES*/
+INSERT INTO PSDG_idioma VALUES('lbl_login','en','Log in');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','User:');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_password','en','Password:');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_login','en','Type your user name');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_password','en','Type your password');
+INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','en','English');
+INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','en','Spanish');
+INSERT INTO PSDG_idioma VALUES('btn_login','en','Sign in');
 INSERT INTO PSDG_idioma VALUES('lbl_conexion','en','Connection');
 INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','en','Connection name:');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre','en','Name that identifies the connection in the application');
