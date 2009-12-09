@@ -18,12 +18,12 @@
 				$html->end("label");
 			$html->end("legend");
 			
-			//TABLA FORMULARIO
+			//TABLA FORMULARIO PARTE ARRIBA
 			$html->tag("div", array("class"=>"tabla"));
 			
 				//FORMULARIO
 				$html->tag("div", array("class"=>"fila"));
-					$html->tag("div", array("class"=>"tabla_centrada tabla_bloque alto_120"));
+					$html->tag("div", array("class"=>"tabla_centrada"));
 					
 						//CAMPO TIPO CONEXION
 						$html->tag("div", array("class"=>"fila"));
@@ -55,7 +55,35 @@
 								$html->tag("input", array("class"=>"ancho_120", "id"=>"con_nombre", "type"=>"text", "maxlength"=>"20", "title"=>$html->getText('ttp_con_nombre')));
 							$html->end("div");
 						$html->end("div");
+					$html->end("div");
+				$html->end("div");
+				
+				//TABLA FORMULARIO PARTE ABAJO (DATOS CONEXION)
+				$html->tag("div", array("class"=>"fila"));
+				
+				$html->tag("fieldset");
+		
+					//TITULO DIV
+					$html->tag("legend");
+						$html->tag("label");
+							echo "detos de coneccion";
+						$html->end("label");
+					$html->end("legend");
+				
+					$html->tag("div", array("class"=>"tabla_centrada"));
 						
+						//CAMPO DB CONEXION
+						$html->tag("div", array("class"=>"fila"));
+							$html->tag("div", array("class"=>"celda alto_30"));
+								$html->tag("label", array("class"=>"etiqueta"));
+									$html->printText("lbl_con_nombre_db");
+								$html->end("label");
+							$html->end("div");
+							$html->tag("div", array("class"=>"celda alto_30"));
+								$html->tag("input", array("class"=>"ancho_120", "id"=>"con_nombre_db", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("ttp_con_nombre_db")));
+							$html->end("div");
+						$html->end("div");
+					
 						//CAMPO USUARIO CONEXION
 						$html->tag("div", array("class"=>"fila"));
 							$html->tag("div", array("class"=>"celda alto_30"));
@@ -80,6 +108,7 @@
 							$html->end("div");
 						$html->end("div");
 					$html->end("div");
+				$html->end("fieldset"); 
 				$html->end("div");
 				
 				//BOTON FORMULARIO
