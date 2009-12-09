@@ -38,7 +38,7 @@ body
 
 #div_conexion
 {
-	width: 300;
+	width: 320;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -49,6 +49,7 @@ body
 	text-align: center;
 	margin: 0 auto;
 	border: 1px solid #f0f0f0;
+	margin-top: 50px; 
 }
 
 #barra_de_estado
