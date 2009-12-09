@@ -12,7 +12,7 @@ function validarCampoNoVacio(campoNoVacio, nombreCampo, mostrarMensaje)
 	{
 		if(mostrarMensaje)
 		{
-			var mensaje = lang_js[4].replace("%v", nombreCampo);
+			var mensaje = lang_js[8].replace("%v", nombreCampo);
 			alert(mensaje);
 		}
 		return false;

@@ -1,5 +1,7 @@
 <?php 
+
 require_once("../conexiones/ConexionBDMySQL.inc");
+
 class Traductor
 {
 	var $lang;

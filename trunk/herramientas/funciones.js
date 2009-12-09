@@ -11,7 +11,7 @@ function eliminar(nombreElemento)
 
 function mostrar(nombreElemento)
 {
-	$("#"+nombreElemento).slideToggle("slow",ajaxSuccess(lang_js[7]));
+	$("#"+nombreElemento).slideToggle("slow",ajaxSuccess(lang_js[11]));
 }
 
 function ajaxSend(mensaje)
@@ -20,7 +20,7 @@ function ajaxSend(mensaje)
 	lbl_status.html(mensaje);
 	lbl_status.removeClass("error");
 	var lbl_loading = $("#lbl_loading");
-	lbl_loading.html('<img src="../imagenes/loading_bar.gif"/>');
+	lbl_loading.html('<img src="imagenes/loading_bar.gif"/>');
 }
 
 function ajaxSuccess(mensaje)

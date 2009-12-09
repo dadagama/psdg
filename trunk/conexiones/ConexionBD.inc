@@ -69,12 +69,17 @@ abstract class ConexionBD extends Conexion
    * Transforma el resulset de la clase en un arreglo asociativo y lo retorna.
    * El resulset de la clase se debe encontrar inicializado antes de hacer el 
    * llamado a esta función.
-   * @see		inicializarSQL($instruccionSQL)
    * @return 	array	Arreglo asociativo que representa un registro de la 
    * 					consulta. [nombreCampo] => [valorCampo].
    */
   abstract function obtenerResultadoComoArreglo();
   
+  /**
+   * Retorna el numero de filas del resulset devuelto por una sentencia SELECT
+   * ó SHOW.
+   * @return	int	Numero de filas almacenadas en el resultset.
+   */
+  abstract function obtenerNumeroFilas();
   
 }
 ?>

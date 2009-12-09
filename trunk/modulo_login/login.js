@@ -1,9 +1,42 @@
 var doc;
-var lang = "en";
-var idiomas_cargados = new Array("en");
-var lang_js = lang_en;
 doc=$(document);
 doc.ready(inicializarEventos);
+
+var lang_en = new Array(
+		"Log in",//0
+		"User:",//1
+		"Type your user name",//2
+		"Password:",//3
+		"Type your password",//4
+		"English",//5
+		"Spanish",//6
+		"Sign in",//7
+		"[%v] field must not be empty.",//8
+		"Incorrect user or password.",//9
+		"Sending data...",//10
+		"OK",//11
+		"Connection timeout error."//12
+	);
+
+var lang_es = new Array(
+		"Iniciar sesión",//0
+		"Usuario:",//1
+		"Digite su nombre de usuario",//2
+		"Contraseña:",//3
+		"Digite su contraseña",//4
+		"Inglés",//5
+		"Español",//6
+		"Iniciar sesión",//7
+		"El campo [%v] no puede estar vacío.",//8
+		"Nombre de usuario ó contraseña incorrecta.",//9
+		"Enviando información...",//10
+		"OK",//11
+		"Error: Tiempo de conexión agotado."//12
+	);
+
+var lang = "en";
+var lang_js = lang_en;
+var idiomas_cargados = new Array("en");
 
 function inicializarEventos()
 {
@@ -17,12 +50,6 @@ function cambiarLenguaje()
 {
 	var chk_lang = $(this);
 	lang = chk_lang.val();
-	if(!idiomaEstaCargado(lang))
-	{
-		agregarIdioma(lang);
-		$("body").append("<script type='text/javascript' src='../idiomas/"+lang+".js'></script>");
-		
-	}
 	switch(lang)
 	{
 		case "es":
@@ -34,8 +61,15 @@ function cambiarLenguaje()
 	}	
 	$("#lbl_login").html(lang_js[0]);
 	$("#lbl_usu_login").html(lang_js[1]);
-	$("#lbl_usu_password").html(lang_js[2]);
-	$("#btn_login").val(lang_js[3]);
+	$("#usu_login").attr("title",lang_js[2]);
+	$("#lbl_usu_password").html(lang_js[3]);
+	$("#usu_password").attr("title",lang_js[4]);
+	$("#chk_lang_en").attr("title",lang_js[5]);
+	$("#chk_lang_es").attr("title",lang_js[6]);
+	$("#img_lang_en").attr("title",lang_js[5]);
+	$("#img_lang_es").attr("title",lang_js[6]);
+	$("#btn_login").val(lang_js[7]);
+	$("#btn_login").attr("title",lang_js[7]);
 }
 
 function agregarIdioma(idioma)
@@ -61,8 +95,8 @@ function verificarDatosSesion()
 {
 	var login = $("#lbl_usu_login").html();
 	var pass = $("#lbl_usu_password").html();
-	var usu_login = $("#inp_usu_login");
-	var usu_password = $("#inp_usu_password");
+	var usu_login = $("#usu_login");
+	var usu_password = $("#usu_password");
 	if (validarCampoNoVacio(usu_login, login, true) && validarCampoNoVacio(usu_password, pass, true))
 	{
 		$.ajax({
@@ -70,12 +104,12 @@ function verificarDatosSesion()
 					type: 		"POST",
 					dataType:	"html",
 					contentType:"application/x-www-form-urlencoded",
-					url:		"login.php",
+					url:		"../modulo_login/login.php",
 					data:		"usu_login="+usu_login.val()+"&usu_password="+usu_password.val()+"&lang="+lang,
-					beforeSend:	ajaxSend(lang_js[6]),
+					beforeSend:	ajaxSend(lang_js[10]),
 					success:	iniciarSesion,
 					timeout:	5000,
-					error:		ajaxError(lang_js[8])
+					error:		ajaxError(lang_js[12])
 				}); 
 	}
 	return false;
@@ -91,5 +125,5 @@ function iniciarSesion(div_conexiones)
 		setTimeout('mostrar("div_conexion")',1000);
 	}
 	else
-		ajax_error(lang_js[5]);
+		ajaxError(lang_js[9]);
 }

@@ -1,4 +1,5 @@
 <?php
+
 require_once("ConexionBD.inc");
 class ConexionBDMySQL extends ConexionBD
 {
@@ -44,5 +45,10 @@ class ConexionBDMySQL extends ConexionBD
   {
     return $this->_parametrosConexion;
   }
+  
+	function obtenerNumeroFilas()
+	{
+		return mysql_num_rows($this->_resultSet);
+	}
 }
 ?>

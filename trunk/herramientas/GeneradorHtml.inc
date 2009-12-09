@@ -1,4 +1,5 @@
 <?php
+
 require_once ("../herramientas/Traductor.inc");
 
 class GeneradorHtml
