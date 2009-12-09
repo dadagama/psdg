@@ -41,5 +41,12 @@ class GeneradorHtml
 	{
 		echo "</$tipo>";
 	}
+	
+	function cargarJsDeModulo($modulo)
+	{
+		$this->tag("script", array("type"=>"text/javascript", "src"=>"../modulo_$modulo/$modulo.js"));
+		$this->end("script");
+	}
+	
 }
 ?>
