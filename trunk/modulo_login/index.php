@@ -14,8 +14,8 @@ session_start();
 	<body>
 		<div class="div_logo alineacion_centrado"></div>
 		<div id="div_cuerpo">
-		<?php 
-			if(isset($_SESSION['modulo']))
+		<?php
+			if(isset($_SESSION['modulo']) && $_SESSION['modulo'] != "login")
 			{
 				require_once("../modulo_".$_SESSION['modulo']."/fm_".$_SESSION['modulo'].".php");
 			}
