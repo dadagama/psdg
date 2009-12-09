@@ -5,6 +5,8 @@
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
 	
+	$html->cargarJsDeModulo($_SESSION['modulo']);
+	
 	//DIV CONEXION
 	$html->tag("div", array("id"=>"div_conexion"));
 		$html->tag("fieldset");
