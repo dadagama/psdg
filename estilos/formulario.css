@@ -10,6 +10,16 @@
 	display: inline-table;
 }
 
+.tabla_bloque
+{
+	display: inline-block;
+}
+
+.alto_120
+{
+	height: 120px;
+}
+
 .fila
 {
 	display: table-row;
@@ -42,6 +52,11 @@
 .ancho_100
 {
 	width: 100px;
+}
+
+.ancho_120
+{
+	width: 120px;
 }
 
 .etiqueta
