@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	$_SESSION['modulo'] = "login";
 	
 	if(!isset($_SESSION['lang']))
 		$_SESSION['lang'] = "en";
@@ -7,8 +8,7 @@
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
 	
-	$html->tag("script", array("type"=>"text/javascript", "src"=>"../modulo_login/login.js"));
-	$html->end("script");
+	$html->cargarJsDeModulo($_SESSION['modulo']);
 	
 	//DIV SESION
 	$html->tag("div", array("id"=>"div_sesion"));
