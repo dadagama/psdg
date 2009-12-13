@@ -29,9 +29,18 @@
 {
 	display: table-cell;
 	/*border: 1px solid #0f0;*/
-	vertical-align:middle;
 	margin-top: 5px;
-	text-align: 	right;
+	text-align: right;
+}
+
+.vertical_centro
+{
+	vertical-align: middle;
+}
+
+.vertical_arriba
+{
+	vertical-align: top;
 }
 
 .centrado
@@ -57,6 +66,11 @@
 .ancho_120
 {
 	width: 120px;
+}
+
+.alineacion_centrado 
+{
+	margin:0 auto;
 }
 
 .etiqueta
