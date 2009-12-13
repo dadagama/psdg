@@ -4,6 +4,19 @@ function ocultar(nombreElemento)
 	setTimeout('eliminar("'+nombreElemento+'")',2000);
 }
 
+function establecerPosicionSecuencia(secuencia_activa)
+{
+	for ( var int = 1; int <= 4; int++) 
+	{
+		if(int < secuencia_activa)
+			$("#step_"+int).attr("src","../imagenes/step_"+int+"_ok.png");
+		else if(int == secuencia_activa)
+			$("#step_"+int).attr("src","../imagenes/step_"+int+"_on.png");
+		else
+			$("#step_"+int).attr("src","../imagenes/step_"+int+"_off.png");
+	}
+}
+
 function eliminar(nombreElemento)
 {
 	$("#"+nombreElemento).remove();

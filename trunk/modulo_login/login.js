@@ -115,14 +115,15 @@ function verificarDatosSesion()
 	return false;
 }
 
-function iniciarSesion(div_conexiones)
+function iniciarSesion(modulo_conexiones)
 {
-	if(div_conexiones != '-1')
+	if(modulo_conexiones != '-1')
 	{
 		setTimeout('ocultar("div_sesion")',0);
-		$("#div_cuerpo").append(div_conexiones);
-		$('#div_conexion').hide();
-		setTimeout('mostrar("div_conexion")',1000);
+		$("#div_cuerpo").append(modulo_conexiones);
+		$('#div_general_conexiones').hide();
+		setTimeout('mostrar("div_general_conexiones")',1000);
+		establecerPosicionSecuencia(1);
 	}
 	else
 		ajaxError(lang_js[9]);

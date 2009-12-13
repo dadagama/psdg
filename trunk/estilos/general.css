@@ -3,7 +3,7 @@
 	text-decoration: 	blink;
 }
 
-.div_logo 
+#div_logo 
 {
 	background: url("../imagenes/psdg.png");
 	height: 151px;
@@ -17,11 +17,6 @@ body
 	margin: 0 auto;
 }
 
-.alineacion_centrado 
-{
-	margin:0 auto;
-}
-
 #div_cuerpo
 {
 	margin: 0 auto;
@@ -29,27 +24,50 @@ body
 	/*border: 1px solid #f0f0f0;*/
 }
 
+#div_secuencia
+{
+	text-align: center;
+	margin: 0 auto;
+	width: 800px;
+	height: 50px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 #div_sesion
 {
 	text-align: center;
 	margin: 0 auto;
-	width: 250;
+	width: 250px;
+}
+
+.div_help
+{
+	position: absolute;
+	right: 5px;
+	top: 11px;
 }
 
 #div_conexion
 {
-	width: 320;
+	width: 380px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;/*PROBANDO...*/
+}
+
+#div_general_conexiones
+{
+	width: 900px;
 	text-align: center;
 	margin: 0 auto;
 }
 
 #div_conexiones
 {
-	width: 500;
+	width: 380px;
 	text-align: center;
 	margin: 0 auto;
-	border: 1px solid #f0f0f0;
-	margin-top: 50px; 
 }
 
 #barra_de_estado

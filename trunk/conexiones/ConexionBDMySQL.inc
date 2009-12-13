@@ -48,7 +48,7 @@ class ConexionBDMySQL extends ConexionBD
   
 	function obtenerNumeroFilas()
 	{
-		return mysql_num_rows($this->_resultSet);
+	return mysql_num_rows($this->_resultSet);
 	}
 }
 ?>

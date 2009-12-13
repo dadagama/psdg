@@ -21,15 +21,19 @@ class Traductor
 	
 	function traducir($texto)
 	{
-		$traduccion = $texto;
+		$resultado = $texto;
 		$sql = "	SELECT idi_traduccion
 					FROM PSDG_idioma 
 					WHERE idi_texto = '$texto'
 					AND idi_lenguaje = '".$this->lang."'
 					LIMIT 1";
 		$this->conexionBDI->ejecutarSQL($sql);
-		$resultado = $this->conexionBDI->obtenerResultadoComoArreglo();
-		return utf8_encode($resultado['idi_traduccion']);
+		if($this->conexionBDI->obtenerNumeroFilas() > 0)
+		{
+			$resultado = $this->conexionBDI->obtenerResultadoComoArreglo();
+			$resultado = $resultado['idi_traduccion'];
+		}
+		return utf8_encode($resultado);
 	}
 }
 ?>

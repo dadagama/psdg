@@ -16,6 +16,11 @@ class GeneradorHtml
 		echo stripslashes($this->traductor->traducir($texto));
 	}
 	
+	function printStaticText($texto)
+	{
+		echo stripslashes(utf8_encode($texto));
+	}
+	
 	function getText($texto)
 	{
 		return $this->traductor->traducir($texto);
