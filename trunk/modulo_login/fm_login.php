@@ -30,7 +30,7 @@
 					
 					//CAMPO NOMBRE USUARIO
 					$html->tag("div", array("class"=>"fila"));
-						$html->tag("div", array("class"=>"celda alto_30"));
+						$html->tag("div", array("class"=>"celda alto_30 ancho_100"));
 							$html->tag("label", array("id"=>"lbl_usu_login", "class"=>"etiqueta"));
 								$html->printText("lbl_usu_login");
 							$html->end("label");
@@ -42,7 +42,7 @@
 					
 					//CAMPO CONTRASEÑA
 					$html->tag("div", array("class"=>"fila"));
-						$html->tag("div", array("class"=>"celda alto_30"));
+						$html->tag("div", array("class"=>"celda alto_30 ancho_100"));
 							$html->tag("label", array("id"=>"lbl_usu_password", "class"=>"etiqueta"));
 								$html->printText("lbl_usu_password");
 							$html->end("label");

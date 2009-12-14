@@ -2,7 +2,6 @@
 {
 	display: table;
 	width: 100%;
-	/*border: 1px dashed #f00;*/
 }
 
 .tabla_centrada
@@ -28,7 +27,6 @@
 .celda
 {
 	display: table-cell;
-	/*border: 1px solid #0f0;*/
 	margin-top: 5px;
 	text-align: right;
 }
@@ -63,9 +61,14 @@
 	width: 100px;
 }
 
-.ancho_120
+.ancho_130
 {
-	width: 120px;
+	width: 130px;
+}
+
+.ancho_150
+{
+	width: 150px;
 }
 
 .alineacion_centrado 

@@ -1,11 +1,11 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['step']))
-	$_SESSION['step'] = 0;
+	session_start();
 	
-require_once("../herramientas/GeneradorHtml.inc");
-$html = new GeneradorHtml($_SESSION['lang']);
+	if(!isset($_SESSION['step']))
+		$_SESSION['step'] = 0;
+		
+	require_once("../herramientas/GeneradorHtml.inc");
+	$html = new GeneradorHtml($_SESSION['lang']);
 ?>
 <html>
 	<head>
@@ -17,7 +17,7 @@ $html = new GeneradorHtml($_SESSION['lang']);
 		<link rel="stylesheet" type="text/css" href="../estilos/formulario.css">
 		<link rel="stylesheet" type="text/css" href="../estilos/general.css">
 	</head>
-	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>)">
+	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>); mostrarBotonLogout(<?php echo $_SESSION['step']; ?>);">
 		<?php
 			//DIV LOGO
 			$html->tag("div", array("id"=>"div_logo", "class"=>"alineacion_centrado"));
@@ -27,12 +27,25 @@ $html = new GeneradorHtml($_SESSION['lang']);
 			//DIV SECUENCIA
 			$html->tag("div", array("id"=>"div_secuencia", "class"=>"alineacion_centrado"));
 				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Establecer restricciones"));
+				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->end("img");
 				$html->tag("img", array("id"=>"step_2", "src"=>"../imagenes/step_2_off.png", "alt"=>"2", "title"=>"2"));
+				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->end("img");
 				$html->tag("img", array("id"=>"step_3", "src"=>"../imagenes/step_3_off.png", "alt"=>"3", "title"=>"3"));
+				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->end("img");
 				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"4", "title"=>"4"));
+				$html->end("img");
+				
+				$html->tag("div", array("id"=>"div_logout"));
+					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/logout.png", "alt"=>"logout", "title"=>"logout"));
+					$html->end("input");
+				$html->end("div");
+					
 			$html->end("div");
 			//FIN DIV SECUENCIA
 			
@@ -54,6 +67,22 @@ $html = new GeneradorHtml($_SESSION['lang']);
 				$html->end("label");
 			$html->end("div");
 			//FIN DIV BARRA DE ESTADO
+			
+			//DIV AYUDA
+			$html->tag("div", array("id"=>"div_ayuda", "class"=>"oculto"));
+			
+				$html->tag("label", array("id"=>"lbl_ayuda", "class"=>"titulo"));
+				$html->end("label");
+				
+				$html->tag("button", array("id"=>"boton_cerrar", "onclick"=>"esconder('div_ayuda');"));
+						$html->printStaticText("X");
+				$html->end("button");
+				
+				$html->tag("label", array("id"=>"div_mensaje"));
+				$html->end("label");
+				
+			$html->end("div");
+			//FIN DIV AYUDA
 		?>
 	</body>
 </html>
