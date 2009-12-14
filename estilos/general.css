@@ -21,17 +21,17 @@ body
 {
 	margin: 0 auto;
 	width: 1024px;
-	/*border: 1px solid #f0f0f0;*/
 }
 
 #div_secuencia
 {
 	text-align: center;
 	margin: 0 auto;
-	width: 800px;
+	width: 1024px;
 	height: 50px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	position: relative;
 }
 
 #div_sesion
@@ -44,8 +44,15 @@ body
 .div_help
 {
 	position: absolute;
-	right: 5px;
-	top: 11px;
+	right: 4px;
+	top: 9px;
+}
+
+#div_logout
+{
+	position: absolute;
+	right: 4px;
+	top: 9px;
 }
 
 #div_conexion
@@ -53,12 +60,12 @@ body
 	width: 380px;
 	text-align: center;
 	margin: 0 auto;
-	position: relative;/*PROBANDO...*/
+	position: relative;
 }
 
 #div_general_conexiones
 {
-	width: 900px;
+	/*width: 900px;*/
 	text-align: center;
 	margin: 0 auto;
 }
@@ -66,8 +73,10 @@ body
 #div_conexiones
 {
 	width: 380px;
+	height: 50px;
 	text-align: center;
 	margin: 0 auto;
+	position: relative;
 }
 
 #barra_de_estado
@@ -95,4 +104,52 @@ body
 	vertical-align: middle;
 	text-align: center;
 	width: 50px;
+}
+
+#div_ayuda
+{
+	padding: 10px;
+	width: 300px;
+	height: 180px;
+	position: fixed;
+	bottom: 0px;
+	background: #0089ce;
+	right: 0px;
+}
+
+#div_mensaje
+{
+	color: #fff;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13px;
+	margin-top: 5px;
+	position: absolute;
+}
+
+.titulo
+{
+	color: #fff;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	display: block;
+	width: 270px;
+	border-bottom: solid 1px #d2bfb6;
+}
+
+#boton_cerrar
+{
+	color: #0089ce;
+	font-family: Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 25px;
+	height: 25px;
+}
+
+.oculto
+{
+	display: none;
 }

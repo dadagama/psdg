@@ -53,5 +53,16 @@ class GeneradorHtml
 		$this->end("script");
 	}
 	
+	function cargarHerramientasJS()
+	{
+		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/funciones.js"));
+		$this->end("script");
+		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/validacion.js"));
+		$this->end("script");
+		//SE DEBERIA INDEPENDIZAR EL ARRAY DE IDIOMAS PARA NO CARGAR TODO EL JS DE LOGIN
+		$this->tag("script", array("type"=>"text/javascript", "src"=>"../modulo_login/login.js"));
+		$this->end("script");
+	}
+	
 }
 ?>

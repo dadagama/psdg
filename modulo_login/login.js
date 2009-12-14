@@ -15,7 +15,8 @@ var lang_en = new Array(
 		"Incorrect user or password.",//9
 		"Sending data...",//10
 		"OK",//11
-		"Connection timeout error."//12
+		"Error: Connection timeout.",//12
+		"Help"//13
 	);
 
 var lang_es = new Array(
@@ -31,7 +32,8 @@ var lang_es = new Array(
 		"Nombre de usuario ó contraseña incorrecta.",//9
 		"Enviando información...",//10
 		"OK",//11
-		"Error: Tiempo de conexión agotado."//12
+		"Error: Tiempo de conexión agotado.",//12
+		"Ayuda"//13
 	);
 
 var lang = "en";
@@ -45,6 +47,7 @@ function inicializarEventos()
   var chk_lang = $("input[name='chk_lang']");
   chk_lang.click(cambiarLenguaje);
 }
+
 
 function cambiarLenguaje()
 {
@@ -106,10 +109,10 @@ function verificarDatosSesion()
 					contentType:"application/x-www-form-urlencoded",
 					url:		"../modulo_login/login.php",
 					data:		"usu_login="+usu_login.val()+"&usu_password="+usu_password.val()+"&lang="+lang,
-					beforeSend:	ajaxSend(lang_js[10]),
+					beforeSend:	ajaxSend,
 					success:	iniciarSesion,
-					timeout:	5000,
-					error:		ajaxError(lang_js[12])
+					timeout:	10000,
+					error:		ajaxError(12)
 				}); 
 	}
 	return false;
@@ -122,9 +125,10 @@ function iniciarSesion(modulo_conexiones)
 		setTimeout('ocultar("div_sesion")',0);
 		$("#div_cuerpo").append(modulo_conexiones);
 		$('#div_general_conexiones').hide();
+		$('#div_general_conexiones').removeClass("oculto");
 		setTimeout('mostrar("div_general_conexiones")',1000);
 		establecerPosicionSecuencia(1);
 	}
 	else
-		ajaxError(lang_js[9]);
+		ajaxError();
 }
