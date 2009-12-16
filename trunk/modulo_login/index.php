@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="../herramientas/validacion.js"></script>
 		<script type="text/javascript" src="../herramientas/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="../herramientas/funciones.js"></script>
+		<script type="text/javascript" src="../herramientas/lang.js"></script>
 		<link rel="stylesheet" type="text/css" href="../estilos/formulario.css">
 		<link rel="stylesheet" type="text/css" href="../estilos/general.css">
 	</head>

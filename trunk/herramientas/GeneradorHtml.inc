@@ -37,6 +37,16 @@ class GeneradorHtml
 		echo "<".stripslashes($tag)." ".stripslashes($atributosAsociativos)." ".stripslashes($atributos).">";
 	}
 	
+	function botonAyuda($nombreBoton)
+	{
+		$this->tag("div", array("class"=>"div_help"));
+			$this->tag("input", array(	"onclick"=>"mostrarPopupAyuda('$nombreBoton');", 
+												"type"=>"image", "src"=>"../imagenes/help.png", 
+												"alt"=>"Ayuda", 
+												"title"=>$this->getText("ttp_help")));
+		$this->end("div");
+	}
+	
 	function br()
 	{
 		echo "<br/>";
@@ -47,22 +57,16 @@ class GeneradorHtml
 		echo "</$tipo>";
 	}
 	
-	function cargarJsDeModulo($modulo)
+	function cargarModuloJS($modulo)
 	{
 		$this->tag("script", array("type"=>"text/javascript", "src"=>"../modulo_$modulo/$modulo.js"));
 		$this->end("script");
 	}
 	
-	function cargarHerramientasJS()
+	function cargarHerramientaJS($herramienta)
 	{
-		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/funciones.js"));
-		$this->end("script");
-		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/validacion.js"));
-		$this->end("script");
-		//SE DEBERIA INDEPENDIZAR EL ARRAY DE IDIOMAS PARA NO CARGAR TODO EL JS DE LOGIN
-		$this->tag("script", array("type"=>"text/javascript", "src"=>"../modulo_login/login.js"));
+		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/$herramienta.js"));
 		$this->end("script");
 	}
-	
 }
 ?>
