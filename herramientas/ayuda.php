@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	if($_REQUEST['numero'])
+	if($_REQUEST['nombreBoton'])
 	{
 		require_once("../conexiones/ConexionBDMySQL.inc");
 				
@@ -8,7 +8,7 @@
 		$conexionBDI->conectar();
 		$sql = "	SELECT ayu_mensaje
 					FROM PSDG_mensaje_ayuda
-					WHERE ayu_codigo = '".$_REQUEST['numero']."'
+					WHERE ayu_nombre_boton = '".$_REQUEST['nombreBoton']."'
 					AND ayu_lenguaje = '".$_SESSION['lang']."'
 					LIMIT 1";
 		$conexionBDI->ejecutarSQL($sql);

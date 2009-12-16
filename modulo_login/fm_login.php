@@ -8,7 +8,7 @@
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
 	
-	$html->cargarJsDeModulo($_SESSION['modulo']);
+	$html->cargarModuloJS("login");
 	
 	//DIV SESION
 	$html->tag("div", array("id"=>"div_sesion"));

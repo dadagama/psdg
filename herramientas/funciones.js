@@ -87,7 +87,7 @@ function ajaxError(numero)
 	lbl_loading.html("");
 }
 
-function mostrarPopupAyuda(numero)
+function mostrarPopupAyuda(nombreBoton)
 {
 	$.ajax({
 		async:		true,
@@ -95,7 +95,7 @@ function mostrarPopupAyuda(numero)
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../herramientas/ayuda.php",
-		data:		"numero="+numero,
+		data:		"nombreBoton="+nombreBoton,
 		success:	mostrarPopup
 	});
 }
