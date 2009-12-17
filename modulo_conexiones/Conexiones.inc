@@ -18,8 +18,9 @@ class Conexiones
 	{
 		$sql = "	SELECT con_tipo
 					FROM PSDG_conexion
-					WHERE con_tipo = 'BDO'
+					WHERE con_tipo = 'bd'
 					AND con_usu_login = '".$this->usu_login."'
+					AND con_nombre = 'BDO'
 					LIMIT 1";
 
 		$this->conexionBDI->ejecutarSQL($sql);

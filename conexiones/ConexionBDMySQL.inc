@@ -36,6 +36,11 @@ class ConexionBDMySQL extends ConexionBD
     $this->_resultSet = mysql_query(/*$this->_sql*/$instruccionSQL, $this->_conexion);
   }
   
+	function obtenerResultset()
+	{
+		return $this->_resultSet;
+	}
+  
   function obtenerResultadoComoArreglo()
   {
     return mysql_fetch_assoc($this->_resultSet);

@@ -19,7 +19,7 @@ function verificarDatosSesion()
 	if (validarCampoNoVacio(usu_login, login, true) && validarCampoNoVacio(usu_password, pass, true))
 	{
 		$.ajax({
-					async:		true,
+					async:		false,
 					type: 		"POST",
 					dataType:	"html",
 					contentType:"application/x-www-form-urlencoded",
