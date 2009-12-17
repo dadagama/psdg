@@ -12,7 +12,12 @@ var lang_en = new Array(
 		"Sending data...",//10
 		"OK",//11
 		"Error: Connection timeout.",//12
-		"Help"//13
+		"Help",//13
+		"Set connections",//14
+		"Set restrictions",//15
+		"Set output type",//16
+		"Run",//17
+		"Connection name already exists in the BDI"//18
 	);
 
 var lang_es = new Array(
@@ -29,7 +34,12 @@ var lang_es = new Array(
 		"Enviando información...",//10
 		"OK",//11
 		"Error: Tiempo de conexión agotado.",//12
-		"Ayuda"//13
+		"Ayuda",//13
+		"Establecer conexiones",//14
+		"Establecer restricciones",//15
+		"Establecer tipo de salida",//16
+		"Ejecutar",//17
+		"El nombre de conexión ya existe en la BDI"//18
 	);
 
 var lang = "en";
@@ -40,15 +50,7 @@ function cambiarLenguaje()
 {
 	var chk_lang = $(this);
 	lang = chk_lang.val();
-	switch(lang)
-	{
-		case "es":
-			lang_js = lang_es;
-			break;
-		default:
-			lang_js = lang_en;
-			break;
-	}	
+	establecerIdioma(lang);
 	$("#lbl_login").html(lang_js[0]);
 	$("#lbl_usu_login").html(lang_js[1]);
 	$("#usu_login").attr("title",lang_js[2]);
@@ -60,6 +62,23 @@ function cambiarLenguaje()
 	$("#img_lang_es").attr("title",lang_js[6]);
 	$("#btn_login").val(lang_js[7]);
 	$("#btn_login").attr("title",lang_js[7]);
+	$("#step_1").attr("title",lang_js[14]);
+	$("#step_2").attr("title",lang_js[15]);
+	$("#step_3").attr("title",lang_js[16]);
+	$("#step_4").attr("title",lang_js[17]);
+}
+
+function establecerIdioma(lang)
+{
+	switch(lang)
+	{
+		case "es":
+			lang_js = lang_es;
+			break;
+		default:
+			lang_js = lang_en;
+			break;
+	}	
 }
 
 function agregarIdioma(idioma)

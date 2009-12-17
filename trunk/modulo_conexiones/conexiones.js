@@ -1,39 +1,91 @@
-function adicionarConexion(no_es_BDO)
+function adicionarConexion()
 {
-	var lbl_con_tipo = $("#lbl_con_tipo").html();
-	var lbl_con_nombre = $("#lbl_con_nombre").html();
-	var lbl_con_nombre_db = $("#lbl_con_nombre_db").html();
-	var lbl_con_usuario = $("#lbl_con_usuario").html();
-	var lbl_con_password = $("#lbl_con_password").html();
-	var lbl_con_nombre_archivo = $("#lbl_con_nombre_archivo").html();
-	var lbl_con_nombre_biblioteca = $("#lbl_con_nombre_biblioteca").html();
+	if(pasaValidacionCampos())
+	{
+		var datos_conexion = $("#fm_datos_conexion").serialize();
+		$.ajax({
+			async:		true,
+			type: 		"POST",
+			dataType:	"html",
+			contentType:"application/x-www-form-urlencoded",
+			url:		"../modulo_conexiones/ajax_conexiones.php",
+			data:		"con_nombre="+$("#con_nombre").val()+"&con_tipo="+$("#con_tipo").val()+"&"+datos_conexion,
+			beforeSend:	ajaxSend,
+			success:	insertoConexion,
+			timeout:	10000,
+			error:		ajaxError(12)
+		}); 
+		return false;
+	}
+}
+
+function pasaValidacionCampos()
+{
+	var validacion_abajo = false;
+	var validacion_arriba = false;
+	var con_tipo = $("#con_tipo").val();
 	
-	var con_tipo = $("#con_tipo");
-	var con_nombre = $("#con_nombre");
+	validacion_arriba = validarCampoNoVacio($("#con_tipo"), $("#lbl_con_tipo").html(), true) && validarCampoNoVacio($("#con_nombre"), $("#lbl_con_nombre").html(), true);
 	
-	var con_nombre_db = $("#con_nombre_db");
-	
-	var datos_conexion = $("#fm_datos_conexion").serialize();
-	
-	if(no_es_BDO)
-		validarCampoNoVacio(con_nombre_db, lbl_con_nombre_db, true);
+	if(validacion_arriba)
+	{
+		switch(con_tipo)
+		{
+			case "bd":
+				if(validarCampoNoVacio($("#con_nombre_db"), $("#lbl_con_nombre_db").html(), true)
+					&& validarCampoNoVacio($("#con_usuario"), $("#lbl_con_usuario").html(), true)
+					&& validarCampoNoVacio($("#con_password"), $("#lbl_con_password").html(), true))
+					validacion_abajo = true;
+				break;
+			case "archivo":
+				if(validarCampoNoVacio($("#con_nombre_archivo"), $("#lbl_con_nombre_archivo").html(), true))
+					validacion_abajo = true;
+				break;
+			case "biblioteca":
+				if(validarCampoNoVacio($("#con_nombre_biblioteca"), $("#lbl_con_nombre_biblioteca").html(), true))
+					validacion_abajo = true;
+				break;
+		}
+	}
+	return validacion_abajo;
+}
+
+function insertoConexion(inserto)
+{
+	if(inserto)
+	{
+		restablecerFormulario();
+		ajaxSuccess();
+	}
 	else
-		validarCampoNoVacio(con_nombre_db, lbl_con_nombre_db, true);
-		
-//	if (validarCampoNoVacio(usu_login, login, true) && validarCampoNoVacio(usu_password, pass, true))
-//	{
-		/*$.ajax({
-					async:		true,
-					type: 		"POST",
-					dataType:	"html",
-					contentType:"application/x-www-form-urlencoded",
-					url:		"../modulo_conexiones/ajax_conexiones.php",
-					data:		"con_nombre="+con_nombre+"&con_tipo="+con_tipo+"&datos_conexion="+datos_conexion,
-					beforeSend:	ajaxSend,
-					success:	iniciarSesion,
-					timeout:	10000,
-					error:		ajaxError(12)
-				}); 
-//	}
-	return false;*/
+		ajaxError(18);
+}
+
+function restablecerFormulario()
+{
+	$("#con_nombre").val("");
+	$("#con_tipo").val("");
+	$("#con_nombre_db").val("");
+	$("#con_usuario").val("");
+	$("#con_password").val("");
+	$("#con_nombre_archivo").val("");
+	$("#con_nombre_biblioteca").val("");
+	hacerVisibleCamposFormulario('bd');
+}
+
+function hacerVisibleCamposFormulario(tipo_conexion)
+{
+	$("#fm_datos_conexion").;
+	switch(tipo_conexion)
+	{
+		case "bd":
+
+			break;
+		case "archivo":
+
+			break;
+		case "biblioteca":
+
+			break;
+	}
 }

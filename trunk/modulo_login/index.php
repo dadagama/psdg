@@ -6,6 +6,14 @@
 		
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
+	
+	if(isset($_SESSION['lang']))
+		$idioma = $_SESSION['lang'];
+	else
+	{
+		$idioma = 'en';
+		$_SESSION['lang'] = 'en';
+	}
 ?>
 <html>
 	<head>
@@ -18,7 +26,7 @@
 		<link rel="stylesheet" type="text/css" href="../estilos/formulario.css">
 		<link rel="stylesheet" type="text/css" href="../estilos/general.css">
 	</head>
-	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>); mostrarBotonLogout(<?php echo $_SESSION['step']; ?>);">
+	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>); mostrarBotonLogout(<?php echo $_SESSION['step']; ?>); establecerIdioma('<?php echo $idioma; ?>')">
 		<?php
 			//DIV LOGO
 			$html->tag("div", array("id"=>"div_logo", "class"=>"alineacion_centrado"));
@@ -27,19 +35,19 @@
 			
 			//DIV SECUENCIA
 			$html->tag("div", array("id"=>"div_secuencia", "class"=>"alineacion_centrado"));
-				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Establecer restricciones"));
+				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Set connections"));
 				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_2", "src"=>"../imagenes/step_2_off.png", "alt"=>"2", "title"=>"2"));
+				$html->tag("img", array("id"=>"step_2", "src"=>"../imagenes/step_2_off.png", "alt"=>"paso 2", "title"=>"Set restrictions"));
 				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_3", "src"=>"../imagenes/step_3_off.png", "alt"=>"3", "title"=>"3"));
+				$html->tag("img", array("id"=>"step_3", "src"=>"../imagenes/step_3_off.png", "alt"=>"paso 3", "title"=>"Set output type"));
 				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"4", "title"=>"4"));
+				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"paso 4", "title"=>"Run"));
 				$html->end("img");
 				
 				$html->tag("div", array("id"=>"div_logout"));

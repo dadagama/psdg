@@ -1,13 +1,25 @@
+DROP TABLE IF EXISTS `PSDG_conexion`;
 DROP TABLE IF EXISTS `PSDG_usuario`;
+DROP TABLE IF EXISTS `PSDG_idioma`;
+DROP TABLE IF EXISTS `PSDG_mensaje_ayuda`;
+
+
 CREATE TABLE `BDI`.`PSDG_usuario` (
 	`usu_login` VARCHAR( 20 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
 	`usu_password` VARCHAR( 40 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'contraseña del usuario',
 	PRIMARY KEY ( `usu_login` )
 ) ENGINE = InnoDB COMMENT = 'Almacena los usuarios que tienen acceso a la aplicación';
 
+CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
+	`con_nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
+	`con_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
+	`con_tipo` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tipo de fuente al que se conectará',
+	`con_parametros` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Parametros para realizar la conexión, con el formato p1:v1,p2:v2, ... ,pn:vn',
+	PRIMARY KEY ( `con_nombre`, `con_usu_login`),
+	FOREIGN KEY (`con_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`)
+) ENGINE= InnoDB COMMENT = 'Almacena las conexiones a fuentes de datos externas a la aplicacion';
 INSERT INTO PSDG_usuario(usu_login, usu_password) VALUES('demo','89e495e7941cf9e40e6980d14a16bf023ccd4c91');
 
-DROP TABLE IF EXISTS `PSDG_idioma`;
 CREATE TABLE IF NOT EXISTS `PSDG_idioma` (
 	`idi_texto` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Etiqueta a traducir',
 	`idi_lenguaje` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Abreviatura del lenguaje en el que se encuentra la traducción',
@@ -18,10 +30,6 @@ CREATE TABLE IF NOT EXISTS `PSDG_idioma` (
 /*ESPAÑOL*/
 /*general*/
 INSERT INTO PSDG_idioma VALUES('ttp_help','es','Haga clic para obtener ayuda sobre esta sección.');
-INSERT INTO PSDG_idioma VALUES('ttp_step_1','es','Establecer restricciones');
-INSERT INTO PSDG_idioma VALUES('ttp_step_2','es','Establecer restricciones');
-INSERT INTO PSDG_idioma VALUES('ttp_step_3','es','Establecer restricciones');
-INSERT INTO PSDG_idioma VALUES('ttp_step_4','es','Establecer restricciones');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','es','Iniciar Sesión');
 INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Usuario:');
@@ -53,10 +61,6 @@ INSERT INTO PSDG_idioma VALUES('lgn_con_conexiones_establecidas','es','Conexione
 /*INGLES*/
 /*general*/
 INSERT INTO PSDG_idioma VALUES('ttp_help','en','Click for help on this section.');
-INSERT INTO PSDG_idioma VALUES('ttp_step_1','en','Set restrictions');
-INSERT INTO PSDG_idioma VALUES('ttp_step_2','en','Set restrictions');
-INSERT INTO PSDG_idioma VALUES('ttp_step_3','en','Set restrictions');
-INSERT INTO PSDG_idioma VALUES('ttp_step_4','en','Set restrictions');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','en','Log in');
 INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','User:');
@@ -90,7 +94,7 @@ INSERT INTO PSDG_idioma VALUES('lgn_con_conexiones_establecidas','en','Establish
 
 
 
-DROP TABLE IF EXISTS `PSDG_mensaje_ayuda`;
+
 CREATE TABLE IF NOT EXISTS `PSDG_mensaje_ayuda` (
 	`ayu_nombre_boton` varchar(50) NOT NULL COMMENT 'Nombre del botón al que pertenece el mensaje de ayuda',
 	`ayu_lenguaje` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Abreviatura del lenguaje en el que se encuentra el mensaje',
@@ -100,25 +104,10 @@ CREATE TABLE IF NOT EXISTS `PSDG_mensaje_ayuda` (
 
 /*ESPAÑOL*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('btn_con_help_1','es','Aquí se definen los parámetros para conectar con fuentes externas de información que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).<br/><br/>Tambien se deben definir <b>como mínimo</b> los parámetros de conexion a la Base de datos objetivo (BDO) que será poblada.');
+INSERT INTO PSDG_mensaje_ayuda VALUES('btn_con_help_1','es','Aquí se definen los parámetros para conectar con fuentes externas de información que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).<br/><br/>Tambien se deben definir <b>como mínimo</b> los parámetros de conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Toda la informacion se almacena en la Base de Datos Interna (<b>BDI</b>).');
 /**************************************************************************************************************/
 /*INGLES*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('btn_con_help_1','en','Here you define the parameters to connect to external information sources that provide additional data types (databases, plain text files or libraries).<br/><br/>Also you should define <b>at least</b> the parameters of connection to the Target Database (BDO), which will be populated.');
+INSERT INTO PSDG_mensaje_ayuda VALUES('btn_con_help_1','en','Here you define the parameters to connect to external information sources that provide additional data types (databases, plain text files or libraries).<br/><br/>Also you should define <b>at least</b> the parameters of connection to the Target Database (<b>BDO</b>), which will be populated.<br/><br/>All information is stored in the Internal Database (<b>BDI</b>).');
 
-
-
-
-
-
-
-DROP TABLE IF EXISTS `PSDG_conexion`;
-CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
-	`con_nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
-	`con_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
-	`con_tipo` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tipo de fuente al que se conectará',
-	`con_parametros` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Parametros para realizar la conexión, con el formato p1:v1,p2:v2, ... ,pn:vn',
-	PRIMARY KEY ( `con_nombre`, `con_usu_login`),
-	FOREIGN KEY (`con_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`)
-) ENGINE= InnoDB COMMENT = 'Almacena las conexiones a fuentes de datos externas a la aplicacion';
 
