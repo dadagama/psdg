@@ -24,11 +24,22 @@ class Conexiones
 					LIMIT 1";
 
 		$this->conexionBDI->ejecutarSQL($sql);
-
 		if($this->conexionBDI->obtenerNumeroFilas() == 1)
 			return true;
 		else
 			return false;
+	}
+	
+	function insertarConexion($con_nombre, $usu_login, $con_tipo, $parametros_conexion)
+	{
+		$sql = "	INSERT INTO PSDG_conexion
+			VALUES (	'".$con_nombre."',
+						'".$usu_login."',
+						'".$con_tipo."',
+						'$parametros_conexion'
+			)";
+		$this->conexionBDI->ejecutarSQL($sql);
+		return $this->conexionBDI->obtenerResultset();
 	}
 }
 ?>
