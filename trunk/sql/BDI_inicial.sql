@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `PSDG_idioma` (
 INSERT INTO PSDG_idioma VALUES('ttp_help','es','Haga clic para obtener ayuda sobre esta sección.');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','es','Iniciar Sesión');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Usuario:');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_password','es','Contraseña:');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Usuario');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_password','es','Contraseña');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_login','es','Digite su nombre de usuario');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_password','es','Digite su contraseña');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','es','Inglés');
@@ -41,34 +41,35 @@ INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','es','Español');
 INSERT INTO PSDG_idioma VALUES('btn_login','es','Iniciar Sesión');
 /*conexiones*/
 INSERT INTO PSDG_idioma VALUES('lgn_con_configurar_conexion','es','Configuración de conexiones');
-INSERT INTO PSDG_idioma VALUES('lbl_con_tipo','es','Conectar con:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_tipo','es','Conectar con');
 INSERT INTO PSDG_idioma VALUES('ttp_con_tipo','es','Tipo de conexión');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_bd','es','Base de datos');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_biblioteca','es','Biblioteca');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','es','Nombre conexión:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','es','Nombre conexión');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre','es','Nombre que se utilizará para identificar la conexión');
 INSERT INTO PSDG_idioma VALUES('lgn_con_datos_conexion','es','Parámetros de conexión');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_db','es','Nombre BD:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_db','es','Nombre BD');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_db','es','Nombre de la Base de datos');
-INSERT INTO PSDG_idioma VALUES('lbl_con_usuario','es','Usuario:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_usuario','es','Usuario');
 INSERT INTO PSDG_idioma VALUES('ttp_con_usuario','es','Usuario con el que se conecta a la Base de datos');
-INSERT INTO PSDG_idioma VALUES('lbl_con_password','es','Contraseña:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_password','es','Contraseña');
 INSERT INTO PSDG_idioma VALUES('ttp_con_password','es','Contraseña del usuario con el que se conecta la Base de datos');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_archivo','es','Archivo:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_archivo','es','Ruta del archivo de texto plano a importar');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_biblioteca','es','Biblioteca:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_biblioteca','es','Biblioteca');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_biblioteca','es','Ruta de la biblioteca a importar');
 INSERT INTO PSDG_idioma VALUES('btn_establecer','es','Añadir');
 INSERT INTO PSDG_idioma VALUES('lgn_con_conexiones_establecidas','es','Conexiones establecidas');
+INSERT INTO PSDG_idioma VALUES('lbl_eliminar','es','Eliminar');
 /**************************************************************************************************************/
 /*INGLES*/
 /*general*/
 INSERT INTO PSDG_idioma VALUES('ttp_help','en','Click for help on this section.');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','en','Log in');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','User:');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_password','en','Password:');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','User');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_password','en','Password');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_login','en','Type your user name');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_password','en','Type your password');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','en','English');
@@ -76,28 +77,27 @@ INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','en','Spanish');
 INSERT INTO PSDG_idioma VALUES('btn_login','en','Sign in');
 /*conexiones*/
 INSERT INTO PSDG_idioma VALUES('lgn_con_configurar_conexion','en','Connection setup');
-INSERT INTO PSDG_idioma VALUES('lbl_con_tipo','en','Link to:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_tipo','en','Link to');
 INSERT INTO PSDG_idioma VALUES('ttp_con_tipo','en','Connection type');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_archivo','en','File');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_bd','en','Database');
 INSERT INTO PSDG_idioma VALUES('opt_con_tipo_biblioteca','en','Library');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','en','Connection name:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre','en','Connection name');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre','en','Name that identifies the connection in the application');
 INSERT INTO PSDG_idioma VALUES('lgn_con_datos_conexion','en','Connection parameters');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_db','en','DB name:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_db','en','DB name');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_db','en','Database name');
-INSERT INTO PSDG_idioma VALUES('lbl_con_usuario','en','User:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_usuario','en','User');
 INSERT INTO PSDG_idioma VALUES('ttp_con_usuario','en','User that connects to the database');
-INSERT INTO PSDG_idioma VALUES('lbl_con_password','en','Password:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_password','en','Password');
 INSERT INTO PSDG_idioma VALUES('ttp_con_password','en','User\'s password in the database');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_archivo','en','File:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_archivo','en','File');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_archivo','en','URL plain text file to import');
-INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_biblioteca','en','Library:');
+INSERT INTO PSDG_idioma VALUES('lbl_con_nombre_biblioteca','en','Library');
 INSERT INTO PSDG_idioma VALUES('ttp_con_nombre_biblioteca','en','URL library to import');
 INSERT INTO PSDG_idioma VALUES('btn_establecer','en','Add');
 INSERT INTO PSDG_idioma VALUES('lgn_con_conexiones_establecidas','en','Established connections');
-
-
+INSERT INTO PSDG_idioma VALUES('lbl_eliminar','en','Remove');
 
 
 

@@ -30,8 +30,7 @@ class Traductor
 		$this->conexionBDI->ejecutarSQL($sql);
 		if($this->conexionBDI->obtenerNumeroFilas() > 0)
 		{
-			$resultado = $this->conexionBDI->obtenerResultadoComoArreglo();
-			$resultado = $resultado['idi_traduccion'];
+			$resultado = $this->conexionBDI->obtenerResultadoComoCadena();
 		}
 		return utf8_encode($resultado);
 	}
