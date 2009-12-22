@@ -211,15 +211,35 @@
 								$html->printText("lgn_con_conexiones_establecidas");
 							$html->end("label");
 						$html->end("legend");
+						
 						//TABLA
-						/*$html->tag("div", array("class"=>"tabla"));
-							$html->tag("div", array("class"=>"fila"));
-									$html->tag("div", array("class"=>"tabla_centrada"));
-										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("label", array("class"=>"etiqueta"));
-													$html->printText("lbl_con_nombre");*/
-													
+						$html->tag("div", array("class"=>"tabla", "id"=>"div_conexiones_establecidas"));
+						
+//							$html->tag("div", array("class"=>"fila"));
+//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
+//									$html->tag("label", array("class"=>"etiqueta"));
+//										$html->printText("ttp_con_tipo");
+//									$html->end("label");
+//								$html->end("div");
+//							
+//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
+//									$html->tag("label", array("class"=>"etiqueta"));
+//										$html->printText("lbl_con_nombre");
+//									$html->end("label");
+//								$html->end("div");
+//								
+//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
+//									$html->tag("label", array("class"=>"etiqueta"));
+//										$html->printText("lbl_eliminar");
+//									$html->end("label");
+//								$html->end("div");
+//							$html->end("div");
+							
+							
+							
+						$html->end("div");	
+						//FIN TABLA
+						
 					$html->end("fieldset");
 				$html->end("div");
 				//FIN DIV DE CONEXIONES

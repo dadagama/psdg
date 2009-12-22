@@ -17,7 +17,10 @@ var lang_en = new Array(
 		"Set restrictions",//15
 		"Set output type",//16
 		"Run",//17
-		"Connection name already exists in the BDI"//18
+		"Connection name already exists in the BDI",//18
+		"Allowed file extension is [.txt]",//19
+		"Allowed library extension is[.lib]",//20
+		"Remove this connection"//21
 	);
 
 var lang_es = new Array(
@@ -39,7 +42,10 @@ var lang_es = new Array(
 		"Establecer restricciones",//15
 		"Establecer tipo de salida",//16
 		"Ejecutar",//17
-		"El nombre de conexión ya existe en la BDI"//18
+		"El nombre de conexión ya existe en la BDI",//18
+		"La extensión permitida para archivos es [.txt]",//19
+		"La extensión permitida para bibliotecas es [.lib]",//20
+		"Eliminar esta conexión"//21
 	);
 
 var lang = "en";

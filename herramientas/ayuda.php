@@ -14,8 +14,8 @@
 		$conexionBDI->ejecutarSQL($sql);
 		if($conexionBDI->obtenerNumeroFilas() == 1)
 		{
-			$mensaje = $conexionBDI->obtenerResultadoComoArreglo();
-			echo utf8_encode($mensaje['ayu_mensaje']);
+			$mensaje = $conexionBDI->obtenerResultadoComoCadena();
+			echo utf8_encode($mensaje);
 		}
 		else
 			echo "No existe ayuda para este módulo :(";

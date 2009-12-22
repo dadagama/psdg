@@ -31,6 +31,21 @@
 	text-align: right;
 }
 
+.conexion_establecida
+{
+	text-align: left;
+	color: #626262;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 15px;
+}
+
+.titulo_tabla
+{
+	display: table-cell;
+	margin-top: 5px;
+	text-align: center;
+}
+
 .vertical_centro
 {
 	vertical-align: middle;

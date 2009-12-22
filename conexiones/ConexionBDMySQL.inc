@@ -43,7 +43,18 @@ class ConexionBDMySQL extends ConexionBD
   
   function obtenerResultadoComoArreglo()
   {
-    return mysql_fetch_assoc($this->_resultSet);
+		$arreglo = array();
+		while ($row = mysql_fetch_assoc($this->_resultSet)) 
+		{
+			$arreglo[] = $row;
+		}
+		return $arreglo;
+  }
+  
+	function obtenerResultadoComoCadena()
+  {
+		$row = mysql_fetch_array($this->_resultSet);
+		return $row[0];
   }
   
   function obtenerParametrosConexion()
