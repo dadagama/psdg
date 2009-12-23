@@ -15,9 +15,9 @@ function establecerPosicionSecuencia(secuencia_activa)
 function mostrarBotonLogout(secuencia_activa)
 {
 	if(secuencia_activa != 0)
-		$("#div_logout").show();
+		setTimeout('efecto("div_logout","fadeIn")',1500);
 	else
-		$("#div_logout").hide();
+		setTimeout('efecto("div_logout","hide")',0);
 }
 
 function cerrarSesion()
@@ -39,25 +39,31 @@ function redireccionarIndex()
 	document.location.href="../modulo_login/index.php";
 }
 
-function ocultar(nombreElemento)
-{
-	$("#"+nombreElemento).fadeOut("slow");
-	setTimeout('eliminar("'+nombreElemento+'")',2000);
-}
-
 function eliminar(nombreElemento)
 {
 	$("#"+nombreElemento).remove();
 }
 
-function mostrar(nombreElemento)
+function efecto(nombreElemento, nombreEfecto)
 {
-	$("#"+nombreElemento).slideToggle("slow",ajaxSuccess);
-}
-
-function esconder(nombreElemento)
-{
-	$("#"+nombreElemento).slideToggle("slow",ajaxSuccess);
+	switch(nombreEfecto)
+	{
+		case "slideToggle":
+			$("#"+nombreElemento).slideToggle("slow",ajaxSuccess);
+			break;
+		case "fadeIn":
+			$("#"+nombreElemento).fadeIn("slow",ajaxSuccess);
+			break;
+		case "fadeOut":
+			$("#"+nombreElemento).fadeOut("slow",ajaxSuccess);
+			break;
+		case "hide":
+			$("#"+nombreElemento).hide();
+			break;	
+		default:
+			$("#"+nombreElemento).show("slow",ajaxSuccess);
+			break;
+	}
 }
 
 function ajaxSend()
@@ -109,5 +115,5 @@ function mostrarPopup(mensaje)
 	div_ayuda.hide();
 	div_ayuda.removeClass("oculto");
 	div_mensaje.html(mensaje);
-	setTimeout('mostrar("div_ayuda")',0);
+	setTimeout('efecto("div_ayuda","slideToggle")',0);
 }

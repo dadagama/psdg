@@ -30,24 +30,24 @@
 					
 					//CAMPO NOMBRE USUARIO
 					$html->tag("div", array("class"=>"fila"));
-						$html->tag("div", array("class"=>"celda alto_30 ancho_100"));
+						$html->tag("div", array("class"=>"alineacion_derecha vertical_centro celda alto_30 ancho_100"));
 							$html->tag("label", array("id"=>"lbl_usu_login", "class"=>"etiqueta"));
 								$html->printText("lbl_usu_login");
 							$html->end("label");
 						$html->end("div");
-						$html->tag("div", array("class"=>"celda alto_30"));
+						$html->tag("div", array("class"=>"vertical_centro celda alto_30"));
 							$html->tag("input", array("class"=>"ancho_100", "id"=>"usu_login", "type"=>"text", "maxlength"=>"20", "title"=>$html->getText('ttp_usu_login')));
 						$html->end("div");
 					$html->end("div");
 					
 					//CAMPO CONTRASEÑA
 					$html->tag("div", array("class"=>"fila"));
-						$html->tag("div", array("class"=>"celda alto_30 ancho_100"));
+						$html->tag("div", array("class"=>"alineacion_derecha vertical_centro celda alto_30 ancho_100"));
 							$html->tag("label", array("id"=>"lbl_usu_password", "class"=>"etiqueta"));
 								$html->printText("lbl_usu_password");
 							$html->end("label");
 						$html->end("div");
-						$html->tag("div", array("class"=>"celda alto_30"));
+						$html->tag("div", array("class"=>"vertical_centro celda alto_30"));
 							$html->tag("input", array("class"=>"ancho_100", "id"=>"usu_password", "type"=>"password", "maxlength"=>"20", "title"=>$html->getText('ttp_usu_password')));
 						$html->end("div");
 					$html->end("div");

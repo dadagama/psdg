@@ -13,22 +13,22 @@
 	$html->cargarModuloJS("conexiones");
 
 	//DIV GENERAL
-	$html->tag("div", array("id"=>"div_general_conexiones", "class"=>"tabla $ocultar"));
+	$html->tag("div", array("id"=>"con_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
 			$html->tag("div", array("class"=>"celda vertical_arriba"));
 	
 				//DIV CONEXION
-				$html->tag("div", array("id"=>"div_conexion"));
+				$html->tag("div", array("id"=>"con_div_conexion"));
 				
 					$html->tag("fieldset");
 					
 						//BOTON AYUDA
-						$html->botonAyuda("btn_con_help_1");
+						$html->botonAyuda("con_btn_help_1");
 					
 						//TITULO DIV
 						$html->tag("legend");
 							$html->tag("label");
-								$html->printText("lgn_con_configurar_conexion");
+								$html->printText("con_lgn_configurar_conexion");
 							$html->end("label");
 						$html->end("legend");
 						
@@ -41,22 +41,22 @@
 								
 									//CAMPO TIPO CONEXION
 									$html->tag("div", array("class"=>"fila"));
-										$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-											$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_tipo"));
-												$html->printText("lbl_con_tipo");
+										$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+											$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_tipo"));
+												$html->printText("con_lbl_tipo");
 											$html->end("label");
 										$html->end("div");
 										
-										$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-											$html->tag("select", array("class"=>"ancho_130", "id"=>"con_tipo", "title"=>$html->getText('ttp_con_tipo'), "onchange"=>"actualizarFormulario();"));
+										$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+											$html->tag("select", array("class"=>"ancho_140", "id"=>"con_tipo", "title"=>$html->getText('con_ttp_tipo'), "onchange"=>"actualizarFormulario();"));
 												$html->tag("option", array("value"=>"bd"));
-													$html->printText("opt_con_tipo_bd");
+													$html->printText("con_opt_tipo_bd");
 												$html->end("option");
 												$html->tag("option", array("value"=>"archivo", $disable_select=>$disable_select));
-													$html->printText("opt_con_tipo_archivo");
+													$html->printText("con_opt_tipo_archivo");
 												$html->end("option");
 												$html->tag("option", array("value"=>"biblioteca", $disable_select=>$disable_select));
-													$html->printText("opt_con_tipo_biblioteca");
+													$html->printText("con_opt_tipo_biblioteca");
 												$html->end("option");
 											$html->end("select");
 										$html->end("div");
@@ -64,13 +64,14 @@
 									
 									//CAMPO NOMBRE CONEXION
 									$html->tag("div", array("class"=>"fila"));
-										$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-											$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_nombre"));
-												$html->printText("lbl_con_nombre");
+										$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+											$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre"));
+												$html->printText("con_lbl_nombre");
 											$html->end("label");
 										$html->end("div");
+	
 										$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-											$html->tag("input", array("class"=>"ancho_130", "name"=>"con_nombre", "id"=>"con_nombre", "type"=>"text", "maxlength"=>"20", "title"=>$html->getText('ttp_con_nombre')));
+											$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre", "id"=>"con_nombre", "type"=>"text", "maxlength"=>"20", "title"=>$html->getText('con_ttp_nombre')));
 										$html->end("div");
 									$html->end("div");
 
@@ -87,57 +88,57 @@
 								//TITULO DIV
 								$html->tag("legend");
 									$html->tag("label");
-										$html->printText("lgn_con_datos_conexion");
+										$html->printText("con_lgn_datos_conexion");
 									$html->end("label");
 								$html->end("legend");
 							
-								$html->tag("div", array("class"=>"tabla_centrada", "id"=>"div_datos_conexion"));
+								$html->tag("div", array("class"=>"tabla_centrada", "id"=>"con_div_datos_conexion"));
 									
 									//DIV CONEXION BD
-									$html->tag("div", array("class"=>"fila", "id"=>"div_con_bd"));
+									$html->tag("div", array("class"=>"fila", "id"=>"con_div_bd"));
 									
 										//CAMPO DB CONEXION
 										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_nombre_db"));
-													$html->printText("lbl_con_nombre_db");
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_db"));
+													$html->printText("con_lbl_nombre_db");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_130", "name"=>"con_nombre_db", "id"=>"con_nombre_db", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("ttp_con_nombre_db")));
+												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre_db", "id"=>"con_nombre_db", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_nombre_db")));
 											$html->end("div");
 										$html->end("div");
 									
 										//CAMPO USUARIO CONEXION
 										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_usuario"));
-													$html->printText("lbl_con_usuario");
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_usuario"));
+													$html->printText("con_lbl_usuario");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_130", "name"=>"con_usuario", "id"=>"con_usuario", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("ttp_con_usuario")));
+												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_usuario", "id"=>"con_usuario", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_usuario")));
 											$html->end("div");
 										$html->end("div");
 										
 										//CAMPO CONTRASEÑA CONEXION
 										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_password"));
-													$html->printText("lbl_con_password");
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_password"));
+													$html->printText("con_lbl_password");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_130", "name"=>"con_password", "id"=>"con_password", "type"=>"password", "maxlength"=>"30", "title"=>$html->getText('ttp_con_password')));
+												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_password", "id"=>"con_password", "type"=>"password", "maxlength"=>"30", "title"=>$html->getText('con_ttp_password')));
 											$html->end("div");
 										$html->end("div");
 									
 										//BOTON FORMULARIO
-										$html->tag("div", array("class"=>"fila"));
+										$html->tag("div", array("class"=>"fila"));										
 											$html->tag("div", array("class"=>"tabla_centrada"));
 												$html->tag("div", array("class"=>"fila"));
 													$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-														$html->tag("input", array("id"=>"btn_establecer", "type"=>"button", "value"=>$html->getText("btn_establecer"), "onclick"=>"adicionarConexion();"));
+														$html->tag("input", array("id"=>"con_btn_establecer", "type"=>"button", "value"=>$html->getText("con_btn_establecer"), "onclick"=>"adicionarConexion();"));
 													$html->end("div");
 												$html->end("div");
 											$html->end("div");
@@ -149,32 +150,46 @@
 									//FIN DIV CONEXION BD
 									
 									//DIV ARCHIVO
-									$html->tag("div", array("class"=>"fila", "id"=>"div_con_archivo"));
+									$html->tag("div", array("class"=>"fila", "id"=>"con_div_archivo"));
+									
+										//CAMPO SEPARADOR
+										$html->tag("div", array("class"=>"fila"));
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_separador"));
+													$html->printText("con_lbl_separador");
+												$html->end("label");
+											$html->end("div");
+											$html->tag("div", array("class"=>"alineacion_izquierda celda vertical_centro alto_30"));
+												$html->tag("input", array("class"=>"ancho_20", "maxlength"=>"1", "name"=>"con_separador", "id"=>"con_separador", "type"=>"text", "title"=>$html->getText("con_ttp_separador")));
+											$html->end("div");
+										$html->end("div");	
+										
 										//CAMPO ARCHIVO
 										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_nombre_archivo"));
-													$html->printText("lbl_con_nombre_archivo");
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_archivo"));
+													$html->printText("con_lbl_nombre_archivo");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_130", "size"=>"6", "name"=>"con_nombre_archivo", "id"=>"con_nombre_archivo", "type"=>"file", "title"=>$html->getText("ttp_con_nombre_archivo")));
+												$html->tag("input", array("class"=>"ancho_140", "size"=>"6", "name"=>"con_nombre_archivo", "id"=>"con_nombre_archivo", "type"=>"file", "title"=>$html->getText("con_ttp_nombre_archivo")));
 											$html->end("div");
 										$html->end("div");
+										
 									$html->end("div");
 									//FIN DIV ARCHIVO
 									
 									//DIV BIBLIOTECA
-									$html->tag("div", array("class"=>"fila", "id"=>"div_con_biblioteca"));
+									$html->tag("div", array("class"=>"fila", "id"=>"con_div_biblioteca"));
 										//CAMPO BIBLIOTECA
 										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30 ancho_130"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"lbl_con_nombre_biblioteca"));
-													$html->printText("lbl_con_nombre_biblioteca");
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_biblioteca"));
+													$html->printText("con_lbl_nombre_biblioteca");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_130", "size"=>"6", "name"=>"con_nombre_biblioteca", "id"=>"con_nombre_biblioteca", "type"=>"file", "title"=>$html->getText("ttp_con_nombre_biblioteca")));
+												$html->tag("input", array("class"=>"ancho_140", "size"=>"6", "name"=>"con_nombre_biblioteca", "id"=>"con_nombre_biblioteca", "type"=>"file", "title"=>$html->getText("con_ttp_nombre_biblioteca")));
 											$html->end("div");
 										$html->end("div");
 									$html->end("div");
@@ -200,43 +215,20 @@
 			$html->tag("div", array("class"=>"celda vertical_arriba"));
 			
 				//DIV DE CONEXIONES
-				$html->tag("div", array("id"=>"div_conexiones"));
+				$html->tag("div", array("id"=>"con_div_conexiones"));
 					$html->tag("fieldset");
 						
 						//BOTON AYUDA
-						$html->botonAyuda("btn_con_help_2");
+						$html->botonAyuda("con_btn_help_2");
 					
 						$html->tag("legend");
 							$html->tag("label");
-								$html->printText("lgn_con_conexiones_establecidas");
+								$html->printText("con_lgn_conexiones_establecidas");
 							$html->end("label");
 						$html->end("legend");
 						
 						//TABLA
-						$html->tag("div", array("class"=>"tabla", "id"=>"div_conexiones_establecidas"));
-						
-//							$html->tag("div", array("class"=>"fila"));
-//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
-//									$html->tag("label", array("class"=>"etiqueta"));
-//										$html->printText("ttp_con_tipo");
-//									$html->end("label");
-//								$html->end("div");
-//							
-//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
-//									$html->tag("label", array("class"=>"etiqueta"));
-//										$html->printText("lbl_con_nombre");
-//									$html->end("label");
-//								$html->end("div");
-//								
-//								$html->tag("div", array("class"=>"celda titulo_tabla vertical_centro alto_30"));
-//									$html->tag("label", array("class"=>"etiqueta"));
-//										$html->printText("lbl_eliminar");
-//									$html->end("label");
-//								$html->end("div");
-//							$html->end("div");
-							
-							
-							
+						$html->tag("div", array("class"=>"tabla", "id"=>"con_div_conexiones_establecidas"));
 						$html->end("div");	
 						//FIN TABLA
 						
@@ -249,5 +241,15 @@
 	$html->end("div");
 	//FIN DIV GENERAL
 	
-
+	//DIV BOTONES SECUENCIA
+	$html->tag("div", array("id"=>"con_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
+		$html->tag("div", array("class"=>"fila"));
+			$html->tag("div", array("class"=>"celda vertical_arriba"));
+				//$html->tag("label");
+					$html->tag("input", array("id"=>"con_btn_siguiente", "type"=>"image", "src"=>"../imagenes/step_1_off.png", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('con_ttp_siguiente'), "title"=>$html->getText('con_ttp_siguiente')));
+				//$html->end("label");
+			$html->end("div");
+		$html->end("div");
+	$html->end("div");
+	//FIN DIV BOTONES SECUENCIA
 ?>

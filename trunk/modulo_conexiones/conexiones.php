@@ -14,33 +14,57 @@ switch($_REQUEST['funcion'])
 		$con_nombre = $_REQUEST['con_nombre'];
 		$usu_login = $_SESSION['usu_login'];
 		$con_tipo = $_REQUEST['con_tipo'];
-		$con_nombre_bd = $_REQUEST['con_nombre_db'];
-		$con_usuario_bd = $_REQUEST['con_usuario'];
-		$con_password_bd = $_REQUEST['con_password'];
 		$error = false;
+		
 		switch($con_tipo)
 		{
 			case "bd":
+				$con_nombre_bd = $_REQUEST['con_nombre_db'];
+				$con_usuario_bd = $_REQUEST['con_usuario'];
+				$con_password_bd = $_REQUEST['con_password'];
 				$parametros_conexion = '"con_nombre_db":"'.$con_nombre_bd.'","con_usuario":"'.$con_usuario_bd.'","con_password":"'.$con_password_bd.'"';
 				break;
+				
 			case "archivo":
-				$nombre_archivo = $_FILES['con_archivo']['name'];			
-				if($objetoConexiones->crearTablaConexionExterna($con_nombre, "FILE", $nombre_archivo))
+				$nombre_archivo = $_FILES['con_archivo']['name'];
+				$separador = $_REQUEST['con_separador'];
+				if($objetoConexiones->crearTablaConexionExterna($con_nombre, $con_tipo, $nombre_archivo))
 				{
 					$lines = file($_FILES['con_archivo']['tmp_name']);
 					foreach ($lines as $line_num => $line) 
 					{
-						$datos = explode(" ", $line);
+						$datos = explode($separador, $line);
 						foreach ($datos as $indice => $valor)
-							$objetoConexiones->insertarValoresEnTabla($con_nombre, "FILE", $valor);
+						{
+							$val[0] = $valor;//toca porque la funcion recibe un arreglo de valores
+							$objetoConexiones->insertarValoresEnTabla($con_nombre, $con_tipo, $val);
+						}
 					}
-					$parametros_conexion = '"con_nombre_archivo_tabla":"'.$usu_login.'_FILE_'.$con_nombre.'"';
+					$parametros_conexion = '"con_nombre_archivo_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
 				}
 				else
 					$error = true;
 				break;
+				
 			case "biblioteca":
-				$parametros_conexion = '"con_nombre_biblioteca_tabla":"'.$usu_login.'_LIB_'.$con_nombre.'"';
+				$nombre_archivo = $_FILES['con_biblioteca']['name'];
+				$archivo = file($_FILES['con_biblioteca']['tmp_name']);
+				
+				if($objetoConexiones->crearTablaConexionExterna($con_nombre, $con_tipo, $nombre_archivo, $archivo[0]))
+				{
+					foreach ($archivo as $line_num => $line) 
+					{
+						if($line_num != 0)//no cuento los nombres de los campos
+						{
+							$valores = explode(",", $line);
+							//foreach ($datos as $indice => $valor)
+							$objetoConexiones->insertarValoresEnTabla($con_nombre, $con_tipo, $valores);
+						}
+					}
+					$parametros_conexion = '"con_nombre_biblioteca_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
+				}
+				else
+					$error = true;
 				break;
 		}
 		if(!$error)
@@ -52,6 +76,16 @@ switch($_REQUEST['funcion'])
 	case "obtenerConexiones":
 		$arregloConexiones = $objetoConexiones->obtenerArregloInfoConexiones();
 		echo json_encode($arregloConexiones);
+		break;
+	
+	case "eliminarConexion":
+		$con_nombre = $_REQUEST['con_nombre'];
+		$con_tipo = $_REQUEST['con_tipo'];
+		echo $objetoConexiones->eliminarConexion($con_nombre, $con_tipo);
+		break;
+		
+	case "siguiente":
+		require_once("../modulo_restricciones/fm_restricciones.php");
 		break;
 
 	default:

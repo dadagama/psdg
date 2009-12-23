@@ -38,13 +38,11 @@ function iniciarSesion(modulo_conexiones)
 {
 	if(modulo_conexiones != '-1')
 	{
-		setTimeout('ocultar("div_sesion")',0);
+		setTimeout('efecto("div_sesion","fadeOut")',0);
+		setTimeout('eliminar("div_sesion")',2000);
+		
 		$("#div_cuerpo").append(modulo_conexiones);
-		$('#div_general_conexiones').hide();
-		$('#div_general_conexiones').removeClass("oculto");
-		setTimeout('mostrar("div_general_conexiones")',1000);
-		establecerPosicionSecuencia(1);
 	}
 	else
-		ajaxError();
+		ajaxError(9);
 }
