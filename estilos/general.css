@@ -55,28 +55,67 @@ body
 	top: 9px;
 }
 
-#div_conexion
-{
-	width: 400px;
-	text-align: center;
-	margin: 0 auto;
-	position: relative;
-}
-
-#div_general_conexiones
+#con_div_general
 {
 	/*width: 900px;*/
 	text-align: center;
 	margin: 0 auto;
 }
 
-#div_conexiones
+#con_div_conexion
+{
+	width: 400px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
+#con_div_conexiones
 {
 	width: 400px;
 	height: 50px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;
+}
+
+#res_div_general
+{
+	/*width: 900px;*/
+	text-align: center;
+	margin: 0 auto;
+}
+
+#res_div_estructura_bd
+{
+	width: 400px;
+	height: 50px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
+#sal_div_general
+{
+	/*width: 900px;*/
+	text-align: center;
+	margin: 0 auto;
+}
+
+sal_div_tipos
+{
+	width: 400px;
+	height: 50px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
+.div_botones_secuencia
+{
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 20px;
 }
 
 #barra_de_estado
@@ -110,7 +149,7 @@ body
 {
 	padding: 10px;
 	width: 300px;
-	height: 180px;
+	height: 190px;
 	position: fixed;
 	bottom: 0px;
 	background: #0089ce;

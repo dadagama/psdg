@@ -83,7 +83,7 @@
 				$html->tag("label", array("id"=>"lbl_ayuda", "class"=>"titulo"));
 				$html->end("label");
 				
-				$html->tag("button", array("id"=>"boton_cerrar", "onclick"=>"esconder('div_ayuda');"));
+				$html->tag("button", array("id"=>"boton_cerrar", "onclick"=>"efecto('div_ayuda','slideToggle');"));
 						$html->printStaticText("X");
 				$html->end("button");
 				

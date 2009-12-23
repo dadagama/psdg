@@ -20,7 +20,8 @@ var lang_en = new Array(
 		"Connection name already exists in the BDI",//18
 		"Allowed file extension is [.txt]",//19
 		"Allowed library extension is[.lib]",//20
-		"Remove this connection"//21
+		"Remove this connection",//21
+		"The connection could not be removed"//22
 	);
 
 var lang_es = new Array(
@@ -45,7 +46,8 @@ var lang_es = new Array(
 		"El nombre de conexión ya existe en la BDI",//18
 		"La extensión permitida para archivos es [.txt]",//19
 		"La extensión permitida para bibliotecas es [.lib]",//20
-		"Eliminar esta conexión"//21
+		"Eliminar esta conexión",//21
+		"La conexión no pudo ser eliminada"//22
 	);
 
 var lang = "en";

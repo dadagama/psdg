@@ -14,11 +14,6 @@
 	display: inline-block;
 }
 
-.alto_120
-{
-	height: 120px;
-}
-
 .fila
 {
 	display: table-row;
@@ -28,7 +23,21 @@
 {
 	display: table-cell;
 	margin-top: 5px;
+}
+
+.alineacion_derecha
+{
 	text-align: right;
+}
+
+.alineacion_izquierda
+{
+	text-align: left;
+}
+
+.centrado
+{
+	text-align: center;
 }
 
 .conexion_establecida
@@ -66,6 +75,16 @@
 	height: 30px;
 }
 
+.alto_120
+{
+	height: 120px;
+}
+
+.ancho_20
+{
+	width: 20px;
+}
+
 .ancho_50
 {
 	width: 50px;
@@ -81,9 +100,9 @@
 	width: 130px;
 }
 
-.ancho_150
+.ancho_140
 {
-	width: 150px;
+	width: 140px;
 }
 
 .alineacion_centrado 
