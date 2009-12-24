@@ -14,7 +14,7 @@
 	//DIV GENERAL
 	$html->tag("div", array("id"=>"sal_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 	
 				//DIV CONEXION
 				$html->tag("div", array("id"=>"sal_div_tipos"));
@@ -59,7 +59,7 @@
 	$html->tag("div", array("id"=>"sal_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
 		$html->tag("div", array("class"=>"fila"));
 		
-			$html->tag("div", array("class"=>"celda vertical_arriba"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
 					$html->tag("input", array("id"=>"sal_btn_anterior", "type"=>"image", "src"=>"../imagenes/step_1_ok.png", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$html->getText('sal_ttp_anterior'), "title"=>$html->getText('sal_ttp_anterior')));
 					$html->tag("input", array("id"=>"sal_btn_siguiente", "type"=>"image", "src"=>"../imagenes/step_1_off.png", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('sal_ttp_siguiente'), "title"=>$html->getText('sal_ttp_siguiente')));
 			$html->end("div");

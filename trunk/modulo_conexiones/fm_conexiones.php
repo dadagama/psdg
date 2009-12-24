@@ -15,7 +15,7 @@
 	//DIV GENERAL
 	$html->tag("div", array("id"=>"con_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 	
 				//DIV CONEXION
 				$html->tag("div", array("id"=>"con_div_conexion"));
@@ -212,7 +212,7 @@
 			$html->end("div");
 			
 			
-			$html->tag("div", array("class"=>"celda vertical_arriba"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 			
 				//DIV DE CONEXIONES
 				$html->tag("div", array("id"=>"con_div_conexiones"));
@@ -244,7 +244,7 @@
 	//DIV BOTONES SECUENCIA
 	$html->tag("div", array("id"=>"con_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
 				//$html->tag("label");
 					$html->tag("input", array("id"=>"con_btn_siguiente", "type"=>"image", "src"=>"../imagenes/step_1_off.png", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('con_ttp_siguiente'), "title"=>$html->getText('con_ttp_siguiente')));
 				//$html->end("label");
