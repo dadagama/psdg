@@ -10,10 +10,10 @@ class Traductor
 	function __construct($lang)
 	{
 		$this->lang = $lang;
-		$parametrosConexion['nombreServidor'] = "localhost";
-		$parametrosConexion['nombreUsuario'] = "root";
-		$parametrosConexion['clave'] = "root";
-		$parametrosConexion['nombreBD'] = "BDI";
+		$parametrosConexion['con_servidor'] = "localhost";
+		$parametrosConexion['con_usuario'] = "root";
+		$parametrosConexion['con_password'] = "root";
+		$parametrosConexion['con_nombre_bd'] = "BDI";
 		
 		$this->conexionBDI = new ConexionBDMySQL($parametrosConexion);
   		$this->conexionBDI->conectar();

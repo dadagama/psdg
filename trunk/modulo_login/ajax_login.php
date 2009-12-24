@@ -8,7 +8,7 @@ if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']) && isset($_
 	$parametrosConexion['con_servidor'] = "localhost";
 	$parametrosConexion['con_usuario'] = "root";
 	$parametrosConexion['con_password'] = "root";
-	$parametrosConexion['con_nombre_db'] = "BDI";
+	$parametrosConexion['con_nombre_bd'] = "BDI";
 	
 	$_SESSION['conexionBDI'] = $parametrosConexion;
 
