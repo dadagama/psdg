@@ -13,8 +13,8 @@ class ConexionBDMySQL extends ConexionBD
     $servidor = $this->_parametrosConexion['con_servidor'];
     $usuario  = $this->_parametrosConexion['con_usuario'];
     $clave    = $this->_parametrosConexion['con_password'];
-    $bd       = $this->_parametrosConexion['con_nombre_db'];
-    //echo print_r($this->_parametrosConexion);
+    $bd       = $this->_parametrosConexion['con_nombre_bd'];
+
 	if($this->_conexion = mysql_connect($servidor, $usuario, $clave))
 	  return mysql_select_db($bd, $this->_conexion);
 	else
@@ -34,7 +34,7 @@ class ConexionBDMySQL extends ConexionBD
   function ejecutarSQL($instruccionSQL)
   {
     $this->_resultSet = mysql_query(/*$this->_sql*/$instruccionSQL, $this->_conexion);
-  }
+  } 
   
 	function obtenerResultset()
 	{
@@ -64,7 +64,7 @@ class ConexionBDMySQL extends ConexionBD
   
 	function obtenerNumeroFilas()
 	{
-	return mysql_num_rows($this->_resultSet);
+		return mysql_num_rows($this->_resultSet);
 	}
 }
 ?>

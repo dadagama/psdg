@@ -14,10 +14,10 @@ abstract class Conexion
    * ['rutaArchivo']	=> string<br/>
    * ['modo']			=> string<br/>
    * --- Para conexion con BD ---<br/>
-   * [nombreServidor']	=> string<br/>
-   * ['nombreUsuario']	=> string<br/>
-   * ['clave']			=> string<br/>
-   * ['nombreBD']		=> string
+   * ['con_servidor']	=> string<br/>
+   * ['con_usuario']	=> string<br/>
+   * ['con_password']	=> string<br/>
+   * ['con_nombre_bd']	=> string
    * @var	array
    */
   var $_parametrosConexion;
