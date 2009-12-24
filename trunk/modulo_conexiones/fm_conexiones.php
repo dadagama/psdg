@@ -97,6 +97,18 @@
 									//DIV CONEXION BD
 									$html->tag("div", array("class"=>"fila", "id"=>"con_div_bd"));
 									
+										//CAMPO SERVIDOR
+										$html->tag("div", array("class"=>"fila"));
+											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_servidor"));
+													$html->printText("con_lbl_servidor");
+												$html->end("label");
+											$html->end("div");
+											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
+												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_servidor", "id"=>"con_servidor", "type"=>"text", "title"=>$html->getText("con_ttp_servidor")));
+											$html->end("div");
+										$html->end("div");
+									
 										//CAMPO DB CONEXION
 										$html->tag("div", array("class"=>"fila"));
 											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));

@@ -2,6 +2,7 @@ $(document).ready(inicializar);
 
 function inicializar()
 {
+	//alert('a');
 	$('#res_div_general').hide();
 	$('#res_div_general').removeClass("oculto");
 	setTimeout('efecto("res_div_general","slideToggle")',1000);
@@ -12,6 +13,7 @@ function inicializar()
 	
 	establecerPosicionSecuencia(2);
 	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
+	
 }
 
 function habilitarSiguienteEtapa(habilitar)

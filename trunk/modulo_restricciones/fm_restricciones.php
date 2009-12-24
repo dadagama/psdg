@@ -2,21 +2,25 @@
 	session_start();
 		
 	$_SESSION['modulo'] = "restricciones";
-	if(isset($_SESSION['step']) && $_SESSION['step'] != 2)//para el efecto de aparecer
+	//if(isset($_SESSION['step']) && $_SESSION['step'] != 2)//para el efecto de aparecer
 		$ocultar = "oculto";
-		
+	
 	$_SESSION['step'] = 2;
 
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
+
 	$html->cargarModuloJS($_SESSION['modulo']);
 
+	require_once("../modulo_restricciones/Restricciones.inc");
+	$objetoRestricciones = new Restricciones($_SESSION['conexionBDI'],$_SESSION['usu_login']);
+	
 	//DIV GENERAL
 	$html->tag("div", array("id"=>"res_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
 			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 	
-				//DIV CONEXION
+				//DIV ESTRUCTURA
 				$html->tag("div", array("id"=>"res_div_estructura_bd"));
 				
 					$html->tag("fieldset");
@@ -31,24 +35,26 @@
 							$html->end("label");
 						$html->end("legend");
 						
-						//TABLA FORMULARIO
+						//TABLA ESTRUCTURA
 						$html->tag("div", array("class"=>"tabla"));
 						
 							//FORMULARIO
 							$html->tag("div", array("class"=>"fila"));
-								$html->tag("div", array("class"=>"tabla_centrada"));
-								
+								$html->tag("div", array("class"=>"celda alineacion_izquierda"));
+//								$html->tag("div", array("class"=>"tabla_centrada"));
+									$objetoRestricciones->construirArbolBDO();
+//								$html->end("div");
 								$html->end("div");
 							$html->end("div");
 							//FIN FORMULARIO
 							
 						$html->end("div");
-						//FIN TABLA FORMULARIO
+						//FIN TABLA ESTRUCTURA
 						
 					$html->end("fieldset"); 
 
 				$html->end("div");
-				//FIN DIV CONEXION
+				//FIN DIV ESTRUCTURA
 				
 			$html->end("div");
 		$html->end("div");

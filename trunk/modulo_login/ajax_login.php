@@ -5,10 +5,10 @@ if(isset($_REQUEST['usu_login']) && isset($_REQUEST['usu_password']) && isset($_
 {
 	require_once("../conexiones/ConexionBDMySQL.inc");
 	
-	$parametrosConexion['nombreServidor'] = "localhost";
-	$parametrosConexion['nombreUsuario'] = "root";
-	$parametrosConexion['clave'] = "root";
-	$parametrosConexion['nombreBD'] = "BDI";
+	$parametrosConexion['con_servidor'] = "localhost";
+	$parametrosConexion['con_usuario'] = "root";
+	$parametrosConexion['con_password'] = "root";
+	$parametrosConexion['con_nombre_db'] = "BDI";
 	
 	$_SESSION['conexionBDI'] = $parametrosConexion;
 

@@ -32,17 +32,6 @@ class Conexiones
 	
 	function insertarConexion($con_nombre, $con_tipo, $parametros_conexion)
 	{
-		switch($con_tipo)
-		{
-			case "bd":
-				//nada
-				break;
-			case "archivo":
-				
-				break;
-			case "biblioteca":
-				break;
-		}
 		$sql = "	INSERT INTO PSDG_conexion
 			VALUES (	'".$con_nombre."',
 						'".$this->usu_login."',
