@@ -151,7 +151,8 @@ function pasaValidacionCampos(con_tipo)
 		switch(con_tipo)
 		{
 			case "bd":
-				if(validarCampoNoVacio($("#con_nombre_db"), $("#con_lbl_nombre_db").html(), true)
+				if(validarCampoNoVacio($("#con_servidor"), $("#con_lbl_servidor").html(), true)
+					&&validarCampoNoVacio($("#con_nombre_db"), $("#con_lbl_nombre_db").html(), true)
 					&& validarCampoNoVacio($("#con_usuario"), $("#con_lbl_usuario").html(), true)
 					&& validarCampoNoVacio($("#con_password"), $("#con_lbl_password").html(), true))
 					validacion_abajo = true;
@@ -233,6 +234,7 @@ function limpiarFormulario()
 {
 	$("#con_nombre").val("");
 	$("#con_tipo").val("");
+	$("#con_servidor").val("");
 	$("#con_nombre_db").val("");
 	$("#con_usuario").val("");
 	$("#con_password").val("");

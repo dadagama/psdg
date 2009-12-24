@@ -10,11 +10,11 @@ class ConexionBDMySQL extends ConexionBD
   
   function conectar()
   {
-    $servidor = $this->_parametrosConexion['nombreServidor'];
-    $usuario  = $this->_parametrosConexion['nombreUsuario'];
-    $clave    = $this->_parametrosConexion['clave'];
-    $bd       = $this->_parametrosConexion['nombreBD'];
-    
+    $servidor = $this->_parametrosConexion['con_servidor'];
+    $usuario  = $this->_parametrosConexion['con_usuario'];
+    $clave    = $this->_parametrosConexion['con_password'];
+    $bd       = $this->_parametrosConexion['con_nombre_db'];
+    //echo print_r($this->_parametrosConexion);
 	if($this->_conexion = mysql_connect($servidor, $usuario, $clave))
 	  return mysql_select_db($bd, $this->_conexion);
 	else
