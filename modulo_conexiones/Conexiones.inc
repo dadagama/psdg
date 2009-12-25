@@ -38,6 +38,7 @@ class Conexiones
 						'".$con_tipo."',
 						'$parametros_conexion'
 			)";
+		echo "sql".$sql;
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
@@ -95,6 +96,16 @@ class Conexiones
 					WHERE con_nombre = '".$con_nombre."'";
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
+	}
+	
+	function conexionValida($con_servidor,$con_usuario_bd,$con_password_bd,$con_nombre_bd)
+	{
+		$parametros['con_servidor'] = $con_servidor;
+		$parametros['con_usuario'] = $con_usuario_bd;
+		$parametros['con_password'] = $con_password_bd;
+		$parametros['con_nombre_bd'] = $con_nombre_bd;
+		$conexion_de_prueba = new ConexionBDMySQL($parametros);
+		return $conexion_de_prueba->conectar(); 
 	}
 }
 ?>

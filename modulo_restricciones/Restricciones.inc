@@ -28,7 +28,8 @@ class Restricciones
 		$this->conexionBDI->ejecutarSQL($sql);
 		$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
 		$arreglo_parametros = json_decode($con_parametros, true);
-		//$this->conexionBDO = new ConexionBDMySQL($arreglo_parametros);
+		$this->conexionBDO = new ConexionBDMySQL($arreglo_parametros);
+		echo "conecata:".$this->conexionBDO->conectar();
 	}
 	
 	function construirArbolBDO()
