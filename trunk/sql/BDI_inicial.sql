@@ -51,8 +51,8 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_nombre','es','Nombre que se utilizará p
 INSERT INTO PSDG_idioma VALUES('con_lgn_datos_conexion','es','Parámetros de conexión');
 INSERT INTO PSDG_idioma VALUES('con_lbl_servidor','es','Servidor');
 INSERT INTO PSDG_idioma VALUES('con_ttp_servidor','es','URL del servidor');
-INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_db','es','Nombre BD');
-INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_db','es','Nombre de la Base de datos');
+INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_bd','es','Nombre BD');
+INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_bd','es','Nombre de la Base de datos');
 INSERT INTO PSDG_idioma VALUES('con_lbl_usuario','es','Usuario');
 INSERT INTO PSDG_idioma VALUES('con_ttp_usuario','es','Usuario con el que se conecta a la Base de datos');
 INSERT INTO PSDG_idioma VALUES('con_lbl_password','es','Contraseña');
@@ -90,8 +90,8 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_nombre','en','Name that identifies the c
 INSERT INTO PSDG_idioma VALUES('con_lgn_datos_conexion','en','Connection parameters');
 INSERT INTO PSDG_idioma VALUES('con_lbl_servidor','en','Server');
 INSERT INTO PSDG_idioma VALUES('con_ttp_servidor','en','URL Server');
-INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_db','en','DB name');
-INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_db','en','Database name');
+INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_bd','en','DB name');
+INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_bd','en','Database name');
 INSERT INTO PSDG_idioma VALUES('con_lbl_usuario','en','User');
 INSERT INTO PSDG_idioma VALUES('con_ttp_usuario','en','User that connects to the database');
 INSERT INTO PSDG_idioma VALUES('con_lbl_password','en','Password');

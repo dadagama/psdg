@@ -20,10 +20,15 @@ switch($_REQUEST['funcion'])
 		{
 			case "bd":
 				$con_servidor = $_REQUEST['con_servidor'];
-				$con_nombre_bd = $_REQUEST['con_nombre_db'];
+				$con_nombre_bd = $_REQUEST['con_nombre_bd'];
 				$con_usuario_bd = $_REQUEST['con_usuario'];
 				$con_password_bd = $_REQUEST['con_password'];
-				$parametros_conexion = '{"con_servidor":"'.$con_servidor.'","con_nombre_db":"'.$con_nombre_bd.'","con_usuario":"'.$con_usuario_bd.'","con_password":"'.$con_password_bd.'"}';
+				$valida = $objetoConexiones->conexionValida($con_servidor,$con_usuario_bd,$con_password_bd,$con_nombre_bd);
+				echo "valida:".$valida;
+				if($valida)
+					$parametros_conexion = '{"con_servidor":"'.$con_servidor.'","con_nombre_bd":"'.$con_nombre_bd.'","con_usuario":"'.$con_usuario_bd.'","con_password":"'.$con_password_bd.'"}';
+				else
+					$error = true;
 				break;
 				
 			case "archivo":

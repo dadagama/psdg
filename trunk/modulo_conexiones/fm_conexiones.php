@@ -112,12 +112,12 @@
 										//CAMPO DB CONEXION
 										$html->tag("div", array("class"=>"fila"));
 											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_db"));
-													$html->printText("con_lbl_nombre_db");
+												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_bd"));
+													$html->printText("con_lbl_nombre_bd");
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre_db", "id"=>"con_nombre_db", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_nombre_db")));
+												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre_bd", "id"=>"con_nombre_bd", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_nombre_bd")));
 											$html->end("div");
 										$html->end("div");
 									
