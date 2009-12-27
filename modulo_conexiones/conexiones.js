@@ -128,15 +128,24 @@ function confirmarBiblioteca(file, ext)
 
 function archivoEnviado(file, response)
 {
-	if(response != false)
+	switch(response)
 	{
-		limpiarFormulario();
-		hacerVisibleCamposFormulario('bd');
-		actualizarListadoConexiones();
-		ajaxSuccess();
+		case "archivo":
+			ajaxError(18);
+			break;
+		case "biblioteca":
+			ajaxError(18);
+			break;
+		case "conexion":
+			ajaxError(18);
+			break;
+		default:
+			limpiarFormulario();
+			hacerVisibleCamposFormulario('bd');
+			actualizarListadoConexiones();
+			ajaxSuccess();
+			break;
 	}
-	else
-		ajaxError(18);
 }
 
 function pasaValidacionCampos(con_tipo)
@@ -171,13 +180,19 @@ function pasaValidacionCampos(con_tipo)
 
 function insertoConexion(datosConexion)
 {
-	if(datosConexion != "")
+	switch(datosConexion)
 	{
-		verificarSiExisteConexionBDO();
-		actualizarListadoConexiones();
+		case "bd":
+			ajaxError(23);
+			break;
+		case "conexion":
+			ajaxError(18);
+			break;
+		default:
+			verificarSiExisteConexionBDO();
+			actualizarListadoConexiones();
+			break;
 	}
-	else
-		ajaxError(18);
 }
 
 function existeBDO(existe)
@@ -289,8 +304,8 @@ function mostrarConexiones(conexiones)
 	div_conexiones_establecidas.empty();
 	for(var x = 0; x < json_data_object.length; x++)
 	{
-		var con_nombre = json_data_object[x].con_nombre;
-		var con_tipo = json_data_object[x].con_tipo;
+		var con_nombre = json_data_object[x][0];
+		var con_tipo = json_data_object[x][1];
 		var imagen_tipo = "../imagenes/";
 		var imagen_eliminar = "../imagenes/delete.png";
 		switch(con_tipo)

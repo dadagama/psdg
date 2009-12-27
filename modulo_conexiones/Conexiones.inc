@@ -5,6 +5,7 @@ require_once("../conexiones/ConexionBDMySQL.inc");
 class Conexiones
 {
 	var $conexionBDI;	
+	var $conexion_de_prueba;
 	var $usu_login;
 	
 	function __construct($parametrosConexion,$login)
@@ -32,18 +33,19 @@ class Conexiones
 	
 	function insertarConexion($con_nombre, $con_tipo, $parametros_conexion)
 	{
+		//$this->conexionBDI->conectar();//se quito pero no se ha probado nuevamente si realmente no se necesita
 		$sql = "	INSERT INTO PSDG_conexion
 			VALUES (	'".$con_nombre."',
 						'".$this->usu_login."',
 						'".$con_tipo."',
 						'$parametros_conexion'
 			)";
-		echo "sql".$sql;
+
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
 	
-	function crearTablaConexionExterna($con_nombre, $tipo_conexion, $nombre_archivo, $nombres_campos)
+	function crearTablaConexionExterna($con_nombre, $tipo_conexion, $nombre_archivo, $nombres_campos = "")
 	{
 		$campos = "";
 		if(isset($nombres_campos) && $nombres_campos && $tipo_conexion == "biblioteca")
@@ -73,7 +75,6 @@ class Conexiones
 			
 		$sql = "	INSERT INTO ".$this->usu_login."_".$tipo_conexion."_".$con_nombre."
 			VALUES ($vals)";
-		echo $sql;
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
@@ -93,7 +94,9 @@ class Conexiones
 
 		$sql = "	DELETE 
 					FROM PSDG_conexion
-					WHERE con_nombre = '".$con_nombre."'";
+					WHERE con_nombre = '".$con_nombre."'
+					AND con_tipo = '".$con_tipo."'
+					AND con_usu_login = '".$this->usu_login."'";
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
@@ -104,8 +107,17 @@ class Conexiones
 		$parametros['con_usuario'] = $con_usuario_bd;
 		$parametros['con_password'] = $con_password_bd;
 		$parametros['con_nombre_bd'] = $con_nombre_bd;
-		$conexion_de_prueba = new ConexionBDMySQL($parametros);
-		return $conexion_de_prueba->conectar(); 
+		$this->conexion_de_prueba = new ConexionBDMySQL($parametros);
+		if($this->conexion_de_prueba->conectar())
+		{
+			$this->conexion_de_prueba->desconectar();
+			$this->conexion_de_prueba = "";
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 ?>

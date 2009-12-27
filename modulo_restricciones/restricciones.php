@@ -2,7 +2,7 @@
 session_start();
 
 require_once("../modulo_restricciones/Restricciones.inc");
-$objetoRestricciones = new Restricciones($_SESSION['conexionBDI'],$_SESSION['usu_login']);
+$objetoRestricciones = new Restricciones($_SESSION['conexionBDI'], $_SESSION['usu_login'], $_SESSION['lang']);
 
 switch($_REQUEST['funcion'])
 {		

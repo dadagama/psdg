@@ -10,15 +10,16 @@
 	require_once("../herramientas/GeneradorHtml.inc");
 	$html = new GeneradorHtml($_SESSION['lang']);
 
+	$html->cargarHerramientaJS("jquery.tree.min");
 	$html->cargarModuloJS($_SESSION['modulo']);
 
 	require_once("../modulo_restricciones/Restricciones.inc");
-	$objetoRestricciones = new Restricciones($_SESSION['conexionBDI'],$_SESSION['usu_login']);
+	$objetoRestricciones = new Restricciones($_SESSION['conexionBDI'],$_SESSION['usu_login'],$_SESSION['lang']);
 	
 	//DIV GENERAL
 	$html->tag("div", array("id"=>"res_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_400"));
 	
 				//DIV ESTRUCTURA
 				$html->tag("div", array("id"=>"res_div_estructura_bd"));
@@ -41,9 +42,9 @@
 							//FORMULARIO
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda alineacion_izquierda"));
-//								$html->tag("div", array("class"=>"tabla_centrada"));
-									$objetoRestricciones->construirArbolBDO();
-//								$html->end("div");
+									$html->tag("div", array("id"=>"estructura", "class"=>"texto_arbol tree tree-classic"));
+										$objetoRestricciones->construirArbolBDO();
+									$html->end("div");
 								$html->end("div");
 							$html->end("div");
 							//FIN FORMULARIO
@@ -55,8 +56,32 @@
 
 				$html->end("div");
 				//FIN DIV ESTRUCTURA
-				
 			$html->end("div");
+			
+			
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_624"));
+				//DIV DETALLE
+				$html->tag("div", array("id"=>"res_div_detalle_externo"));
+					$html->tag("fieldset");
+					
+						//BOTON AYUDA
+						$html->botonAyuda("res_btn_help_2");
+					
+						$html->tag("legend");
+							$html->tag("label");
+								$html->printText("res_lgn_detalle");
+							$html->end("label");
+						$html->end("legend");
+						//TABLA
+						$html->tag("div", array("class"=>"tabla", "id"=>"res_div_detalle"));
+						$html->end("div");	
+						//FIN TABLA
+					$html->end("fieldset");
+				$html->end("div");
+				//FIN DIV DETALLE
+			$html->end("div");
+			
+			
 		$html->end("div");
 	$html->end("div");
 	//FIN DIV GENERAL

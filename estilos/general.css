@@ -67,6 +67,21 @@ body
 	width: 512px;
 }
 
+.ancho_400
+{
+	width: 400px;
+}
+
+.ancho_624
+{
+	width: 624px;
+}
+
+.ancho_280
+{
+	width: 280px;
+}
+
 .ancho_1024
 {
 	width: 1024px;
@@ -97,7 +112,15 @@ body
 
 #res_div_estructura_bd
 {
-	width: 400px;
+	width: 280px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
+#res_div_detalle_externo
+{
+	width: 520px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;
@@ -197,4 +220,13 @@ sal_div_tipos
 .oculto
 {
 	display: none;
+}
+
+
+.texto_arbol
+{ 
+	float:left; 
+	margin:0;
+	font-family:Verdana; 
+	font-size:10px;
 }
