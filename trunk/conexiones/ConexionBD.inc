@@ -26,6 +26,10 @@ abstract class ConexionBD extends Conexion
    */
   var $_conexion;
   
+  abstract function establecer_bd($bd);
+  
+  abstract function restablecer_bd_original();
+  
   /**
    * Convierte una instrucción sql en la sentencia preparada de la clase.
    * @param	$sentenciaSQL	Una instrucción sql con la sintaxis de una sentencia

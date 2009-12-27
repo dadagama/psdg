@@ -24,16 +24,16 @@ switch($_REQUEST['funcion'])
 				$con_usuario_bd = $_REQUEST['con_usuario'];
 				$con_password_bd = $_REQUEST['con_password'];
 				$valida = $objetoConexiones->conexionValida($con_servidor,$con_usuario_bd,$con_password_bd,$con_nombre_bd);
-				echo "valida:".$valida;
 				if($valida)
 					$parametros_conexion = '{"con_servidor":"'.$con_servidor.'","con_nombre_bd":"'.$con_nombre_bd.'","con_usuario":"'.$con_usuario_bd.'","con_password":"'.$con_password_bd.'"}';
 				else
-					$error = true;
+					$error = "bd";
 				break;
 				
 			case "archivo":
 				$nombre_archivo = $_FILES['con_archivo']['name'];
 				$separador = $_REQUEST['con_separador'];
+				
 				if($objetoConexiones->crearTablaConexionExterna($con_nombre, $con_tipo, $nombre_archivo))
 				{
 					$lines = file($_FILES['con_archivo']['tmp_name']);
@@ -49,7 +49,7 @@ switch($_REQUEST['funcion'])
 					$parametros_conexion = '"con_nombre_archivo_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
 				}
 				else
-					$error = true;
+					$error = "archivo";
 				break;
 				
 			case "biblioteca":
@@ -70,13 +70,18 @@ switch($_REQUEST['funcion'])
 					$parametros_conexion = '"con_nombre_biblioteca_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
 				}
 				else
-					$error = true;
+					$error = "biblioteca";
 				break;
 		}
 		if(!$error)
-			echo $objetoConexiones->insertarConexion($con_nombre, $con_tipo, $parametros_conexion);
+		{
+			if($objetoConexiones->insertarConexion($con_nombre, $con_tipo, $parametros_conexion))
+				echo true;
+			else
+				echo "conexion";
+		}
 		else
-			echo false;
+			echo $error;
 		break;
 		
 	case "obtenerConexiones":
