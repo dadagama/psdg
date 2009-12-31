@@ -11,6 +11,7 @@
 	$html = new GeneradorHtml($_SESSION['lang']);
 
 	$html->cargarHerramientaJS("jquery.tree.min");
+	$html->cargarHerramientaJS("jquery-spin");
 	$html->cargarModuloJS($_SESSION['modulo']);
 
 	require_once("../modulo_restricciones/Restricciones.inc");

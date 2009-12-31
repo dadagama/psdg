@@ -117,7 +117,6 @@ function desplegarModulo(modulo)
 
 function mostrarDetalleTabla(nombre_tabla)
 {
-	//alert(nombre_tabla);
 	$.ajax({
 		async:		false,
 		type: 		"POST",
@@ -133,13 +132,69 @@ function mostrarDetalleTabla(nombre_tabla)
 	return false;
 }
 
-function actualizarDivDetalle(formulario)
+function establecerRestriccionTabla()
 {
-	$('#res_div_detalle').html(formulario);
-	setTimeout('efecto("res_div_detalle","fadeIn")',0);
+	nombre_tabla = $('#rec_lbl_nombre_tabla').html();
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=establecerRestriccionTabla&numero_tuplas="+$('#rec_txt_numero_tuplas').val()+"&nombre_tabla="+nombre_tabla,
+		beforeSend:	ajaxSend,
+		success:	ajaxSuccess,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
 }
 
-function mostrarDetalleCampo(nombre_campo)
+function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato)
 {
-	//alert(nombre_campo);
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=mostrarDetalleCampo&nombre_campo="+nombre_campo+"&nombre_tabla="+nombre_tabla+"&tipo_dato="+tipo_dato,
+		beforeSend:	ajaxSend,
+		success:	actualizarDivDetalle,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function establecerRestriccionCampo()
+{
+	/*nombre_tabla = $('#lbl_nombre_tabla').html();
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=establecerRestriccionTabla&numero_tuplas="+$('#txt_numero_tuplas').val()+"&nombre_tabla="+nombre_tabla,
+		beforeSend:	ajaxSend,
+		success:	ajaxSuccess,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;*/
+}
+
+function actualizarDivDetalle(formulario)
+{
+	setTimeout('efecto("res_div_detalle","slideToggle")',0);
+	setTimeout('mostrarFormularioDetalle(\''+formulario+'\')',500);
+}
+
+function mostrarFormularioDetalle(formulario)
+{
+	$('#res_div_detalle').addClass("oculto");
+	$('#res_div_detalle').html(formulario);
+	$('#res_div_detalle').removeClass("oculto");
+	setTimeout('efecto("res_div_detalle","slideDown")',0);
 }

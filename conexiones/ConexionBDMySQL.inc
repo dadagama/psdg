@@ -118,5 +118,12 @@ class ConexionBDMySQL extends ConexionBD
 	{
 		return mysql_num_rows($this->_resultSet);
 	}
+	
+	function existeRegistro($campos, $tablas, $condiciones)
+	{
+		$sql = "SELECT $campos FROM $tablas WHERE $condiciones";
+		$this->ejecutarSQL($sql);
+		return $this->obtenerNumeroFilas();
+	}
 }
 ?>

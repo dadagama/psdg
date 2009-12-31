@@ -1,7 +1,11 @@
-DROP TABLE IF EXISTS `PSDG_conexion`;
-DROP TABLE IF EXISTS `PSDG_usuario`;
 DROP TABLE IF EXISTS `PSDG_idioma`;
 DROP TABLE IF EXISTS `PSDG_mensaje_ayuda`;
+DROP TABLE IF EXISTS `PSDG_restricciones_campos`;
+DROP TABLE IF EXISTS `PSDG_restricciones_tablas`;
+DROP TABLE IF EXISTS `PSDG_fuentes_de_tipos`;
+DROP TABLE IF EXISTS `PSDG_fuentes`;
+DROP TABLE IF EXISTS `PSDG_conexion`;
+DROP TABLE IF EXISTS `PSDG_usuario`;
 
 
 CREATE TABLE `BDI`.`PSDG_usuario` (
@@ -10,15 +14,99 @@ CREATE TABLE `BDI`.`PSDG_usuario` (
 	PRIMARY KEY ( `usu_login` )
 ) ENGINE = InnoDB COMMENT = 'Almacena los usuarios que tienen acceso a la aplicación';
 
+INSERT INTO PSDG_usuario(usu_login, usu_password) VALUES('demo','89e495e7941cf9e40e6980d14a16bf023ccd4c91');
+
+CREATE TABLE `BDI`.`PSDG_fuentes` (
+	`fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
+	`fue_nombre` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de dato que permite el SMBD',
+	PRIMARY KEY ( `fue_codigo` )
+) ENGINE = InnoDB COMMENT = 'Almacena los distintos fuentes de datos que puede utilizar el usuario para generar datos deacuerdo al SMBD de la BDO';
+
+INSERT INTO PSDG_fuentes VALUES(1,'Archivo');
+INSERT INTO PSDG_fuentes VALUES(2,'Base de datos externa');
+INSERT INTO PSDG_fuentes VALUES(3,'Biblioteca');
+INSERT INTO PSDG_fuentes VALUES(4,'Lista de valores');
+INSERT INTO PSDG_fuentes VALUES(5,'Constante');
+INSERT INTO PSDG_fuentes VALUES(6,'Intervalo');
+
+
+CREATE TABLE `BDI`.`PSDG_fuentes_de_tipos` (
+	`fdt_motor` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
+	`fdt_tipo_de_dato` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de dato que permite el SMBD',
+	`fdt_fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de dato que permite el SMBD',
+	FOREIGN KEY (`fdt_fue_codigo`) REFERENCES `PSDG_fuentes` (`fue_codigo`)
+) ENGINE = InnoDB COMMENT = 'Almacena los distintos fuentes de datos que puede utilizar el usuario para generar datos deacuerdo al SMBD de la BDO';
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',5);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',5);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',5);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',6);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',6);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',6);
+
+
+
 CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
 	`con_nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
 	`con_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
 	`con_tipo` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Tipo de fuente al que se conectará',
 	`con_parametros` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Parametros para realizar la conexión, con el formato p1:v1,p2:v2, ... ,pn:vn',
 	PRIMARY KEY ( `con_nombre`, `con_usu_login`, `con_tipo`),
-	FOREIGN KEY (`con_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`)
+	FOREIGN KEY (`con_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE= InnoDB COMMENT = 'Almacena las conexiones a fuentes de datos externas a la aplicacion';
-INSERT INTO PSDG_usuario(usu_login, usu_password) VALUES('demo','89e495e7941cf9e40e6980d14a16bf023ccd4c91');
+
+
+CREATE TABLE `BDI`.`PSDG_restricciones_tablas` (
+	`ret_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
+	`ret_nombre_tabla` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
+	`ret_numero_tuplas_a_generar` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'cantidad de tuplas que se generaran para llenar esta tabla',
+	FOREIGN KEY (`ret_usu_login`) REFERENCES `PSDG_conexion` (`con_usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB COMMENT = 'Almacena las restricciones a nivel de tablas para la BDO';
+
+CREATE TABLE `BDI`.`PSDG_restricciones_campos` (
+	`rec_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
+	`rec_nombre_tabla` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la tabla a la que pertenece el campo',
+	`rec_nombre_campo` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del campo al que pertenece esta restriccion',
+	`rec_fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de fuente de donde se obtendran los valores',
+	`rec_parametros_tipo_fuente` VARCHAR( 500 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'parametros que utiliza el tipo de fuente para retornar los valores',
+	`rec_acceso_aleatorio` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si los datos se retornan de manera secuencial (0) o aleatoria (1)',
+	`rec_porcentaje_nulos` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'Porcentaje que indica la cantidad de nulos que se deben generar para este campo',
+	FOREIGN KEY (`rec_fue_codigo`) REFERENCES `PSDG_fuentes` (`fue_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (`rec_usu_login`) REFERENCES `PSDG_conexion` (`con_usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB COMMENT = 'Almacena las restricciones a nivel de campos de las tablas para la BDO';
+
 
 CREATE TABLE IF NOT EXISTS `PSDG_idioma` (
 	`idi_texto` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Etiqueta a traducir',
@@ -116,6 +204,7 @@ INSERT INTO PSDG_idioma VALUES('res_lgn_estructura_bd','en','BDO structure');
 INSERT INTO PSDG_idioma VALUES('res_lgn_detalle','en','Detalle');
 INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','en','Set Connections');
 INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','en','Set output type');
+
 
 
 

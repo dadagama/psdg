@@ -40,7 +40,7 @@ class Conexiones
 						'".$con_tipo."',
 						'$parametros_conexion'
 			)";
-
+//echo $sql;
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
