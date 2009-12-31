@@ -68,5 +68,27 @@ class GeneradorHtml
 		$this->tag("script", array("type"=>"text/javascript", "src"=>"../herramientas/$herramienta.js"));
 		$this->end("script");
 	}
+	
+	function printSelect(&$conexion, $codigo, $valor, $nombre_tabla, $condiciones = "", $codigo_seleccionado = "", $arreglo_atributos_asociativos = "", $arreglo_atributos = "")
+	{
+		$sql = "SELECT $codigo, $valor
+					FROM $nombre_tabla";
+		if($condiciones)
+			$sql .= "WHERE $condiciones";
+		$conexion->ejecutarSQL($sql);
+		//echo $sql;
+		$this->tag("select", $arreglo_atributos_asociativos, $arreglo_atributos);
+		while($datos_opcion = $conexion->obtenerFilaComoArregloAsociativo())
+		{
+			
+			if($datos_opcion[$codigo] == $codigo_seleccionado)
+				$seleccionado = "selected";
+				
+			$this->tag("option", array("value"=>$datos_opcion[$codigo], $seleccionado=>$seleccionado));
+				$this->printText("select_".$datos_opcion[$valor]);
+			$this->end("option");
+		}
+		$this->end("select");
+	}
 }
 ?>

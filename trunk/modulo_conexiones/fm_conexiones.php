@@ -46,7 +46,7 @@
 												$html->printText("con_lbl_tipo");
 											$html->end("label");
 										$html->end("div");
-										
+										 
 										$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
 											$html->tag("select", array("class"=>"ancho_140", "id"=>"con_tipo", "title"=>$html->getText('con_ttp_tipo'), "onchange"=>"actualizarFormulario();"));
 												$html->tag("option", array("value"=>"bd"));
