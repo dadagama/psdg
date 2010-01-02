@@ -14,11 +14,27 @@ switch($_REQUEST['funcion'])
 	case "establecerRestriccionTabla":
 		$numero_tuplas = $_REQUEST['numero_tuplas'];
 		$nombre_tabla = $_REQUEST['nombre_tabla'];
-		$objetoRestricciones->actualizarRestriccionTabla($nombre_tabla, $numero_tuplas);
+		if($numero_tuplas != 0)
+			$cadena_precondiciones_no_establecidas = $objetoRestricciones->precondicionesEstablecidas($nombre_tabla);
+		if($cadena_precondiciones_no_establecidas)
+			echo $cadena_precondiciones_no_establecidas;
+		else
+		{
+			$objetoRestricciones->actualizarRestriccionTabla($nombre_tabla, $numero_tuplas);
+			echo "ok";
+		}
 		break;
-
+		
 	case "mostrarDetalleCampo":
-		$objetoRestricciones->cargarRestriccionesCampo($_REQUEST['nombre_tabla'], $_REQUEST['nombre_campo'], $_REQUEST['tipo_dato']);
+		$objetoRestricciones->cargarRestriccionesCampo(	$_REQUEST['nombre_tabla'], 
+																		$_REQUEST['nombre_campo'], 
+																		$_REQUEST['tipo_dato'],
+																		$_REQUEST['longitud'],
+																		$_REQUEST['permite_nulos'],
+																		$_REQUEST['es_llave_primaria'],
+																		$_REQUEST['es_valor_unico'],
+																		$_REQUEST['es_sin_signo'],
+																		$_REQUEST['valor_default']);
 		echo $objetoRestricciones->crearFormularioRestriccionesCampo();
 		break;
 	
