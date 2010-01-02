@@ -41,7 +41,7 @@ function inicializar()
 													image : "../imagenes/field.png"
 												}
 									},
-						"llave" :	{
+						"llave_primaria" :	{
 										// the following three rules basically do the same
 										valid_children : "none",
 										max_children : 0,
@@ -50,7 +50,16 @@ function inicializar()
 													image : "../imagenes/key.png"
 												}
 									},
-						"ok" :	{
+						"llave_foranea" :	{
+										// the following three rules basically do the same
+										valid_children : "none",
+										max_children : 0,
+										max_depth :0,
+										icon :	{ 
+													image : "../imagenes/error.png"
+												}
+									},
+						"unico" :	{
 										// the following three rules basically do the same
 										valid_children : "none",
 										max_children : 0,
@@ -111,7 +120,7 @@ function desplegarModulo(modulo)
 	
 	setTimeout('efecto("res_div_botones_secuencia","fadeOut")',0);
 	setTimeout('eliminar("res_div_botones_secuencia")',2000);
-	
+	numero_tuplas
 	$("#div_cuerpo").append(modulo);
 }
 
@@ -135,22 +144,42 @@ function mostrarDetalleTabla(nombre_tabla)
 function establecerRestriccionTabla()
 {
 	nombre_tabla = $('#rec_lbl_nombre_tabla').html();
-	$.ajax({
-		async:		false,
-		type: 		"POST",
-		dataType:	"html",
-		contentType:"application/x-www-form-urlencoded",
-		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=establecerRestriccionTabla&numero_tuplas="+$('#rec_txt_numero_tuplas').val()+"&nombre_tabla="+nombre_tabla,
-		beforeSend:	ajaxSend,
-		success:	ajaxSuccess,
-		timeout:	10000,
-		error:		ajaxError(12)
-	}); 
-	return false;
+	numero_tuplas = $('#rec_txt_numero_tuplas').val();
+	var acepta_eliminacion = true;
+	if(numero_tuplas == 0)
+		acepta_eliminacion = mensajeConfirmacion(27);
+	
+	if(acepta_eliminacion)
+	{
+		$.ajax({
+			async:		false,
+			type: 		"POST",
+			dataType:	"html",
+			contentType:"application/x-www-form-urlencoded",
+			url:		"../modulo_restricciones/restricciones.php",
+			data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
+			beforeSend:	ajaxSend,
+			success:	verificarRestriccionTablaEstablecida,
+			timeout:	10000,
+			error:		ajaxError(12)
+		});
+	}
+	else
+	{
+		ajaxSuccess();
+		return false;
+	}
 }
 
-function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato)
+function verificarRestriccionTablaEstablecida(establecida)
+{
+	if(establecida == "ok")
+		mensaje_barra_estado(26);
+	else
+		mostrarPopupError("res_error_1", establecida);
+}
+
+function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, longitud, permite_nulos, es_llave_primaria, es_valor_unico, es_sin_signo, valor_default)
 {
 	$.ajax({
 		async:		false,
@@ -158,7 +187,16 @@ function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato)
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=mostrarDetalleCampo&nombre_campo="+nombre_campo+"&nombre_tabla="+nombre_tabla+"&tipo_dato="+tipo_dato,
+		data:		"funcion=mostrarDetalleCampo" +
+					"&nombre_tabla=" + nombre_tabla +
+					"&nombre_campo=" + nombre_campo +
+					"&tipo_dato=" + tipo_dato +
+					"&longitud=" + longitud +
+					"&permite_nulos=" + permite_nulos +
+					"&es_llave_primaria=" + es_llave_primaria +
+					"&es_valor_unico=" + es_valor_unico +
+					"&es_sin_signo=" + es_sin_signo +
+					"&valor_default=" + valor_default,
 		beforeSend:	ajaxSend,
 		success:	actualizarDivDetalle,
 		timeout:	10000,

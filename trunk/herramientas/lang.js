@@ -1,8 +1,8 @@
 var lang_en = new Array(
 		"Log in",//0
-		"User:",//1
+		"User",//1
 		"Type your user name",//2
-		"Password:",//3
+		"Password",//3
 		"Type your password",//4
 		"English",//5
 		"Spanish",//6
@@ -22,14 +22,18 @@ var lang_en = new Array(
 		"Allowed library extension is[.lib]",//20
 		"Remove this connection",//21
 		"The connection could not be removed",//22
-		"Unable to establish connection with the DB, check the connection parameters."//23
+		"Unable to establish connection with the DB, check the connection parameters.",//23
+		"Warning",//24
+		"",//25 - para uso de info externa.
+		"Constraint set correctly.",//26
+		"If this value is set to zero, tables that depend on this will also be excluded. Are you sure?"//27
 	);
 
 var lang_es = new Array(
 		"Iniciar sesión",//0
-		"Usuario:",//1
+		"Usuario",//1
 		"Digite su nombre de usuario",//2
-		"Contraseña:",//3
+		"Contraseña",//3
 		"Digite su contraseña",//4
 		"Inglés",//5
 		"Español",//6
@@ -49,7 +53,11 @@ var lang_es = new Array(
 		"La extensión permitida para bibliotecas es [.lib]",//20
 		"Eliminar esta conexión",//21
 		"La conexión no pudo ser eliminada",//22
-		"No se pudo establecer conexión con la BD, revise los parámetros de conexión."//23
+		"No se pudo establecer conexión con la BD, revise los parámetros de conexión.",//23
+		"Advertencia",//24
+		"",//25 - para uso de info externa.
+		"Restricción establecida correctamente.",//26
+		"Si este valor se establece en cero, las tablas que dependan de esta tambien seran excluídas. ¿Esta seguro?"//27
 	);
 
 var lang = "en";

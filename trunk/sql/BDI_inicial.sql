@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `PSDG_idioma`;
-DROP TABLE IF EXISTS `PSDG_mensaje_ayuda`;
+DROP TABLE IF EXISTS `PSDG_mensaje_popup`;
 DROP TABLE IF EXISTS `PSDG_restricciones_campos`;
 DROP TABLE IF EXISTS `PSDG_restricciones_tablas`;
 DROP TABLE IF EXISTS `PSDG_fuentes_de_tipos`;
@@ -209,25 +209,27 @@ INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','en','Set output type');
 
 
 
-CREATE TABLE IF NOT EXISTS `PSDG_mensaje_ayuda` (
-	`ayu_nombre_boton` varchar(50) NOT NULL COMMENT 'Nombre del botón al que pertenece el mensaje de ayuda',
-	`ayu_lenguaje` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Abreviatura del lenguaje en el que se encuentra el mensaje',
-	`ayu_mensaje` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Texto del mensaje de ayuda',
-	PRIMARY KEY ( `ayu_nombre_boton`,`ayu_lenguaje` )
-) ENGINE= InnoDB COMMENT = 'Almacena los mensajes de ayuda en todos los idiomas';
+CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
+	`pop_accion` varchar(50) NOT NULL COMMENT 'Nombre de la accion asociada al mensaje',
+	`pop_lenguaje` char(2) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Abreviatura del lenguaje en el que se encuentra el mensaje',
+	`pop_mensaje` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Texto del mensaje del popup',
+	PRIMARY KEY ( `pop_accion`,`pop_lenguaje` )
+) ENGINE= InnoDB COMMENT = 'Almacena los mensajes de ayuda y error en todos los idiomas para los popups';
 
 /*ESPAÑOL*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('con_btn_help_1','es','Aquí se definen los parámetros para conectar con fuentes externas de información que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).<br/><br/>Tambien se deben definir <b>como mínimo</b> los parámetros de conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Toda la informacion se almacena en la Base de Datos Interna (<b>BDI</b>).');
-INSERT INTO PSDG_mensaje_ayuda VALUES('con_btn_help_2','es','Aquí se muestran todas las conexiones que se establecieron satisfactoriamente.<br/><br/>Puede eliminar una conexión a una determinada fuente haciendo clic en su respectivo botón <b>Eliminar</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','es','Aquí se definen los parámetros para conectar con fuentes externas de información que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).<br/><br/>Tambien se deben definir <b>como mínimo</b> los parámetros de conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Toda la informacion se almacena en la Base de Datos Interna (<b>BDI</b>).');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','es','Aquí se muestran todas las conexiones que se establecieron satisfactoriamente.<br/><br/>Puede eliminar una conexión a una determinada fuente haciendo clic en su respectivo botón <b>Eliminar</b>.');
 /*RESTRICCIONES*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos que será poblada (<b>BDO</b>).<br/><br/>Haz clic en cada una de las tablas y campos de la BDO para configurar sus parámetros en la ventana <b>Detalle</b>.');
-INSERT INTO PSDG_mensaje_ayuda VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar un determinado campo ó tabla de la BDO, seleccione el valor <b>No llenar</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos que será poblada (<b>BDO</b>).<br/><br/>Haz clic en cada una de las tablas y campos de la BDO para configurar sus parámetros en la ventana <b>Detalle</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar un determinado campo ó tabla de la BDO, seleccione el valor <b>No llenar</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','es','La operación no se pudo completar. Se necesita establecer primero las condiciones de las siguientes tablas para cumplir las restricciones de llaves foráneas: <b>%v</b>.');
 /**************************************************************************************************************/
 /*INGLES*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('con_btn_help_1','en','Here you define the parameters to connect to external information sources that provide additional data types (databases, plain text files or libraries).<br/><br/>Also you should define <b>at least</b> the parameters of connection to the Target Database (<b>BDO</b>), which will be populated.<br/><br/>All information is stored in the Internal Database (<b>BDI</b>).');
-INSERT INTO PSDG_mensaje_ayuda VALUES('con_btn_help_2','en','Here are all the connections that were established successfully. You can delete a connection to a particular source by clicking on its respective <b>Remove</b> button.');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','en','Here you define the parameters to connect to external information sources that provide additional data types (databases, plain text files or libraries).<br/><br/>Also you should define <b>at least</b> the parameters of connection to the Target Database (<b>BDO</b>), which will be populated.<br/><br/>All information is stored in the Internal Database (<b>BDI</b>).');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','en','Here are all the connections that were established successfully. You can delete a connection to a particular source by clicking on its respective <b>Remove</b> button.');
 /*RESTRICCIONES*/
-INSERT INTO PSDG_mensaje_ayuda VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Click on each of the tables and fields of the BDO to set its parameters in the <b>Detail</b> window.');
-INSERT INTO PSDG_mensaje_ayuda VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields. If you do not want to populate a field or table in the BDO, select  <b>No fill</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Click on each of the tables and fields of the BDO to set its parameters in the <b>Detail</b> window.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields. If you do not want to populate a field or table in the BDO, select  <b>No fill</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','en','Operation could not be completed. You need first establish conditions on the following tables to meet the foreign key constraints: <b>%v</b>.');

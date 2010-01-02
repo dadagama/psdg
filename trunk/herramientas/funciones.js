@@ -84,6 +84,21 @@ function ajaxSuccess()
 	lbl_loading.html("");
 }
 
+function mensaje_barra_estado(numero)
+{
+	var lbl_status = $("#lbl_status");
+	lbl_status.html(lang_js[numero]);
+	lbl_status.removeClass("error");
+	var lbl_loading = $("#lbl_loading");
+	lbl_loading.html("");
+}
+
+function mensajeConfirmacion(numero, datos)
+{
+	var mensaje = lang_js[numero].replace("%v", datos);
+	return confirm(mensaje);
+}
+
 function ajaxError(numero)
 {
 	var lbl_status = $("#lbl_status");
@@ -93,20 +108,34 @@ function ajaxError(numero)
 	lbl_loading.html("");
 }
 
-function mostrarPopupAyuda(nombreBoton)
+function mostrarPopupAyuda(accion)
 {
 	$.ajax({
 		async:		true,
 		type: 		"POST",
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
-		url:		"../herramientas/ayuda.php",
-		data:		"nombreBoton="+nombreBoton,
-		success:	mostrarPopup
+		url:		"../herramientas/popup.php",
+		data:		"accion="+accion,
+		success:	popupAyuda
 	});
 }
 
-function mostrarPopup(mensaje)
+function mostrarPopupError(accion, mensaje_embebido)
+{
+	lang_js[25] = mensaje_embebido;
+	$.ajax({
+		async:		true,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../herramientas/popup.php",
+		data:		"accion="+accion,
+		success:	popupError
+	});
+}
+
+function popupAyuda(mensaje)
 {
 	var div_mensaje = $("#div_mensaje");
 	var div_ayuda = $("#div_ayuda");
@@ -114,6 +143,19 @@ function mostrarPopup(mensaje)
 	lbl_ayuda.html("<b>"+lang_js[13]+"</b>");
 	div_ayuda.hide();
 	div_ayuda.removeClass("oculto");
+	div_mensaje.html(mensaje);
+	setTimeout('efecto("div_ayuda","slideToggle")',0);
+}
+
+function popupError(mensaje)
+{
+	var div_mensaje = $("#div_mensaje");
+	var div_ayuda = $("#div_ayuda");
+	var lbl_ayuda = $("#lbl_ayuda");
+	lbl_ayuda.html("<b>"+lang_js[24]+"</b>");
+	div_ayuda.hide();
+	div_ayuda.removeClass("oculto");
+	mensaje = mensaje.replace("%v", lang_js[25]);
 	div_mensaje.html(mensaje);
 	setTimeout('efecto("div_ayuda","slideToggle")',0);
 }
