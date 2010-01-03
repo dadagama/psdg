@@ -20,7 +20,7 @@
 	//DIV GENERAL
 	$html->tag("div", array("id"=>"res_div_general", "class"=>"tabla $ocultar"));
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba ancho_400"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 	
 				//DIV ESTRUCTURA
 				$html->tag("div", array("id"=>"res_div_estructura_bd"));
@@ -38,13 +38,13 @@
 						$html->end("legend");
 						
 						//TABLA ESTRUCTURA
-						$html->tag("div", array("class"=>"tabla"));
+						$html->tag("div", array("class"=>"tabla margin_arriba_10"));
 						
 							//FORMULARIO
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda alineacion_izquierda"));
 									$html->tag("div", array("id"=>"estructura", "class"=>"texto_arbol tree tree-classic"));
-										$objetoRestricciones->construirArbolBDO();
+										//$objetoRestricciones->construirArbolBDO();
 									$html->end("div");
 								$html->end("div");
 							$html->end("div");
@@ -60,7 +60,7 @@
 			$html->end("div");
 			
 			
-			$html->tag("div", array("class"=>"celda vertical_arriba ancho_624"));
+			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
 				//DIV DETALLE
 				$html->tag("div", array("id"=>"res_div_detalle_externo"));
 					$html->tag("fieldset");
@@ -74,7 +74,7 @@
 							$html->end("label");
 						$html->end("legend");
 						//TABLA
-						$html->tag("div", array("class"=>"tabla", "id"=>"res_div_detalle"));
+						$html->tag("div", array("class"=>"tabla margin_arriba_10", "id"=>"res_div_detalle"));
 						$html->end("div");	
 						//FIN TABLA
 					$html->end("fieldset");

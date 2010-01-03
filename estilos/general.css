@@ -62,30 +62,77 @@ body
 	margin: 0 auto;
 }
 
-.ancho_512
-{
-	width: 512px;
-}
+.alto_30
+{height: 30px;}
 
-.ancho_400
-{
-	width: 400px;
-}
+.alto_120
+{height: 120px;}
 
-.ancho_624
-{
-	width: 624px;
-}
+.ancho_20
+{width: 20px;}
+
+.ancho_50
+{width: 50px;}
+
+.ancho_100
+{width: 100px;}
+
+.ancho_130
+{width: 130px;}
+
+.ancho_140
+{width: 140px;}
+
+.ancho_200
+{width: 200px;}
+
+.ancho_256
+{width: 256px;}
 
 .ancho_280
-{
-	width: 280px;
-}
+{width: 280px;}
+
+.ancho_400
+{width: 400px;}
+
+.ancho_512
+{width: 512px;}
+
+.ancho_624
+{width: 624px;}
 
 .ancho_1024
-{
-	width: 1024px;
-}
+{width: 1024px;}
+
+.oculto
+{display: none;}
+
+.vertical_centro
+{vertical-align: middle;}
+
+.vertical_arriba
+{vertical-align: top;}
+
+.centrado
+{text-align: center;}
+
+.alineacion_centrado 
+{margin:0 auto;}
+
+.alineacion_derecha
+{text-align: right;}
+
+.alineacion_izquierda
+{text-align: left;}
+
+.paddin_izquierdo_15
+{padding-left: 15px;}
+
+.margin_arriba_10
+{margin-top: 10px;}
+
+fieldset
+{border: 1px solid #d2bfb6;}
 
 #con_div_conexion
 {
@@ -112,7 +159,7 @@ body
 
 #res_div_estructura_bd
 {
-	width: 280px;
+	width: 350px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;
@@ -120,7 +167,7 @@ body
 
 #res_div_detalle_externo
 {
-	width: 520px;
+	width: 400px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;
@@ -216,12 +263,6 @@ sal_div_tipos
 	width: 25px;
 	height: 25px;
 }
-
-.oculto
-{
-	display: none;
-}
-
 
 .texto_arbol
 { 
