@@ -11,6 +11,10 @@ switch($_REQUEST['funcion'])
 		echo $objetoRestricciones->crearFormularioRestriccionesTabla();
 		break;
 	
+	case "construirArbolBDO":
+		$objetoRestricciones->construirArbolBDO();
+		break;
+		
 	case "establecerRestriccionTabla":
 		$numero_tuplas = $_REQUEST['numero_tuplas'];
 		$nombre_tabla = $_REQUEST['nombre_tabla'];
@@ -29,12 +33,10 @@ switch($_REQUEST['funcion'])
 		$objetoRestricciones->cargarRestriccionesCampo(	$_REQUEST['nombre_tabla'], 
 																		$_REQUEST['nombre_campo'], 
 																		$_REQUEST['tipo_dato'],
-																		$_REQUEST['longitud'],
 																		$_REQUEST['permite_nulos'],
-																		$_REQUEST['es_llave_primaria'],
-																		$_REQUEST['es_valor_unico'],
-																		$_REQUEST['es_sin_signo'],
-																		$_REQUEST['valor_default']);
+																		$_REQUEST['tipo_llave'],
+																		$_REQUEST['valor_default'],
+																		$_REQUEST['extra']);
 		echo $objetoRestricciones->crearFormularioRestriccionesCampo();
 		break;
 	

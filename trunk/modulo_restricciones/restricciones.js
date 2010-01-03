@@ -11,8 +11,128 @@ function inicializar()
 	setTimeout('efecto("res_div_botones_secuencia","fadeIn")',2000);
 	
 	establecerPosicionSecuencia(2);
+	verificarRestriccionTablaEstablecida("ok");
 	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
+}
+
+function habilitarSiguienteEtapa(habilitar)
+{
+	if(habilitar)
+	{
+		$('#res_btn_siguiente').removeAttr("disabled");
+		setTimeout('efecto("res_btn_siguiente","hide")',0);
+		$('#res_btn_siguiente').attr("src","../imagenes/step_1_ok.png");
+		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
+	}
+	else
+	{
+		setTimeout('efecto("res_btn_siguiente","hide")',0);
+		$('#res_btn_siguiente').attr("src","../imagenes/step_1_off.png");
+		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
+		$('#res_btn_siguiente').attr("disabled","disabled");
+	}
+}
+
+function mostrarEtapa(ubicacion_etapa)
+{
+	$.ajax({
+				async:		false,
+				type: 		"POST",
+				dataType:	"html",
+				contentType:"application/x-www-form-urlencoded",
+				url:		"../modulo_restricciones/restricciones.php",
+				data:		"funcion="+ubicacion_etapa,
+				beforeSend:	ajaxSend,
+				success:	desplegarModulo,
+				timeout:	10000,
+				error:		ajaxError(12)
+			}); 
+	return false;
+}
+
+function desplegarModulo(modulo)
+{
+	setTimeout('efecto("res_div_general","fadeOut")',0);
+	setTimeout('eliminar("res_div_general")',2000);
 	
+	setTimeout('efecto("res_div_botones_secuencia","fadeOut")',0);
+	setTimeout('eliminar("res_div_botones_secuencia")',2000);
+	$("#div_cuerpo").append(modulo);
+}
+
+function mostrarDetalleTabla(nombre_tabla)
+{
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=mostrarDetalleTabla&nombre_tabla="+nombre_tabla,
+		beforeSend:	ajaxSend,
+		success:	actualizarDivDetalle,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function establecerRestriccionTabla()
+{
+	nombre_tabla = $('#rec_lbl_nombre_tabla').html();
+	numero_tuplas = $('#rec_txt_numero_tuplas').val();
+	var acepta_eliminacion = true;
+	if(numero_tuplas == 0)
+		acepta_eliminacion = mensajeConfirmacion(27);
+	
+	if(acepta_eliminacion)
+	{
+		$.ajax({
+			async:		false,
+			type: 		"POST",
+			dataType:	"html",
+			contentType:"application/x-www-form-urlencoded",
+			url:		"../modulo_restricciones/restricciones.php",
+			data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
+			beforeSend:	ajaxSend,
+			success:	verificarRestriccionTablaEstablecida,
+			timeout:	10000,
+			error:		ajaxError(12)
+		});
+	}
+	else
+	{
+		ajaxSuccess();
+		return false;
+	}
+}
+
+function verificarRestriccionTablaEstablecida(establecida)
+{
+	if(establecida == "ok")
+	{
+		$.ajax({
+			async:		false,
+			type: 		"POST",
+			dataType:	"html",
+			contentType:"application/x-www-form-urlencoded",
+			url:		"../modulo_restricciones/restricciones.php",
+			data:		"funcion=construirArbolBDO",
+			beforeSend:	ajaxSend,
+			success:	actualizarArbolBDO,
+			timeout:	10000,
+			error:		ajaxError(12)
+		});
+		mensaje_barra_estado(26);
+	}
+	else
+		mostrarPopupError("res_error_1", establecida);
+}
+
+function actualizarArbolBDO(arbolBDO)
+{
+	$('#estructura').html("");
+	$('#estructura').html(arbolBDO);
 	$("#estructura").tree(
 		{
 			rules :	{
@@ -78,108 +198,7 @@ function inicializar()
 	);
 }
 
-function habilitarSiguienteEtapa(habilitar)
-{
-	if(habilitar)
-	{
-		$('#res_btn_siguiente').removeAttr("disabled");
-		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/step_1_ok.png");
-		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
-	}
-	else
-	{
-		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/step_1_off.png");
-		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
-		$('#res_btn_siguiente').attr("disabled","disabled");
-	}
-}
-
-function mostrarEtapa(ubicacion_etapa)
-{
-	$.ajax({
-				async:		false,
-				type: 		"POST",
-				dataType:	"html",
-				contentType:"application/x-www-form-urlencoded",
-				url:		"../modulo_restricciones/restricciones.php",
-				data:		"funcion="+ubicacion_etapa,
-				beforeSend:	ajaxSend,
-				success:	desplegarModulo,
-				timeout:	10000,
-				error:		ajaxError(12)
-			}); 
-	return false;
-}
-
-function desplegarModulo(modulo)
-{
-	setTimeout('efecto("res_div_general","fadeOut")',0);
-	setTimeout('eliminar("res_div_general")',2000);
-	
-	setTimeout('efecto("res_div_botones_secuencia","fadeOut")',0);
-	setTimeout('eliminar("res_div_botones_secuencia")',2000);
-	numero_tuplas
-	$("#div_cuerpo").append(modulo);
-}
-
-function mostrarDetalleTabla(nombre_tabla)
-{
-	$.ajax({
-		async:		false,
-		type: 		"POST",
-		dataType:	"html",
-		contentType:"application/x-www-form-urlencoded",
-		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=mostrarDetalleTabla&nombre_tabla="+nombre_tabla,
-		beforeSend:	ajaxSend,
-		success:	actualizarDivDetalle,
-		timeout:	10000,
-		error:		ajaxError(12)
-	}); 
-	return false;
-}
-
-function establecerRestriccionTabla()
-{
-	nombre_tabla = $('#rec_lbl_nombre_tabla').html();
-	numero_tuplas = $('#rec_txt_numero_tuplas').val();
-	var acepta_eliminacion = true;
-	if(numero_tuplas == 0)
-		acepta_eliminacion = mensajeConfirmacion(27);
-	
-	if(acepta_eliminacion)
-	{
-		$.ajax({
-			async:		false,
-			type: 		"POST",
-			dataType:	"html",
-			contentType:"application/x-www-form-urlencoded",
-			url:		"../modulo_restricciones/restricciones.php",
-			data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
-			beforeSend:	ajaxSend,
-			success:	verificarRestriccionTablaEstablecida,
-			timeout:	10000,
-			error:		ajaxError(12)
-		});
-	}
-	else
-	{
-		ajaxSuccess();
-		return false;
-	}
-}
-
-function verificarRestriccionTablaEstablecida(establecida)
-{
-	if(establecida == "ok")
-		mensaje_barra_estado(26);
-	else
-		mostrarPopupError("res_error_1", establecida);
-}
-
-function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, longitud, permite_nulos, es_llave_primaria, es_valor_unico, es_sin_signo, valor_default)
+function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, permite_nulos, tipo_llave, valor_default, extra)
 {
 	$.ajax({
 		async:		false,
@@ -191,12 +210,10 @@ function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, longitud, pe
 					"&nombre_tabla=" + nombre_tabla +
 					"&nombre_campo=" + nombre_campo +
 					"&tipo_dato=" + tipo_dato +
-					"&longitud=" + longitud +
 					"&permite_nulos=" + permite_nulos +
-					"&es_llave_primaria=" + es_llave_primaria +
-					"&es_valor_unico=" + es_valor_unico +
-					"&es_sin_signo=" + es_sin_signo +
-					"&valor_default=" + valor_default,
+					"&tipo_llave=" + tipo_llave +
+					"&valor_default=" + valor_default +
+					"&extra=" + extra,
 		beforeSend:	ajaxSend,
 		success:	actualizarDivDetalle,
 		timeout:	10000,
