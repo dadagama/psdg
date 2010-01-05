@@ -74,9 +74,9 @@ class GeneradorHtml
 		$sql = "SELECT $codigo, $valor
 					FROM $nombre_tabla";
 		if($condiciones)
-			$sql .= "WHERE $condiciones";
+			$sql .= " WHERE $condiciones";
 		$conexion->ejecutarSQL($sql);
-		//echo $sql;
+//		echo $sql;
 		$this->tag("select", $arreglo_atributos_asociativos, $arreglo_atributos);
 		while($datos_opcion = $conexion->obtenerFilaComoArregloAsociativo())
 		{

@@ -322,13 +322,13 @@ function mostrarConexiones(conexiones)
 		}
 		
 		var div = 				"<div class='fila'>" +
-								"	<div class='ancho_50 celda vertical_centro alto_30 centrado'>" +
+								"	<div class='ancho_50 celda vertical_centro alto_40 centrado borde_inferior'>" +
 								"		<img src='"+imagen_tipo+"'/>" +
 								"	</div>" +
-								"	<div class='celda vertical_centro alto_30 conexion_establecida'>" +
+								"	<div class='celda vertical_centro alto_40 conexion_establecida borde_inferior'>" +
 								"		<label>"+con_nombre+"</label>" +
 								"	</div>" +
-								"	<div class='ancho_50 celda vertical_centro alto_30 conexion_establecida'>" +
+								"	<div class='ancho_50 celda vertical_centro alto_40 conexion_establecida borde_inferior'>" +
 								"		<input type='image' title='"+lang_js[21]+"' alt='eliminar_conexion' src='"+imagen_eliminar+"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
 								"	</div>" +
 								"</div>";

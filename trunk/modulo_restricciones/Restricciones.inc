@@ -261,7 +261,7 @@ class Restricciones
 	{	
 		//FORMULARIO
 		$this->html->tag("div", array("class"=>"fila"));
-		$this->html->tag("div", array("class"=>"celda"));
+		$this->html->tag("div", array("class"=>"celda ancho_512"));
 		$this->html->tag("fieldset");
 		
 			$this->html->tag("legend");
@@ -270,193 +270,226 @@ class Restricciones
 				$this->html->end("label");
 			$this->html->end("legend");
 			
-			//NOMBRE DE TABLA
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_200"));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro ancho_200 valor_campo color_letra_campo paddin_izquierdo_15"));
-					$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla"));
-						$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_tabla']);
-					$this->html->end("label");
-				$this->html->end("div");
-			$this->html->end("div");
-	
-			//NOMBRE DE CAMPO
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_200"));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Campo");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro ancho_200 valor_campo color_letra_campo paddin_izquierdo_15"));
-					$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo"));
-						$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_campo']);
-					$this->html->end("label");
-				$this->html->end("div");
-			$this->html->end("div");
+			$this->html->tag("div", array("class"=>"tabla"));
 			
-			//TIPO DE DATO
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Tipo de dato");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo paddin_izquierdo_15"));
-					$this->html->tag("label", array("id"=>"rec_lbl_tipo_dato"));
-						$this->html->printStaticText($this->arreglo_restricciones['rec_tipo_dato']);
-					$this->html->end("label");
-				$this->html->end("div");
-			$this->html->end("div");
-			
-			//PERMITE NULOS
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Permite Nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo paddin_izquierdo_15"));
-					$this->html->tag("label", array("id"=>"rec_lbl_permite_nulos"));
-						$this->html->printStaticText($this->arreglo_restricciones['permite_nulos']);
-					$this->html->end("label");
-				$this->html->end("div");
-			$this->html->end("div");
-			
-			if($this->arreglo_restricciones['tipo_llave'])
-			{
-				//TIPO DE LLAVE
+				//NOMBRE DE TABLA
 				$this->html->tag("div", array("class"=>"fila"));
-					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta"));
-							$this->html->printStaticText("Tipo de llave");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
+						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+							$this->html->printStaticText("Tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
-					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo paddin_izquierdo_15"));
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro valor_campo color_letra_campo"));
+						$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla"));
+							$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_tabla']);
+						$this->html->end("label");
+					$this->html->end("div");
+				$this->html->end("div");
+		
+				//NOMBRE DE CAMPO
+				$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
+						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+							$this->html->printStaticText("Campo");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->end("label");
+					$this->html->end("div");
+					
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro ancho_200 valor_campo color_letra_campo"));
 						$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo"));
-							$this->html->printStaticText($this->arreglo_restricciones['tipo_llave']);
+							$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_campo']);
 						$this->html->end("label");
 					$this->html->end("div");
 				$this->html->end("div");
-			}
-			
-			//VALOR DEFAULT
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Valor por defecto");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
 				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo paddin_izquierdo_15"));
-					$this->html->tag("label", array("id"=>"rec_lbl_es_valor_unico"));
-						$this->html->printStaticText($this->arreglo_restricciones['valor_default']);
-					$this->html->end("label");
-				$this->html->end("div");
-			$this->html->end("div");
-			
-			if($this->arreglo_restricciones['extra'])
-			{
-				//EXTRAS
+				//TIPO DE DATO
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta"));
-							$this->html->printStaticText("Otro");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+							$this->html->printStaticText("Tipo de dato");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
-					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo paddin_izquierdo_15"));
-						$this->html->tag("label", array("id"=>"rec_lbl_es_sin_signo"));
-							$this->html->printStaticText($this->arreglo_restricciones['extra']);
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
+						$this->html->tag("label", array("id"=>"rec_lbl_tipo_dato"));
+							$this->html->printStaticText($this->arreglo_restricciones['rec_tipo_dato']);
 						$this->html->end("label");
 					$this->html->end("div");
 				$this->html->end("div");
-			}
+				
+				//PERMITE NULOS
+				$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
+						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+							$this->html->printStaticText("Permite Nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->end("label");
+					$this->html->end("div");
+					
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
+						$this->html->tag("label", array("id"=>"rec_lbl_permite_nulos"));
+							$this->html->printStaticText($this->arreglo_restricciones['permite_nulos']);
+						$this->html->end("label");
+					$this->html->end("div");
+				$this->html->end("div");
+				
+				if($this->arreglo_restricciones['tipo_llave'])
+				{
+					//TIPO DE LLAVE
+					$this->html->tag("div", array("class"=>"fila"));
+						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
+							$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+								$this->html->printStaticText("Tipo de llave");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->end("label");
+						$this->html->end("div");
+						
+						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
+							$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo"));
+								$this->html->printStaticText($this->arreglo_restricciones['tipo_llave']);
+							$this->html->end("label");
+						$this->html->end("div");
+					$this->html->end("div");
+				}
+				
+				//VALOR DEFAULT
+				$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
+						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+							$this->html->printStaticText("Valor por defecto");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->end("label");
+					$this->html->end("div");
+					
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
+						$this->html->tag("label", array("id"=>"rec_lbl_es_valor_unico"));
+							$this->html->printStaticText($this->arreglo_restricciones['valor_default']);
+						$this->html->end("label");
+					$this->html->end("div");
+				$this->html->end("div");
+				
+				if($this->arreglo_restricciones['extra'])
+				{
+					//EXTRAS
+					$this->html->tag("div", array("class"=>"fila"));
+						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
+							$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
+								$this->html->printStaticText("Otro");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->end("label");
+						$this->html->end("div");
+						
+						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
+							$this->html->tag("label", array("id"=>"rec_lbl_es_sin_signo"));
+								$this->html->printStaticText($this->arreglo_restricciones['extra']);
+							$this->html->end("label");
+						$this->html->end("div");
+					$this->html->end("div");
+				}
+				
+			$this->html->end("div");
 			
 		$this->html->end("fieldset");
 		$this->html->end("div");
 		$this->html->end("div");
 		
-		
-		$porcentaje_nulos = 0;
-		if($this->arreglo_restricciones['rec_porcentaje_nulos'])
-			$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
+		//FIELDSET CONFIGURACION RESTRICCIONES
 				
 		$this->html->tag("div", array("class"=>"fila"));
 		$this->html->tag("div", array("class"=>"celda"));
+		$this->html->tag("fieldset");
 		
-		$this->html->tag("div", array("class"=>"tabla_centrada"));
+			$this->html->tag("legend");
+				$this->html->tag("label");
+					$this->html->printText("res_lgn_titulo_restricciones");
+				$this->html->end("label");
+			$this->html->end("legend");
 			
-			//NULOS
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30 ancho_256"));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Porcentaje valores nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 ancho_200 valor_campo color_letra_campo paddin_izquierdo_15"));
-						$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo"));
-				$this->html->end("div");
-			$this->html->end("div");
+			$this->html->tag("div", array("class"=>"tabla"));
 			
-			//FUENTE DE DATOS
-			$this->html->tag("div", array("class"=>"fila"));
-				$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_256"));
-					$this->html->tag("label", array("class"=>"etiqueta"));
-						$this->html->printStaticText("Fuente de datos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-					$this->html->end("label");
-				$this->html->end("div");
-				
-				$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 ancho_200 valor_campo color_letra_campo paddin_izquierdo_15"));
-						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes", "", $this->arreglo_restricciones['rec_fue_codigo'], array("class"=>"valor_campo color_letra_campo"), "");
-				$this->html->end("div");
-			$this->html->end("div");
-			
-			switch($this->arreglo_restricciones['rec_fue_codigo'])
-			{
-				case 1://Archivo
-					$this->html->tag("div", array("class"=>"fila"));
-						$this->html->tag("div", array("class"=>"celda alineacion_izquierda"));
-							$this->html->tag("label", array("class"=>"etiqueta"));
-								$this->html->printStaticText("Cantidad de tuplas");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-							$this->html->end("label");
-						$this->html->end("div");
-						
-						$this->html->tag("div", array("class"=>"celda alineacion_izquierda"));
-							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas));
-						$this->html->end("div");
+				//FUENTE DE DATOS
+				$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printStaticText("Fuente de datos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->end("label");
 					$this->html->end("div");
-					break;
-				case 2://Base de datos externa
-					break;
-				case 3://Biblioteca
-					break;
-				case 4://Lista de valores
-					break;
-				case 5://Constante
-					break;
-				case 6://Intervalo
-					break;
-			}
+					
+					$tipo_de_dato = $this->obtenerTipoDeDato($this->arreglo_restricciones['rec_tipo_dato']);
+					
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+							$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("class"=>"valor_campo color_letra_campo"), "");
+					$this->html->end("div");
+				$this->html->end("div");
+			
+				$porcentaje_nulos = 0;
+				if($this->arreglo_restricciones['rec_porcentaje_nulos'])
+					$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
+				
+				//NULOS
+				$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printStaticText("Porcentaje valores nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->end("label");
+					$this->html->end("div");
+					
+					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo"));
+					$this->html->end("div");
+				$this->html->end("div");
+				
+				switch($this->arreglo_restricciones['rec_fue_codigo'])
+				{
+					case 1://Archivo
+						$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"celda alineacion_izquierda"));
+								$this->html->tag("label", array("class"=>"etiqueta"));
+									$this->html->printStaticText("Cantidad de tuplas");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+								$this->html->end("label");
+							$this->html->end("div");
+							
+							$this->html->tag("div", array("class"=>"celda alineacion_izquierda"));
+								$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas));
+							$this->html->end("div");
+						$this->html->end("div");
+						break;
+					case 2://Base de datos externa
+						break;
+					case 3://Biblioteca
+						break;
+					case 4://Lista de valores
+						break;
+					case 5://Constante
+						break;
+					case 6://Intervalo
+						break;
+				}
+				
+			$this->html->end("div");
+			
+		$this->html->end("fieldset");
+		$this->html->end("div");
+		$this->html->end("div");			
 	
-			//BOTON
-			$this->html->tag("div", array("class"=>"fila"));
+		//BOTON
+		$this->html->tag("div", array("class"=>"fila"));
+			$this->html->tag("div", array("class"=>"celda"));
 				$this->html->tag("input", array("id"=>"rec_btn_establecer" ,"type"=>"button", "value"=>"Establecer", "onclick"=>"establecerRestriccionTabla();", "class"=>"valor_campo color_letra_campo"));//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 			$this->html->end("div");
+		$this->html->end("div");
 			
-		$this->html->end("div");	
-		$this->html->end("div");
-		$this->html->end("div");
+//		$this->html->end("div");	
+//		$this->html->end("div");
+//		$this->html->end("div");
 		//FIN FORMULARIO
+	}
+	
+	function obtenerTipoDeDato($tipo_de_dato_extendido)
+	{
+		$posicion_parentesis = stripos($tipo_de_dato_extendido, "(");
+		if($posicion_parentesis)
+			$tipo_dato = substr($tipo_de_dato_extendido, 0, $posicion_parentesis);
+		else
+			$tipo_dato = $tipo_de_dato_extendido;
+			  
+		return $tipo_dato;	
 	}
 	
 	function actualizarRestriccionCampo($nombre_tabla, $numero_tuplas)

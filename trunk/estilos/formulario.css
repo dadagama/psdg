@@ -45,13 +45,13 @@
 	font-size: 		15px;
 	font-family: 	Arial,Helvetica,sans-serif;
 	color: 			#2a7bb3;
-	padding: 		0 5px 10px 0;
+	margin: 0px 10px 0px 0px;
 	vertical-align:middle;
 }
 
 .valor_campo
 {
-	font-size: 15px;
+	font-size: 14px;
 	font-family: Arial,Helvetica,sans-serif;
 }
 
