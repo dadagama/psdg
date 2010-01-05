@@ -65,6 +65,9 @@ body
 .alto_30
 {height: 30px;}
 
+.alto_40
+{height: 40px;}
+
 .alto_120
 {height: 120px;}
 
@@ -73,6 +76,9 @@ body
 
 .ancho_50
 {width: 50px;}
+
+.ancho_50p
+{width: 50%;}
 
 .ancho_100
 {width: 100px;}
@@ -125,11 +131,14 @@ body
 .alineacion_izquierda
 {text-align: left;}
 
-.paddin_izquierdo_15
-{padding-left: 15px;}
+.margin_izquierdo_15
+{margin-left: 15px;}
 
 .margin_arriba_10
 {margin-top: 10px;}
+
+.borde_inferior
+{border-bottom: solid 1px #d2bfb6;}
 
 fieldset
 {border: 1px solid #d2bfb6;}
@@ -167,7 +176,7 @@ fieldset
 
 #res_div_detalle_externo
 {
-	width: 400px;
+	width: 512px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;

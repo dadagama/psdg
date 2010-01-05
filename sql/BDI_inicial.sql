@@ -55,12 +55,19 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',5);
 
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',1);
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',2);
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',3);
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',4);
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',5);
-INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','integer',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',6);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',6);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',2);
