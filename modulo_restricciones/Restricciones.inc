@@ -275,8 +275,8 @@ class Restricciones
 				//NOMBRE DE TABLA
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
-						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-							$this->html->printStaticText("Tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printText("rec_lbl_nombre_tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
@@ -290,8 +290,8 @@ class Restricciones
 				//NOMBRE DE CAMPO
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-							$this->html->printStaticText("Campo");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printText("rec_lbl_nombre_campo");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
@@ -305,8 +305,8 @@ class Restricciones
 				//TIPO DE DATO
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-							$this->html->printStaticText("Tipo de dato");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printText("rec_lbl_tipo_dato");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
@@ -320,31 +320,35 @@ class Restricciones
 				//PERMITE NULOS
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-							$this->html->printStaticText("Permite Nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printText("rec_lbl_permite_nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
 						$this->html->tag("label", array("id"=>"rec_lbl_permite_nulos"));
-							$this->html->printStaticText($this->arreglo_restricciones['permite_nulos']);
+							$this->html->printText("res_nulo_".$this->arreglo_restricciones['permite_nulos']);
 						$this->html->end("label");
 					$this->html->end("div");
 				$this->html->end("div");
 				
 				if($this->arreglo_restricciones['tipo_llave'])
 				{
+					$arreglo_tipos_llave = $this->obtenerTiposLlave($this->arreglo_restricciones['rec_nombre_tabla'], $this->arreglo_restricciones['rec_nombre_campo']);
+					$arreglo_traducido = $this->html->traducirArreglo($arreglo_tipos_llave);
+					$tipos_llave = implode(",", $arreglo_traducido);
+					
 					//TIPO DE LLAVE
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-							$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-								$this->html->printStaticText("Tipo de llave");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->tag("label", array("class"=>"etiqueta"));
+								$this->html->printText("rec_lbl_tipo_llave");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 							$this->html->end("label");
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
-							$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo"));
-								$this->html->printStaticText($this->arreglo_restricciones['tipo_llave']);
+							$this->html->tag("label", array("id"=>"rec_lbl_tipo_llave"));
+								$this->html->printText($tipos_llave);
 							$this->html->end("label");
 						$this->html->end("div");
 					$this->html->end("div");
@@ -353,14 +357,14 @@ class Restricciones
 				//VALOR DEFAULT
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-						$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-							$this->html->printStaticText("Valor por defecto");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+						$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->printText("rec_lbl_valor_default");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
-						$this->html->tag("label", array("id"=>"rec_lbl_es_valor_unico"));
-							$this->html->printStaticText($this->arreglo_restricciones['valor_default']);
+						$this->html->tag("label", array("id"=>"rec_lbl_valor_default"));
+							$this->html->printText($this->arreglo_restricciones['valor_default']);
 						$this->html->end("label");
 					$this->html->end("div");
 				$this->html->end("div");
@@ -370,14 +374,14 @@ class Restricciones
 					//EXTRAS
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro "));
-							$this->html->tag("label", array("class"=>"etiqueta ancho_200"));
-								$this->html->printStaticText("Otro");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->tag("label", array("class"=>"etiqueta"));
+								$this->html->printText("rec_lbl_extras");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 							$this->html->end("label");
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro  valor_campo color_letra_campo"));
-							$this->html->tag("label", array("id"=>"rec_lbl_es_sin_signo"));
-								$this->html->printStaticText($this->arreglo_restricciones['extra']);
+							$this->html->tag("label", array("id"=>"rec_lbl_extras"));
+								$this->html->printText($this->arreglo_restricciones['extra']);
 							$this->html->end("label");
 						$this->html->end("div");
 					$this->html->end("div");
@@ -393,7 +397,7 @@ class Restricciones
 				
 		$this->html->tag("div", array("class"=>"fila"));
 		$this->html->tag("div", array("class"=>"celda"));
-		$this->html->tag("fieldset");
+		$this->html->tag("fieldset", array("class"=>"margin_arriba_10"));
 		
 			$this->html->tag("legend");
 				$this->html->tag("label");
@@ -407,7 +411,7 @@ class Restricciones
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
 						$this->html->tag("label", array("class"=>"etiqueta"));
-							$this->html->printStaticText("Fuente de datos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->printText("rec_tipo_dato");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 						$this->html->end("label");
 					$this->html->end("div");
 					
@@ -422,18 +426,21 @@ class Restricciones
 				if($this->arreglo_restricciones['rec_porcentaje_nulos'])
 					$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
 				
-				//NULOS
-				$this->html->tag("div", array("class"=>"fila"));
-					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-						$this->html->tag("label", array("class"=>"etiqueta"));
-							$this->html->printStaticText("Porcentaje valores nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
-						$this->html->end("label");
+				if($this->arreglo_restricciones['permite_nulos'] != "NO")
+				{
+					//NULOS
+					$this->html->tag("div", array("class"=>"fila"));
+						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
+							$this->html->tag("label", array("class"=>"etiqueta"));
+								$this->html->printStaticText("Porcentaje valores nulos");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+							$this->html->end("label");
+						$this->html->end("div");
+						
+						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+								$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo"));
+						$this->html->end("div");
 					$this->html->end("div");
-					
-					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo"));
-					$this->html->end("div");
-				$this->html->end("div");
+				}
 				
 				switch($this->arreglo_restricciones['rec_fue_codigo'])
 				{
@@ -479,6 +486,29 @@ class Restricciones
 //		$this->html->end("div");
 //		$this->html->end("div");
 		//FIN FORMULARIO
+	}
+	
+	function obtenerTiposLlave($rec_nombre_tabla, $rec_nombre_campo)
+	{
+		$parametros_conexion_BDO = $this->conexionBDO->obtenerParametrosConexion();
+		$nombre_BDO = $parametros_conexion_BDO['con_nombre_bd'];
+		//consulto si es una llave foranea
+		$sql = "	SELECT CONSTRAINT_TYPE
+					FROM TABLE_CONSTRAINTS, KEY_COLUMN_USAGE
+					WHERE TABLE_CONSTRAINTS.TABLE_NAME = KEY_COLUMN_USAGE.TABLE_NAME
+					AND TABLE_CONSTRAINTS.CONSTRAINT_NAME = KEY_COLUMN_USAGE.CONSTRAINT_NAME
+					AND TABLE_CONSTRAINTS.TABLE_SCHEMA = KEY_COLUMN_USAGE.TABLE_SCHEMA
+					AND TABLE_CONSTRAINTS.CONSTRAINT_SCHEMA = '".$nombre_BDO."'
+					AND TABLE_CONSTRAINTS.TABLE_NAME = '".$rec_nombre_tabla."'
+					AND KEY_COLUMN_USAGE.COLUMN_NAME = '".$rec_nombre_campo."'";
+		//echo $sql;
+		$this->conexionBDO->establecer_bd("information_schema");
+		$this->conexionBDO->ejecutarSQL($sql);
+		$arreglo_tipos = array();
+		while($tipo_llave = $this->conexionBDO->obtenerFilaComoArreglo())
+			$arreglo_tipos[] = "rec_lbl_".$tipo_llave[0];
+		$this->conexionBDO->restablecer_bd_original();
+		return $arreglo_tipos;
 	}
 	
 	function obtenerTipoDeDato($tipo_de_dato_extendido)
