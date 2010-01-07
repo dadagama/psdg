@@ -80,7 +80,6 @@ class GeneradorHtml
 		$this->tag("select", $arreglo_atributos_asociativos, $arreglo_atributos);
 		while($datos_opcion = $conexion->obtenerFilaComoArregloAsociativo())
 		{
-			
 			if($datos_opcion[$codigo] == $codigo_seleccionado)
 				$seleccionado = "selected";
 				
@@ -89,6 +88,16 @@ class GeneradorHtml
 			$this->end("option");
 		}
 		$this->end("select");
+	}
+	
+	function traducirArreglo($arreglo)
+	{
+		$arreglo_traduccion = array();
+		foreach($arreglo AS $pos => $texto)
+		{
+			$arreglo_traduccion[] = $this->getText($texto);
+		}
+		return $arreglo_traduccion;
 	}
 }
 ?>

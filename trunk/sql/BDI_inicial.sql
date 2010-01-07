@@ -22,12 +22,13 @@ CREATE TABLE `BDI`.`PSDG_fuentes` (
 	PRIMARY KEY ( `fue_codigo` )
 ) ENGINE = InnoDB COMMENT = 'Almacena los distintos fuentes de datos que puede utilizar el usuario para generar datos deacuerdo al SMBD de la BDO';
 
-INSERT INTO PSDG_fuentes VALUES(1,'Archivo');
-INSERT INTO PSDG_fuentes VALUES(2,'Base de datos externa');
+INSERT INTO PSDG_fuentes VALUES(1,'Ninguna');
+INSERT INTO PSDG_fuentes VALUES(2,'Base de datos');
 INSERT INTO PSDG_fuentes VALUES(3,'Biblioteca');
 INSERT INTO PSDG_fuentes VALUES(4,'Lista de valores');
 INSERT INTO PSDG_fuentes VALUES(5,'Constante');
 INSERT INTO PSDG_fuentes VALUES(6,'Intervalo');
+INSERT INTO PSDG_fuentes VALUES(7,'Archivo');
 
 
 CREATE TABLE `BDI`.`PSDG_fuentes_de_tipos` (
@@ -42,18 +43,22 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',2);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',7);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',2);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',7);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',2);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',7);
+
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',2);
@@ -61,6 +66,8 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',7);
+
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',2);
@@ -68,6 +75,8 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',7);
+
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',2);
@@ -75,6 +84,8 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',7);
+
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',2);
@@ -82,6 +93,8 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',7);
+
 
 
 
@@ -166,6 +179,31 @@ INSERT INTO PSDG_idioma VALUES('res_lgn_estructura_bd','es','Estructura de la BD
 INSERT INTO PSDG_idioma VALUES('res_lgn_detalle','es','Detalle');
 INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','es','Establecer conexiones');
 INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','es','Establecer tipo de salida');
+
+INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','es','Restricciones');
+INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','es','Información del campo');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','es','Nombre de la tabla');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo','es','Nombre del campo');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_dato','es','Tipo de dato');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_permite_nulos','es','Permite valores nulos');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_llave','es','Tipo de llave');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_PRIMARY KEY','es','Primaria');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_FOREIGN KEY','es','Foránea');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_UNIQUE','es','Única');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_default','es','Valor por defecto');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_extras','es','Extra');
+
+INSERT INTO PSDG_idioma VALUES('select_Archivo','es','Archivo');
+INSERT INTO PSDG_idioma VALUES('select_Base de datos','es','Base de datos');
+INSERT INTO PSDG_idioma VALUES('select_Biblioteca','es','Biblioteca');
+INSERT INTO PSDG_idioma VALUES('select_Lista de valores','es','Lista de valores');
+INSERT INTO PSDG_idioma VALUES('select_Constante','es','Constante');
+INSERT INTO PSDG_idioma VALUES('select_Intervalo','es','Intérvalo');
+INSERT INTO PSDG_idioma VALUES('select_Ninguna','es','Ninguna');
+INSERT INTO PSDG_idioma VALUES('res_nulo_YES','es','Si');
+INSERT INTO PSDG_idioma VALUES('res_nulo_NO','es','No');
+
+
 /**************************************************************************************************************/
 /*INGLES*/
 /*general*/
@@ -212,7 +250,28 @@ INSERT INTO PSDG_idioma VALUES('res_lgn_detalle','en','Detalle');
 INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','en','Set Connections');
 INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','en','Set output type');
 
+INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','en','Field information');
+INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','en','Restrictions');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','en','Table name');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo','en','Field name');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_dato','en','Data type');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_permite_nulos','en','Allow null value');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_llave','en','Key type');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_PRIMARY KEY','en','Primary');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_FOREIGN KEY','en','Foreign');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_UNIQUE','en','Unique');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_default','en','Default value');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_extras','en','Extra');
 
+INSERT INTO PSDG_idioma VALUES('select_Archivo','en','File');
+INSERT INTO PSDG_idioma VALUES('select_Base de datos','en','Database');
+INSERT INTO PSDG_idioma VALUES('select_Biblioteca','en','Library');
+INSERT INTO PSDG_idioma VALUES('select_Lista de valores','en','Value list');
+INSERT INTO PSDG_idioma VALUES('select_Constante','en','Constant');
+INSERT INTO PSDG_idioma VALUES('select_Intervalo','en','Interval');
+INSERT INTO PSDG_idioma VALUES('select_Ninguna','en','None');
+INSERT INTO PSDG_idioma VALUES('res_nulo_YES','en','Yes');
+INSERT INTO PSDG_idioma VALUES('res_nulo_NO','en','No');
 
 
 
