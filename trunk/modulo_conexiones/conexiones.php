@@ -18,7 +18,7 @@ switch($_REQUEST['funcion'])
 		
 		switch($con_tipo)
 		{
-			case "bd":
+			case "2":
 				$con_servidor = $_REQUEST['con_servidor'];
 				$con_nombre_bd = $_REQUEST['con_nombre_bd'];
 				$con_usuario_bd = $_REQUEST['con_usuario'];
@@ -30,7 +30,7 @@ switch($_REQUEST['funcion'])
 					$error = "bd";
 				break;
 				
-			case "archivo":
+			case "7":
 				$nombre_archivo = $_FILES['con_archivo']['name'];
 				$separador = $_REQUEST['con_separador'];
 				
@@ -52,7 +52,7 @@ switch($_REQUEST['funcion'])
 					$error = "archivo";
 				break;
 				
-			case "biblioteca":
+			case "3":
 				$nombre_archivo = $_FILES['con_biblioteca']['name'];
 				$archivo = file($_FILES['con_biblioteca']['tmp_name']);
 				

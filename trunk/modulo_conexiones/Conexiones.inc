@@ -17,9 +17,9 @@ class Conexiones
 
 	function existeRegistroBDO()
 	{
-		$sql = "	SELECT con_tipo
+		$sql = "	SELECT con_fue_codigo
 					FROM PSDG_conexion
-					WHERE con_tipo = 'bd'
+					WHERE con_fue_codigo = '2'
 					AND con_usu_login = '".$this->usu_login."'
 					AND con_nombre = 'BDO'
 					LIMIT 1";
@@ -48,7 +48,7 @@ class Conexiones
 	function crearTablaConexionExterna($con_nombre, $tipo_conexion, $nombre_archivo, $nombres_campos = "")
 	{
 		$campos = "";
-		if(isset($nombres_campos) && $nombres_campos && $tipo_conexion == "biblioteca")
+		if(isset($nombres_campos) && $nombres_campos && $tipo_conexion == "3")
 		{
 			$nombres = explode(",", $nombres_campos);
 			for($x = 0; $x < count($nombres); $x++)
@@ -81,7 +81,7 @@ class Conexiones
 	
 	function obtenerArregloInfoConexiones()
 	{
-		$sql = "	SELECT con_nombre, con_tipo
+		$sql = "	SELECT con_nombre, con_fue_codigo
 					FROM PSDG_conexion";
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultadoComoArreglo();
@@ -95,7 +95,7 @@ class Conexiones
 		$sql = "	DELETE 
 					FROM PSDG_conexion
 					WHERE con_nombre = '".$con_nombre."'
-					AND con_tipo = '".$con_tipo."'
+					AND con_fue_codigo = '".$con_tipo."'
 					AND con_usu_login = '".$this->usu_login."'";
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();

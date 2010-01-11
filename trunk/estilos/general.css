@@ -74,11 +74,17 @@ body
 .ancho_20
 {width: 20px;}
 
+.ancho_35
+{width: 35px;}
+
 .ancho_50
 {width: 50px;}
 
 .ancho_50p
 {width: 50%;}
+
+.ancho_70
+{width: 70px;}
 
 .ancho_100
 {width: 100px;}
@@ -88,6 +94,9 @@ body
 
 .ancho_140
 {width: 140px;}
+
+.ancho_150
+{width: 150px;}
 
 .ancho_200
 {width: 200px;}

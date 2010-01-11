@@ -60,7 +60,7 @@
 		$html->tag("div", array("class"=>"fila"));
 		
 			$html->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
-					$html->tag("input", array("id"=>"eje_btn_anterior", "type"=>"image", "src"=>"../imagenes/step_1_ok.png", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$html->getText('eje_ttp_anterior'), "title"=>$html->getText('eje_ttp_anterior')));
+					$html->tag("input", array("id"=>"res_btn_anterior", "type"=>"image", "src"=>"../imagenes/btn_back_1.png", "onmouseover"=>"this.src='../imagenes/btn_back_2.png'", "onmouseout"=>"this.src='../imagenes/btn_back_1.png'", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$html->getText('res_ttp_anterior'), "title"=>$html->getText('res_ttp_anterior')));
 			$html->end("div");
 			
 		$html->end("div");
