@@ -32,6 +32,24 @@ function inicializar()
 		});
 }
 
+function habilitarSiguienteEtapa(habilitar)
+{
+	if(habilitar)
+	{
+		$('#con_btn_siguiente').removeAttr("disabled");
+		setTimeout('efecto("con_btn_siguiente","hide")',0);
+		$('#con_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
+		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
+	}
+	else
+	{
+		setTimeout('efecto("con_btn_siguiente","hide")',0);
+		$('#con_btn_siguiente').attr("src","../imagenes/btn_next_3.png");
+		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
+		$('#con_btn_siguiente').attr("disabled","disabled");
+	}
+}
+
 function verificarSiExisteConexionBDO()
 {
 	$.ajax({
@@ -212,23 +230,6 @@ function existeBDO(existe)
 	ajaxSuccess();
 }
 
-function habilitarSiguienteEtapa(habilitar)
-{
-	if(habilitar)
-	{
-		$('#con_btn_siguiente').removeAttr("disabled");
-		setTimeout('efecto("con_btn_siguiente","hide")',0);
-		$('#con_btn_siguiente').attr("src","../imagenes/step_1_ok.png");
-		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
-	}
-	else
-	{
-		setTimeout('efecto("con_btn_siguiente","hide")',0);
-		$('#con_btn_siguiente').attr("src","../imagenes/step_1_off.png");
-		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
-		$('#con_btn_siguiente').attr("disabled","disabled");
-	}
-}
 
 function colocarFormularioBDO(colocar)
 {

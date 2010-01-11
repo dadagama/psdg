@@ -88,15 +88,6 @@
 	//FIN DIV GENERAL
 	
 	//DIV BOTONES SECUENCIA
-	$html->tag("div", array("id"=>"res_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
-		$html->tag("div", array("class"=>"fila"));
-		
-			$html->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
-					$html->tag("input", array("id"=>"res_btn_anterior", "type"=>"image", "src"=>"../imagenes/btn_back_1.png", "onmouseover"=>"this.src='../imagenes/btn_back_2.png'", "onmouseout"=>"this.src='../imagenes/btn_back_1.png'", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$html->getText('res_ttp_anterior'), "title"=>$html->getText('res_ttp_anterior')));
-					$html->tag("input", array("id"=>"res_btn_siguiente", "type"=>"image", "src"=>"../imagenes/btn_next_1.png", "onmouseover"=>"this.src='../imagenes/btn_next_2.png'", "onmouseout"=>"this.src='../imagenes/btn_next_1.png'", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('res_ttp_siguiente'), "title"=>$html->getText('res_ttp_siguiente')));
-			$html->end("div");
-			
-		$html->end("div");
-	$html->end("div");
+	$html->generarBotonesSecuencia("res", true, true, $ocultar);
 	//FIN DIV BOTONES SECUENCIA
 ?>

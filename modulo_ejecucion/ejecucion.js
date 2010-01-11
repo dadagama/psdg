@@ -17,17 +17,17 @@ function habilitarSiguienteEtapa(habilitar)
 {
 	if(true)//<=======================  OJO OJO OJO OJO OJO CAMBIAR
 	{
-		$('#eje_btn_siguiente').removeAttr("disabled");
-		setTimeout('efecto("eje_btn_siguiente","hide")',0);
-		$('#eje_btn_siguiente').attr("src","../imagenes/step_1_ok.png");
-		setTimeout('efecto("eje_btn_siguiente","fadeIn")',0);
+		$('#sal_btn_siguiente').removeAttr("disabled");
+		setTimeout('efecto("sal_btn_siguiente","hide")',0);
+		$('#sal_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
+		setTimeout('efecto("sal_btn_siguiente","fadeIn")',0);
 	}
 	else
 	{
-		setTimeout('efecto("eje_btn_siguiente","hide")',0);
-		$('#eje_btn_siguiente').attr("src","../imagenes/step_1_off.png");
-		setTimeout('efecto("eje_btn_siguiente","fadeIn")',0);
-		$('#eje_btn_siguiente').attr("disabled","disabled");
+		setTimeout('efecto("sal_btn_siguiente","hide")',0);
+		$('#sal_btn_siguiente').attr("src","../imagenes/btn_next_3.png");
+		setTimeout('efecto("sal_btn_siguiente","fadeIn")',0);
+		$('#sal_btn_siguiente').attr("disabled","disabled");
 	}
 }
 
