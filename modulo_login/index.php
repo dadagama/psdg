@@ -51,7 +51,7 @@
 				$html->end("img");
 				
 				$html->tag("div", array("id"=>"div_logout"));
-					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/logout.png", "alt"=>"logout", "title"=>"logout"));
+					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "onmouseover"=>"this.src='../imagenes/btn_logout_2.png'", "onmouseout"=>"this.src='../imagenes/btn_logout_1.png'", "alt"=>"logout", "title"=>"logout"));
 					$html->end("input");
 				$html->end("div");
 					

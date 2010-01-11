@@ -51,7 +51,7 @@ function verificarSiExisteConexionBDO()
 
 function adicionarConexion()
 {
-	var con_tipo = $("#con_tipo").val();
+	var con_tipo = $("#con_fue_codigo").val();
 	if(pasaValidacionCampos(con_tipo))
 	{
 		var datos_conexion = $("#fm_datos_conexion").serialize();
@@ -61,7 +61,7 @@ function adicionarConexion()
 			dataType:	"html",
 			contentType:"application/x-www-form-urlencoded",
 			url:		"../modulo_conexiones/conexiones.php",
-			data:		"funcion=insertarConexion&con_nombre="+$("#con_nombre").val()+"&con_tipo="+$("#con_tipo").val()+"&"+datos_conexion,
+			data:		"funcion=insertarConexion&con_nombre="+$("#con_nombre").val()+"&con_tipo="+con_tipo+"&"+datos_conexion,
 			beforeSend:	ajaxSend,
 			success:	insertoConexion,
 			timeout:	10000,
@@ -77,12 +77,12 @@ function confirmarArchivo(file, ext)
 	if(ext == 'txt')
 	{
 		if(	confirm("se utilizará el archivo ["+file+"] como fuente de valores ¿Esta seguro?") &&
-			pasaValidacionCampos('archivo'))
+			pasaValidacionCampos('7'))
 		{
 			this.setData({
 				'funcion': "insertarConexion",
 				'con_nombre': $("#con_nombre").val(),
-				'con_tipo': $("#con_tipo").val(),
+				'con_tipo': $("#con_fue_codigo").val(),
 				'con_separador': $("#con_separador").val()
 			});
 		}
@@ -105,12 +105,12 @@ function confirmarBiblioteca(file, ext)
 	if(ext == 'lib')
 	{
 		if(	confirm("se utilizará el archivo ["+file+"] como biblioteca de valores ¿Esta seguro?") &&
-			pasaValidacionCampos('biblioteca'))
+			pasaValidacionCampos('3'))
 		{
 			this.setData({
 				'funcion': "insertarConexion",
 				'con_nombre': $("#con_nombre").val(),
-				'con_tipo': $("#con_tipo").val()
+				'con_tipo': $("#con_fue_codigo").val()
 			});
 		}
 		else
@@ -141,7 +141,7 @@ function archivoEnviado(file, response)
 			break;
 		default:
 			limpiarFormulario();
-			hacerVisibleCamposFormulario('bd');
+			hacerVisibleCamposFormulario('2');
 			actualizarListadoConexiones();
 			ajaxSuccess();
 			break;
@@ -159,18 +159,18 @@ function pasaValidacionCampos(con_tipo)
 	{
 		switch(con_tipo)
 		{
-			case "bd":
+			case '2':
 				if(validarCampoNoVacio($("#con_servidor"), $("#con_lbl_servidor").html(), true)
 					&&validarCampoNoVacio($("#con_nombre_bd"), $("#con_lbl_nombre_bd").html(), true)
 					&& validarCampoNoVacio($("#con_usuario"), $("#con_lbl_usuario").html(), true)
 					&& validarCampoNoVacio($("#con_password"), $("#con_lbl_password").html(), true))
 					validacion_abajo = true;
 				break;
-			case "archivo":
+			case '7':
 				if(validarCampoNoVacio($("#con_separador"), $("#con_lbl_separador").html(), true))
 					validacion_abajo = true;
 				break;
-			case "biblioteca":
+			case '3':
 				validacion_abajo = true;
 				break;
 		}
@@ -198,7 +198,7 @@ function insertoConexion(datosConexion)
 function existeBDO(existe)
 {
 	limpiarFormulario();
-	hacerVisibleCamposFormulario('bd');
+	hacerVisibleCamposFormulario('2');
 	if(!existe)
 	{
 		colocarFormularioBDO(true);
@@ -236,19 +236,19 @@ function colocarFormularioBDO(colocar)
 	{
 		$("#con_nombre").val("BDO");
 		$("#con_nombre").attr("disabled","disabled");
-		$("#con_tipo").attr("disabled","disabled");
+		$("#con_fue_codigo").attr("disabled","disabled");
 	}
 	else
 	{
 		$("#con_nombre").removeAttr("disabled");
-		$("#con_tipo").removeAttr("disabled");
+		$("#con_fue_codigo").removeAttr("disabled");
 	}
 }
 
 function limpiarFormulario()
 {
 	$("#con_nombre").val("");
-	$("#con_tipo").val("");
+	$("#con_fue_codigo").val("");
 	$("#con_servidor").val("");
 	$("#con_nombre_bd").val("");
 	$("#con_usuario").val("");
@@ -260,7 +260,7 @@ function limpiarFormulario()
 
 function actualizarFormulario()
 {
-	hacerVisibleCamposFormulario($("#con_tipo").val());
+	hacerVisibleCamposFormulario($("#con_fue_codigo").val());
 }
 
 function hacerVisibleCamposFormulario(tipo_conexion)
@@ -268,13 +268,13 @@ function hacerVisibleCamposFormulario(tipo_conexion)
 	$("#con_div_datos_conexion").children().hide();
 	switch(tipo_conexion)
 	{
-		case "bd":
+		case '2':
 			$("#con_div_bd").show();
 			break;
-		case "archivo":
+		case '7':
 			$("#con_div_archivo").show();
 			break;
-		case "biblioteca":
+		case '3':
 			$("#con_div_biblioteca").show();
 			break;
 	}
@@ -307,16 +307,18 @@ function mostrarConexiones(conexiones)
 		var con_nombre = json_data_object[x][0];
 		var con_tipo = json_data_object[x][1];
 		var imagen_tipo = "../imagenes/";
-		var imagen_eliminar = "../imagenes/delete.png";
+		var imagen_eliminar = "../imagenes/btn_delete_1.png";
+		var imagen_eliminar_over = "../imagenes/btn_delete_2.png";
+		
 		switch(con_tipo)
 		{
-			case "bd":
+			case '2':
 				imagen_tipo += "bd.png";
 				break;
-			case "archivo":
+			case '7':
 				imagen_tipo += "txt.png";
 				break;
-			case "biblioteca":
+			case '3':
 				imagen_tipo += "lib.png";
 				break;
 		}
@@ -329,7 +331,7 @@ function mostrarConexiones(conexiones)
 								"		<label>"+con_nombre+"</label>" +
 								"	</div>" +
 								"	<div class='ancho_50 celda vertical_centro alto_40 conexion_establecida borde_inferior'>" +
-								"		<input type='image' title='"+lang_js[21]+"' alt='eliminar_conexion' src='"+imagen_eliminar+"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
+								"		<input type='image' title='"+lang_js[21]+"' alt='eliminar_conexion' src='"+imagen_eliminar+"' onmouseout='this.src=\""+imagen_eliminar+"\"' onmouseover='this.src=\""+imagen_eliminar_over+"\"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
 								"	</div>" +
 								"</div>";
 

@@ -48,14 +48,14 @@
 										$html->end("div");
 										 
 										$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-											$html->tag("select", array("class"=>"ancho_140", "id"=>"con_tipo", "title"=>$html->getText('con_ttp_tipo'), "onchange"=>"actualizarFormulario();"));
-												$html->tag("option", array("value"=>"bd"));
+											$html->tag("select", array("class"=>"ancho_140", "id"=>"con_fue_codigo", "title"=>$html->getText('con_ttp_tipo'), "onchange"=>"actualizarFormulario();"));
+												$html->tag("option", array("value"=>"2"));
 													$html->printText("con_opt_tipo_bd");
 												$html->end("option");
-												$html->tag("option", array("value"=>"archivo", $disable_select=>$disable_select));
+												$html->tag("option", array("value"=>"7", $disable_select=>$disable_select));
 													$html->printText("con_opt_tipo_archivo");
 												$html->end("option");
-												$html->tag("option", array("value"=>"biblioteca", $disable_select=>$disable_select));
+												$html->tag("option", array("value"=>"3", $disable_select=>$disable_select));
 													$html->printText("con_opt_tipo_biblioteca");
 												$html->end("option");
 											$html->end("select");
@@ -257,9 +257,7 @@
 	$html->tag("div", array("id"=>"con_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
 		$html->tag("div", array("class"=>"fila"));
 			$html->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
-				//$html->tag("label");
-					$html->tag("input", array("id"=>"con_btn_siguiente", "type"=>"image", "src"=>"../imagenes/step_1_off.png", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('con_ttp_siguiente'), "title"=>$html->getText('con_ttp_siguiente')));
-				//$html->end("label");
+				$html->tag("input", array("id"=>"res_btn_siguiente", "type"=>"image", "src"=>"../imagenes/btn_next_1.png", "onmouseover"=>"this.src='../imagenes/btn_next_2.png'", "onmouseout"=>"this.src='../imagenes/btn_next_1.png'", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$html->getText('res_ttp_siguiente'), "title"=>$html->getText('res_ttp_siguiente')));
 			$html->end("div");
 		$html->end("div");
 	$html->end("div");
