@@ -254,6 +254,11 @@ INSERT INTO PSDG_idioma VALUES('select_Exponencial','es','Distribución Exponenc
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','es','Si');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','es','No');
 
+/*salida*/
+INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','es','Tipos de salida');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','es','Exportar datos a la BDO');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_text','es','Exportar datos a un archivo');
+
 
 /**************************************************************************************************************/
 /*INGLES*/
@@ -349,6 +354,12 @@ INSERT INTO PSDG_idioma VALUES('select_Exponencial','en','Exponential distributi
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','en','Yes');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','en','No');
 
+/*salida*/
+INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','en','Output type');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','en','Export data to BDO');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_text','en','Export data to file');
+
+
 
 
 CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
@@ -366,6 +377,8 @@ INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','es','Aquí se muestran t
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos que será poblada (<b>BDO</b>).<br/><br/>Haz clic en cada una de las tablas y campos de la BDO para configurar sus parámetros en la ventana <b>Detalle</b>.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar un determinado campo ó tabla de la BDO, seleccione el valor <b>No llenar</b>.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','es','La operación no se pudo completar. Se necesita establecer primero las condiciones de las siguientes tablas para cumplir las restricciones de llaves foráneas: <b>%v</b>.');
+/*salida*/
+INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','es','Si selecciona <b>BDO</b> los datos serán migrados a la base de datos.<br>Si selecciona <b>SQL</b> los datos serán migrados a un script Sql que luego podrá descargar.');
 /**************************************************************************************************************/
 /*INGLES*/
 /*conexiones*/

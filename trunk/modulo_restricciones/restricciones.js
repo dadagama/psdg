@@ -21,13 +21,13 @@ function habilitarSiguienteEtapa(habilitar)
 	{
 		$('#res_btn_siguiente').removeAttr("disabled");
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/step_1_ok.png");
+		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 	}
 	else
 	{
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/step_1_off.png");
+		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 		$('#res_btn_siguiente').attr("disabled","disabled");
 	}

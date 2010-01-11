@@ -147,5 +147,19 @@ class GeneradorHtml
 		}
 		return $arreglo_traduccion;
 	}
+	
+	function generarBotonesSecuencia($prefijo, $atras = true, $adelante = true, $ocultar)
+	{
+		$this->tag("div", array("id"=>$prefijo."_div_botones_secuencia", "class"=>"tabla $ocultar div_botones_secuencia"));
+		$this->tag("div", array("class"=>"fila"));
+			$this->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
+				if($atras)
+					$this->tag("input", array("id"=>$prefijo."_btn_anterior", "type"=>"image", "src"=>"../imagenes/btn_back_1.png", "onmouseover"=>"this.src='../imagenes/btn_back_2.png'", "onmouseout"=>"this.src='../imagenes/btn_back_1.png'", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$this->getText($prefijo.'_ttp_anterior'), "title"=>$this->getText($prefijo.'_ttp_anterior')));
+				if($adelante)
+					$this->tag("input", array("id"=>$prefijo."_btn_siguiente", "type"=>"image", "src"=>"../imagenes/btn_next_1.png", "onmouseover"=>"this.src='../imagenes/btn_next_2.png'", "onmouseout"=>"this.src='../imagenes/btn_next_1.png'", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$this->getText($prefijo.'_ttp_siguiente'), "title"=>$this->getText($prefijo.'_ttp_siguiente')));
+			$this->end("div");
+		$this->end("div");
+		$this->end("div");
+	}
 }
 ?>
