@@ -96,68 +96,69 @@
 									
 									//DIV CONEXION BD
 									$html->tag("div", array("class"=>"fila", "id"=>"con_div_bd"));
-									
-										//CAMPO SERVIDOR
-										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_servidor"));
-													$html->printText("con_lbl_servidor");
-												$html->end("label");
-											$html->end("div");
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_servidor", "id"=>"con_servidor", "type"=>"text", "title"=>$html->getText("con_ttp_servidor")));
-											$html->end("div");
-										$html->end("div");
-									
-										//CAMPO DB CONEXION
-										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_bd"));
-													$html->printText("con_lbl_nombre_bd");
-												$html->end("label");
-											$html->end("div");
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre_bd", "id"=>"con_nombre_bd", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_nombre_bd")));
-											$html->end("div");
-										$html->end("div");
-									
-										//CAMPO USUARIO CONEXION
-										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_usuario"));
-													$html->printText("con_lbl_usuario");
-												$html->end("label");
-											$html->end("div");
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_usuario", "id"=>"con_usuario", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_usuario")));
-											$html->end("div");
-										$html->end("div");
-										
-										//CAMPO CONTRASEÑA CONEXION
-										$html->tag("div", array("class"=>"fila"));
-											$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
-												$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_password"));
-													$html->printText("con_lbl_password");
-												$html->end("label");
-											$html->end("div");
-											$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_140", "name"=>"con_password", "id"=>"con_password", "type"=>"password", "maxlength"=>"30", "title"=>$html->getText('con_ttp_password')));
-											$html->end("div");
-										$html->end("div");
-									
-										//BOTON FORMULARIO
-										$html->tag("div", array("class"=>"fila"));										
-											$html->tag("div", array("class"=>"tabla_centrada"));
+										$html->tag("div", array("class"=>"celda"));
+											$html->tag("div", array("class"=>"tabla"));
+												//CAMPO SERVIDOR
 												$html->tag("div", array("class"=>"fila"));
+													$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+														$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_servidor"));
+															$html->printText("con_lbl_servidor");
+														$html->end("label");
+													$html->end("div");
 													$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
+														$html->tag("input", array("class"=>"ancho_140", "name"=>"con_servidor", "id"=>"con_servidor", "type"=>"text", "title"=>$html->getText("con_ttp_servidor")));
+													$html->end("div");
+												$html->end("div");
+											
+												//CAMPO DB CONEXION
+												$html->tag("div", array("class"=>"fila"));
+													$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+														$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_nombre_bd"));
+															$html->printText("con_lbl_nombre_bd");
+														$html->end("label");
+													$html->end("div");
+													$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
+														$html->tag("input", array("class"=>"ancho_140", "name"=>"con_nombre_bd", "id"=>"con_nombre_bd", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_nombre_bd")));
+													$html->end("div");
+												$html->end("div");
+											
+												//CAMPO USUARIO CONEXION
+												$html->tag("div", array("class"=>"fila"));
+													$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+														$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_usuario"));
+															$html->printText("con_lbl_usuario");
+														$html->end("label");
+													$html->end("div");
+													$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
+														$html->tag("input", array("class"=>"ancho_140", "name"=>"con_usuario", "id"=>"con_usuario", "type"=>"text", "maxlength"=>"30", "title"=>$html->getText("con_ttp_usuario")));
+													$html->end("div");
+												$html->end("div");
+												
+												//CAMPO CONTRASEÑA CONEXION
+												$html->tag("div", array("class"=>"fila"));
+													$html->tag("div", array("class"=>"alineacion_derecha celda vertical_centro alto_30 ancho_140"));
+														$html->tag("label", array("class"=>"etiqueta", "id"=>"con_lbl_password"));
+															$html->printText("con_lbl_password");
+														$html->end("label");
+													$html->end("div");
+													$html->tag("div", array("class"=>"celda vertical_centro alto_30"));
+														$html->tag("input", array("class"=>"ancho_140", "name"=>"con_password", "id"=>"con_password", "type"=>"password", "maxlength"=>"30", "title"=>$html->getText('con_ttp_password')));
+													$html->end("div");
+												$html->end("div");
+												
+											$html->end("div");
+											
+											//BOTON FORMULARIO
+											$html->tag("div", array("class"=>"tabla"));
+												$html->tag("div", array("class"=>"fila"));
+													$html->tag("div", array("class"=>"celda vertical_centro alto_30 centrado"));
 														$html->tag("input", array("id"=>"con_btn_establecer", "type"=>"button", "value"=>$html->getText("con_btn_establecer"), "onclick"=>"adicionarConexion();"));
 													$html->end("div");
 												$html->end("div");
-											$html->end("div");
-										$html->end("div");
-										//FIN BOTON FORMULARIO
-										
-										
+											$html->end("div");	
+											//FIN BOTON FORMULARIO
+											
+										$html->end("div");	
 									$html->end("div");	
 									//FIN DIV CONEXION BD
 									

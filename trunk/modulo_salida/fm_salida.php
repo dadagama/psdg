@@ -35,7 +35,7 @@
 							$html->tag("div", array("class"=>"tabla"));	
 								$html->tag("div", array("class"=>"fila"));
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag(	"input", array("onclick"=>"alert('hi');", 
+										$html->tag("input", array("onclick"=>"alert('hi');", 
 																			"type"=>"image", 
 																			"src"=>"../imagenes/btn_db_1.png", 
 																			"alt"=>"bd_out", 
@@ -44,7 +44,7 @@
 																			"onmouseout"=>"this.src='../imagenes/btn_db_1.png'"));
 									$html->end("div");
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag(	"input", array("onclick"=>"alert('hi');", 
+										$html->tag("input", array("onclick"=>"alert('hi');", 
 																			"type"=>"image", 
 																			"src"=>"../imagenes/btn_text_1.png", 
 																			"alt"=>"text_out", 
@@ -52,6 +52,22 @@
 																			"onmouseover"=>"this.src='../imagenes/btn_text_2.png'",
 																			"onmouseout"=>"this.src='../imagenes/btn_text_1.png'"));
 									$html->end("div");
+								$html->end("div");
+								
+								$html->tag("div", array("class"=>"fila"));
+								
+									$html->tag("div", array("class"=>"celda alto_30 vertical_centro"));
+										$html->tag("label", array("class"=>"etiqueta"));
+											$html->printText("sal_lbl_bd");
+										$html->end("label");
+									$html->end("div");
+										
+									$html->tag("div", array("class"=>"celda alto_30 vertical_centro"));
+										$html->tag("label", array("class"=>"etiqueta alto_30"));
+											$html->printText("sal_lbl_text"); 
+										$html->end("label");
+									$html->end("div");
+									
 								$html->end("div");
 							$html->end("div");
 							//FIN TABLA FORMULARIO

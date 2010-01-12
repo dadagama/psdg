@@ -44,7 +44,7 @@ var lang_es = new Array(
 		"OK",//11
 		"Error: Tiempo de conexión agotado.",//12
 		"Ayuda",//13
-		"Establecer conexiones",//14
+		"Configurar conexiones",//14
 		"Establecer restricciones",//15
 		"Establecer tipo de salida",//16
 		"Ejecutar",//17

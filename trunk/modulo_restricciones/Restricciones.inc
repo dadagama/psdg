@@ -134,12 +134,12 @@ class Restricciones
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
 							$this->html->tag("label", array("class"=>"etiqueta"));
-								$this->html->printStaticText("Nombre de tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+								$this->html->printText("ret_lbl_nombre_tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 							$this->html->end("label");
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla"));
+							$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla") );
 								$this->html->printStaticText($this->arreglo_restricciones['ret_nombre_tabla']);
 							$this->html->end("label");
 						$this->html->end("div");
@@ -149,7 +149,7 @@ class Restricciones
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
 							$this->html->tag("label", array("class"=>"etiqueta"));
-								$this->html->printStaticText("Cantidad de tuplas");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+								$this->html->printText("ret_lbl_cantidad_tuplas");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
 							$this->html->end("label");
 						$this->html->end("div");
 						
