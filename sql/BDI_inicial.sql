@@ -175,7 +175,7 @@ INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','es','Inglés');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','es','Español');
 INSERT INTO PSDG_idioma VALUES('btn_login','es','Iniciar Sesión');
 /*conexiones*/
-INSERT INTO PSDG_idioma VALUES('con_lgn_configurar_conexion','es','Configuración de conexiones');
+INSERT INTO PSDG_idioma VALUES('con_lgn_configurar_conexion','es','Configurar conexión');
 INSERT INTO PSDG_idioma VALUES('con_lbl_tipo','es','Conectar con');
 INSERT INTO PSDG_idioma VALUES('con_ttp_tipo','es','Tipo de conexión');
 INSERT INTO PSDG_idioma VALUES('con_opt_tipo_archivo','es','Archivo');
@@ -204,10 +204,13 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_siguiente','es','Establecer restriccione
 /*restricciones*/
 INSERT INTO PSDG_idioma VALUES('res_lgn_estructura_bd','es','Estructura de la BDO');
 INSERT INTO PSDG_idioma VALUES('res_lgn_detalle','es','Detalle');
-INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','es','Establecer conexiones');
-INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','es','Establecer tipo de salida');
+INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','es','Configurar conexiones');
+INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','es','Establecer formato de salida');
 
-INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','es','Restricciones');
+INSERT INTO PSDG_idioma VALUES('ret_lbl_nombre_tabla','es','Nombre de tabla');
+INSERT INTO PSDG_idioma VALUES('ret_lbl_cantidad_tuplas','es','Numero de registros');
+
+INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','es','Establecer restricciones');
 INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','es','Información del campo');
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_setup_fuente','es','Configuración de fuente de datos');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','es','Nombre de la tabla');
@@ -255,10 +258,22 @@ INSERT INTO PSDG_idioma VALUES('res_nulo_YES','es','Si');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','es','No');
 
 /*salida*/
-INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','es','Tipos de salida');
+INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','es','Establecer formato de salida');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','es','Exportar datos a la BDO');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_text','es','Exportar datos a un archivo');
 
+INSERT INTO PSDG_idioma VALUES('sal_lbl_bd','es','Migrar los datos sintéticos a la base de datos objetivo.');
+INSERT INTO PSDG_idioma VALUES('sal_lbl_text','es','Migrar los datos sintéticos a un script Sql.');
+
+
+INSERT INTO PSDG_idioma VALUES('sal_ttp_anterior','es','Configurar restricciones');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_siguiente','es','Ejecutar');
+
+/*ejecucion*/
+INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','es','Ejecutar');
+INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','es','Iniciar');
+
+INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','es','Configurar formato de salida');
 
 /**************************************************************************************************************/
 /*INGLES*/
@@ -275,7 +290,7 @@ INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','en','English');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','en','Spanish');
 INSERT INTO PSDG_idioma VALUES('btn_login','en','Sign in');
 /*conexiones*/
-INSERT INTO PSDG_idioma VALUES('con_lgn_configurar_conexion','en','Connection setup');
+INSERT INTO PSDG_idioma VALUES('con_lgn_configurar_conexion','en','Set connection');
 INSERT INTO PSDG_idioma VALUES('con_lbl_tipo','en','Link to');
 INSERT INTO PSDG_idioma VALUES('con_ttp_tipo','en','Connection type');
 INSERT INTO PSDG_idioma VALUES('con_opt_tipo_archivo','en','File');
@@ -304,11 +319,14 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_siguiente','en','Set restrictions');
 /*restricciones*/
 INSERT INTO PSDG_idioma VALUES('res_lgn_estructura_bd','en','BDO structure');
 INSERT INTO PSDG_idioma VALUES('res_lgn_detalle','en','Detail');
-INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','en','Set Connections');
+INSERT INTO PSDG_idioma VALUES('res_ttp_anterior','en','Set connections');
 INSERT INTO PSDG_idioma VALUES('res_ttp_siguiente','en','Set output type');
 
+INSERT INTO PSDG_idioma VALUES('ret_lbl_nombre_tabla','en','Table name');
+INSERT INTO PSDG_idioma VALUES('ret_lbl_cantidad_tuplas','en','Number of records');
+
 INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','en','Field information');
-INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','en','Restrictions');
+INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','en','Set restrictions');
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_setup_fuente','en','Setup data source');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','en','Table name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo','en','Field name');
@@ -359,7 +377,17 @@ INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','en','Output type');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','en','Export data to BDO');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_text','en','Export data to file');
 
+INSERT INTO PSDG_idioma VALUES('sal_lbl_bd','en','Migrate synthetic data to target database.');
+INSERT INTO PSDG_idioma VALUES('sal_lbl_text','en','Migrate synthetic data to Sql script.');
 
+INSERT INTO PSDG_idioma VALUES('sal_ttp_anterior','en','Set restrictions');
+INSERT INTO PSDG_idioma VALUES('sal_ttp_siguiente','en','Run');
+
+/*ejecucion*/
+INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','en','Run');
+INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','en','Start');
+
+INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','en','Set output type');
 
 
 CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
@@ -371,20 +399,26 @@ CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
 
 /*ESPAÑOL*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','es','Aquí se definen los parámetros para conectar con fuentes externas de información que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).<br/><br/>Tambien se deben definir <b>como mínimo</b> los parámetros de conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Toda la informacion se almacena en la Base de Datos Interna (<b>BDI</b>).');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','es','Debe definir <b>almenos</b> la conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Aquí tambien se definen los parámetros para conectar con fuentes externas que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).');
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','es','Aquí se muestran todas las conexiones que se establecieron satisfactoriamente.<br/><br/>Puede eliminar una conexión a una determinada fuente haciendo clic en su respectivo botón <b>Eliminar</b>.');
 /*RESTRICCIONES*/
-INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos que será poblada (<b>BDO</b>).<br/><br/>Haz clic en cada una de las tablas y campos de la BDO para configurar sus parámetros en la ventana <b>Detalle</b>.');
-INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar un determinado campo ó tabla de la BDO, seleccione el valor <b>No llenar</b>.');
-INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','es','La operación no se pudo completar. Se necesita establecer primero las condiciones de las siguientes tablas para cumplir las restricciones de llaves foráneas: <b>%v</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos objetivo que será poblada (<b>BDO</b>).<br/><br/>Seleccione las tablas y campos de la BDO que desee poblar para establecer sus parámetros en la ventana <b>Detalle</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar una determinada tabla de la BDO, establezca a <b>cero (0)</b> el campo <b>Cantidad de tuplas</b>.<br/><br/>Si no desea poblar un determinado campo de una tabla, establezca el valor <b>Ninguna</b> el campo <b>Fuente de datos</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','es','La operación no se pudo completar. Se necesita establecer primero las condiciones de las siguientes tablas para cumplir las restricciones de llaves foráneas:<br/><b>%v</b>.');
 /*salida*/
-INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','es','Si selecciona <b>BDO</b> los datos serán migrados a la base de datos.<br>Si selecciona <b>SQL</b> los datos serán migrados a un script Sql que luego podrá descargar.');
+INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','es','Seleccione una de las opciones del panel para migrar los datos sintéticos generados hacia ese destino.');
+/*Ejecución*/
+INSERT INTO PSDG_mensaje_popup VALUES('eje_btn_help_1','es','Haga clic en el boton <b>Iniciar</b> para comenzar con el proceso de generar los datos sintéticos.');
 /**************************************************************************************************************/
 /*INGLES*/
 /*conexiones*/
-INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','en','Here you define the parameters to connect to external information sources that provide additional data types (databases, plain text files or libraries).<br/><br/>Also you should define <b>at least</b> the parameters of connection to the Target Database (<b>BDO</b>), which will be populated.<br/><br/>All information is stored in the Internal Database (<b>BDI</b>).');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','en','You must define at least the connection to the target database (<b>BDO</b>) to be populated.<br/><br/>This also defines the parameters to connect to external sources to provide additional data types (databases, plain text files or libraries).');
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','en','Here are all the connections that were established successfully. You can delete a connection to a particular source by clicking on its respective <b>Remove</b> button.');
 /*RESTRICCIONES*/
-INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Click on each of the tables and fields of the BDO to set its parameters in the <b>Detail</b> window.');
-INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields. If you do not want to populate a field or table in the BDO, select  <b>No fill</b>.');
-INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','en','Operation could not be completed. You need first establish conditions on the following tables to meet the foreign key constraints: <b>%v</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Select the tables and fields you want to populate the BDO to set its parameters in the <b>Detail</b> window.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields.<br/><br/>If you do not want to populate a table in the BDO, Set  <b>zero (0)</b> in the field <b>Number of records</b>.<br/><br/>If you do not want to populate a table field, Set  <b>None</b> in the field <b>Data source</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','en','Operation could not be completed. You need first establish conditions on the following tables to meet the foreign key constraints:<br/><b>%v</b>.');
+/*salida*/
+INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','en','Select a option from panel to migrate generated synthetic data to that destination.');
+/*Ejecución*/
+INSERT INTO PSDG_mensaje_popup VALUES('eje_btn_help_1','en','Click the <b>Start</b> button to begin the process of generating synthetic data');

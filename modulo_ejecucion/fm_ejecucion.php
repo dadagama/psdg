@@ -2,7 +2,7 @@
 	session_start();
 		
 	$_SESSION['modulo'] = "ejecucion";
-	if(isset($_SESSION['step']) && $_SESSION['step'] != 4)//para el efecto de aparecer
+	//if(isset($_SESSION['step']) && $_SESSION['step'] != 4)//para el efecto de aparecer
 		$ocultar = "oculto";
 		
 	$_SESSION['step'] = 4;
@@ -12,14 +12,14 @@
 	$html->cargarModuloJS($_SESSION['modulo']);
 
 	//DIV GENERAL
-	$html->tag("div", array("id"=>"eje_div_general", "class"=>"tabla $ocultar"));
+	$html->tag("div", array("id"=>"eje_div_general", "class"=>"$ocultar"));
+	$html->tag("div", array("class"=>"tabla"));	
 		$html->tag("div", array("class"=>"fila"));
-			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
+			$html->tag("div", array("class"=>"celda vertical_arriba"));
 	
-				//DIV CONEXION
-				$html->tag("div", array("id"=>"eje_div_estructura_bd"));
-				
-					$html->tag("fieldset");
+				//DIV CONSOLA
+				$html->tag("div", array("id"=>"eje_div_consola", "class"=>""));
+				$html->tag("fieldset");
 					
 						//BOTON AYUDA
 						$html->botonAyuda("eje_btn_help_1");
@@ -27,31 +27,35 @@
 						//TITULO DIV
 						$html->tag("legend");
 							$html->tag("label");
-								$html->printText("eje_lgn_estructura_bd");
+								$html->printText("eje_lgn_consola");
 							$html->end("label");
 						$html->end("legend");
 						
-						//TABLA FORMULARIO
+						//TABLA CONSOLA
 						$html->tag("div", array("class"=>"tabla"));
-						
-							//FORMULARIO
 							$html->tag("div", array("class"=>"fila"));
-								$html->tag("div", array("class"=>"tabla_centrada"));
-								
+								$html->tag("div", array("class"=>"celda centrado"));
+									$html->tag("input", array("id"=>"eje_btn_iniciar" ,"type"=>"button", "value"=>$html->getText("eje_btn_iniciar"), "onclick"=>"alert(':)')", "class"=>"color_letra_campo margin_arriba_10"));
 								$html->end("div");
 							$html->end("div");
-							//FIN FORMULARIO
 							
+							$html->tag("div", array("class"=>"fila"));
+								$html->tag("div", array("class"=>"celda centrado"));
+									$html->tag("textarea", array("class"=>"valor_campo color_letra_campo ancho_512 alto_120 margin_arriba_10", "wrap"=>"soft", "readonly"=>"readonly"));
+									$html->end("textarea");
+								$html->end("div");
+							$html->end("div");
 						$html->end("div");
-						//FIN TABLA FORMULARIO
+						//FIN TABLA CONSOLA
 						
-					$html->end("fieldset"); 
-
+				$html->end("fieldset"); 
 				$html->end("div");
-				//FIN DIV CONEXION
+				//FIN DIV CONSOLA
 				
 			$html->end("div");
 		$html->end("div");
+		
+	$html->end("div");
 	$html->end("div");
 	//FIN DIV GENERAL
 	

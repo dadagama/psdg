@@ -205,6 +205,20 @@ fieldset
 	position: relative;
 }
 
+#eje_div_general
+{
+	text-align: center;
+	margin: 0 auto;
+}
+
+#eje_div_consola
+{
+	width: 600px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
 .div_botones_secuencia
 {
 	text-align: center;
