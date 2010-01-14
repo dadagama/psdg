@@ -240,6 +240,39 @@ function establecerRestriccionCampo()
 	return false;*/
 }
 
+function actualizarFormularioFuenteDeDatos()
+{
+	hacerVisibleCamposFormularioFuenteDeDatos($("#rec_fuente_datos").val());
+}
+
+function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
+{
+	$("#rec_tabla_restricciones").children().hide();
+	switch(tipo_conexion)
+	{
+		case '1': 
+			break;
+		case '2':
+			$("#rec_tabla_bd").show();
+			break;
+		case '3':
+			$("#rec_tabla_biblioteca").show();
+			break;
+		case '4':
+			$("#rec_tabla_lista").show();
+			break;
+		case '5':
+			$("#rec_tabla_constante").show();
+			break;
+		case '6':
+			$("#rec_tabla_intervalo").show();
+			break;
+		case '7':
+			$("#rec_tabla_archivo").show();
+			break;
+	}
+}
+
 function actualizarDivDetalle(formulario)
 {
 	setTimeout('efecto("res_div_detalle","slideToggle")',0);
@@ -252,4 +285,5 @@ function mostrarFormularioDetalle(formulario)
 	$('#res_div_detalle').html(formulario);
 	$('#res_div_detalle').removeClass("oculto");
 	setTimeout('efecto("res_div_detalle","slideDown")',0);
+	actualizarFormularioFuenteDeDatos();
 }

@@ -154,7 +154,7 @@ class Restricciones
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo"));
+							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo ancho_50", "maxlength"=>"5"));
 						$this->html->end("div");
 					$this->html->end("div");
 		$this->html->end("div");
@@ -426,7 +426,7 @@ class Restricciones
 					$tipo_de_dato = $this->obtenerTipoDeDato($this->arreglo_restricciones['rec_tipo_dato']);
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo")); 
-						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("id"=>"rec_fuente_datos", "class"=>"valor_campo color_letra_campo ancho_150"), "");
+						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("id"=>"rec_fuente_datos", "onchange"=>"actualizarFormularioFuenteDeDatos();", "class"=>"valor_campo color_letra_campo ancho_150"), "");
 					$this->html->end("div");
 				$this->html->end("div");
 			
@@ -445,7 +445,7 @@ class Restricciones
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-								$this->html->tag("input", array("id"=>"rec_porcentaje_nulos" ,"type"=>"text", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo ancho_35"));
+								$this->html->tag("input", array("id"=>"rec_porcentaje_nulos", "type"=>"text", "maxlength"=>"3", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo ancho_35"));
 						$this->html->end("div");
 					$this->html->end("div");
 //				}
@@ -461,7 +461,7 @@ class Restricciones
 						$this->html->end("label");
 					$this->html->end("legend");
 					
-					$this->html->tag("div", array("class"=>"tabla"));	
+					$this->html->tag("div", array("class"=>"tabla", "id"=>"rec_tabla_restricciones"));	
 				
 					if($this->arreglo_restricciones['rec_parametros_tipo_fuente'])
 					{
@@ -476,7 +476,7 @@ class Restricciones
 
 //						case 2://Base de datos externa
 							
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_bd"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));	
 							
@@ -521,7 +521,7 @@ class Restricciones
 //							break;
 
 //						case 3://Biblioteca
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_biblioteca"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
@@ -565,7 +565,7 @@ class Restricciones
 //							break;
 
 //						case 4://Lista de valores
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_lista"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
@@ -590,7 +590,7 @@ class Restricciones
 							if($parametros_conexion['rec_valor_constante'])
 								$valor_constante = $parametros_conexion['rec_valor_constante'];	
 								
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_constante"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
@@ -618,7 +618,7 @@ class Restricciones
 								$valor_hasta = $parametros_conexion['rec_valor_hasta'];
 							}	
 								
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_intervalo"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
@@ -651,7 +651,7 @@ class Restricciones
 
 //						case 7://Archivo
 
-							$this->html->tag("div", array("class"=>"fila"));
+							$this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_archivo"));
 							$this->html->tag("div", array("class"=>"celda"));
 							$this->html->tag("div", array("class"=>"tabla"));
 										$this->html->tag("div", array("class"=>"fila"));

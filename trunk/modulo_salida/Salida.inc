@@ -13,6 +13,5 @@ class Salida
   		$this->conexionBDI->conectar();
   		$this->usu_login = $login;
 	}
-
 }
 ?>
