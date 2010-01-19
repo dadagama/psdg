@@ -12,6 +12,8 @@ function inicializar()
 	
 	establecerPosicionSecuencia(2);
 	verificarRestriccionTablaEstablecida("ok");
+	//esta funcion se debe llamar despues de construir arbol BDO:
+	establecerRestriccionesForaneas();
 	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
 }
 
@@ -105,6 +107,27 @@ function establecerRestriccionTabla()
 		ajaxSuccess();
 		return false;
 	}
+}
+
+function establecerRestriccionesForaneas()
+{
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=establecerRestriccionesForaneas",
+		beforeSend:	ajaxSend,
+		success:	listo,
+		timeout:	10000,
+		error:		ajaxError(12)
+	});
+}
+
+function listo(x)
+{
+	alert("listo!"+x);
 }
 
 function verificarRestriccionTablaEstablecida(establecida)
@@ -242,7 +265,7 @@ function establecerRestriccionCampo()
 
 function actualizarFormularioFuenteDeDatos()
 {
-	hacerVisibleCamposFormularioFuenteDeDatos($("#rec_fuente_datos").val());
+	hacerVisibleCamposFormularioFuenteDeDatos($("#rec_fue_codigo").val());
 }
 
 function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
@@ -275,7 +298,7 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 
 function actualizarDivDetalle(formulario)
 {
-	setTimeout('efecto("res_div_detalle","slideToggle")',0);
+	setTimeout('efecto("res_div_detalle","fadeOut")',0);//slideToggle
 	setTimeout('mostrarFormularioDetalle(\''+formulario+'\')',500);
 }
 
@@ -284,6 +307,12 @@ function mostrarFormularioDetalle(formulario)
 	$('#res_div_detalle').addClass("oculto");
 	$('#res_div_detalle').html(formulario);
 	$('#res_div_detalle').removeClass("oculto");
-	setTimeout('efecto("res_div_detalle","slideDown")',0);
+	setTimeout('efecto("res_div_detalle","fadeIn")',0);//slideDown
 	actualizarFormularioFuenteDeDatos();
+}
+
+function actualizarCampoTablasBD()
+{
+	alert($('#rec_nombre_bd').val());
+	
 }

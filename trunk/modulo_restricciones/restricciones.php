@@ -15,6 +15,10 @@ switch($_REQUEST['funcion'])
 		$objetoRestricciones->construirArbolBDO();
 		break;
 		
+	case "establecerRestriccionesForaneas":
+		$objetoRestricciones->establecerRestriccionesForaneas();
+		break;
+	
 	case "establecerRestriccionTabla":
 		$numero_tuplas = $_REQUEST['numero_tuplas'];
 		$nombre_tabla = $_REQUEST['nombre_tabla'];

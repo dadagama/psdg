@@ -32,6 +32,7 @@ class Traductor
 		{
 			$resultado = $this->conexionBDI->obtenerResultadoComoCadena();
 		}
+		//echo "%%".$resultado;
 		return utf8_encode($resultado);
 	}
 }

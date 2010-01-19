@@ -149,6 +149,7 @@ CREATE TABLE `BDI`.`PSDG_restricciones_campos` (
 	`rec_parametros_tipo_fuente` VARCHAR( 500 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'parametros que utiliza el tipo de fuente para retornar los valores',
 	`rec_acceso_aleatorio` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si los datos se retornan de manera secuencial (0) o aleatoria (1)',
 	`rec_porcentaje_nulos` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'Porcentaje que indica la cantidad de nulos que se deben generar para este campo',
+	`rec_es_foranea` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si el campo es llave foranea (1) o no (0)',
 	FOREIGN KEY (`rec_fue_codigo`) REFERENCES `PSDG_fuentes` (`fue_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (`rec_usu_login`) REFERENCES `PSDG_conexion` (`con_usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Almacena las restricciones a nivel de campos de las tablas para la BDO';
