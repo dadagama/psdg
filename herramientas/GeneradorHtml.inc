@@ -95,6 +95,8 @@ class GeneradorHtml
 			{
 				if($datos_opcion[$codigo] == $codigo_seleccionado)
 					$seleccionado = "selected";
+				else
+					$seleccionado = "";
 					
 				$this->tag("option", array("value"=>$datos_opcion[$codigo], $seleccionado=>$seleccionado));
 					if($traducir_opciones)
