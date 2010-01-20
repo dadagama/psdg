@@ -109,6 +109,40 @@ class GeneradorHtml
 		$this->end("select");
 	}
 	
+	function arregloAOpciones($arreglo_valores="", $opcion_seleccionada="", $primera_opcion="", $traducir_opciones=false, $campo_deshabilitado="")
+	{
+		if($primera_opcion)
+		{
+			$this->tag("option", array("value"=>""));
+				$this->printText($primera_opcion);
+			$this->end("option");
+		}
+		
+		if($arreglo_valores)
+		{
+			foreach($arreglo_valores AS $pos => $valor)
+			{
+				if($valor[0] == $opcion_seleccionada)
+					$seleccionado = "selected";
+				else
+					$seleccionado = "";
+				
+				if($valor[0] == $campo_deshabilitado)
+					$deshabilitado = "disabled";
+				else
+					$deshabilitado = "";
+				
+					
+				$this->tag("option", array("value"=>$valor[0], $seleccionado=>$seleccionado, $deshabilitado=>$deshabilitado));
+					if($traducir_opciones)
+						$this->printText("select_".$valor[0]);
+					else
+						$this->printStaticText($valor[0]);
+				$this->end("option");
+			}
+		}
+	}
+	
 //	function printSelectEspecial(&$conexion = "", $sql = "", $opcion_seleccionada = "", $arreglo_atributos_asociativos = "", $arreglo_atributos = "", $primeraOpcion = "", $traducir_opciones = false)
 //	{
 ////		echo $sql;

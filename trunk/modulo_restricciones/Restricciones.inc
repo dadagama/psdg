@@ -103,7 +103,7 @@ class Restricciones
 	
 	function tieneRestriccionTablaEstablecida($nombre_tabla)
 	{
-		return $this->conexionBDI->existeRegistro("ret_nombre_tabla", "PSDG_restricciones_tablas", "ret_nombre_tabla = '".$nombre_tabla."'");
+		return $this->conexionBDI->existeRegistro("ret_nombre_tabla", "PSDG_restricciones_tablas", "ret_nombre_tabla = '".$nombre_tabla."' AND ret_usu_login = '".$this->usu_login."'");
 	}
 	
 	function cargarRestriccionesTabla($nombre_tabla)
@@ -247,7 +247,7 @@ class Restricciones
 	function cargarRestriccionesCampo($nombre_tabla, $nombre_campo, $tipo_dato, $permite_nulos, $tipo_llave, $valor_default, $extra)
 	{
 		$this->arreglo_restricciones = array();
-		$sql = "	SELECT rec_fue_codigo, rec_parametros_tipo_fuente, rec_acceso_aleatorio, rec_porcentaje_nulos, rec_es_foranea
+		$sql = "	SELECT rec_fue_codigo, rec_parametros_tipo_fuente, rec_porcentaje_nulos, rec_es_foranea
 					FROM PSDG_restricciones_campos
 					WHERE rec_nombre_tabla = '".$nombre_tabla."'
 					AND rec_nombre_campo = '".$nombre_campo."'
@@ -408,7 +408,7 @@ class Restricciones
 		$tipo_de_dato = $this->obtenerTipoDeDato($this->arreglo_restricciones['rec_tipo_dato']);
 		
 		if($es_foranea = $this->arreglo_restricciones['rec_es_foranea'])
-			$read_only = "disabled";
+			$disabled = "disabled";
 						
 		$porcentaje_nulos = 0;
 		if($this->arreglo_restricciones['rec_porcentaje_nulos'])
@@ -443,7 +443,7 @@ class Restricciones
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo")); 
-						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("id"=>"rec_fue_codigo", "onchange"=>"actualizarFormularioFuenteDeDatos();", "class"=>"valor_campo color_letra_campo ancho_150", $read_only=>$read_only), "");
+						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("id"=>"rec_fue_codigo", "onchange"=>"actualizarFormularioFuenteDeDatos();", "class"=>"valor_campo color_letra_campo ancho_150", $disabled=>$disabled), "");
 					$this->html->end("div");
 				$this->html->end("div");
 			
@@ -468,6 +468,7 @@ class Restricciones
 				//FIN DIV FUENTE DE DATOS
 				
 				//FIELDSET SETUP FUENTE DATOS 
+				$this->html->tag("form", array("name"=>"fm_parametros_tipo_fuente", "id"=>"fm_parametros_tipo_fuente"));
 				$this->html->tag("fieldset", array("class"=>"margin_arriba_10"));
 				
 					$this->html->tag("legend");
@@ -496,10 +497,10 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											if($es_foranea)
+											/*if($es_foranea)
 												$this->html->printStaticText($parametros_conexion['rec_nombre_conexion']);
-											else
-												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '2'", $parametros_conexion['rec_nombre_conexion'], array("id"=>"rec_nombre_bd", "class"=>"valor_campo color_letra_campo ancho_150", $read_only=>$read_only, "onchange"=>"actualizarCampoTablasBD();"), "", "select_seleccione", false);
+											else*/
+												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '2'", $parametros_conexion['rec_nombre_conexion'], array("name"=>"rec_nombre_conexion", "id"=>"rec_nombre_conexion", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoTablasBD();","readonly"=>"readonly"/*, $disabled=>$disabled*/), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 								
@@ -511,10 +512,10 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											if($es_foranea)
+											/*if($es_foranea)
 												$this->html->printStaticText($parametros_conexion['rec_nombre_tabla']);
-											else
-												$this->html->printSelect($conexion_falsa, "", "", "", "", "", array("id"=>"rec_nombre_tabla", "class"=>"valor_campo color_letra_campo ancho_150", $read_only=>$read_only), "", "select_seleccione", false);
+											else*/
+												$this->html->printSelect($conexion_falsa, "", "", "", "", "", array("name"=>"rec_nombre_tabla", "id"=>"rec_nombre_tabla", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBD();","readonly"=>"readonly"/* $disabled=>$disabled*/), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 									
@@ -526,10 +527,10 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											if($es_foranea)
+											/*if($es_foranea)
 												$this->html->printStaticText($parametros_conexion['rec_nombre_campo']);
-											else
-												$this->html->printSelect($conexion_falsa, "", "", "", "", "", array("id"=>"rec_nombre_campo", "class"=>"valor_campo color_letra_campo ancho_150", $read_only=>$read_only), "", "select_seleccione", false);
+											else*/
+												$this->html->printSelect($conexion_falsa, "", "", "", "", "", array("name"=>"rec_nombre_campo", "id"=>"rec_nombre_campo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 							$this->html->end("div");
@@ -687,9 +688,9 @@ class Restricciones
 							$this->html->end("div");
 //							break;
 //					}
-					
+
 					//PROBABILIDADES
-					$this->html->tag("div", array("class"=>"fila"));
+					$this->html->tag("div", array("class"=>"fila", "id"=>"rec_probabilidades"));
 					$this->html->tag("div", array("class"=>"celda"));
 					$this->html->tag("div", array("class"=>"tabla"));
 								$this->html->tag("div", array("class"=>"fila"));
@@ -698,30 +699,30 @@ class Restricciones
 											$this->html->tag("div", array("class"=>"fila"));
 												$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
 													$this->html->tag("label", array("class"=>"etiqueta"));
-														$this->html->printText("rec_lbl_tipo_acceso");
+														$this->html->printText("rec_lbl_tia_codigo");
 													$this->html->end("label");
 												$this->html->end("div");
 												
 												$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-													$this->html->printSelect($this->conexionBDI, "tia_codigo", "tia_nombre", "PSDG_tipo_acceso", "", $parametros_conexion['tia_nombre'], array("id"=>"rec_tipo_acceso", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+													$this->html->printSelect($this->conexionBDI, "tia_codigo", "tia_nombre", "PSDG_tipo_acceso", "", $parametros_conexion['rec_tia_codigo'], array("id"=>"rec_tia_codigo", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarVisibilidadCampoFuncionProbabilidad();"), "", "", true);
 												$this->html->end("div");
 											$this->html->end("div");
 								$this->html->end("div");
 								$this->html->end("div");
 								$this->html->end("div");
 								
-								$this->html->tag("div", array("class"=>"fila"));
+								$this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_funcion_probabilidad"));
 								$this->html->tag("div", array("class"=>"celda"));
 								$this->html->tag("div", array("class"=>"tabla"));
 											$this->html->tag("div", array("class"=>"fila"));
 												$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
 													$this->html->tag("label", array("class"=>"etiqueta"));
-														$this->html->printText("rec_lbl_funcion_probabilidad");
+														$this->html->printText("rec_lbl_fup_codigo");
 													$this->html->end("label");
 												$this->html->end("div");
 												
 												$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['fup_nombre'], array("id"=>"rec_funcion_probabilidad", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
 												$this->html->end("div");
 											$this->html->end("div");
 								$this->html->end("div");
@@ -741,15 +742,60 @@ class Restricciones
 		$this->html->end("div");			
 		//FIN FORMULARIO
 		
-		if(!$read_only)
-		{
+//		if(!$read_only)
+//		{
 			//BOTON
 			$this->html->tag("div", array("class"=>"fila"));
 				$this->html->tag("div", array("class"=>"celda"));
-					$this->html->tag("input", array("id"=>"rec_btn_establecer" ,"type"=>"button", "value"=>"Establecer", "onclick"=>"establecerRestriccionTabla();", "class"=>"valor_campo color_letra_campo margin_arriba_10"));
+					$this->html->tag("input", array("id"=>"rec_btn_establecer" ,"type"=>"button", "value"=>"Establecer", "onclick"=>"establecerRestriccionCampo();", "class"=>"valor_campo color_letra_campo margin_arriba_10"));
 				$this->html->end("div");
 			$this->html->end("div");
-		}	
+			$this->html->end("form");
+//		}	
+	}
+	
+	function actualizarCampoTablasBD($nombre_conexion="")
+	{
+		$arreglo_nombres_tablas = "";
+		if($nombre_conexion)
+		{
+			$sql = "SELECT con_parametros
+					FROM PSDG_conexion
+					WHERE con_nombre = '$nombre_conexion'
+					AND con_usu_login = '".$this->usu_login."'
+					AND con_fue_codigo = '2'
+					LIMIT 1";
+			$this->conexionBDI->ejecutarSQL($sql);
+			$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
+			$arreglo_parametros = json_decode($con_parametros, true);
+			//establezco la conexion con la bd de la conexion
+			$conexion_auxiliar = new ConexionBDMySQL($arreglo_parametros);
+			$conexion_auxiliar->conectar();
+			$arreglo_nombres_tablas = $conexion_auxiliar->obtenerNombresTablasBD();
+		}
+		$this->html->arregloAOpciones($arreglo_nombres_tablas,"","select_seleccione", false);
+	}
+	
+	function actualizarCampoCamposBD($nombre_conexion, $nombre_tabla, $campo_deshabilitado)
+	{
+		$arreglo_nombres_campos = "";
+		if($nombre_conexion)
+		{
+			$sql = "SELECT con_parametros
+					FROM PSDG_conexion
+					WHERE con_nombre = '$nombre_conexion'
+					AND con_usu_login = '".$this->usu_login."'
+					AND con_fue_codigo = '2'
+					LIMIT 1";
+			$this->conexionBDI->ejecutarSQL($sql);
+			$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
+			$arreglo_parametros = json_decode($con_parametros, true);
+			//establezco la conexion con la bd de la conexion
+			$conexion_auxiliar = new ConexionBDMySQL($arreglo_parametros);
+			$conexion_auxiliar->conectar();
+			$arreglo_nombres_campos = $conexion_auxiliar->obtenerNombresCamposTablaBD($nombre_tabla);
+		}
+		$this->html->arregloAOpciones($arreglo_nombres_campos,"","select_seleccione", false, $campo_deshabilitado);
 	}
 	
 	function obtenerTiposLlave($rec_nombre_tabla, $rec_nombre_campo)
@@ -786,21 +832,38 @@ class Restricciones
 		return $tipo_dato;	
 	}
 	
-	function actualizarRestriccionCampo($nombre_tabla, $numero_tuplas)
+	function actualizarRestriccionCampo($rec_nombre_tabla, $rec_nombre_campo, $rec_fue_codigo="", $rec_parametros_tipo_fuente="", $rec_porcentaje_nulos = "0")
 	{
-		/*if($numero_tuplas == 0)
-			$sql = "	DELETE FROM PSDG_restricciones_tablas 
-						WHERE ret_nombre_tabla = '".$nombre_tabla."'
-						AND ret_usu_login = '".$this->usu_login."'";
-		else if($this->conexionBDI->existeRegistro("ret_nombre_tabla", "PSDG_restricciones_tablas", "ret_nombre_tabla = '".$nombre_tabla."'"))
-			$sql = "	UPDATE PSDG_restricciones_tablas 
-						SET ret_numero_tuplas_a_generar = $numero_tuplas 
-						WHERE ret_nombre_tabla = '".$nombre_tabla."' 
-						AND ret_usu_login = '".$this->usu_login."'";
-		else
-			$sql = "INSERT INTO PSDG_restricciones_tablas(ret_usu_login,ret_nombre_tabla,ret_numero_tuplas_a_generar) VALUES('".$this->usu_login."', '$nombre_tabla', $numero_tuplas)";
+		if(!$rec_fue_codigo)//si se selecciona fuente NINGUNA, borro la restriccion, si no existe no pasa nada 0 rows affected
+			$sql = "	DELETE FROM PSDG_restricciones_campos 
+						WHERE rec_nombre_tabla = '".$rec_nombre_tabla."'
+						AND rec_nombre_campo = '".$rec_nombre_campo."'
+						AND rec_usu_login = '".$this->usu_login."'";			
+		else if($this->conexionBDI->existeRegistro("rec_nombre_campo", "PSDG_restricciones_campos", "rec_nombre_campo = '".$rec_nombre_campo."' AND rec_nombre_tabla = '".$rec_nombre_tabla."' AND rec_usu_login = '".$this->usu_login."'"))//si existe restriccion la actualizo
+			$sql = "	UPDATE PSDG_restricciones_campos 
+						SET rec_fue_codigo = '$rec_fue_codigo',
+						rec_parametros_tipo_fuente = '$rec_parametros_tipo_fuente'
+						rec_porcentaje_nulos = '$rec_porcentaje_nulos'
+						WHERE rec_nombre_tabla = '".$rec_nombre_tabla."'
+						AND rec_nombre_campo = '".$rec_nombre_campo."'
+						AND rec_usu_login = '".$this->usu_login."'";
+		else //si seleccione fuente y no existe restriccion, la inserto
+			$sql = "INSERT INTO PSDG_restricciones_campos(	rec_usu_login, 
+															rec_nombre_tabla,
+															rec_nombre_campo,
+															rec_fue_codigo,
+															rec_parametros_tipo_fuente,
+															rec_porcentaje_nulos,
+															rec_es_foranea)
+			 		VALUES(	'".$this->usu_login."', 
+			 				'".$rec_nombre_tabla."', 
+							'".$rec_nombre_campo."',
+							'".$rec_fue_codigo."',
+							'".$rec_parametros_tipo_fuente."',
+							'".$rec_porcentaje_nulos."',
+							'0')";
 		//echo $sql;
-		$this->conexionBDI->ejecutarSQL($sql); */
+		$this->conexionBDI->ejecutarSQL($sql);
 	}
 	
 	function establecerRestriccionesForaneas()
@@ -835,15 +898,13 @@ class Restricciones
 																rec_nombre_campo,
 																rec_fue_codigo,
 																rec_parametros_tipo_fuente,
-																rec_acceso_aleatorio,
 																rec_porcentaje_nulos,
 																rec_es_foranea)
 				 		VALUES(	'".$this->usu_login."', 
 				 				'".$info_campo_referenciado[0]."', 
 								'".$info_campo_referenciado[1]."',
 								'2',
-								'{\"rec_nombre_conexion\":\"BDO\",\"rec_nombre_tabla\":\"".$info_campo_referenciado[2]."\",\"rec_nombre_campo\":\"".$info_campo_referenciado[3]."\"}',
-								'1',
+								'{\"rec_nombre_conexion\":\"BDO\",\"rec_nombre_tabla\":\"".$info_campo_referenciado[2]."\",\"rec_nombre_campo\":\"".$info_campo_referenciado[3]."\",\"rec_tia_codigo\":\"2\"}',
 								'0',
 								'1')";
 				$this->conexionBDI->ejecutarSQL($sql);
