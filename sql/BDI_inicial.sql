@@ -147,7 +147,7 @@ CREATE TABLE `BDI`.`PSDG_restricciones_campos` (
 	`rec_nombre_campo` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del campo al que pertenece esta restriccion',
 	`rec_fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de fuente de donde se obtendran los valores',
 	`rec_parametros_tipo_fuente` VARCHAR( 500 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'parametros que utiliza el tipo de fuente para retornar los valores',
-	`rec_acceso_aleatorio` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si los datos se retornan de manera secuencial (0) o aleatoria (1)',
+/*	`rec_acceso_aleatorio` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si los datos se retornan de manera secuencial (0) o aleatoria (1)',*/
 	`rec_porcentaje_nulos` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'Porcentaje que indica la cantidad de nulos que se deben generar para este campo',
 	`rec_es_foranea` TINYINT(1) COLLATE utf8_unicode_ci NOT NULL COMMENT 'bandera que indica si el campo es llave foranea (1) o no (0)',
 	FOREIGN KEY (`rec_fue_codigo`) REFERENCES `PSDG_fuentes` (`fue_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -231,8 +231,8 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_biblioteca','es','Conexión bib
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','es','Tipo de campo orígen');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','es','Nombre del campo orígen');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','es','Conexión base de datos');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_acceso','es','Tipo de acceso');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion_probabilidad','es','Función de probabilidad');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','es','Tipo de acceso');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','es','Función de probabilidad');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','es','Valores');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_desde','es','Desde');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','es','Hasta');
@@ -346,8 +346,8 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_biblioteca','en','Link library'
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','en','Source field type');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','en','Source field name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','en','Link database');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_acceso','en','Access type');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion_probabilidad','en','Probability function');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','en','Access type');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','en','Probability function');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','en','Values');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_desde','en','From');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','en','to');

@@ -125,5 +125,23 @@ class ConexionBDMySQL extends ConexionBD
 		$this->ejecutarSQL($sql);
 		return $this->obtenerNumeroFilas();
 	}
+	
+	function obtenerNombresTablasBD()
+	{
+		$sql = "SHOW TABLES";
+		$this->ejecutarSQL($sql);
+		return $this->obtenerResultadoComoArreglo();
+	}
+	
+	function obtenerNombresCamposTablaBD($nombre_tabla)
+	{
+		$nombre_bd = $this->_parametrosConexion['con_nombre_bd'];
+		$sql = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_NAME = '$nombre_tabla' AND TABLE_SCHEMA = '$nombre_bd'";
+		$this->establecer_bd("information_schema");
+		$this->ejecutarSQL($sql);
+		$arreglo_nombres_campos = $this->obtenerResultadoComoArreglo();
+		$this->restablecer_bd_original();		
+		return $arreglo_nombres_campos;
+	}
 }
 ?>
