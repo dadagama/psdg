@@ -242,25 +242,32 @@ function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, permite_nulo
 
 function establecerRestriccionCampo()
 {
-	var rec_nombre_tabla = $('#rec_lbl_nombre_tabla').html();
-	var rec_nombre_campo = $('#rec_lbl_nombre_campo').html();
 	var rec_fue_codigo = $('#rec_fue_codigo').val();
+	var rec_nombre_conexion = $('#rec_nombre_conexion').val();
+	var rec_nombre_tabla_origen = $('#rec_lbl_nombre_tabla').html();
+	var rec_nombre_campo_origen = $('#rec_lbl_nombre_campo').html();
 	var rec_parametros_tipo_fuente = $("#fm_parametros_tipo_fuente").serialize();
 	var rec_porcentaje_nulos = $('#rec_porcentaje_nulos').val();
-	alert(rec_nombre_tabla+","+rec_nombre_campo+","+rec_fue_codigo+","+rec_parametros_tipo_fuente+","+rec_porcentaje_nulos);
+	//alert(rec_nombre_tabla_origen+","+rec_nombre_campo_origen+","+rec_fue_codigo+","+rec_parametros_tipo_fuente+","+rec_porcentaje_nulos);
 	$.ajax({
 		async:		false,
 		type: 		"POST",
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=establecerRestriccionCampo&rec_nombre_tabla="+rec_nombre_tabla+"&rec_nombre_campo"+rec_nombre_campo+"&rec_fue_codigo"+rec_fue_codigo+"&rec_porcentaje_nulos"+rec_porcentaje_nulos+"&"+rec_parametros_tipo_fuente,
+		data:		"funcion=establecerRestriccionCampo&rec_nombre_tabla_origen="+rec_nombre_tabla_origen+"&rec_nombre_campo_origen="+rec_nombre_campo_origen+"&rec_fue_codigo="+rec_fue_codigo+"&rec_nombre_conexion="+rec_nombre_conexion+"&rec_porcentaje_nulos="+rec_porcentaje_nulos+"&"+rec_parametros_tipo_fuente,
 		beforeSend:	ajaxSend,
-		success:	ajaxSuccess,
+		success:	restriccionEstablecidaCorrecta,
 		timeout:	10000,
 		error:		ajaxError(12)
 	}); 
 	return false;
+}
+
+function restriccionEstablecidaCorrecta()
+{
+	ajaxSuccess();
+	alert(lang_js[26]);
 }
 
 function actualizarFormularioFuenteDeDatos()
@@ -273,28 +280,28 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 	$("#rec_tabla_restricciones").children().hide();
 	switch(tipo_conexion)
 	{
-		case '1': 
+		case '1': //ninguna
 			break;
-		case '2':
+		case '2'://bd
 			$("#rec_tabla_bd").show();
 			$("#rec_probabilidades").show();
 			break;
-		case '3':
+		case '3'://bilbioteca
 			$("#rec_tabla_biblioteca").show();
 			$("#rec_probabilidades").show();
 			break;
-		case '4':
+		case '4'://lista de valores
 			$("#rec_tabla_lista").show();
 			$("#rec_probabilidades").show();
 			break;
-		case '5':
+		case '5'://constante
 			$("#rec_tabla_constante").show();
 			break;
-		case '6':
+		case '6'://intervalo
 			$("#rec_tabla_intervalo").show();
 			$("#rec_probabilidades").show();
 			break;
-		case '7':
+		case '7'://archivo
 			$("#rec_tabla_archivo").show();
 			$("#rec_probabilidades").show();
 			break;
@@ -318,6 +325,7 @@ function actualizarDivDetalle(formulario)
 
 function mostrarFormularioDetalle(formulario)
 {
+	formulario = formulario.replace(/@br2n/g,"\n");
 	$('#res_div_detalle').addClass("oculto");
 	$('#res_div_detalle').html(formulario);
 	$('#res_div_detalle').removeClass("oculto");
@@ -345,12 +353,17 @@ function actualizarCampoTablasBD()
 	actualizarCampoCamposBD();
 }
 
+function actualizarSelectTablasBD(opciones)
+{
+	$('#rec_nombre_tabla').html(opciones);
+	ajaxSuccess();
+}
+
 function actualizarCampoCamposBD()
 {
 	var nombre_conexion = $('#rec_nombre_conexion').val();
 	var nombre_tabla = $('#rec_nombre_tabla').val();
-	var nombre_campo_actual = $('#rec_lbl_nombre_campo').html();
-	
+	var nombre_campo_actual = $('#rec_lbl_nombre_campo').html();	
 	$('#rec_nombre_campo').html("");
 	$.ajax({
 		async:		false,
@@ -366,14 +379,34 @@ function actualizarCampoCamposBD()
 	});
 }
 
-function actualizarSelectTablasBD(opciones)
-{
-	$('#rec_nombre_tabla').html(opciones);
-	ajaxSuccess();
-}
-
 function actualizarSelectCampoBD(opciones)
 {
 	$('#rec_nombre_campo').html(opciones);
+	ajaxSuccess();
+}
+
+function actualizarCampoCamposBiblioteca()
+{
+	var nombre_conexion = $('#rec_conexion_biblioteca').val();
+	var tipo_campo = $('#rec_tipo_campo_biblioteca').val();
+	$('#rec_nombre_campo_biblioteca').html("");
+	//alert(nombre_conexion+","+tipo_campo);
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=actualizarCampoCamposBiblioteca&nombre_conexion="+nombre_conexion+"&tipo_campo="+tipo_campo,
+		beforeSend:	ajaxSend,
+		success:	actualizarSelectCampoBiblioteca,
+		timeout:	10000,
+		error:		ajaxError(12)
+	});
+}
+
+function actualizarSelectCampoBiblioteca(opciones)
+{
+	$('#rec_nombre_campo_biblioteca').html(opciones);
 	ajaxSuccess();
 }

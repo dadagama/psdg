@@ -51,39 +51,49 @@ switch($_REQUEST['funcion'])
 	case "actualizarCampoCamposBD":
 		$objetoRestricciones->actualizarCampoCamposBD($_REQUEST['nombre_conexion'], $_REQUEST['nombre_tabla'],$_REQUEST['nombre_campo_actual']);
 		break;
+
+	case "actualizarCampoCamposBiblioteca":
+		$objetoRestricciones->actualizarCampoCamposBiblioteca($_REQUEST['nombre_conexion'], $_REQUEST['tipo_campo']);
+		break;
 		
 	case "establecerRestriccionCampo":
+		if($_REQUEST['rec_tia_codigo'] == 3)//si el acceso es a traves de funcion de probabilidad
+			$rec_fup_codigo = ',"rec_fup_codigo":"'.$_REQUEST['rec_fup_codigo'].'"';
+		$objetoRestricciones->eliminarTablaListaDeValores($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_campo_origen']);//si existe
 		switch($_REQUEST['rec_fue_codigo'])
 		{
 			case "1"://Ninguna
 				break;
 				
 			case "2"://Base de datos
-				$rec_parametros_tipo_fuente = '{"var":"'.$_REQUEST[''].'","var":"'.$_REQUEST[''].'","var":"'.$_REQUEST[''].'"}';
+				$rec_parametros_tipo_fuente = '{"rec_nombre_conexion":"'.$_REQUEST['rec_nombre_conexion'].'","rec_nombre_tabla":"'.$_REQUEST['rec_nombre_tabla'].'","rec_nombre_campo":"'.$_REQUEST['rec_nombre_campo'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
+				if($_REQUEST['rec_nombre_conexion'] == "BDO")//si depende de otra tabla de la BDO
+					$objetoRestricciones->crearDependenciaDeTabla($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_tabla']);//crear la dependendia para las prioridades.
 				break;
 				
 			case "3"://Biblioteca
-				$rec_parametros_tipo_fuente = "..";
+				$rec_parametros_tipo_fuente = '{"rec_conexion_biblioteca":"'.$_REQUEST['rec_conexion_biblioteca'].'","rec_tipo_campo_biblioteca":"'.$_REQUEST['rec_tipo_campo_biblioteca'].'","rec_nombre_campo_biblioteca":"'.$_REQUEST['rec_nombre_campo_biblioteca'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 				
 			case "4"://Lista de valores
-				$rec_parametros_tipo_fuente = "..";
+				$rec_nombre_tabla_lista_valores = $objetoRestricciones->crearTablaListaDeValores($_REQUEST['rec_lista_valores'], $_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_campo_origen']);
+				$rec_parametros_tipo_fuente = '{"rec_nombre_tabla_lista_valores":"'.$rec_nombre_tabla_lista_valores.'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 				
 			case "5"://Constante
-				$rec_parametros_tipo_fuente = "..";
+				$rec_parametros_tipo_fuente = '{"rec_valor_constante":"'.$_REQUEST['rec_valor_constante'].'"}';
 				break;
 				
 			case "6"://Intervalo
-				$rec_parametros_tipo_fuente = "..";
+				$rec_parametros_tipo_fuente = '{"rec_valor_desde":"'.$_REQUEST['rec_valor_desde'].'","rec_valor_hasta":"'.$_REQUEST['rec_valor_hasta'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 				
 			case "7"://Archivo
-				$rec_parametros_tipo_fuente = "..";
+				$rec_parametros_tipo_fuente = '{"rec_conexion_archivo":"'.$_REQUEST['rec_conexion_archivo'].'","rec_tia_codigo:"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 		}
-		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla'],
-															$_REQUEST['rec_nombre_campo'],
+		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla_origen'],
+															$_REQUEST['rec_nombre_campo_origen'],
 															$_REQUEST['rec_fue_codigo'],
 															$rec_parametros_tipo_fuente,
 															$_REQUEST['rec_porcentaje_nulos']);
