@@ -3,7 +3,7 @@ function establecerPosicionSecuencia(secuencia_activa)
 	for ( var int = 1; int <= 4; int++) 
 	{
 		if(int < secuencia_activa)
-			$("#step_"+int).attr("src","../imagenes/step_"+int+"_ok.png");
+			$("#step_"+int).attr("src","../imagenes/step_"+int+"_on.png");
 		else if(int == secuencia_activa)
 			$("#step_"+int).attr("src","../imagenes/step_"+int+"_on.png");
 		else

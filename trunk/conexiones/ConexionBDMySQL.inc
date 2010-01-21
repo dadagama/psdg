@@ -143,5 +143,6 @@ class ConexionBDMySQL extends ConexionBD
 		$this->restablecer_bd_original();		
 		return $arreglo_nombres_campos;
 	}
+	
 }
 ?>

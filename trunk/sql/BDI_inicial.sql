@@ -5,9 +5,37 @@ DROP TABLE IF EXISTS `PSDG_restricciones_tablas`;
 DROP TABLE IF EXISTS `PSDG_fuentes_de_tipos`;
 DROP TABLE IF EXISTS `PSDG_conexion`;
 DROP TABLE IF EXISTS `PSDG_fuentes`;
-DROP TABLE IF EXISTS `PSDG_usuario`;
 DROP TABLE IF EXISTS `PSDG_tipo_acceso`;
 DROP TABLE IF EXISTS `PSDG_funcion_probabilidad`;
+DROP TABLE IF EXISTS `PSDG_tipo_campo_biblioteca`;
+DROP TABLE IF EXISTS `PSDG_dependencias_de_tablas`;
+DROP TABLE IF EXISTS `PSDG_dependencias_de_campos`;
+DROP TABLE IF EXISTS `PSDG_usuario`;
+
+CREATE TABLE `BDI`.`PSDG_usuario` (
+	`usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
+	`usu_password` VARCHAR( 40 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'contraseña del usuario',
+	PRIMARY KEY ( `usu_login` )
+) ENGINE = InnoDB COMMENT = 'Almacena los usuarios que tienen acceso a la aplicación';
+
+INSERT INTO PSDG_usuario(usu_login, usu_password) VALUES('demo','89e495e7941cf9e40e6980d14a16bf023ccd4c91');
+
+CREATE TABLE `BDI`.`PSDG_dependencias_de_tablas` (
+	`det_usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
+	`det_nombre_tabla_dependiente` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la tabla dependiente',
+	`det_depende_de` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la tabla de la cual depende para sus valores',
+	PRIMARY KEY ( `det_nombre_tabla_dependiente`, `det_depende_de`),
+	FOREIGN KEY (`det_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB COMMENT = 'Almacena las dependencias entre tablas que se crean por las restricciones o llaves';
+
+CREATE TABLE `BDI`.`PSDG_dependencias_de_campos` (
+	`dec_usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
+	`dec_nombre_tabla` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la tabla a la que pertenece la dependencia',
+	`dec_nombre_campo_dependiente` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del campo dependiente',
+	`dec_depende_de` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del campo del cual depende para sus valores',
+	PRIMARY KEY ( `dec_nombre_tabla`, `dec_nombre_campo_dependiente`, `dec_depende_de`),
+	FOREIGN KEY (`dec_usu_login`) REFERENCES `PSDG_usuario` (`usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB COMMENT = 'Almacena las dependencias entre campos que se crean por las restricciones';
 
 
 CREATE TABLE `BDI`.`PSDG_tipo_acceso` (
@@ -20,6 +48,15 @@ INSERT INTO PSDG_tipo_acceso VALUES(1,'Secuencial');
 INSERT INTO PSDG_tipo_acceso VALUES(2,'Aleatorio');
 INSERT INTO PSDG_tipo_acceso VALUES(3,'Probabilistico');
 
+CREATE TABLE `BDI`.`PSDG_tipo_campo_biblioteca` (
+	`tcb_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo de identificacion para el tipo de campo',
+	`tcb_nombre` VARCHAR( 40 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de campo',
+	PRIMARY KEY ( `tcb_codigo` )
+) ENGINE = InnoDB COMMENT = 'Almacena los tipos de campo que componen una biblioteca';
+
+INSERT INTO PSDG_tipo_campo_biblioteca VALUES(1,'Independiente');
+INSERT INTO PSDG_tipo_campo_biblioteca VALUES(2,'Dependiente');
+
 
 CREATE TABLE `BDI`.`PSDG_funcion_probabilidad` (
 	`fup_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo de identificacion para la funcion de probabilidad',
@@ -31,14 +68,6 @@ INSERT INTO PSDG_funcion_probabilidad VALUES(1,'Uniforme');
 INSERT INTO PSDG_funcion_probabilidad VALUES(2,'Normal estandar');
 INSERT INTO PSDG_funcion_probabilidad VALUES(3,'Exponencial');
 
-
-CREATE TABLE `BDI`.`PSDG_usuario` (
-	`usu_login` VARCHAR( 20 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
-	`usu_password` VARCHAR( 40 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'contraseña del usuario',
-	PRIMARY KEY ( `usu_login` )
-) ENGINE = InnoDB COMMENT = 'Almacena los usuarios que tienen acceso a la aplicación';
-
-INSERT INTO PSDG_usuario(usu_login, usu_password) VALUES('demo','89e495e7941cf9e40e6980d14a16bf023ccd4c91');
 
 CREATE TABLE `BDI`.`PSDG_fuentes` (
 	`fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo del tipo de fuente',
@@ -125,7 +154,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',7);
 
 CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
 	`con_nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
-	`con_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
+	`con_usu_login` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre asignado a la conexión',
 	`con_fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la fuente asociada a esta conexion',
 	`con_parametros` varchar(800) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Parametros para realizar la conexión, con el formato p1:v1,p2:v2, ... ,pn:vn',
 	PRIMARY KEY ( `con_nombre`, `con_usu_login`, `con_fue_codigo`),
@@ -135,14 +164,14 @@ CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
 
 
 CREATE TABLE `BDI`.`PSDG_restricciones_tablas` (
-	`ret_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
+	`ret_usu_login` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
 	`ret_nombre_tabla` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
 	`ret_numero_tuplas_a_generar` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'cantidad de tuplas que se generaran para llenar esta tabla',
 	FOREIGN KEY (`ret_usu_login`) REFERENCES `PSDG_conexion` (`con_usu_login`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB COMMENT = 'Almacena las restricciones a nivel de tablas para la BDO';
 
 CREATE TABLE `BDI`.`PSDG_restricciones_campos` (
-	`rec_usu_login` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
+	`rec_usu_login` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Nombre del usuario que establecio la restriccion',
 	`rec_nombre_tabla` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la tabla a la que pertenece el campo',
 	`rec_nombre_campo` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del campo al que pertenece esta restriccion',
 	`rec_fue_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del tipo de fuente de donde se obtendran los valores',
@@ -254,6 +283,9 @@ INSERT INTO PSDG_idioma VALUES('select_Probabilistico','es','Probabílistico');
 INSERT INTO PSDG_idioma VALUES('select_Uniforme','es','Distribución Uniforme');
 INSERT INTO PSDG_idioma VALUES('select_Normal estandar','es','Distribución Normal');
 INSERT INTO PSDG_idioma VALUES('select_Exponencial','es','Distribución Exponencial');
+
+INSERT INTO PSDG_idioma VALUES('select_Dependiente','es','Dependiente');
+INSERT INTO PSDG_idioma VALUES('select_Independiente','es','Independiente');
 
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','es','Si');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','es','No');
@@ -369,6 +401,9 @@ INSERT INTO PSDG_idioma VALUES('select_Probabilistico','en','Probabilistic');
 INSERT INTO PSDG_idioma VALUES('select_Uniforme','en','Uniform distribution');
 INSERT INTO PSDG_idioma VALUES('select_Normal estandar','en','Normal distribution');
 INSERT INTO PSDG_idioma VALUES('select_Exponencial','en','Exponential distribution');
+
+INSERT INTO PSDG_idioma VALUES('select_Dependiente','en','Dependent');
+INSERT INTO PSDG_idioma VALUES('select_Independiente','en','Independent');
 
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','en','Yes');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','en','No');

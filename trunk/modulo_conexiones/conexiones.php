@@ -46,7 +46,7 @@ switch($_REQUEST['funcion'])
 							$objetoConexiones->insertarValoresEnTabla($con_nombre, $con_tipo, $val);
 						}
 					}
-					$parametros_conexion = '"con_nombre_archivo_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
+					$parametros_conexion = '{"con_nombre_archivo_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"}';
 				}
 				else
 					$error = "archivo";
@@ -67,7 +67,7 @@ switch($_REQUEST['funcion'])
 							$objetoConexiones->insertarValoresEnTabla($con_nombre, $con_tipo, $valores);
 						}
 					}
-					$parametros_conexion = '"con_nombre_biblioteca_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"';
+					$parametros_conexion = '{"con_nombre_biblioteca_tabla":"'.$usu_login.'_'.$con_tipo.'_'.$con_nombre.'"}';
 				}
 				else
 					$error = "biblioteca";
