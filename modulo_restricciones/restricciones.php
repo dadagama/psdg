@@ -14,10 +14,6 @@ switch($_REQUEST['funcion'])
 	case "construirArbolBDO":
 		$objetoRestricciones->construirArbolBDO();
 		break;
-		
-	case "establecerRestriccionesForaneas":
-		$objetoRestricciones->establecerRestriccionesForaneas();
-		break;
 	
 	case "establecerRestriccionTabla":
 		$numero_tuplas = $_REQUEST['numero_tuplas'];
@@ -29,6 +25,7 @@ switch($_REQUEST['funcion'])
 		else
 		{
 			$objetoRestricciones->actualizarRestriccionTabla($nombre_tabla, $numero_tuplas);
+			$objetoRestricciones->establecerRestriccionesForaneas($nombre_tabla, $numero_tuplas);
 			echo "ok";
 		}
 		break;
@@ -67,8 +64,11 @@ switch($_REQUEST['funcion'])
 				
 			case "2"://Base de datos
 				$rec_parametros_tipo_fuente = '{"rec_nombre_conexion":"'.$_REQUEST['rec_nombre_conexion'].'","rec_nombre_tabla":"'.$_REQUEST['rec_nombre_tabla'].'","rec_nombre_campo":"'.$_REQUEST['rec_nombre_campo'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
-				if($_REQUEST['rec_nombre_conexion'] == "BDO")//si depende de otra tabla de la BDO
-					$objetoRestricciones->crearDependenciaDeTabla($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_tabla']);//crear la dependendia para las prioridades.
+				if($_REQUEST['rec_nombre_conexion'] == "BDO")//si depende de una tabla de la BDO
+					if($_REQUEST['rec_nombre_tabla_origen'] != $_REQUEST['rec_nombre_tabla'])//si no es de ella misma, es dependencia a nivel de tabla
+						$objetoRestricciones->crearDependenciaDeTabla($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_tabla']);//crear la dependendia para las prioridades.
+					else//si depende de ella misma es una dependencia a nivel de campo
+						$objetoRestricciones->crearDependenciaDeCampo($_REQUEST['rec_nombre_tabla'], $_REQUEST['rec_nombre_campo_origen'], $_REQUEST['rec_nombre_campo']);//crear la dependendia para las prioridades.
 				break;
 				
 			case "3"://Biblioteca

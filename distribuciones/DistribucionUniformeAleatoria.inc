@@ -16,8 +16,10 @@ class DistribucionUniformeAleatoria
 	var $_r;
 	
 	//Metodo constructor
-	function __construct($a, $c, $m, $x)
+	function __construct($a = 16807, $c = 0, $m = 2147483641, $x="")
 	{
+		if($x == "")
+			$x = rand(1,123456789);
 		//Valores Ideales: (16807, 0, 2147483641, 123456789)
 		$this->_multiplicadorA = $a;
 		$this->_incrementoC    = $c;
@@ -44,4 +46,7 @@ class DistribucionUniformeAleatoria
 		return $this->_semillaX/$this->_moduloM;
 	}
 }
+//$x = new DistribucionUniformeAleatoria($a = 16807, $c = 0, $m = 2147483641, rand(1,123456789));
+//echo floor($x->generar() * 10);
+
 ?>

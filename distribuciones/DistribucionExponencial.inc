@@ -20,4 +20,6 @@ class DistribucionExponencial
 		return $a;
 	}
 }
+//$x = new DistribucionExponencial(1);
+//echo $x->generar();
 ?>
