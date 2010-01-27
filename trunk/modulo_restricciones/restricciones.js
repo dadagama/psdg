@@ -11,9 +11,7 @@ function inicializar()
 	setTimeout('efecto("res_div_botones_secuencia","fadeIn")',2000);
 	
 	establecerPosicionSecuencia(2);
-	verificarRestriccionTablaEstablecida("ok");
-	//esta funcion se debe llamar despues de construir arbol BDO:
-	establecerRestriccionesForaneas();
+	construirArbolBDO("ok");
 	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
 }
 
@@ -97,7 +95,7 @@ function establecerRestriccionTabla()
 			url:		"../modulo_restricciones/restricciones.php",
 			data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
 			beforeSend:	ajaxSend,
-			success:	verificarRestriccionTablaEstablecida,
+			success:	construirArbolBDO,
 			timeout:	10000,
 			error:		ajaxError(12)
 		});
@@ -109,23 +107,7 @@ function establecerRestriccionTabla()
 	}
 }
 
-function establecerRestriccionesForaneas()
-{
-	$.ajax({
-		async:		false,
-		type: 		"POST",
-		dataType:	"html",
-		contentType:"application/x-www-form-urlencoded",
-		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=establecerRestriccionesForaneas",
-		beforeSend:	ajaxSend,
-		success:	ajaxSuccess,
-		timeout:	10000,
-		error:		ajaxError(12)
-	});
-}
-
-function verificarRestriccionTablaEstablecida(establecida)
+function construirArbolBDO(establecida)
 {
 	if(establecida == "ok")
 	{

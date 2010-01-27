@@ -807,7 +807,7 @@ class Restricciones
 		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"select_seleccione", false, $campo_deshabilitado);
 	}
 	
-	function actualizarCampoCamposBiblioteca($nombre_conexion, $tipo_campo, $opcion_seleccionada)
+	function actualizarCampoCamposBiblioteca($nombre_conexion, $tipo_campo, $opcion_seleccionada="")
 	{
 		$arreglo_nombres_campos = "";
 		if($nombre_conexion)
@@ -868,10 +868,18 @@ class Restricciones
 	function actualizarRestriccionCampo($rec_nombre_tabla, $rec_nombre_campo, $rec_fue_codigo="", $rec_parametros_tipo_fuente="", $rec_porcentaje_nulos = "0")
 	{
 		if($rec_fue_codigo == 1)//si se selecciona fuente NINGUNA, borro la restriccion, si no existe no pasa nada 0 rows affected
+		{
+			//borro tambien dependencia de tablas si tenia
+			$sql = "	DELETE FROM PSDG_dependencias_de_tablas 
+						WHERE det_nombre_tabla_dependiente = '".$rec_nombre_tabla."'
+						AND det_depende_de = '".$rec_nombre_campo."'
+						AND det_usu_login = '".$this->usu_login."'";
+			$this->conexionBDI->ejecutarSQL($sql);
 			$sql = "	DELETE FROM PSDG_restricciones_campos 
 						WHERE rec_nombre_tabla = '".$rec_nombre_tabla."'
 						AND rec_nombre_campo = '".$rec_nombre_campo."'
-						AND rec_usu_login = '".$this->usu_login."'";			
+						AND rec_usu_login = '".$this->usu_login."'";
+		}			
 		else if($this->conexionBDI->existeRegistro("rec_nombre_campo", "PSDG_restricciones_campos", "rec_nombre_campo = '".$rec_nombre_campo."' AND rec_nombre_tabla = '".$rec_nombre_tabla."' AND rec_usu_login = '".$this->usu_login."'"))//si existe restriccion la actualizo
 			$sql = "	UPDATE PSDG_restricciones_campos 
 						SET rec_fue_codigo = '$rec_fue_codigo',
@@ -899,57 +907,85 @@ class Restricciones
 		$this->conexionBDI->ejecutarSQL($sql);
 	}
 	
-	function establecerRestriccionesForaneas()
+	function establecerRestriccionesForaneas($nombre_tabla, $numero_tuplas)
 	{
-		//miro si ya no estan establecidas antes, para no hacerlo otra vez
-		$sql = "SELECT rec_es_foranea 
-				FROM PSDG_restricciones_campos 
-				WHERE rec_es_foranea = 1
-				AND rec_usu_login = '".$this->usu_login."'";
-		$this->conexionBDI->ejecutarSQL($sql);
-		$num_foraneas = $this->conexionBDI->obtenerNumeroFilas();
-		 
-		if($num_foraneas == 0)
+		if($numero_tuplas == 0)//si se elimino restriccion tabla
 		{
-			$parametros_conexion_BDO = $this->conexionBDO->obtenerParametrosConexion();
-			$nombre_BDO = $parametros_conexion_BDO['con_nombre_bd'];
-			//consulto el campo y la tabla a la que apuntan las llaves foraneas
-			//de la BDO
-			$sql = "	SELECT TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
-						FROM KEY_COLUMN_USAGE
-						WHERE CONSTRAINT_SCHEMA = '".$nombre_BDO."'
-						AND REFERENCED_TABLE_NAME IS NOT NULL
-						AND REFERENCED_COLUMN_NAME IS NOT NULL";
-			$this->conexionBDO->establecer_bd("information_schema");
-			$this->conexionBDO->ejecutarSQL($sql);
+			//se eliminan restricciones de los campos de esta tabla
+			//se eliminan restricciones de campos que dependan de esta tabla
+			$sql = "DELETE FROM PSDG_restricciones_campos 
+					WHERE rec_usu_login = '".$this->usu_login."'
+					AND (rec_nombre_tabla = '".$nombre_tabla."'
+						OR rec_parametros_tipo_fuente LIKE '{\"rec_nombre_conexion\":\"BDO\",\"rec_nombre_tabla\":\"$nombre_tabla\"%')";
+			$this->conexionBDI->ejecutarSQL($sql);
 			
-			while ($info_campo_referenciado = $this->conexionBDO->obtenerFilaComoArreglo())
+			//se eliminan las dependencias (interna) de campos de esta tabla
+			$sql = "DELETE FROM PSDG_dependencias_de_campos
+					WHERE dec_usu_login = '".$this->usu_login."'
+					AND dec_nombre_tabla = '".$nombre_tabla."'";
+			$this->conexionBDI->ejecutarSQL($sql);
+			
+			//se eliminan las dependencias de tablas
+			$sql = "DELETE FROM PSDG_dependencias_de_tablas
+					WHERE det_usu_login = '".$this->usu_login."'
+					AND (det_nombre_tabla_dependiente  = '".$nombre_tabla."'
+						OR det_depende_de = '".$nombre_tabla."')";
+			$this->conexionBDI->ejecutarSQL($sql);
+		}
+		else
+		{
+			//miro si ya no estan establecidas antes, para no hacerlo otra vez
+			$sql = "SELECT rec_es_foranea 
+					FROM PSDG_restricciones_campos 
+					WHERE rec_es_foranea = 1
+					AND rec_usu_login = '".$this->usu_login."'
+					AND rec_nombre_tabla = '".$nombre_tabla."' LIMIT 1";
+			$this->conexionBDI->ejecutarSQL($sql);
+			$num_foraneas = $this->conexionBDI->obtenerNumeroFilas();
+			 
+			if($num_foraneas == 0)
 			{
+				$parametros_conexion_BDO = $this->conexionBDO->obtenerParametrosConexion();
+				$nombre_BDO = $parametros_conexion_BDO['con_nombre_bd'];
+				//consulto el campo y la tabla a la que apuntan las llaves foraneas
+				//de la BDO
+				$sql = "	SELECT TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+							FROM KEY_COLUMN_USAGE
+							WHERE CONSTRAINT_SCHEMA = '".$nombre_BDO."'
+							AND TABLE_NAME = '".$nombre_tabla."'
+							AND REFERENCED_TABLE_NAME IS NOT NULL
+							AND REFERENCED_COLUMN_NAME IS NOT NULL";
+				$this->conexionBDO->establecer_bd("information_schema");
+				$this->conexionBDO->ejecutarSQL($sql);
 				
-				$sql = "INSERT INTO PSDG_restricciones_campos(	rec_usu_login, 
-																rec_nombre_tabla,
-																rec_nombre_campo,
-																rec_fue_codigo,
-																rec_parametros_tipo_fuente,
-																rec_porcentaje_nulos,
-																rec_es_foranea)
-				 		VALUES(	'".$this->usu_login."', 
-				 				'".$info_campo_referenciado[0]."', 
-								'".$info_campo_referenciado[1]."',
-								'2',
-								'{\"rec_nombre_conexion\":\"BDO\",\"rec_nombre_tabla\":\"".$info_campo_referenciado[2]."\",\"rec_nombre_campo\":\"".$info_campo_referenciado[3]."\",\"rec_tia_codigo\":\"2\"}',
-								'0',
-								'1')";
-				$this->conexionBDI->ejecutarSQL($sql);
-				$sql = "INSERT INTO PSDG_dependencias_de_tablas(det_usu_login,
-																det_nombre_tabla_dependiente, 
-																det_depende_de)
-						VALUES ('".$this->usu_login."', 
-								'".$info_campo_referenciado[0]."', 
-								'".$info_campo_referenciado[2]."')";
-				$this->conexionBDI->ejecutarSQL($sql);
+				while ($info_campo_referenciado = $this->conexionBDO->obtenerFilaComoArreglo())
+				{
+					
+					$sql = "INSERT INTO PSDG_restricciones_campos(	rec_usu_login, 
+																	rec_nombre_tabla,
+																	rec_nombre_campo,
+																	rec_fue_codigo,
+																	rec_parametros_tipo_fuente,
+																	rec_porcentaje_nulos,
+																	rec_es_foranea)
+					 		VALUES(	'".$this->usu_login."', 
+					 				'".$info_campo_referenciado[0]."', 
+									'".$info_campo_referenciado[1]."',
+									'2',
+									'{\"rec_nombre_conexion\":\"BDO\",\"rec_nombre_tabla\":\"".$info_campo_referenciado[2]."\",\"rec_nombre_campo\":\"".$info_campo_referenciado[3]."\",\"rec_tia_codigo\":\"2\"}',
+									'0',
+									'1')";
+					$this->conexionBDI->ejecutarSQL($sql);
+					$sql = "INSERT INTO PSDG_dependencias_de_tablas(det_usu_login,
+																	det_nombre_tabla_dependiente, 
+																	det_depende_de)
+							VALUES ('".$this->usu_login."', 
+									'".$info_campo_referenciado[0]."', 
+									'".$info_campo_referenciado[2]."')";
+					$this->conexionBDI->ejecutarSQL($sql);
+				}
+				$this->conexionBDO->restablecer_bd_original();
 			}
-			$this->conexionBDO->restablecer_bd_original();
 		}
 	}
 	
@@ -982,9 +1018,9 @@ class Restricciones
 		}
 	}
 	
-	function obtenerValoresTablaListaDeValores($rec_nombre_tabla_lista_valores)
+	function obtenerValoresTablaListaDeValores($nombre_tabla_lista_valores)
 	{
-		$sql = "SELECT valores FROM $rec_nombre_tabla_lista_valores";
+		$sql = "SELECT valores FROM $nombre_tabla_lista_valores";
 		$this->conexionBDI->ejecutarSQL($sql);
 		if($this->conexionBDI->obtenerResultset())
 		{
@@ -998,17 +1034,25 @@ class Restricciones
 			return "";
 	}
 	
-	function crearDependenciaDeTabla($rec_nombre_tabla_origen, $rec_nombre_tabla)
+	function crearDependenciaDeTabla($det_nombre_tabla_dependiente, $det_depende_de)
 	{
-		if($rec_nombre_tabla_origen != $rec_nombre_tabla)
+		$num_registros = $this->conexionBDI->existeRegistro("det_nombre_tabla_dependiente", "PSDG_dependencias_de_tablas", "det_usu_login='".$this->usu_login."' AND det_nombre_tabla_dependiente='".$det_nombre_tabla_dependiente."' AND det_depende_de='".$det_depende_de."'");
+		if($num_registros == 0)
 		{
-			$num_registros = $this->conexionBDI->existeRegistro("det_nombre_tabla_dependiente", "PSDG_dependencias_de_tablas", "det_usu_login='".$this->usu_login."' AND det_nombre_tabla_dependiente='".$rec_nombre_tabla_origen."' AND det_depende_de='".$rec_nombre_tabla."'");
-			if($num_registros == 0)
-			{
-				$sql = "INSERT INTO PSDG_dependencias_de_tablas(det_usu_login, det_nombre_tabla_dependiente, det_depende_de)
-						VALUES ('".$this->usu_login."', '$rec_nombre_tabla_origen', '$rec_nombre_tabla')";
-				$this->conexionBDI->ejecutarSQL($sql);
-			}
+			$sql = "INSERT INTO PSDG_dependencias_de_tablas(det_usu_login, det_nombre_tabla_dependiente, det_depende_de)
+					VALUES ('".$this->usu_login."', '$det_nombre_tabla_dependiente', '$det_depende_de')";
+			$this->conexionBDI->ejecutarSQL($sql);
+		}
+	}
+	
+	function crearDependenciaDeCampo($dec_nombre_tabla, $dec_nombre_campo_dependiente, $dec_depende_de)
+	{
+		$num_registros = $this->conexionBDI->existeRegistro("dec_nombre_campo_dependiente", "PSDG_dependencias_de_campos", "dec_usu_login='".$this->usu_login."' AND dec_nombre_tabla='".$dec_nombre_tabla."' AND dec_nombre_campo_dependiente='".$dec_nombre_campo_dependiente."' AND dec_depende_de='".$dec_depende_de."'");
+		if($num_registros == 0)
+		{
+			$sql = "INSERT INTO PSDG_dependencias_de_campos(dec_usu_login, dec_nombre_tabla, dec_nombre_campo_dependiente, dec_depende_de)
+					VALUES ('".$this->usu_login."', '$dec_nombre_tabla', '$dec_nombre_campo_dependiente', '$dec_depende_de')";
+			$this->conexionBDI->ejecutarSQL($sql);
 		}
 	}
 }
