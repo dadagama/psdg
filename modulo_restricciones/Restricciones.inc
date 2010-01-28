@@ -412,7 +412,7 @@ class Restricciones
 			$readonly = "readonly";
 			$blur = "this.blur();";
 		}
-						
+		debug($this->arreglo_restricciones,'$this->arreglo_restricciones');
 		$porcentaje_nulos = 0;
 		if($this->arreglo_restricciones['rec_porcentaje_nulos'])
 			$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
@@ -696,6 +696,52 @@ class Restricciones
 							$this->html->end("div");
 							$this->html->end("div");
 //							break;
+
+
+//                case 8://Secuencial
+                     debug($parametros_conexion,'$parametros_conexion');
+                     $valor_secuencial = "0";
+                     $delta_secuencial = "0";
+                     if($parametros_conexion['rec_valor_secuencial'])
+                        $valor_secuencial = $parametros_conexion['rec_valor_secuencial'];   
+                        
+                     if($parametros_conexion['rec_delta_secuencial'])
+                        $delta_secuencial = $parametros_conexion['rec_delta_secuencial']; 
+
+
+                     $this->html->tag("div", array("class"=>"fila", "id"=>"rec_tabla_secuencial"));
+                     $this->html->tag("div", array("class"=>"celda"));
+                     $this->html->tag("div", array("class"=>"tabla"));  
+                              $this->html->tag("div", array("class"=>"fila"));
+                                 $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
+                                    $this->html->tag("label", array("class"=>"etiqueta"));
+                                       $this->html->printText("rec_lbl_valor_secuencial");
+                                    $this->html->end("label");
+                                 $this->html->end("div");
+                                 
+                                 $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                    $this->html->tag("input", array("name"=>"rec_valor_secuencial", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$valor_secuencial, "class"=>"valor_campo color_letra_campo ancho_150"));
+                                 $this->html->end("div");
+
+                              $this->html->end("div");
+                              $this->html->tag("div", array("class"=>"fila"));
+
+                                $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
+                                    $this->html->tag("label", array("class"=>"etiqueta"));
+                                       $this->html->printText("rec_lbl_delta_secuencial");
+                                    $this->html->end("label");
+                                 $this->html->end("div");
+
+                                $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                    $this->html->tag("input", array("name"=>"rec_delta_secuencial", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$delta_secuencial, "class"=>"valor_campo color_letra_campo ancho_150"));
+                                 $this->html->end("div");
+
+                              $this->html->end("div");
+                     $this->html->end("div");
+                     $this->html->end("div");
+                     $this->html->end("div");
+//                   break;
+
 //					}
 
 					//PROBABILIDADES

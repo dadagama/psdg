@@ -1,6 +1,16 @@
 <?php 
 session_start();
 
+require_once '../herramientas/FirePHPCore/FirePHP.class.php';
+$firephp = FirePHP::getInstance(true);
+ob_start();
+
+function debug($var,$nombre="")
+{
+  global $firephp;  
+  $firephp->log($var, $nombre);
+}
+
 require_once("../modulo_restricciones/Restricciones.inc");
 $objetoRestricciones = new Restricciones($_SESSION['conexionBDI'], $_SESSION['usu_login'], $_SESSION['lang']);
 
@@ -91,6 +101,10 @@ switch($_REQUEST['funcion'])
 			case "7"://Archivo
 				$rec_parametros_tipo_fuente = '{"rec_conexion_archivo":"'.$_REQUEST['rec_conexion_archivo'].'","rec_tia_codigo:"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
+
+         case "8"://Secuencial
+            $rec_parametros_tipo_fuente = '{"rec_valor_secuencial":"'.$_REQUEST['rec_valor_secuencial'].'","rec_delta_secuencial":"'.$_REQUEST['rec_delta_secuencial'].'"}';
+            break;
 		}
 		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla_origen'],
 															$_REQUEST['rec_nombre_campo_origen'],
