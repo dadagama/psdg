@@ -90,7 +90,7 @@ class GeneradorHtml
 			if($condiciones)
 				$sql .= " WHERE $condiciones";
 			$conexion->ejecutarSQL($sql);
-//			echo $sql;
+          //debug($sql,'SQL printSelect');
 			while($datos_opcion = $conexion->obtenerFilaComoArregloAsociativo())
 			{
 				if($datos_opcion[$codigo] == $codigo_seleccionado)

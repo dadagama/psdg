@@ -287,6 +287,10 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 			$("#rec_tabla_archivo").show();
 			$("#rec_probabilidades").show();
 			break;
+      case '8'://secuencial
+         $("#rec_tabla_secuencial").show();
+         //$("#rec_probabilidades").show();/// hay esto?
+         break;
 	}
 }
 
@@ -296,7 +300,6 @@ function actualizarVisibilidadCampoFuncionProbabilidad()
 	var tipo_acceso = $("#rec_tia_codigo").val();
 	if(tipo_acceso == 3)//probabilistico
 		$("#rec_fila_funcion_probabilidad").children().show();
-		
 }
 
 function actualizarDivDetalle(formulario)
