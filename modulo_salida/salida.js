@@ -11,7 +11,7 @@ function inicializar()
 	setTimeout('efecto("sal_div_botones_secuencia","fadeIn")',2000);
 	
 	establecerPosicionSecuencia(3);
-	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
+	verificarOpcionEscogida();
 }
 
 function habilitarSiguienteEtapa(habilitar)
@@ -58,4 +58,51 @@ function desplegarModulo(modulo)
 	setTimeout('eliminar("sal_div_botones_secuencia")',2000);
 	
 	$("#div_cuerpo").append(modulo);
+}
+
+function seleccionarSalida(tis_codigo)
+{
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_salida/salida.php",
+		data:		"funcion=seleccionarSalida&tis_codigo="+tis_codigo,
+		beforeSend:	ajaxSend,
+		success:	verificarOpcion,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function verificarOpcionEscogida()
+{
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_salida/salida.php",
+		data:		"funcion=verificarOpcionEscogida",
+		beforeSend:	ajaxSend,
+		success:	verificarOpcion,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function verificarOpcion(estado)
+{
+	if(estado == "ok_nuevo")
+	{
+		habilitarSiguienteEtapa(true);
+		aviso(28);
+	}
+	else if(estado == "ok")
+		habilitarSiguienteEtapa(true);
+	else
+		habilitarSiguienteEtapa(false);
 }

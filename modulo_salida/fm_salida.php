@@ -35,7 +35,7 @@
 							$html->tag("div", array("class"=>"tabla"));	
 								$html->tag("div", array("class"=>"fila"));
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag("input", array("onclick"=>"alert('hi');", 
+										$html->tag("input", array("onclick"=>"seleccionarSalida(1);", 
 																			"type"=>"image", 
 																			"src"=>"../imagenes/btn_db_1.png", 
 																			"alt"=>"bd_out", 
@@ -44,7 +44,7 @@
 																			"onmouseout"=>"this.src='../imagenes/btn_db_1.png'"));
 									$html->end("div");
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag("input", array("onclick"=>"alert('hi');", 
+										$html->tag("input", array("onclick"=>"alert('no implementado aún');", 
 																			"type"=>"image", 
 																			"src"=>"../imagenes/btn_text_1.png", 
 																			"alt"=>"text_out", 

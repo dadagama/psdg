@@ -303,3 +303,11 @@ fieldset
 	font-family:Verdana; 
 	font-size:12px;
 }
+
+#div_log
+{
+	
+	text-align: left;
+	overflow:auto;
+	font-family: Arial,Helvetica,sans-serif;
+}
