@@ -61,7 +61,7 @@ function efecto(nombreElemento, nombreEfecto)
 			$("#"+nombreElemento).hide();
 			break;	
 		default:
-			$("#"+nombreElemento).show("slow",ajaxSuccess);
+			$("#"+nombreElemento).show("slow",ajaxSuccess);true
 			break;
 	}
 }
@@ -158,4 +158,9 @@ function popupError(mensaje)
 	mensaje = mensaje.replace("%v", lang_js[25]);
 	div_mensaje.html(mensaje);
 	setTimeout('efecto("div_ayuda","slideToggle")',0);
+}
+
+function aviso(num_mensaje)
+{
+	alert(lang_js[num_mensaje]);
 }

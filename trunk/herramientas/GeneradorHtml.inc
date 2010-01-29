@@ -55,6 +55,12 @@ class GeneradorHtml
 		echo "<br/>";
 	}
 	
+	function espacios($num_espacios)
+	{
+		for($x = 0; $x < $num_espacios; $x++)
+			echo "&nbsp;";
+	}
+	
 	function end($tipo)
 	{
 		echo "</$tipo>";

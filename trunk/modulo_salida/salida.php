@@ -13,6 +13,18 @@ switch($_REQUEST['funcion'])
 	case "siguiente":
 		require_once("../modulo_ejecucion/fm_ejecucion.php");
 		break;
+
+	case "seleccionarSalida":
+		$objetoSalida->seleccionarSalida($_REQUEST['tis_codigo']);
+		echo "ok_nuevo";
+		break;
+		
+	case "verificarOpcionEscogida":
+		if($objetoSalida->verificarOpcionEscogida())
+			echo "ok";
+		else
+			echo "error";
+		break;	
 		
 	default:
 		exit;

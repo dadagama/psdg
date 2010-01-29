@@ -58,3 +58,69 @@ function desplegarModulo(modulo)
 	
 	$("#div_cuerpo").append(modulo);
 }
+
+function iniciar()
+{
+	
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_ejecucion/ejecucion.php",
+		data:		"funcion=iniciar",
+		beforeSend:	ajaxSend,
+		success:	recibirLog,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function ejecutar()
+{
+	
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_ejecucion/ejecucion.php",
+		data:		"funcion=ejecutar",
+		beforeSend:	ajaxSend,
+		success:	recibirLog,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
+function recibirLog(log)
+{
+	var log_nuevo = "";
+	var elm = document.getElementById('div_log');
+	
+	if(log == "PSDG_EOF")
+	{
+		log_nuevo = "Process Completed!";
+		$('#div_log').append(log_nuevo);		
+		elm.scrollTop = elm.scrollHeight;
+		ajaxSuccess();
+	}
+	else if(log == "PSDG_OK")
+	{
+		log_nuevo = '<img src="../imagenes/ok.png"/><br/>';
+		//log_nuevo = log_nuevo.replace(/@br2n/g,"\n");
+		$('#div_log').append(log_nuevo);
+		elm.scrollTop = elm.scrollHeight;
+		ejecutar();
+	}
+	else
+	{
+		log_nuevo = log;
+		//log_nuevo = log_nuevo.replace(/@br2n/g,"\n");
+		$('#div_log').append(log_nuevo);
+		elm.scrollTop = elm.scrollHeight;
+		ejecutar();
+	}
+}

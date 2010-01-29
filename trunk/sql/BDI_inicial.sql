@@ -11,6 +11,16 @@ DROP TABLE IF EXISTS `PSDG_tipo_campo_biblioteca`;
 DROP TABLE IF EXISTS `PSDG_dependencias_de_tablas`;
 DROP TABLE IF EXISTS `PSDG_dependencias_de_campos`;
 DROP TABLE IF EXISTS `PSDG_usuario`;
+DROP TABLE IF EXISTS `PSDG_tipo_salida_escogida`;
+
+CREATE TABLE `BDI`.`PSDG_tipo_salida_escogida` (
+	`tis_usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
+	`tis_codigo` VARCHAR( 40 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo del tipo de salida a utilizar',
+	PRIMARY KEY ( `tis_usu_login`, `tis_codigo` )
+) ENGINE = InnoDB COMMENT = 'Almacena los tipos de salidas escogidas por los usuarios';
+
+
+
 
 CREATE TABLE `BDI`.`PSDG_usuario` (
 	`usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',

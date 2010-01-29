@@ -35,14 +35,14 @@
 						$html->tag("div", array("class"=>"tabla"));
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda centrado"));
-									$html->tag("input", array("id"=>"eje_btn_iniciar" ,"type"=>"button", "value"=>$html->getText("eje_btn_iniciar"), "onclick"=>"alert(':)')", "class"=>"color_letra_campo margin_arriba_10"));
+									$html->tag("input", array("id"=>"eje_btn_iniciar" ,"type"=>"button", "value"=>$html->getText("eje_btn_iniciar"), "onclick"=>"iniciar()", "class"=>"color_letra_campo margin_arriba_10"));
 								$html->end("div");
 							$html->end("div");
 							
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda centrado"));
-									$html->tag("textarea", array("class"=>"valor_campo color_letra_campo ancho_512 alto_120 margin_arriba_10", "wrap"=>"soft", "readonly"=>"readonly"));
-									$html->end("textarea");
+									$html->tag("div", array("id"=>"div_log", "class"=>"valor_campo color_letra_campo ancho_100p alto_120 margin_arriba_10"/*, "wrap"=>"soft", "readonly"=>"readonly"*/));
+									$html->end("div");
 								$html->end("div");
 							$html->end("div");
 						$html->end("div");
