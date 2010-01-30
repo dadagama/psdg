@@ -99,7 +99,7 @@ function recibirLog(log)
 {
 	var log_nuevo = "";
 	var elm = document.getElementById('div_log');
-	
+	//alert(log);
 	if(log == "PSDG_EOF")
 	{
 		log_nuevo = "Process Completed!";
@@ -113,7 +113,7 @@ function recibirLog(log)
 		//log_nuevo = log_nuevo.replace(/@br2n/g,"\n");
 		$('#div_log').append(log_nuevo);
 		elm.scrollTop = elm.scrollHeight;
-		ejecutar();
+		//ejecutar();
 	}
 	else
 	{
@@ -123,4 +123,5 @@ function recibirLog(log)
 		elm.scrollTop = elm.scrollHeight;
 		ejecutar();
 	}
+	//alert('finish!');
 }

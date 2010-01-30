@@ -322,6 +322,8 @@ function mostrarFormularioDetalle(formulario)
 function actualizarCampoTablasBD()
 {
 	var nombre_conexion = $('#rec_nombre_conexion').val();
+	var nombre_tabla_actual = $('#rec_lbl_nombre_tabla').html();
+	//alert(nombre_tabla_actual);
 	$('#rec_nombre_tabla').html("");
 	$.ajax({
 		async:		false,
@@ -329,7 +331,7 @@ function actualizarCampoTablasBD()
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=actualizarCampoTablasBD&nombre_conexion="+nombre_conexion,
+		data:		"funcion=actualizarCampoTablasBD&nombre_conexion="+nombre_conexion+"&nombre_tabla_actual="+nombre_tabla_actual,
 		beforeSend:	ajaxSend,
 		success:	actualizarSelectTablasBD,
 		timeout:	10000,
@@ -348,7 +350,8 @@ function actualizarCampoCamposBD()
 {
 	var nombre_conexion = $('#rec_nombre_conexion').val();
 	var nombre_tabla = $('#rec_nombre_tabla').val();
-	var nombre_campo_actual = $('#rec_lbl_nombre_campo').html();	
+	var nombre_campo_actual = $('#rec_lbl_nombre_campo').html();
+	var tipo_campo_actual = $('#rec_lbl_tipo_dato').html();
 	$('#rec_nombre_campo').html("");
 	$.ajax({
 		async:		false,
@@ -356,7 +359,7 @@ function actualizarCampoCamposBD()
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=actualizarCampoCamposBD&nombre_conexion="+nombre_conexion+"&nombre_tabla="+nombre_tabla+"&nombre_campo_actual="+nombre_campo_actual,
+		data:		"funcion=actualizarCampoCamposBD&nombre_conexion="+nombre_conexion+"&nombre_tabla="+nombre_tabla+"&nombre_campo_actual="+nombre_campo_actual+"&tipo_campo_actual="+tipo_campo_actual,
 		beforeSend:	ajaxSend,
 		success:	actualizarSelectCampoBD,
 		timeout:	10000,

@@ -52,11 +52,11 @@ switch($_REQUEST['funcion'])
 		break;
 	
 	case "actualizarCampoTablasBD":
-		$objetoRestricciones->actualizarCampoTablasBD($_REQUEST['nombre_conexion']);
+		$objetoRestricciones->actualizarCampoTablasBD($_REQUEST['nombre_conexion'],"",$_REQUEST['nombre_tabla_actual']);
 		break;
 		
 	case "actualizarCampoCamposBD":
-		$objetoRestricciones->actualizarCampoCamposBD($_REQUEST['nombre_conexion'], $_REQUEST['nombre_tabla'],$_REQUEST['nombre_campo_actual']);
+		$objetoRestricciones->actualizarCampoCamposBD($_REQUEST['nombre_conexion'], $_REQUEST['nombre_tabla'],$_REQUEST['nombre_campo_actual'],"",$_REQUEST['tipo_campo_actual']);
 		break;
 
 	case "actualizarCampoCamposBiblioteca":
