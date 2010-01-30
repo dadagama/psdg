@@ -861,7 +861,7 @@ class Restricciones
 				//print_r($arreglo_nombres_campos);
 				//echo "----";
 				//print_r($arreglo_campos_definidos);
-				$arreglo_nombres_campos = $this->intersectArreglos($arreglo_campos_definidos, $arreglo_nombres_campos);
+				$arreglo_nombres_campos = $this->intersectArreglos($arreglo_nombres_campos, $arreglo_campos_definidos);
 			}
 		}
 		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"select_seleccione", false, $campo_deshabilitado);
@@ -954,8 +954,9 @@ class Restricciones
 			$this->conexionBDI->ejecutarSQL($sql);
 			//borro dependencias de campos que dependan de este.
 			$sql = "	DELETE FROM PSDG_restricciones_campos 
-						WHERE rec_parametros_tipo_fuente like '\"rec_nombre_tabla\":\"".$rec_nombre_tabla."\",\"rec_nombre_campo\":\"".$rec_nombre_campo."\"'
+						WHERE rec_parametros_tipo_fuente like '%\"rec_nombre_tabla\":\"".$rec_nombre_tabla."\",\"rec_nombre_campo\":\"".$rec_nombre_campo."\"%'
 						AND rec_usu_login = '".$this->usu_login."'";
+			//echo $sql;
 			$this->conexionBDI->ejecutarSQL($sql);
 			//borro la restriccion
 			$sql = "	DELETE FROM PSDG_restricciones_campos 
