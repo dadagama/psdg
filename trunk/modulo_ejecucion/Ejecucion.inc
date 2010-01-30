@@ -42,7 +42,7 @@ class Ejecucion
 		$this->conexionBDI->ejecutarSQL($sql);
 		$info_tablas = $this->conexionBDI->obtenerResultadoComoArreglo();
 		$indice = 0;
-		//echo "<pre>";
+		echo "<pre> TABLAS ORDENADAS:";
 		//print_r($info_tablas);
 		foreach($info_tablas AS $posicion => $info_tabla)
 		{
@@ -53,11 +53,11 @@ class Ejecucion
 			
 			//echo "<br/>elementos despues de insercion:".$indice;
 		}
-		//return $arreglo_tablas_ordenadas;
-		//print_r($arreglo_tablas_ordenadas);
-		//echo "</pre>";
+		return $arreglo_tablas_ordenadas;
+		print_r($arreglo_tablas_ordenadas);
+		echo "</pre>";
 	}
-	
+
 	function buscarPosicionTablaEnArreglo($nombre_tabla, &$arreglo_tablas_ordenadas, $indice)
 	{
 		//echo "&nbsp;&nbsp;&nbsp; buscarPosicionTablaEnArreglo($nombre_tabla, $arreglo_tablas_ordenadas,$indice)<br/>";
@@ -106,6 +106,68 @@ class Ejecucion
 			return false;
 	}
 	
+	
+	function crearArregloCamposOrdenados($nombre_tabla)
+	{
+		$arreglo_campos_ordenados = array();
+		
+		$sql = "SELECT rec_nombre_campo 
+				FROM PSDG_restricciones_campos
+				WHERE rec_usu_login = '".$this->usu_login."'
+				AND rec_nombre_tabla = '".$nombre_tabla."'";
+		//echo $sql;
+		$this->conexionBDI->ejecutarSQL($sql);
+		$info_campos = $this->conexionBDI->obtenerResultadoComoArreglo();
+		$indice = 0;
+		//echo "<pre>";
+		//print_r($info_campos);
+		foreach($info_campos AS $posicion => $info_campo)
+		{
+			$nombre_campo = $info_campo[0];
+			//echo "<br/>iteracion: $posicion agregar campo $nombre_campo <br/>";
+			$this->buscarPosicionCampoEnArreglo($nombre_campo, $arreglo_campos_ordenados, (count($arreglo_campos_ordenados)-1));
+			$indice = count($arreglo_campos_ordenados);
+			
+			//echo "<br/>elementos despues de insercion:".$indice;
+			print_r($arreglo_campos_ordenados);
+		}
+		return $arreglo_campos_ordenadas;
+	}
+	
+	
+	function buscarPosicionCampoEnArreglo($nombre_campo, &$arreglo_campos_ordenados, $indice)
+	{
+		//echo "&nbsp;&nbsp;&nbsp; buscarPosicionTablaEnArreglo($nombre_tabla, $arreglo_tablas_ordenadas,$indice)<br/>";
+		if(empty($arreglo_campos_ordenados))
+		{
+			$arreglo_campos_ordenados[0] = $nombre_campo;
+			//echo "&nbsp;&nbsp;&nbsp; vacio, agrego al comienzo.<br/>";
+		}
+		else
+		{
+			$campo_ordenado = $arreglo_campos_ordenados[$indice];
+			//echo "&nbsp;&nbsp;&nbsp; comparar con $tabla_ordenada.<br/>";
+			if($this->tablaTieneDependencia($nombre_campo, $campo_ordenado))
+			{
+				$this->agregarElementoArregloEnPosicion($nombre_campo, $arreglo_campos_ordenados, $indice+1);
+				//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; depende, agrego en posiscion $indice+1.<br/>";
+			}
+			else
+			{
+				if($indice == 0)
+				{
+					//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no depende, pero no hay mas, agrego en cero.<br/>";
+					$this->agregarElementoArregloEnPosicion($nombre_campo, $arreglo_campos_ordenados, 0);
+				}
+				else
+				{
+					//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; no depende, pero hay mas, busco con $indice-1.<br/>";
+					$this->buscarPosicionCampoEnArreglo($nombre_campo, $arreglo_campos_ordenados, $indice-1);
+				}
+			}
+		}
+	}
+	
 	function agregarElementoArregloEnPosicion($elemento, &$arreglo_elementos, $posicion)
 	{
 		$nuevo_arreglo = array();
@@ -118,5 +180,6 @@ class Ejecucion
 			$nuevo_arreglo[$x] = $arreglo_elementos[$x-1];
 		$arreglo_elementos = $nuevo_arreglo;
 	}
+	
 }
 ?>

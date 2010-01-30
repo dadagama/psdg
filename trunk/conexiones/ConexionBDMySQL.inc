@@ -126,23 +126,64 @@ class ConexionBDMySQL extends ConexionBD
 		return $this->obtenerNumeroFilas();
 	}
 	
-	function obtenerNombresTablasBD()
+	function obtenerNombresTablasBD($nombre_tabla_actual)
 	{
-		$sql = "SHOW TABLES";
-		$this->ejecutarSQL($sql);
-		return $this->obtenerResultadoComoArreglo();
+		$arreglo_tablas = array();
+		$this->consultarDependenciasForaneas($nombre_tabla_actual, $arreglo_tablas);
+		return $arreglo_tablas;
 	}
 	
-	function obtenerNombresCamposTablaBD($nombre_tabla)
+	function consultarDependenciasForaneas($nombre_tabla_actual, &$arreglo_tablas)
+	{
+		//print_r($arreglo_tablas);
+		$nombre_bd = $this->_parametrosConexion['con_nombre_bd'];
+		$sql = "(SELECT KEY_COLUMN_USAGE.REFERENCED_TABLE_NAME
+				FROM KEY_COLUMN_USAGE
+				WHERE KEY_COLUMN_USAGE.TABLE_SCHEMA = '$nombre_bd'
+				AND KEY_COLUMN_USAGE.TABLE_NAME = '$nombre_tabla_actual'
+				AND KEY_COLUMN_USAGE.REFERENCED_TABLE_NAME IS NOT NULL
+				AND KEY_COLUMN_USAGE.REFERENCED_COLUMN_NAME IS NOT NULL)";
+		$this->establecer_bd("information_schema");
+		$this->ejecutarSQL($sql);
+		$arreglo_nombres_tablas = $this->obtenerResultadoComoArreglo();
+		if($arreglo_nombres_tablas)
+		{
+			//echo "TIENE dependencias.. meto $nombre_tabla_actual y busco<br>";
+			$arreglo_tablas[] = array($nombre_tabla_actual);
+			foreach($arreglo_nombres_tablas AS $posicion => $nombre)
+			{
+				//echo "buscar recursiva de..$nombre[0]<br>";
+				$this->consultarDependenciasForaneas($nombre[0], $arreglo_tablas);
+			}
+		}
+		else
+		{
+			//echo "NO TIENE dependencias..meto $nombre_tabla_actual<br>";
+			$arreglo_tablas[] = array($nombre_tabla_actual);
+		}
+		$this->restablecer_bd_original();
+		//print_r($arreglo_tablas);
+		//return $arreglo_tablas;
+	}
+	
+	function obtenerNombresCamposTablaBD($nombre_tabla, $tipo_campo_actual="")
 	{
 		$nombre_bd = $this->_parametrosConexion['con_nombre_bd'];
-		$sql = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_NAME = '$nombre_tabla' AND TABLE_SCHEMA = '$nombre_bd'";
+		if($tipo_campo_actual)
+		{
+			$tipo_dato = substr($tipo_campo_actual,0,strpos($tipo_campo_actual, "("));
+			$sql_tipo = "AND DATA_TYPE = '$tipo_dato'";
+		}
+		$sql = "SELECT COLUMN_NAME 
+				FROM COLUMNS 
+				WHERE TABLE_NAME = '$nombre_tabla' 
+				AND TABLE_SCHEMA = '$nombre_bd'
+				$sql_tipo";
 		$this->establecer_bd("information_schema");
 		$this->ejecutarSQL($sql);
 		$arreglo_nombres_campos = $this->obtenerResultadoComoArreglo();
-		$this->restablecer_bd_original();		
+		$this->restablecer_bd_original();
 		return $arreglo_nombres_campos;
 	}
-	
 }
 ?>

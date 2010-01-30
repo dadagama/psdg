@@ -518,7 +518,7 @@ class Restricciones
 										 */	
 											$this->html->tag("select", array("name"=>"rec_nombre_tabla", "id"=>"rec_nombre_tabla", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBD();", $readonly=>$readonly, "onFocus"=>$blur));
 												//if($parametros_conexion['rec_nombre_conexion'])
-													$this->actualizarCampoTablasBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla']);
+													$this->actualizarCampoTablasBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla'], $this->arreglo_restricciones['rec_nombre_tabla']);
 											$this->html->end("select");
 										$this->html->end("div");
 									$this->html->end("div");
@@ -533,7 +533,7 @@ class Restricciones
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
 											$this->html->tag("select", array("name"=>"rec_nombre_campo", "id"=>"rec_nombre_campo", "class"=>"valor_campo color_letra_campo ancho_150", $readonly=>$readonly, "onFocus"=>$blur));
 												//if($parametros_conexion['rec_nombre_tabla'])
-													$this->actualizarCampoCamposBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo'], $parametros_conexion['rec_nombre_campo']);
+													$this->actualizarCampoCamposBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo'], $parametros_conexion['rec_nombre_campo'], $this->arreglo_restricciones['rec_tipo_dato']);
 											$this->html->end("select");
 										$this->html->end("div");
 									$this->html->end("div");
@@ -809,7 +809,7 @@ class Restricciones
 //		}	
 	}
 	
-	function actualizarCampoTablasBD($nombre_conexion="", $opcion_seleccionada="")
+	function actualizarCampoTablasBD($nombre_conexion="", $opcion_seleccionada="", $nombre_tabla_actual="")
 	{
 		$arreglo_nombres_tablas = "";
 		if($nombre_conexion)
@@ -826,12 +826,12 @@ class Restricciones
 			//establezco la conexion con la bd de la conexion
 			$conexion_auxiliar = new ConexionBDMySQL($arreglo_parametros);
 			$conexion_auxiliar->conectar();
-			$arreglo_nombres_tablas = $conexion_auxiliar->obtenerNombresTablasBD();
+			$arreglo_nombres_tablas = $conexion_auxiliar->obtenerNombresTablasBD($nombre_tabla_actual);
 		}
 		$this->html->arregloAOpciones($arreglo_nombres_tablas,$opcion_seleccionada,"select_seleccione", false);
 	}
 	
-	function actualizarCampoCamposBD($nombre_conexion, $nombre_tabla, $campo_deshabilitado, $opcion_seleccionada="")
+	function actualizarCampoCamposBD($nombre_conexion, $nombre_tabla, $campo_deshabilitado, $opcion_seleccionada="", $tipo_campo_actual="")
 	{
 		$arreglo_nombres_campos = "";
 		if($nombre_conexion)
@@ -848,9 +848,40 @@ class Restricciones
 			//establezco la conexion con la bd de la conexion
 			$conexion_auxiliar = new ConexionBDMySQL($arreglo_parametros);
 			$conexion_auxiliar->conectar();
-			$arreglo_nombres_campos = $conexion_auxiliar->obtenerNombresCamposTablaBD($nombre_tabla);
+			$arreglo_nombres_campos = $conexion_auxiliar->obtenerNombresCamposTablaBD($nombre_tabla, $tipo_campo_actual);
+			//si es conexion a ella misma (BDO), solo mostrar campos definidos previamente
+			if($nombre_conexion == "BDO")
+			{
+				$sql = "SELECT rec_nombre_campo
+					FROM PSDG_restricciones_campos
+					WHERE rec_nombre_tabla = '$nombre_tabla'
+					AND rec_usu_login = '".$this->usu_login."'";
+				$this->conexionBDI->ejecutarSQL($sql);
+				$arreglo_campos_definidos = $this->conexionBDI->obtenerResultadoComoArreglo();
+				//print_r($arreglo_nombres_campos);
+				//echo "----";
+				//print_r($arreglo_campos_definidos);
+				$arreglo_nombres_campos = $this->intersectArreglos($arreglo_campos_definidos, $arreglo_nombres_campos);
+			}
 		}
 		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"select_seleccione", false, $campo_deshabilitado);
+	}
+	
+	function intersectArreglos($arreglo_nombres_campos, $arreglo_campos_definidos)
+	{
+		$arreglo_intersectado = array();
+		foreach($arreglo_nombres_campos AS $pos => $nombreCampo)
+		{
+			for($x = 0; $x < count($arreglo_campos_definidos); $x++)
+			{
+				//echo "------------------------------".$nombreCampo[0]." == ".$arreglo_campos_definidos[$x][0];
+				if($nombreCampo[0] == $arreglo_campos_definidos[$x][0])
+				{
+					$arreglo_intersectado[] = $nombreCampo;
+				}
+			}
+		}
+		return $arreglo_intersectado;
 	}
 	
 	function actualizarCampoCamposBiblioteca($nombre_conexion, $tipo_campo, $opcion_seleccionada="")
@@ -921,6 +952,12 @@ class Restricciones
 						AND det_depende_de = '".$rec_nombre_campo."'
 						AND det_usu_login = '".$this->usu_login."'";
 			$this->conexionBDI->ejecutarSQL($sql);
+			//borro dependencias de campos que dependan de este.
+			$sql = "	DELETE FROM PSDG_restricciones_campos 
+						WHERE rec_parametros_tipo_fuente like '\"rec_nombre_tabla\":\"".$rec_nombre_tabla."\",\"rec_nombre_campo\":\"".$rec_nombre_campo."\"'
+						AND rec_usu_login = '".$this->usu_login."'";
+			$this->conexionBDI->ejecutarSQL($sql);
+			//borro la restriccion
 			$sql = "	DELETE FROM PSDG_restricciones_campos 
 						WHERE rec_nombre_tabla = '".$rec_nombre_tabla."'
 						AND rec_nombre_campo = '".$rec_nombre_campo."'
