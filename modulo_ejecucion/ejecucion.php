@@ -15,30 +15,38 @@ switch($_REQUEST['funcion'])
 			$_SESSION['estado'] = "mensaje_tabla";
 			$_SESSION['indice_tablas'] = 0;
 			$_SESSION['estado'] = "mensaje_tabla";
+			$objetoEjecucion->mostrarMensajeOrdenarTablas();
 		break;
 		
 	case "ejecutar":
-		if($_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']])
+		if($_SESSION['indice_tablas'] < 1)//$_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']])
 		{
 			if($_SESSION['estado'] == "mensaje_tabla")
 			{
-			echo "entra";
 				$nombre_tabla = $_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']];
-				$nombres_campos = $objetoEjecucion->crearArregloCamposOrdenados($nombre_tabla);
-				print_r($nombres_campos);
-				//crear mensaje tabla
+				$_SESSION['num_registros'] = $objetoEjecucion->obtenerNumeroRegistros($nombre_tabla);
+				$campos_ordenados = $objetoEjecucion->crearArregloCamposOrdenados($nombre_tabla);
+				$_SESSION['nombres_campos_ordenados'] = $campos_ordenados;
+				//print_r($campos_ordenados);
+				$objetoEjecucion->mostrarMensajeGenerarTabla($nombre_tabla);
 				$_SESSION['estado'] = "generar";
 			}
 			else if($_SESSION['estado'] == "generar")
 			{
-				//echo "<br>camelling...<br>";
+				$objetoEjecucion->generarDatosTabla($_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']], $_SESSION['num_registros'],$_SESSION['nombres_campos_ordenados']);
+				$_SESSION['errores'] = $objetoEjecucion->obtenerErrores();
 				$_SESSION['estado'] = "fin_generar";
 			}
 			else if($_SESSION['estado'] == "fin_generar")
 			{
+				$_SESSION['estado'] = "mostrar_errores";
+				echo "PSDG_OK";
+			}
+			else if($_SESSION['estado'] == "mostrar_errores")
+			{
+				$objetoEjecucion->mostrarErrores($_SESSION['errores']);
 				$_SESSION['estado'] = "mensaje_tabla";
 				$_SESSION['indice_tablas']++;
-				echo "PSDG_OK";
 			}
 		}
 		else// estado = finish
