@@ -1,4 +1,5 @@
 <?php
+require_once('../generadores/Generador.inc');
 class GeneradorNumerico extends Generador
 {
 	
@@ -48,6 +49,11 @@ class GeneradorNumerico extends Generador
 	function _generarDesdeSecuencia()
 	{
 		
+	}
+	
+	function _generarDesdeConstante()
+	{
+	
 	}
 }
 ?>

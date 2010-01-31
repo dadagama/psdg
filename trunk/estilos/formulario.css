@@ -49,6 +49,25 @@
 	vertical-align:middle;
 }
 
+.etiqueta_cursiva
+{
+	font-size: 		15px;
+	font-family: 	Arial,Helvetica,sans-serif;
+	font-style:		italic;
+	color: 			#626262;
+	margin: 0px 10px 0px 0px;
+	vertical-align:middle;
+}
+
+.etiqueta_error
+{
+	font-size: 		12px;
+	font-family: 	Arial,Helvetica,sans-serif;
+	color: 			#ff6262;
+	margin: 0px 10px 0px 0px;
+	vertical-align:middle;
+}
+
 .valor_campo
 {
 	font-size: 14px;

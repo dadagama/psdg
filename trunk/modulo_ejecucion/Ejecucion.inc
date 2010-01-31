@@ -6,34 +6,39 @@ require_once("../herramientas/GeneradorHtml.inc");
 class Ejecucion
 {
 	var $conexionBDI;	
+	var $conexionBDO;
 	var $usu_login;
 	var $html;
+	var $_arreglo_generadores;
+	var $warnings;
 	
 	function __construct($parametrosConexion,$login)
 	{
 		$this->conexionBDI = new ConexionBDMySQL($parametrosConexion);
   		$this->conexionBDI->conectar();
   		$this->usu_login = $login;
+  		$this->inicializarConexionBDO();
   		$this->html = new GeneradorHtml($lang);
+	}
+
+	function inicializarConexionBDO()
+	{
+		$sql = "	SELECT con_parametros
+					FROM PSDG_conexion
+					WHERE con_fue_codigo = '2'
+					AND con_usu_login = '".$this->usu_login."'
+					AND con_nombre = 'BDO'
+					LIMIT 1";
+
+		$this->conexionBDI->ejecutarSQL($sql);
+		$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
+		$arreglo_parametros = json_decode($con_parametros, true);
+		$this->conexionBDO = new ConexionBDMySQL($arreglo_parametros);
+		$this->conexionBDO->conectar();
 	}
 	
 	function crearArregloTablasOrdenadas()
-	{
-		$this->html->br();
-			$this->html->tag("label", array("class"=>"etiqueta"));
-				$this->html->printText("eje_lbl_inicializando");
-			$this->html->end("label");
-		$this->html->br();
-			$this->html->espacios(4);
-			$this->html->printText("eje_lbl_ordenando_tablas");
-			$this->html->espacios(2);
-			$this->html->tag("img", array("src"=>"../imagenes/ok.png"));
-		$this->html->br();	
-			$this->html->tag("label", array("class"=>"etiqueta"));
-				$this->html->printText("eje_lbl_generar_datos");
-			$this->html->end("label");
-		$this->html->br();
-		
+	{	
 		$arreglo_tablas_ordenadas = array();
 		
 		$sql = "SELECT ret_nombre_tabla 
@@ -42,7 +47,7 @@ class Ejecucion
 		$this->conexionBDI->ejecutarSQL($sql);
 		$info_tablas = $this->conexionBDI->obtenerResultadoComoArreglo();
 		$indice = 0;
-		echo "<pre> TABLAS ORDENADAS:";
+		//echo "<pre> TABLAS ORDENADAS:";
 		//print_r($info_tablas);
 		foreach($info_tablas AS $posicion => $info_tabla)
 		{
@@ -53,9 +58,9 @@ class Ejecucion
 			
 			//echo "<br/>elementos despues de insercion:".$indice;
 		}
+		//print_r($arreglo_tablas_ordenadas);
+		//echo "</pre>";
 		return $arreglo_tablas_ordenadas;
-		print_r($arreglo_tablas_ordenadas);
-		echo "</pre>";
 	}
 
 	function buscarPosicionTablaEnArreglo($nombre_tabla, &$arreglo_tablas_ordenadas, $indice)
@@ -119,7 +124,7 @@ class Ejecucion
 		$this->conexionBDI->ejecutarSQL($sql);
 		$info_campos = $this->conexionBDI->obtenerResultadoComoArreglo();
 		$indice = 0;
-		//echo "<pre>";
+		//echo "<pre>CAMPOS ORDENADOS TABA $nombre_tabla<br>";
 		//print_r($info_campos);
 		foreach($info_campos AS $posicion => $info_campo)
 		{
@@ -129,9 +134,11 @@ class Ejecucion
 			$indice = count($arreglo_campos_ordenados);
 			
 			//echo "<br/>elementos despues de insercion:".$indice;
-			print_r($arreglo_campos_ordenados);
+			//print_r($arreglo_campos_ordenados);
 		}
-		return $arreglo_campos_ordenadas;
+		//print_r($arreglo_campos_ordenados);
+		//echo "</pre>";
+		return $arreglo_campos_ordenados;
 	}
 	
 	
@@ -146,8 +153,8 @@ class Ejecucion
 		else
 		{
 			$campo_ordenado = $arreglo_campos_ordenados[$indice];
-			//echo "&nbsp;&nbsp;&nbsp; comparar con $tabla_ordenada.<br/>";
-			if($this->tablaTieneDependencia($nombre_campo, $campo_ordenado))
+			//echo "&nbsp;&nbsp;&nbsp; comparar con $campo_ordenado.<br/>";
+			if($this->campoTieneDependencia($nombre_campo, $campo_ordenado))
 			{
 				$this->agregarElementoArregloEnPosicion($nombre_campo, $arreglo_campos_ordenados, $indice+1);
 				//echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; depende, agrego en posiscion $indice+1.<br/>";
@@ -168,6 +175,21 @@ class Ejecucion
 		}
 	}
 	
+	function campoTieneDependencia($nombre_campo, $campo_ordenado)
+	{
+		$sql = "SELECT dec_nombre_campo_dependiente  
+				FROM PSDG_dependencias_de_campos
+				WHERE dec_usu_login = '".$this->usu_login."'
+				AND dec_nombre_campo_dependiente = '".$nombre_campo."'
+				AND dec_depende_de = '".$campo_ordenado."'";
+		//echo $sql;
+		$this->conexionBDI->ejecutarSQL($sql);
+		if($this->conexionBDI->obtenerNumeroFilas())
+			return true;
+		else
+			return false;
+	}
+	
 	function agregarElementoArregloEnPosicion($elemento, &$arreglo_elementos, $posicion)
 	{
 		$nuevo_arreglo = array();
@@ -181,5 +203,166 @@ class Ejecucion
 		$arreglo_elementos = $nuevo_arreglo;
 	}
 	
+	function mostrarMensajeOrdenarTablas()
+	{
+		$this->html->br();
+			$this->html->tag("label", array("class"=>"etiqueta"));
+				$this->html->printText("eje_lbl_inicializando");
+			$this->html->end("label");
+		$this->html->br();
+			$this->html->espacios(4);
+			$this->html->printText("eje_lbl_ordenando_tablas");
+			$this->html->espacios(2);
+			$this->html->tag("img", array("src"=>"../imagenes/ok.png"));
+		$this->html->br();	
+			$this->html->tag("label", array("class"=>"etiqueta"));
+				$this->html->printText("eje_lbl_generar_datos");
+			$this->html->end("label");
+		$this->html->br();
+	}
+	
+	function mostrarMensajeGenerarTabla($nombre_tabla)
+	{
+		$this->html->tag("label");
+			$this->html->espacios(4);
+			$this->html->printText("eje_lbl_generando_tabla");
+		$this->html->end("label");
+		$this->html->espacios(2);
+		$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
+			$this->html->printStaticText($nombre_tabla);
+		$this->html->end("label");
+	}
+	
+	function obtenerNumeroRegistros($nombre_tabla)
+	{
+		$sql = "SELECT 	ret_numero_tuplas_a_generar  
+				FROM PSDG_restricciones_tablas
+				WHERE ret_usu_login = '".$this->usu_login."'
+				AND ret_nombre_tabla = '".$nombre_tabla."'
+				LIMIT 1";
+		$this->conexionBDI->ejecutarSQL($sql);
+		return $this->conexionBDI->obtenerFilaComoCadena();
+	}
+	
+	function generarDatosTabla($nombre_tabla, $num_registros, $arreglo_campos)
+	{
+		//echo "<pre>Tabla: $nombre_tabla, num_REG: $num_registros<br>";
+		//print_r($arreglo_campos);
+		$this->warnings = "";
+		$this->inicializarGeneradores($nombre_tabla, $arreglo_campos);
+		$campos = implode(",", $arreglo_campos);
+		for($x = 0; $x < $num_registros; $x++)
+		{
+			$valores = array();
+			//print_r($this->_arreglo_generadores);
+			foreach($this->_arreglo_generadores AS $pos => $generador)
+			{
+				$valores[] = "'".$generador->generar()."'";
+			}
+			$valores = implode(",", $valores);
+			$sql_tupla = "INSERT INTO $nombre_tabla($campos) VALUES ($valores)";
+			$this->conexionBDO->ejecutarSQL($sql_tupla);
+			if($error = $this->conexionBDO->obtener_error())
+				$this->warnings .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$sql_tupla." -> ".$error."<br/>";
+		}
+	}
+	
+	function obtenerErrores()
+	{
+		return $this->warnings;
+	}
+	
+	function mostrarErrores($errores)
+	{
+		$this->html->tag("label", array("class"=>"etiqueta_error"));
+			$this->html->printStaticText($errores);
+		$this->html->end("label");
+	}
+	
+	function inicializarGeneradores($nombre_tabla, $arreglo_campos)
+	{
+		//	se inicializa el arreglo de generadores
+		$this->_arreglo_generadores = array();
+		foreach($arreglo_campos AS $pos => $nombre_campo)
+		{
+			$this->_arreglo_generadores[] = $this->crearGenerador($nombre_tabla, $nombre_campo); 
+		}
+	}
+	
+	function crearGenerador($nombre_tabla, $nombre_campo)
+	{
+		$info_restriciones_campo = $this->obtenerRestriccionesCampo($nombre_tabla, $nombre_campo);
+		
+		$restricciones_campo = json_decode($info_restriciones_campo['rec_parametros_tipo_fuente'] , true);
+		$restricciones_campo['rec_fue_codigo'] = $info_restriciones_campo['rec_fue_codigo'];
+		//print_r($restricciones_campo);
+		$rec_porcentaje_nulos = $info_restriciones_campo['rec_porcentaje_nulos'];
+		$tipo_dato = $this->obtenerTipoDatoCampo($nombre_tabla, $nombre_campo);
+		$generador = "";
+		//echo "Generador ($nombre_tabla -> $nombre_campo) [$rec_porcentaje_nulos %][$tipo_dato]<br/>";
+		
+		switch($tipo_dato)
+		{
+			case "char":
+				break;
+			
+			case "varchar":
+				break;
+			
+			case "text":
+				break;
+			
+			case "int":
+				require_once('../generadores/GeneradorNumerico.inc');
+				$generador = new GeneradorNumerico();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI, $rec_porcentaje_nulos);
+				break;
+			
+			case "bigint":
+				//echo "<br>BIGINT! ";
+				//print_r($restricciones_campo);
+				require_once('../generadores/GeneradorNumerico.inc');
+				$generador = new GeneradorNumerico();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI, $rec_porcentaje_nulos);
+				break;
+			
+			case "date":
+				break;
+			
+			case "timestamp":
+				break;
+
+		}
+		return $generador;
+	}
+	
+	function obtenerRestriccionesCampo($nombre_tabla, $nombre_campo)
+	{
+		$sql = "SELECT rec_fue_codigo, rec_parametros_tipo_fuente, rec_porcentaje_nulos
+				FROM PSDG_restricciones_campos
+				WHERE rec_usu_login = '".$this->usu_login."'
+				AND rec_nombre_tabla = '".$nombre_tabla."'
+				AND rec_nombre_campo = '".$nombre_campo."'
+				LIMIT 1";
+		$this->conexionBDI->ejecutarSQL($sql);
+		return $this->conexionBDI->obtenerFilaComoArregloAsociativo();
+	}
+	
+	function obtenerTipoDatoCampo($nombre_tabla, $nombre_campo)
+	{
+		$parametros_conexion_BDO = $this->conexionBDO->obtenerParametrosConexion();
+		$nombre_BDO = $parametros_conexion_BDO['con_nombre_bd'];
+		$sql = "	SELECT DATA_TYPE
+					FROM COLUMNS
+					WHERE COLUMNS.TABLE_SCHEMA = '".$nombre_BDO."'
+					AND TABLE_NAME = '".$nombre_tabla."'
+					AND COLUMN_NAME = '".$nombre_campo."'";
+		//echo $sql;
+		$this->conexionBDO->establecer_bd("information_schema");
+		$this->conexionBDO->ejecutarSQL($sql);
+		$tipo_dato = $this->conexionBDO->obtenerFilaComoCadena();
+		$this->conexionBDO->restablecer_bd_original();
+		return $tipo_dato;
+	}
 }
 ?>
