@@ -412,7 +412,7 @@ class Restricciones
 			$readonly = "readonly";
 			$blur = "this.blur();";
 		}
-		debug($this->arreglo_restricciones,'$this->arreglo_restricciones');
+		debug($this->arreglo_restricciones,'$this->arreglo_restricciones 415');
 		$porcentaje_nulos = 0;
 		if($this->arreglo_restricciones['rec_porcentaje_nulos'])
 			$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
@@ -638,7 +638,7 @@ class Restricciones
 //
 //						case 6://Intervalo
 							$valor_desde = 0;
-							$valor_hasta = 0;
+							$valor_hasta = 0;debug($parametros_conexion,'INTERVALO 641');
 							if(isset($parametros_conexion['rec_valor_desde']) && isset($parametros_conexion['rec_valor_hasta']))
 							{
 								$valor_desde = $parametros_conexion['rec_valor_desde'];
@@ -777,49 +777,79 @@ class Restricciones
 												$this->html->end("div");
 												
 												$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150" , "onchange"=>"actualizarVisibilidadCamposDistribucion();"), "", "", true);
 												$this->html->end("div");
 											$this->html->end("div");
 								$this->html->end("div");
 								$this->html->end("div");
 								$this->html->end("div");
 
-                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_funcion_probabilidad"));
+                        $valor_lambda = "0";
+                        if($parametros_conexion['rec_lambda'])
+                          $valor_lambda = $parametros_conexion['rec_lambda']; 
+
+                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_lambda"));
                         $this->html->tag("div", array("class"=>"celda"));
                         $this->html->tag("div", array("class"=>"tabla"));
                                  $this->html->tag("div", array("class"=>"fila"));
                                     $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
                                        $this->html->tag("label", array("class"=>"etiqueta"));
-                                          $this->html->printText("rec_lbl_fup_codigo");
+                                          $this->html->printText("rec_lbl_lambda");
                                        $this->html->end("label");
                                     $this->html->end("div");
                                     
                                     $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-                                       $this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+                                       $this->html->tag("input", array("name"=>"rec_lambda", "id"=>"rec_lambda", "type"=>"text", "value"=>$valor_lambda, "class"=>"valor_campo color_letra_campo ancho_150"));
                                     $this->html->end("div");
                                  $this->html->end("div");
                         $this->html->end("div");
                         $this->html->end("div");
                         $this->html->end("div");
 
-                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_funcion_probabilidad"));
+
+                        $valor_media = "0";
+                        if($parametros_conexion['rec_media'])
+                          $valor_media = $parametros_conexion['rec_media']; 
+
+                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_media"));
                         $this->html->tag("div", array("class"=>"celda"));
                         $this->html->tag("div", array("class"=>"tabla"));
                                  $this->html->tag("div", array("class"=>"fila"));
                                     $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
                                        $this->html->tag("label", array("class"=>"etiqueta"));
-                                          $this->html->printText("rec_lbl_fup_codigo");
+                                          $this->html->printText("rec_lbl_media");
                                        $this->html->end("label");
                                     $this->html->end("div");
                                     
                                     $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-                                       $this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+                                       $this->html->tag("input", array("name"=>"rec_media", "id"=>"rec_media", "type"=>"text", "value"=>$valor_media, "class"=>"valor_campo color_letra_campo ancho_150"));
                                     $this->html->end("div");
                                  $this->html->end("div");
                         $this->html->end("div");
                         $this->html->end("div");
                         $this->html->end("div");
 
+                        $valor_desviacion = "0";
+                        if($parametros_conexion['rec_desviacion_estandar'])
+                          $valor_desviacion = $parametros_conexion['rec_desviacion_estandar']; 
+
+                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_desviacion_estandar"));
+                        $this->html->tag("div", array("class"=>"celda"));
+                        $this->html->tag("div", array("class"=>"tabla"));
+                                 $this->html->tag("div", array("class"=>"fila"));
+                                    $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
+                                       $this->html->tag("label", array("class"=>"etiqueta"));
+                                          $this->html->printText("rec_lbl_desviacion_estandar");
+                                       $this->html->end("label");
+                                    $this->html->end("div");
+                                    
+                                    $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                       $this->html->tag("input", array("name"=>"rec_desviacion_estandar", "id"=>"rec_desviacion_estandar", "type"=>"text", "value"=>$valor_desviacion, "class"=>"valor_campo color_letra_campo ancho_150"));
+                                    $this->html->end("div");
+                                 $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
 
 					$this->html->end("div");
 					$this->html->end("div");
@@ -1226,7 +1256,7 @@ class Restricciones
       $this->conexionBDO->ejecutarSQL($sql); 
       while ($arreglo_meta_datos_campo = $this->conexionBDO->obtenerFilaComoArregloAsociativo())
       {
-        debug($arreglo_meta_datos_campo,'$arreglo_meta_datos_campo');
+        //debug($arreglo_meta_datos_campo,'$arreglo_meta_datos_campo');
         if($arreglo_meta_datos_campo['Null']=='NO')
         {
           
