@@ -8,7 +8,7 @@ ob_start();
 function debug($var,$nombre="")
 {
   global $firephp;  
-  $firephp->log($var, $nombre);
+  //$firephp->log($var, $nombre);
 }
 
 require_once("../modulo_restricciones/Restricciones.inc");
@@ -111,8 +111,20 @@ switch($_REQUEST['funcion'])
 															$_REQUEST['rec_fue_codigo'],
 															$rec_parametros_tipo_fuente,
 															$_REQUEST['rec_porcentaje_nulos']);
+
+
+      /// Verificar si se puede seguir al step 2
+          debug('Verificando');
+          echo json_encode($objetoRestricciones->verificarStepCompleto());
+
+      /// Fin verificador
 		break;
 		
+
+   case "verificarStepCompleto":
+      echo json_encode($objetoRestricciones->verificarStepCompleto());
+      break;
+
 	case "anterior":
 		require_once("../modulo_conexiones/fm_conexiones.php");
 		break;

@@ -700,8 +700,8 @@ class Restricciones
 
 //                case 8://Secuencial
                      debug($parametros_conexion,'$parametros_conexion');
-                     $valor_secuencial = "0";
-                     $delta_secuencial = "0";
+                     $valor_secuencial = "1";
+                     $delta_secuencial = "1";
                      if($parametros_conexion['rec_valor_secuencial'])
                         $valor_secuencial = $parametros_conexion['rec_valor_secuencial'];   
                         
@@ -783,7 +783,44 @@ class Restricciones
 								$this->html->end("div");
 								$this->html->end("div");
 								$this->html->end("div");
-								
+
+                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_funcion_probabilidad"));
+                        $this->html->tag("div", array("class"=>"celda"));
+                        $this->html->tag("div", array("class"=>"tabla"));
+                                 $this->html->tag("div", array("class"=>"fila"));
+                                    $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
+                                       $this->html->tag("label", array("class"=>"etiqueta"));
+                                          $this->html->printText("rec_lbl_fup_codigo");
+                                       $this->html->end("label");
+                                    $this->html->end("div");
+                                    
+                                    $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                       $this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+                                    $this->html->end("div");
+                                 $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
+
+                        $this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_funcion_probabilidad"));
+                        $this->html->tag("div", array("class"=>"celda"));
+                        $this->html->tag("div", array("class"=>"tabla"));
+                                 $this->html->tag("div", array("class"=>"fila"));
+                                    $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
+                                       $this->html->tag("label", array("class"=>"etiqueta"));
+                                          $this->html->printText("rec_lbl_fup_codigo");
+                                       $this->html->end("label");
+                                    $this->html->end("div");
+                                    
+                                    $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                       $this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "", true);
+                                    $this->html->end("div");
+                                 $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
+                        $this->html->end("div");
+
+
 					$this->html->end("div");
 					$this->html->end("div");
 					$this->html->end("div");
@@ -1139,5 +1176,71 @@ class Restricciones
 			$this->conexionBDI->ejecutarSQL($sql);
 		}
 	}
+
+  function verificarStepCompleto()
+  {
+    $sql = "SELECT * FROM PSDG_restricciones_tablas, PSDG_restricciones_campos WHERE rec_nombre_tabla = ret_nombre_tabla AND ret_usu_login = '".$this->usu_login."' ORDER BY rec_nombre_tabla, rec_nombre_campo";
+    $this->conexionBDI->ejecutarSQL($sql);
+    $count = 0;$campos= $arreglotmp =array();$ultimaTabla='';
+    while ($arreglo_restricciones_tabla = $this->conexionBDI->obtenerFilaComoArregloAsociativo())
+    {
+      //debug($arreglo_restricciones_tabla,'$arreglo_restricciones_tabla');
+      if($ultimaTabla!=$arreglo_restricciones_tabla['rec_nombre_tabla'])
+      {
+        if(count($arreglotmp) > 0)
+        {
+          $campos[$ultimaTabla]=$arreglotmp;
+        }        
+        $ultimaTabla=$arreglo_restricciones_tabla['rec_nombre_tabla'];
+        $count++;
+        
+        $arreglotmp = array();
+      }
+      $arreglotmp[] = $arreglo_restricciones_tabla['rec_nombre_campo'];
+    }
+    if(count($arreglotmp) > 0)
+    {
+      $campos[$ultimaTabla]=$arreglotmp;
+    }
+
+    $sql = "SELECT * FROM PSDG_restricciones_tablas WHERE  ret_usu_login = '".$this->usu_login."'";
+    $this->conexionBDI->ejecutarSQL($sql);
+ while ($arreglo_restricciones_tabla = $this->conexionBDI->obtenerFilaComoArregloAsociativo())
+    {
+      if(!isset($campos[$arreglo_restricciones_tabla['ret_nombre_tabla']]))
+      {
+        $campos[$arreglo_restricciones_tabla['ret_nombre_tabla']]=array();
+        $count++;
+      }
+    }
+
+    if($count == 0)
+      return false;
+
+    debug($campos,'$campos !!!');
+
+    foreach($campos as $k  => $v)
+    {
+      $sql = 'DESCRIBE '.$k;
+      //debug($sql,'SQL');
+      $this->conexionBDO->ejecutarSQL($sql); 
+      while ($arreglo_meta_datos_campo = $this->conexionBDO->obtenerFilaComoArregloAsociativo())
+      {
+        debug($arreglo_meta_datos_campo,'$arreglo_meta_datos_campo');
+        if($arreglo_meta_datos_campo['Null']=='NO')
+        {
+          
+          if(!in_array($arreglo_meta_datos_campo['Field'],$v))
+          {
+             return false;
+          }
+        }
+      }
+    
+    
+    }
+
+    return true;
+  }
 }
 ?>
