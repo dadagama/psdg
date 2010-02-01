@@ -12,22 +12,34 @@ function inicializar()
 	
 	establecerPosicionSecuencia(2);
 	construirArbolBDO("ok");
-	habilitarSiguienteEtapa(true);//<=======================  OJO OJO OJO OJO OJO QUITAR
+
+   $.ajax({
+            async:      false,
+            type:       "POST",
+            dataType:   "html",
+            contentType:"application/x-www-form-urlencoded",
+            url:     "../modulo_restricciones/restricciones.php",
+            data:    "funcion=verificarStepCompleto",
+            beforeSend: ajaxSend,
+            success: verificarStepCompleto,
+            timeout: 10000,
+            error:      ajaxError(12)
+         }); 
 }
 
 function habilitarSiguienteEtapa(habilitar)
-{
+{ console.log(habilitar,'habilitarSiguienteEtapa');
 	if(habilitar)
-	{
+	{ console.log(true,'true');
 		$('#res_btn_siguiente').removeAttr("disabled");
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
 		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 	}
 	else
-	{
+	{console.log(false,'false');
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
+		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_3.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 		$('#res_btn_siguiente').attr("disabled","disabled");
 	}
@@ -246,10 +258,18 @@ function establecerRestriccionCampo()
 	return false;
 }
 
-function restriccionEstablecidaCorrecta()
+function verificarStepCompleto(dato)
+{
+   if(dato=='true')
+    habilitarSiguienteEtapa(true);
+   else
+    habilitarSiguienteEtapa(false);
+}
+function restriccionEstablecidaCorrecta(dato)
 {
 	ajaxSuccess();
-	alert(lang_js[26]);
+   verificarStepCompleto(dato);
+   alert(lang_js[26]); 
 }
 
 function actualizarFormularioFuenteDeDatos()
