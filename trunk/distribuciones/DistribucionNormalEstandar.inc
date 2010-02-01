@@ -117,7 +117,7 @@ class DistribucionNormalEstandar
 //		}
 //	}	
 	
-	function generar($u, $d)
+	function generar()
 	{
 		$numeroAleatorio = $this->_distribucionUniforme->generar();
 		$numeroAleatorio2 = $this->_distribucionUniforme->generar();
@@ -132,10 +132,10 @@ class DistribucionNormalEstandar
 		//  SQRT(-2*LN( RAND() ) )  *  SIN(2*PI()*RAND())  * MyStdDev+MyMean  //
 		//                                                                    //
 		////////////////////////////////////////////////////////////////////////
-		$exponente = (pow((($numeroAleatorio - $u)/$d),2.0)/(-2.0));
-		$denom = $d * sqrt(2.0 * pi());
-		$r = (exp($exponente))/$denom;
-		echo "$r";
+//		$exponente = (pow((($numeroAleatorio - $u)/$d),2.0)/(-2.0));
+//		$denom = $d * sqrt(2.0 * pi());
+//		$r = (exp($exponente))/$denom;
+//		echo "$r";
 		$parte1 = -2 * log($numeroAleatorio);
 		$parte2 = sin(2 * pi() *  $numeroAleatorio2);
 		$box_muller = sqrt($parte1) * $parte2 * $this->_desviacion_tipica  + $this->_media;

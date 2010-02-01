@@ -267,7 +267,7 @@ class Ejecucion
 			//echo "***";
 			$sql_tupla = "INSERT INTO $nombre_tabla($campos) VALUES ($valores)";
 			$this->conexionBDO->ejecutarSQL($sql_tupla);
-			echo "<br>--".$sql_tupla."->".$this->conexionBDO->obtener_error();
+			//echo "<br>--".$sql_tupla."->".$this->conexionBDO->obtener_error();
 			if($error = $this->conexionBDO->obtener_error())
 				$this->warnings .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$sql_tupla." -> ".$error."<br/>";
 		}
