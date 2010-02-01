@@ -2,8 +2,8 @@
 require_once "DistribucionUniformeAleatoria.inc";
 class DistribucionNormalEstandar
 {
-//	var $_fr = array();	//rango de F(a)
-//	var $_fa = array();	//rango de a
+	var $_fr = array();	//rango de F(a)
+	var $_fa = array();	//rango de a
 	var $_distribucionUniforme;
 	var $_media;
 	var $_desviacion_tipica;
@@ -14,7 +14,7 @@ class DistribucionNormalEstandar
 		$this->_media = $media;
 		$this->_desviacion_tipica = $desviacion_tipica;
 	}
-	
+
 //	function _ubicarEnRango($numero)
 //	{
 //		if($numero >= 0.999999999 && $numero < 1)
@@ -115,9 +115,9 @@ class DistribucionNormalEstandar
 //			$this->_fa[0] = -7;
 //			$this->_fa[1] = -6;
 //		}
-//	}
-//	
-	function generar()
+//	}	
+	
+	function generar($u, $d)
 	{
 		$numeroAleatorio = $this->_distribucionUniforme->generar();
 		$numeroAleatorio2 = $this->_distribucionUniforme->generar();
@@ -132,12 +132,17 @@ class DistribucionNormalEstandar
 		//  SQRT(-2*LN( RAND() ) )  *  SIN(2*PI()*RAND())  * MyStdDev+MyMean  //
 		//                                                                    //
 		////////////////////////////////////////////////////////////////////////
-		
+		$exponente = (pow((($numeroAleatorio - $u)/$d),2.0)/(-2.0));
+		$denom = $d * sqrt(2.0 * pi());
+		$r = (exp($exponente))/$denom;
+		echo "$r";
 		$parte1 = -2 * log($numeroAleatorio);
 		$parte2 = sin(2 * pi() *  $numeroAleatorio2);
 		$box_muller = sqrt($parte1) * $parte2 * $this->_desviacion_tipica  + $this->_media;
 
 		return $box_muller;
+
 	}
 }
+//$as = new DistribucionNormalEstandar();
 ?>

@@ -19,7 +19,7 @@ switch($_REQUEST['funcion'])
 		break;
 		
 	case "ejecutar":
-		if($_SESSION['indice_tablas'] < 1)//$_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']])
+		if(/*$_SESSION['indice_tablas'] < 2)*/$_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']])
 		{
 			if($_SESSION['estado'] == "mensaje_tabla")
 			{
