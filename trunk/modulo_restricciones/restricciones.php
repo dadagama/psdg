@@ -99,7 +99,7 @@ switch($_REQUEST['funcion'])
 				break;
 				
 			case "7"://Archivo
-				$rec_parametros_tipo_fuente = '{"rec_conexion_archivo":"'.$_REQUEST['rec_conexion_archivo'].'","rec_tia_codigo:"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
+				$rec_parametros_tipo_fuente = '{"rec_conexion_archivo":"'.$_REQUEST['rec_conexion_archivo'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 
          case "8"://Secuencial

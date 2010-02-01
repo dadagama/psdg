@@ -689,7 +689,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '7'", $parametros_conexion['con_nombre'], array("name"=>"rec_conexion_archivo", "id"=>"rec_conexion_archivo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
+												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '7'", $parametros_conexion['rec_conexion_archivo'], array("name"=>"rec_conexion_archivo", "id"=>"rec_conexion_archivo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
 											$this->html->end("div");
 										$this->html->end("div");
 							$this->html->end("div");
