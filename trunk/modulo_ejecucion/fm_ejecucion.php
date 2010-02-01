@@ -41,7 +41,7 @@
 							
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda centrado"));
-									$html->tag("div", array("id"=>"div_log", "class"=>"valor_campo color_letra_campo ancho_100p alto_120 margin_arriba_10"/*, "wrap"=>"soft", "readonly"=>"readonly"*/));
+									$html->tag("div", array("id"=>"div_log", "class"=>"valor_campo color_letra_campo ancho_100p alto_200 margin_arriba_10"/*, "wrap"=>"soft", "readonly"=>"readonly"*/));
 									$html->end("div");
 								$html->end("div");
 							$html->end("div");

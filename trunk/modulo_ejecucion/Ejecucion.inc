@@ -250,18 +250,24 @@ class Ejecucion
 		//print_r($arreglo_campos);
 		$this->warnings = "";
 		$this->inicializarGeneradores($nombre_tabla, $arreglo_campos);
+		
 		$campos = implode(",", $arreglo_campos);
+		//echo "++++";
+//		print_r($this->_arreglo_generadores);
 		for($x = 0; $x < $num_registros; $x++)
 		{
 			$valores = array();
 			//print_r($this->_arreglo_generadores);
 			foreach($this->_arreglo_generadores AS $pos => $generador)
 			{
-				$valores[] = "'".$generador->generar()."'";
+				$valores[] = "'".$generador->generar($arreglo_valores_previos)."'";
 			}
+			//echo "<br>---".$valores[0];
 			$valores = implode(",", $valores);
+			//echo "***";
 			$sql_tupla = "INSERT INTO $nombre_tabla($campos) VALUES ($valores)";
 			$this->conexionBDO->ejecutarSQL($sql_tupla);
+			echo "<br>--".$sql_tupla."->".$this->conexionBDO->obtener_error();
 			if($error = $this->conexionBDO->obtener_error())
 				$this->warnings .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$sql_tupla." -> ".$error."<br/>";
 		}
@@ -285,6 +291,7 @@ class Ejecucion
 		$this->_arreglo_generadores = array();
 		foreach($arreglo_campos AS $pos => $nombre_campo)
 		{
+			//echo "<br>crearGenerador($nombre_tabla, $nombre_campo);";
 			$this->_arreglo_generadores[] = $this->crearGenerador($nombre_tabla, $nombre_campo); 
 		}
 	}
@@ -292,21 +299,26 @@ class Ejecucion
 	function crearGenerador($nombre_tabla, $nombre_campo)
 	{
 		$info_restriciones_campo = $this->obtenerRestriccionesCampo($nombre_tabla, $nombre_campo);
-		
 		$restricciones_campo = json_decode($info_restriciones_campo['rec_parametros_tipo_fuente'] , true);
 		$restricciones_campo['rec_fue_codigo'] = $info_restriciones_campo['rec_fue_codigo'];
-		//print_r($restricciones_campo);
-		$rec_porcentaje_nulos = $info_restriciones_campo['rec_porcentaje_nulos'];
-		$tipo_dato = $this->obtenerTipoDatoCampo($nombre_tabla, $nombre_campo);
-		$generador = "";
-		//echo "Generador ($nombre_tabla -> $nombre_campo) [$rec_porcentaje_nulos %][$tipo_dato]<br/>";
+		$restricciones_campo['rec_usu_login'] = $this->usu_login;
+		$restricciones_campo['rec_porcentaje_nulos'] = $info_restriciones_campo['rec_porcentaje_nulos'];
 		
+		$tipo_dato = $this->obtenerTipoDatoCampo($nombre_tabla, $nombre_campo);
+		
+		//echo "<br>restricciones campo $nombre_tabla --> $nombre_campo [$tipo_dato]:<br>";
+		//print_r($restricciones_campo);
+				
+		$generador = "";
 		switch($tipo_dato)
 		{
 			case "char":
 				break;
 			
 			case "varchar":
+				require_once('../generadores/GeneradorNumerico.inc');
+				$generador = new GeneradorNumerico();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "text":
@@ -315,15 +327,16 @@ class Ejecucion
 			case "int":
 				require_once('../generadores/GeneradorNumerico.inc');
 				$generador = new GeneradorNumerico();
-				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI, $rec_porcentaje_nulos);
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "bigint":
-				//echo "<br>BIGINT! ";
+				//echo "<pre>";
+				//echo "<br>BIGINT! $nombre_tabla, $nombre_campo";
 				//print_r($restricciones_campo);
 				require_once('../generadores/GeneradorNumerico.inc');
 				$generador = new GeneradorNumerico();
-				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI, $rec_porcentaje_nulos);
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "date":
@@ -345,6 +358,7 @@ class Ejecucion
 				AND rec_nombre_campo = '".$nombre_campo."'
 				LIMIT 1";
 		$this->conexionBDI->ejecutarSQL($sql);
+		//echo "<br>SQL!!!:$sql";
 		return $this->conexionBDI->obtenerFilaComoArregloAsociativo();
 	}
 	
