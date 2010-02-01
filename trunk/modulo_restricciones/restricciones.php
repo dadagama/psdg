@@ -106,6 +106,20 @@ switch($_REQUEST['funcion'])
             $rec_parametros_tipo_fuente = '{"rec_valor_secuencial":"'.$_REQUEST['rec_valor_secuencial'].'","rec_delta_secuencial":"'.$_REQUEST['rec_delta_secuencial'].'"}';
             break;
 		}
+
+      if(isset($_REQUEST['rec_lambda']))
+      {
+         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_lambda":"'.$_REQUEST['rec_lambda'].'"}';
+      }
+      if(isset($_REQUEST['rec_media']))
+      {
+         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_media":"'.$_REQUEST['rec_media'].'"}';
+      }
+      if(isset($_REQUEST['rec_desviacion_estandar']))
+      {
+         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_desviacion_estandar":"'.$_REQUEST['rec_desviacion_estandar'].'"}';
+      }
+
 		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla_origen'],
 															$_REQUEST['rec_nombre_campo_origen'],
 															$_REQUEST['rec_fue_codigo'],
