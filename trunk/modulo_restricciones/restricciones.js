@@ -12,7 +12,12 @@ function inicializar()
 	
 	establecerPosicionSecuencia(2);
 	construirArbolBDO("ok");
+   verificarStep();
 
+}
+
+function verificarStep()
+{
    $.ajax({
             async:      false,
             type:       "POST",
@@ -117,6 +122,8 @@ function establecerRestriccionTabla()
 		ajaxSuccess();
 		return false;
 	}
+
+  verificarStep();
 }
 
 function construirArbolBDO(establecida)

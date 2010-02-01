@@ -8,7 +8,7 @@ ob_start();
 function debug($var,$nombre="")
 {
   global $firephp;  
-  //$firephp->log($var, $nombre);
+  $firephp->log($var, $nombre);
 }
 
 require_once("../modulo_restricciones/Restricciones.inc");
