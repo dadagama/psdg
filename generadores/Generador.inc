@@ -80,10 +80,12 @@ abstract class Generador
 	 * Se encarga de inicializar las variables de la clase e inicializa la 
 	 * conexión con la fuente externa si lo requiere.
 	 */
-	function _inicializarVariables($arregloParametros, &$conexion_BDI)
+	function _inicializarVariables($arreglo_parametros, &$conexion_BDI)
 	{
-		$this->_arreglo_parametros = $arregloParametros;
+		$this->_arreglo_parametros = $arreglo_parametros;
 		$this->_conexion_BDI = $conexion_BDI;
+		//para inicializar acceso por SECUENCIA
+		$this->_arreglo_parametros['contador'] = 0;
 		
 		require_once ("../distribuciones/DistribucionUniformeAleatoria.inc");
 		$this->_generador_probabilidad_nulo = new DistribucionUniformeAleatoria(16807, 0, 2147483641, rand(1,123456789));
@@ -236,7 +238,7 @@ abstract class Generador
 		{
 			require_once ("../distribuciones/DistribucionNormalEstandar.inc");
 			$media = $this->_arreglo_parametros['rec_media'];
-			$desviacion = $this->_arreglo_parametros['rec_desviacion'];
+			$desviacion = $this->_arreglo_parametros['rec_desviacion_estandar'];
 			$this->_generador_numero_aleatorio = new DistribucionNormalEstandar($media, $desviacion);
 		}
 		else if($this->_arreglo_parametros['rec_fup_codigo'] == 3)//Exponencial
@@ -274,7 +276,7 @@ abstract class Generador
 	 * @see		inicializarParametros($arregloParametros)
 	 * @return	string	Dato sintético generado.
 	 */
-	function generar($arreglo_valores_previos)
+	function generar($arreglo_valores_previos="")
 	{
 		if($this->_debeGenerarValorNulo)
 			return "null";

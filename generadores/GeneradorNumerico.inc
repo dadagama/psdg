@@ -10,6 +10,7 @@ class GeneradorNumerico extends Generador
 	 */
 	function _inicializarVariables($arreglo_parametros, &$conexion_BDI)
 	{
+		parent::_inicializarVariables($arreglo_parametros, $conexion_BDI);
 		//echo "<br>_inicializarVariables()";
 		//print_r($arreglo_parametros);
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
@@ -29,7 +30,6 @@ class GeneradorNumerico extends Generador
 				$this->_arreglo_parametros['contador'] = $this->_arreglo_parametros['rec_valor_desde'];
 				break;
 		}
-		parent::_inicializarVariables($arregloParametros, $conexion_BDI);
 	}
 
 	
@@ -39,12 +39,12 @@ class GeneradorNumerico extends Generador
 	 * @see		inicializarParametros($arregloParametros)
 	 * @return	string	Dato sintético generado.
 	 */
-	function generar()
+	function generar($arreglo_valores_previos="")
 	{	
 		if($this->_debeGenerarValorNulo)
 			return "null";
-			
-		switch($this->_arregloParametros['rec_fue_codigo'])
+		//echo "<br>fuente: ".$this->_arreglo_parametros['rec_fue_codigo'];
+		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{
 			case "6"://intervalo
 				return $this->_generarDesdeIntervalo();
@@ -96,7 +96,7 @@ class GeneradorNumerico extends Generador
 			case "3"://Probabilistico
 				if($this->_arreglo_parametros['rec_fup_codigo'] == 1)//Uniforme
 				{
-					$cantidad_valores_posibles =  $this->_arreglo_parametros['rec_valor_hasta'] - $this->_arreglo_parametros['rec_valor_desde'];
+					$cantidad_valores_posibles =  $this->_arreglo_parametros['rec_valor_hasta'] - $this->_arreglo_parametros['rec_valor_desde'] + 1;
 					return (floor($this->_generador_numero_aleatorio->generar() * $cantidad_valores_posibles) + $this->_arreglo_parametros['rec_valor_desde']);
 				}
 				else if($this->_arreglo_parametros['rec_fup_codigo'] == 2)//Normal estandar
