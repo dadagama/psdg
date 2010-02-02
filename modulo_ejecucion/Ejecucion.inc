@@ -257,10 +257,13 @@ class Ejecucion
 		for($x = 0; $x < $num_registros; $x++)
 		{
 			$valores = array();
+			$arreglo_memoria = array(); //$this->crearArregloMemoria($arreglo_campos);
 			//print_r($this->_arreglo_generadores);
 			foreach($this->_arreglo_generadores AS $pos => $generador)
 			{
-				$valores[] = "'".$generador->generar($arreglo_valores_previos)."'";
+				$valor = $generador->generar($arreglo_memoria);
+				$arreglo_memoria[$arreglo_campos[$pos]] = $valor;
+				$valores[] = "'".$valor."'";
 			}
 			//echo "<br>---".$valores[0];
 			$valores = implode(",", $valores);
@@ -272,6 +275,14 @@ class Ejecucion
 				$this->warnings .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$sql_tupla." -> ".$error."<br/>";
 		}
 	}
+	
+	/*function $this->crearArregloMemoria($arreglo_campos)
+	{
+		$arreglo_asociativo
+		foreach($arreglo_campos AS $pos => $nombre_campo)
+			$arreglo_asociativo[$nombre_campo] = "";
+		return $arreglo_asociativo;
+	}*/
 	
 	function obtenerErrores()
 	{

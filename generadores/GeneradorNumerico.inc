@@ -39,8 +39,8 @@ class GeneradorNumerico extends Generador
 	 * @see		inicializarParametros($arregloParametros)
 	 * @return	string	Dato sintético generado.
 	 */
-	function generar($arreglo_valores_previos="")
-	{	
+	function generar(&$arreglo_memoria="")
+	{
 		if($this->_debeGenerarValorNulo)
 			return "null";
 		//echo "<br>fuente: ".$this->_arreglo_parametros['rec_fue_codigo'];
@@ -51,7 +51,7 @@ class GeneradorNumerico extends Generador
 			break;
 						
 			default:
-				return parent::generar();
+				return parent::generar($arreglo_memoria);
 			break;
 		}
 	}

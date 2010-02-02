@@ -63,9 +63,22 @@ switch($_REQUEST['funcion'])
 		$objetoRestricciones->actualizarCampoCamposBiblioteca($_REQUEST['nombre_conexion'], $_REQUEST['tipo_campo']);
 		break;
 		
+	case "actualizarCampoIndependienteBiblioteca":
+		$objetoRestricciones->actualizarCampoIndependienteBiblioteca($_REQUEST['nombre_tabla']);
+		break;
+		
 	case "establecerRestriccionCampo":
 		if($_REQUEST['rec_tia_codigo'] == 3)//si el acceso es a traves de funcion de probabilidad
+		{
 			$rec_fup_codigo = ',"rec_fup_codigo":"'.$_REQUEST['rec_fup_codigo'].'"';
+			
+			if(isset($_REQUEST['rec_lambda']))
+				$rec_fup_codigo .= ',"rec_lambda":"'.$_REQUEST['rec_lambda'].'"';
+			if(isset($_REQUEST['rec_media']))
+				$rec_fup_codigo .= ',"rec_media":"'.$_REQUEST['rec_media'].'"';
+			if(isset($_REQUEST['rec_desviacion_estandar']))
+				$rec_fup_codigo .= ',"rec_desviacion_estandar":"'.$_REQUEST['rec_desviacion_estandar'].'"';
+		}
 		$objetoRestricciones->eliminarTablaListaDeValores($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_campo_origen']);//si existe
 		switch($_REQUEST['rec_fue_codigo'])
 		{
@@ -82,7 +95,12 @@ switch($_REQUEST['funcion'])
 				break;
 				
 			case "3"://Biblioteca
-				$rec_parametros_tipo_fuente = '{"rec_conexion_biblioteca":"'.$_REQUEST['rec_conexion_biblioteca'].'","rec_tipo_campo_biblioteca":"'.$_REQUEST['rec_tipo_campo_biblioteca'].'","rec_nombre_campo_biblioteca":"'.$_REQUEST['rec_nombre_campo_biblioteca'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
+				if($_REQUEST['rec_tipo_campo_biblioteca'] == 2)//dependiente
+				{
+					$rec_nombre_campo_independiente = '"rec_nombre_campo_independiente":"'.$_REQUEST['rec_nombre_campo_independiente'].'",';
+					$objetoRestricciones->crearDependenciaDeCampo($_REQUEST['rec_nombre_tabla_origen'], $_REQUEST['rec_nombre_campo_origen'], $_REQUEST['rec_nombre_campo_independiente']);//crear la dependendia para las prioridades.
+				}
+				$rec_parametros_tipo_fuente = '{"rec_conexion_biblioteca":"'.$_REQUEST['rec_conexion_biblioteca'].'","rec_tipo_campo_biblioteca":"'.$_REQUEST['rec_tipo_campo_biblioteca'].'",'.$rec_nombre_campo_independiente.'"rec_nombre_campo_biblioteca":"'.$_REQUEST['rec_nombre_campo_biblioteca'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 				
 			case "4"://Lista de valores
@@ -106,20 +124,6 @@ switch($_REQUEST['funcion'])
             $rec_parametros_tipo_fuente = '{"rec_valor_secuencial":"'.$_REQUEST['rec_valor_secuencial'].'","rec_delta_secuencial":"'.$_REQUEST['rec_delta_secuencial'].'"}';
             break;
 		}
-
-      if(isset($_REQUEST['rec_lambda']))
-      {
-         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_lambda":"'.$_REQUEST['rec_lambda'].'"}';
-      }
-      if(isset($_REQUEST['rec_media']))
-      {
-         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_media":"'.$_REQUEST['rec_media'].'"}';
-      }
-      if(isset($_REQUEST['rec_desviacion_estandar']))
-      {
-         $rec_parametros_tipo_fuente = substr($rec_parametros_tipo_fuente,0,strlen($rec_parametros_tipo_fuente)-1).',"rec_desviacion_estandar":"'.$_REQUEST['rec_desviacion_estandar'].'"}';
-      }
-
 		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla_origen'],
 															$_REQUEST['rec_nombre_campo_origen'],
 															$_REQUEST['rec_fue_codigo'],

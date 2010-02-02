@@ -554,7 +554,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '3'", $parametros_conexion['rec_conexion_biblioteca'], array("name"=>"rec_conexion_biblioteca", "id"=>"rec_conexion_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBiblioteca();"), "", "select_seleccione", false);
+												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '3'", $parametros_conexion['rec_conexion_biblioteca'], array("name"=>"rec_conexion_biblioteca", "id"=>"rec_conexion_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarOpcionTipoCampo(); actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca();"), "", "select_seleccione", false);
 											$this->html->end("div");
 										$this->html->end("div");
 										//{"rec_conexion_biblioteca":"bib1","rec_tipo_campo_biblioteca":"1","rec_nombre_campo_biblioteca":"nivel","rec_tia_codigo":"1"}
@@ -566,7 +566,22 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "tcb_codigo", "tcb_nombre", "PSDG_tipo_campo_biblioteca", "", $parametros_conexion['rec_tipo_campo_biblioteca'], array("name"=>"rec_tipo_campo_biblioteca", "id"=>"rec_tipo_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBiblioteca();"), "", "", true);
+												$this->html->printSelect($this->conexionBDI, "tcb_codigo", "tcb_nombre", "PSDG_tipo_campo_biblioteca", "", $parametros_conexion['rec_tipo_campo_biblioteca'], array("name"=>"rec_tipo_campo_biblioteca", "id"=>"rec_tipo_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca(); actualizarVisibilidadTipoAcceso();"), "", "select_seleccione", true);
+											$this->html->end("div");
+										$this->html->end("div");
+										
+										$this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_campo_independiente"));
+											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
+												$this->html->tag("label", array("class"=>"etiqueta"));
+													$this->html->printText("rec_lbl_nombre_campo_independiente");
+												$this->html->end("label");
+											$this->html->end("div");
+											
+											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+												$this->html->tag("select", array("name"=>"rec_nombre_campo_independiente", "id"=>"rec_nombre_campo_independiente", "class"=>"valor_campo color_letra_campo ancho_150"));
+												//$nombre_tabla, $opcion_seleccionada=""
+													$this->actualizarCampoIndependienteBiblioteca($this->arreglo_restricciones['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo_independiente']);
+												$this->html->end("select");
 											$this->html->end("div");
 										$this->html->end("div");
 										
@@ -829,7 +844,7 @@ class Restricciones
                         $this->html->end("div");
                         $this->html->end("div");
 
-                        $valor_desviacion = "0";
+                        $valor_desviacion = "1";
                         if($parametros_conexion['rec_desviacion_estandar'])
                           $valor_desviacion = $parametros_conexion['rec_desviacion_estandar']; 
 
@@ -972,7 +987,25 @@ class Restricciones
 			else//secundarios o dependientes
 				unset($arreglo_nombres_campos[0]);
 		}
-		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"", false, $campo_deshabilitado);
+		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"select_seleccione", false, $campo_deshabilitado);
+	}
+	
+	function actualizarCampoIndependienteBiblioteca($nombre_tabla, $opcion_seleccionada="")
+	{
+		$arreglo_nombres_campos = "";
+		if($nombre_tabla)
+		{
+			$sql = "SELECT rec_nombre_campo
+					FROM PSDG_restricciones_campos
+					WHERE rec_nombre_tabla = '$nombre_tabla'
+					AND rec_usu_login = '".$this->usu_login."'
+					AND rec_fue_codigo = '3'
+					AND rec_parametros_tipo_fuente LIKE '%\"rec_tipo_campo_biblioteca\":\"1\"%'";
+			$this->conexionBDI->ejecutarSQL($sql);
+			//echo $sql;
+			$arreglo_nombres_campos = $this->conexionBDI->obtenerResultadoComoArreglo();
+		}
+		$this->html->arregloAOpciones($arreglo_nombres_campos, $opcion_seleccionada ,"select_seleccione", false, "");
 	}
 	
 	function obtenerTiposLlave($rec_nombre_tabla, $rec_nombre_campo)

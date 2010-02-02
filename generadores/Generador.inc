@@ -89,7 +89,7 @@ abstract class Generador
 		
 		require_once ("../distribuciones/DistribucionUniformeAleatoria.inc");
 		$this->_generador_probabilidad_nulo = new DistribucionUniformeAleatoria(16807, 0, 2147483641, rand(1,123456789));
-		
+		//echo "<br>pruebaxxx".$this->_arreglo_parametros['rec_fue_codigo'];
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{
 			case "1"://none
@@ -133,25 +133,29 @@ abstract class Generador
 					rec_porcentaje_nulos
 					rec_conexion_biblioteca
 					rec_tipo_campo_biblioteca
+					rec_nombre_campo_independiente
 					rec_nombre_campo_biblioteca
 					rec_tia_codigo
 					---
-					con_nombre_biblioteca_tabla				
+					con_nombre_biblioteca_tabla	
+					con_nombre_campo_tabla_independiente			
 				*/
 				$sql = "SELECT con_parametros 
 						FROM PSDG_conexion 
 						WHERE con_nombre = '".$this->_arreglo_parametros['rec_conexion_biblioteca']."'
 						AND con_usu_login = '".$this->_arreglo_parametros['rec_usu_login']."'
-						LIMIT 1"; 
+						LIMIT 1";
 				//echo "<br>SQL BIBLLIOTECA: $sql";
 				$this->_conexion_BDI->ejecutarSQL($sql);
 				$con_parametros = $this->_conexion_BDI->obtenerFilaComoCadena();
 				$parametros_conexion_biblioteca = json_decode($con_parametros, true);
 				$this->_arreglo_parametros['con_nombre_biblioteca_tabla'] = $parametros_conexion_biblioteca['con_nombre_biblioteca_tabla'];
+				$campos_tabla_biblioteca = $this->_conexion_BDI->obtenerNombresCamposTablaBD($this->_arreglo_parametros['con_nombre_biblioteca_tabla']);
+				$this->_arreglo_parametros['con_nombre_campo_tabla_independiente'] = $campos_tabla_biblioteca[0][0];
 				//se conecta a la BDI, porque alli mismo estan los valores
 				$this->_conexion_fuente_externa = $this->_conexion_BDI;
 				//se establece el rango una sola vez
-				$this->_establecerRangoValoresFuenteExterna($this->_arreglo_parametros['con_nombre_biblioteca_tabla'], 'valor');
+				$this->_establecerRangoValoresFuenteExterna($this->_arreglo_parametros['con_nombre_biblioteca_tabla'], $this->_arreglo_parametros['rec_nombre_campo_biblioteca']);
 				break;
 				
 			case "7"://archivo
@@ -228,7 +232,6 @@ abstract class Generador
 				//$this->_es_fuente_de_rango_dinamico = true;
 			break;
 		}
-		
 		if($this->_arreglo_parametros['rec_fup_codigo'] == 1)//Uniforme
 		{
 			require_once ("../distribuciones/DistribucionUniformeAleatoria.inc");
@@ -276,7 +279,7 @@ abstract class Generador
 	 * @see		inicializarParametros($arregloParametros)
 	 * @return	string	Dato sintético generado.
 	 */
-	function generar($arreglo_valores_previos="")
+	function generar(&$arreglo_memoria="")
 	{
 		if($this->_debeGenerarValorNulo)
 			return "null";
@@ -292,7 +295,7 @@ abstract class Generador
 			break;
 			
 			case "3"://biblioteca
-				return $this->_generarDesdeBiblioteca();
+				return $this->_generarDesdeBiblioteca($arreglo_memoria);
 			break;
 			
 			case "4"://lista de valores
@@ -332,7 +335,7 @@ abstract class Generador
 	 * @return	string	Dato sintético generado. Su valor es uno de los 
 	 * 					registros contenidos en la tabla.
 	 */
-	function _generarDesdeTabla($nombre_tabla, $nombre_campo)
+	function _generarDesdeTabla($nombre_tabla, $nombre_campo, $where="")
 	{
 		//si es fuente BD, el rango de valores es dinamico en cada iteracion
 		//se debe recalcular
@@ -340,51 +343,61 @@ abstract class Generador
 			$this->_establecerRangoValoresFuenteExterna($nombre_tabla, $nombre_campo);
 		//echo "<br>_generarDesdeTabla: $nombre_tabla -> $nombre_campo : ";
 		//print_r($this->_arreglo_parametros);
-		switch($this->_arreglo_parametros['rec_tia_codigo'])
+		if($where)//es campo dependiente de biblioteca
 		{
-			case "1"://Secuencial
-				$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
-				//echo "<br>SECUENCIAL! ".$sql;
-				$this->_conexion_fuente_externa->ejecutarSQL($sql);
-				//echo "<br>SECUENCIAL! ".$this->_arreglo_parametros['numero_valores_posibles']." --".$this->_arreglo_parametros['contador'];
-				//actualizo posicion contador
-				if($this->_arreglo_parametros['contador'] == $this->_arreglo_parametros['numero_valores_posibles'] - 1)
-					$this->_arreglo_parametros['contador'] = 0;
-				else
-					$this->_arreglo_parametros['contador']++;
+			$sql = "SELECT $nombre_campo FROM $nombre_tabla WHERE $where LIMIT 1";
+			//echo "<br>$sql";
+			$this->_conexion_fuente_externa->ejecutarSQL($sql);
+			return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
+		}
+		else
+		{
+			switch($this->_arreglo_parametros['rec_tia_codigo'])
+			{
+				case "1"://Secuencial
+					$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
+					//echo "<br>SECUENCIAL! ".$sql;
+					$this->_conexion_fuente_externa->ejecutarSQL($sql);
+					//echo "<br>SECUENCIAL! ".$this->_arreglo_parametros['numero_valores_posibles']." --".$this->_arreglo_parametros['contador'];
+					//actualizo posicion contador
+					if($this->_arreglo_parametros['contador'] == $this->_arreglo_parametros['numero_valores_posibles'] - 1)
+						$this->_arreglo_parametros['contador'] = 0;
+					else
+						$this->_arreglo_parametros['contador']++;
+					
+					return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
+					break;
 				
-				return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
-				break;
-			
-			case "2"://Aleatorio
-				$this->_arreglo_parametros['contador'] = rand(0,$this->_arreglo_parametros['numero_valores_posibles'] - 1);
-				$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
-				//echo "<br>".$sql;
-				$this->_conexion_fuente_externa->ejecutarSQL($sql);
-				return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
-				break;
-			
-			case "3"://Probabilistico
-				if($this->_arreglo_parametros['rec_fup_codigo'] == 1)//Uniforme
-				{
-					$this->_arreglo_parametros['contador'] = floor($this->_generador_numero_aleatorio->generar() * $this->_arreglo_parametros['numero_valores_posibles']);
-				}
-				else if($this->_arreglo_parametros['rec_fup_codigo'] == 2)//Normal estandar
-				{
-					do
-						$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
-					while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
-				}
-				else if($this->_arreglo_parametros['rec_fup_codigo'] == 3)//Exponencial
-				{
-					do
-						$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
-					while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
-				}
-				$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
-				$this->_conexion_fuente_externa->ejecutarSQL($sql);
-				return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
-				break;
+				case "2"://Aleatorio
+					$this->_arreglo_parametros['contador'] = rand(0,$this->_arreglo_parametros['numero_valores_posibles'] - 1);
+					$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
+					//echo "<br>".$sql;
+					$this->_conexion_fuente_externa->ejecutarSQL($sql);
+					return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
+					break;
+				
+				case "3"://Probabilistico
+					if($this->_arreglo_parametros['rec_fup_codigo'] == 1)//Uniforme
+					{
+						$this->_arreglo_parametros['contador'] = floor($this->_generador_numero_aleatorio->generar() * $this->_arreglo_parametros['numero_valores_posibles']);
+					}
+					else if($this->_arreglo_parametros['rec_fup_codigo'] == 2)//Normal estandar
+					{
+						do
+							$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
+						while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
+					}
+					else if($this->_arreglo_parametros['rec_fup_codigo'] == 3)//Exponencial
+					{
+						do
+							$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
+						while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
+					}
+					$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
+					$this->_conexion_fuente_externa->ejecutarSQL($sql);
+					return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
+					break;
+			}
 		}
 	}
 	
@@ -496,7 +509,7 @@ abstract class Generador
 	 * @return	string	Dato sintético generado. Su valor es un registro 
 	 * 					contenido en la biblioteca.
 	 */
-	function _generarDesdeBiblioteca()
+	function _generarDesdeBiblioteca(&$arreglo_memoria)
 	{
 		/*
 			------ arreglo_parametros -----
@@ -505,17 +518,31 @@ abstract class Generador
 			rec_porcentaje_nulos
 			rec_conexion_biblioteca
 			rec_tipo_campo_biblioteca
+			rec_nombre_campo_independiente
 			rec_nombre_campo_biblioteca
 			rec_tia_codigo
 			---
-			con_nombre_biblioteca_tabla				
+			con_nombre_biblioteca_tabla			
+			con_nombre_campo_tabla_independiente		
 		*/
+		
+//		$sql = "SELECT rec_parametros_tipo_fuente 
+//				FROM PSDG_restricciones_campos 
+//				WHERE rec_usu_login = '".$this->_arreglo_parametros['rec_usu_login']."'
+//				AND rec_nombre_campo = '".$this->_arreglo_parametros['rec_nombre_campo_independiente']."'";
+//	echo "<pre>";	
+//	print_r($this->_arreglo_parametros);
+		//rec_nombre_campo_biblioteca biblioteca 
+		$this->_conexion_BDI->ejecutarSQL($sql);
+		if($this->_arreglo_parametros['rec_nombre_campo_independiente'])
+			$where = $this->_arreglo_parametros['con_nombre_campo_tabla_independiente']." = '".$arreglo_memoria[$this->_arreglo_parametros['rec_nombre_campo_independiente']]."'";
 		//INCOMPLETO, FALTA DEFINIR DE QUE CAMPO DEPENDE Y ASI MISMO OBTENER 
 		//EL VALOR DE LA TABLA... POR ENDE MODIFICAR FIRMA DE METODO
 		//_generarDesdeTabla($tabla, $campo, $where);
 		//si existe where, es que viene de biblioteca y no se aplica el tia_codigo
 		//porque la busqueda es directa.
-		return $this->_generarDesdeTabla($this->_arreglo_parametros['con_nombre_biblioteca_tabla'], $this->_arreglo_parametros['rec_nombre_campo_biblioteca']);		
+//		echo "<br>WHERE!! $where";
+		return $this->_generarDesdeTabla($this->_arreglo_parametros['con_nombre_biblioteca_tabla'], $this->_arreglo_parametros['rec_nombre_campo_biblioteca'], $where);		
 	}
 	
 	/**
