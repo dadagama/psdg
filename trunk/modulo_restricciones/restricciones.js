@@ -249,7 +249,7 @@ function establecerRestriccionCampo()
 	var rec_nombre_campo_origen = $('#rec_lbl_nombre_campo').html();
 	var rec_parametros_tipo_fuente = $("#fm_parametros_tipo_fuente").serialize();
 	var rec_porcentaje_nulos = $('#rec_porcentaje_nulos').val();
-	//alert(rec_nombre_tabla_origen+","+rec_nombre_campo_origen+","+rec_fue_codigo+","+rec_parametros_tipo_fuente+","+rec_porcentaje_nulos);
+	alert(rec_parametros_tipo_fuente);
 	$.ajax({
 		async:		false,
 		type: 		"POST",
@@ -324,7 +324,6 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 function actualizarVisibilidadCampoFuncionProbabilidad()
 {
 	$("#rec_fila_funcion_probabilidad").children().hide();
-
 	var tipo_acceso = $("#rec_tia_codigo").val();
 	if(tipo_acceso == 3)//probabilistico
 		$("#rec_fila_funcion_probabilidad").children().show();
@@ -347,6 +346,35 @@ function actualizarVisibilidadCamposDistribucion()
 
 }
 
+function actualizarVisibilidadCampoIndependiente()
+{
+	$("#rec_fila_campo_independiente").children().hide();
+
+	var tipo_campo = $('#rec_tipo_campo_biblioteca').val();
+
+	if(tipo_campo == 2)//dependiente
+		$("#rec_fila_campo_independiente").children().show();
+}
+
+function actualizarOpcionTipoCampo()
+{
+	if(!$("#rec_conexion_biblioteca").val())
+	{
+		$("select#rec_tipo_campo_biblioteca option[selected]").removeAttr("selected");
+		$("select#rec_tipo_campo_biblioteca option[value='']").attr("selected", "selected");
+		//$("#rec_tipo_campo_biblioteca").
+		//alert("h");
+	}
+}
+
+function actualizarVisibilidadTipoAcceso()
+{
+	$("#rec_probabilidades").children().hide();
+	var tipo_campo_biblioteca = $("#rec_tipo_campo_biblioteca").val();
+	if(tipo_campo_biblioteca != 2)//no sea dependiente
+		$("#rec_probabilidades").children().show();
+}
+
 function actualizarDivDetalle(formulario)
 {
 	setTimeout('efecto("res_div_detalle","fadeOut")',0);//slideToggle
@@ -362,7 +390,9 @@ function mostrarFormularioDetalle(formulario)
 	setTimeout('efecto("res_div_detalle","fadeIn")',0);//slideDown
 	actualizarFormularioFuenteDeDatos();
 	actualizarVisibilidadCampoFuncionProbabilidad();
-   actualizarVisibilidadCamposDistribucion();
+	actualizarVisibilidadCamposDistribucion();
+	actualizarVisibilidadCampoIndependiente();
+	actualizarVisibilidadTipoAcceso();
 }
 
 function actualizarCampoTablasBD()
@@ -423,6 +453,8 @@ function actualizarCampoCamposBiblioteca()
 {
 	var nombre_conexion = $('#rec_conexion_biblioteca').val();
 	var tipo_campo = $('#rec_tipo_campo_biblioteca').val();
+	actualizarVisibilidadCampoIndependiente();
+	
 	$('#rec_nombre_campo_biblioteca').html("");
 	//alert(nombre_conexion+","+tipo_campo);
 	$.ajax({
@@ -442,5 +474,31 @@ function actualizarCampoCamposBiblioteca()
 function actualizarSelectCampoBiblioteca(opciones)
 {
 	$('#rec_nombre_campo_biblioteca').html(opciones);
+	ajaxSuccess();
+}
+
+function actualizarCampoIndependienteBiblioteca()
+{
+	var nombre_tabla = $('#rec_lbl_nombre_tabla').html();
+	//$this->arreglo_restricciones['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo_independiente']
+	$('#rec_nombre_campo_independiente').html("");
+	//alert(nombre_conexion+","+tipo_campo);
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_restricciones/restricciones.php",
+		data:		"funcion=actualizarCampoIndependienteBiblioteca&nombre_tabla="+nombre_tabla,
+		beforeSend:	ajaxSend,
+		success:	actualizarSelectCampoIndependiente,
+		timeout:	10000,
+		error:		ajaxError(12)
+	});
+}
+
+function actualizarSelectCampoIndependiente(opciones)
+{
+	$('#rec_nombre_campo_independiente').html(opciones);
 	ajaxSuccess();
 }
