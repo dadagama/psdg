@@ -39,7 +39,10 @@ switch($_REQUEST['funcion'])
 					$lines = file($_FILES['con_archivo']['tmp_name']);
 					foreach ($lines as $line_num => $line) 
 					{
-						$datos = explode($separador, $line);
+						if($separador)
+							$datos = explode($separador, $line);
+						else
+							$datos = array($line);
 						foreach ($datos as $indice => $valor)
 						{
 							$val[0] = $valor;//toca porque la funcion recibe un arreglo de valores
@@ -55,13 +58,14 @@ switch($_REQUEST['funcion'])
 			case "3":
 				$nombre_archivo = $_FILES['con_biblioteca']['name'];
 				$archivo = file($_FILES['con_biblioteca']['tmp_name']);
-				
+
 				if($objetoConexiones->crearTablaConexionExterna($con_nombre, $con_tipo, $nombre_archivo, $archivo[0]))
 				{
 					foreach ($archivo as $line_num => $line) 
 					{
 						if($line_num != 0)//no cuento los nombres de los campos
 						{
+							//echo "\n  ".$line;
 							$valores = explode(",", $line);
 							//foreach ($datos as $indice => $valor)
 							$objetoConexiones->insertarValoresEnTabla($con_nombre, $con_tipo, $valores);

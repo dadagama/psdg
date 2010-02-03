@@ -96,13 +96,29 @@ function verificarOpcionEscogida()
 
 function verificarOpcion(estado)
 {
-	if(estado == "ok_nuevo")
+	//alert(estado);
+	if(estado == "error")
+		habilitarSiguienteEtapa(false);
+	else if(estado == "ok_nuevo")
 	{
 		habilitarSiguienteEtapa(true);
+		actualizarSeleccion(1);//cambiar
 		aviso(28);
 	}
-	else if(estado == "ok")
-		habilitarSiguienteEtapa(true);
 	else
-		habilitarSiguienteEtapa(false);
+	{
+		habilitarSiguienteEtapa(true);
+		actualizarSeleccion(1);//cambiar
+	}
+}
+
+function actualizarSeleccion(tis_codigo)
+{
+	$("#btn_tis_bdo").attr("src","../imagenes/btn_db_1.png");
+	$("#btn_tis_sql").attr("src","../imagenes/btn_text_1.png");
+	if(tis_codigo == 1)
+	{
+		$("#btn_tis_bdo").attr("src","../imagenes/btn_db_2.png");
+		$("#btn_tis_bdo").attr("onmouseout","../imagenes/btn_db_2.png");
+	}
 }

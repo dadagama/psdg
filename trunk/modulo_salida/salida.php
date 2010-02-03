@@ -20,8 +20,8 @@ switch($_REQUEST['funcion'])
 		break;
 		
 	case "verificarOpcionEscogida":
-		if($objetoSalida->verificarOpcionEscogida())
-			echo "ok";
+		if($tis_codigo = $objetoSalida->verificarOpcionEscogida())
+			echo $tis_codigo;
 		else
 			echo "error";
 		break;	
