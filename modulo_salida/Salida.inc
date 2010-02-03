@@ -25,10 +25,12 @@ class Salida
 	
 	function verificarOpcionEscogida()
 	{
-		if($this->conexionBDI->existeRegistro("tis_codigo", "PSDG_tipo_salida_escogida", "tis_usu_login = '".$this->usu_login."'"))
-			return true;
-		else 
-			return false;
+		$sql = "SELECT tis_codigo FROM PSDG_tipo_salida_escogida WHERE tis_usu_login = '".$this->usu_login."'";
+		$this->conexionBDI->ejecutarSQL($sql);
+		$tis_codigo = "";
+		if($this->conexionBDI->obtenerNumeroFilas())
+			$tis_codigo = $this->conexionBDI->obtenerFilaComoCadena();
+		return $tis_codigo;
 	}
 }
 ?>

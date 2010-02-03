@@ -249,7 +249,7 @@ function establecerRestriccionCampo()
 	var rec_nombre_campo_origen = $('#rec_lbl_nombre_campo').html();
 	var rec_parametros_tipo_fuente = $("#fm_parametros_tipo_fuente").serialize();
 	var rec_porcentaje_nulos = $('#rec_porcentaje_nulos').val();
-	alert(rec_parametros_tipo_fuente);
+	//alert(rec_parametros_tipo_fuente);
 	$.ajax({
 		async:		false,
 		type: 		"POST",

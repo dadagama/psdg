@@ -62,6 +62,7 @@ class Conexiones
 	
 		$sql = "	CREATE TABLE ".$this->usu_login."_".$tipo_conexion."_".$con_nombre."
 			($campos) ENGINE = InnoDB COMMENT = 'create by $nombre_archivo'";
+		//echo $sql;
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}
@@ -72,9 +73,11 @@ class Conexiones
 			$vals[] = "'".$valor."'";
 
 		$vals = implode(",", $vals);
-			
+		$vals = utf8_decode($vals);
+		
 		$sql = "	INSERT INTO ".$this->usu_login."_".$tipo_conexion."_".$con_nombre."
 			VALUES ($vals)";
+		//echo "\n".$vals;
 		$this->conexionBDI->ejecutarSQL($sql);
 		return $this->conexionBDI->obtenerResultset();
 	}

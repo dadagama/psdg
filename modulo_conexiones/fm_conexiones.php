@@ -173,7 +173,7 @@
 												$html->end("label");
 											$html->end("div");
 											$html->tag("div", array("class"=>"alineacion_izquierda celda vertical_centro alto_30"));
-												$html->tag("input", array("class"=>"ancho_20", "maxlength"=>"1", "name"=>"con_separador", "id"=>"con_separador", "type"=>"text", "title"=>$html->getText("con_ttp_separador")));
+												$html->tag("input", array("class"=>"ancho_35", "maxlength"=>"2", "name"=>"con_separador", "id"=>"con_separador", "type"=>"text", "title"=>$html->getText("con_ttp_separador")));
 											$html->end("div");
 										$html->end("div");	
 										

@@ -146,6 +146,7 @@ function confirmarBiblioteca(file, ext)
 
 function archivoEnviado(file, response)
 {
+	//alert("archivo: "+response);
 	switch(response)
 	{
 		case "archivo":
@@ -185,7 +186,7 @@ function pasaValidacionCampos(con_tipo)
 					validacion_abajo = true;
 				break;
 			case '7':
-				if(validarCampoNoVacio($("#con_separador"), $("#con_lbl_separador").html(), true))
+				//if(validarCampoNoVacio($("#con_separador"), $("#con_lbl_separador").html(), true))
 					validacion_abajo = true;
 				break;
 			case '3':
@@ -198,6 +199,7 @@ function pasaValidacionCampos(con_tipo)
 
 function insertoConexion(datosConexion)
 {
+	//alert(datosConexion);
 	switch(datosConexion)
 	{
 		case "bd":

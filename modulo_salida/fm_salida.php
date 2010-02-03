@@ -35,22 +35,24 @@
 							$html->tag("div", array("class"=>"tabla"));	
 								$html->tag("div", array("class"=>"fila"));
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag("input", array("onclick"=>"seleccionarSalida(1);", 
-																			"type"=>"image", 
-																			"src"=>"../imagenes/btn_db_1.png", 
-																			"alt"=>"bd_out", 
-																			"title"=>$html->getText("sal_ttp_bd"),
-																			"onmouseover"=>"this.src='../imagenes/btn_db_2.png'",
-																			"onmouseout"=>"this.src='../imagenes/btn_db_1.png'"));
+										$html->tag("input", array("id" => "btn_tis_bdo",
+																	"onclick"=>"seleccionarSalida(1);", 
+																	"type"=>"image", 
+																	"src"=>"../imagenes/btn_db_1.png", 
+																	"alt"=>"bd_out", 
+																	"title"=>$html->getText("sal_ttp_bd"),
+																	"onmouseover"=>"this.src='../imagenes/btn_db_2.png'",
+																	"onmouseout"=>"this.src='../imagenes/btn_db_1.png'"));
 									$html->end("div");
 									$html->tag("div", array("class"=>"celda"));
-										$html->tag("input", array("onclick"=>"alert('no implementado aún');", 
-																			"type"=>"image", 
-																			"src"=>"../imagenes/btn_text_1.png", 
-																			"alt"=>"text_out", 
-																			"title"=>$html->getText("sal_ttp_text"),
-																			"onmouseover"=>"this.src='../imagenes/btn_text_2.png'",
-																			"onmouseout"=>"this.src='../imagenes/btn_text_1.png'"));
+										$html->tag("input", array("id" => "btn_tis_sql",
+																	"onclick"=>"alert('no implementado aún');", 
+																	"type"=>"image", 
+																	"src"=>"../imagenes/btn_text_1.png", 
+																	"alt"=>"text_out", 
+																	"title"=>$html->getText("sal_ttp_text"),
+																	"onmouseover"=>"this.src='../imagenes/btn_text_2.png'",
+																	"onmouseout"=>"this.src='../imagenes/btn_text_1.png'"));
 									$html->end("div");
 								$html->end("div");
 								
