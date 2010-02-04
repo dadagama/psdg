@@ -11,6 +11,7 @@ class GeneradorNumerico extends Generador
 	function _inicializarVariables($arreglo_parametros, &$conexion_BDI)
 	{
 		parent::_inicializarVariables($arreglo_parametros, $conexion_BDI);
+
 		//echo "<br>_inicializarVariables()";
 		//print_r($arreglo_parametros);
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
@@ -29,6 +30,21 @@ class GeneradorNumerico extends Generador
 				*/
 				$this->_arreglo_parametros['contador'] = $this->_arreglo_parametros['rec_valor_desde'];
 				break;
+					
+			case "8"://secuencia
+				/*	
+					------ arreglo_parametros -----
+					rec_usu_login
+					rec_fue_codigo
+					rec_porcentaje_nulos
+					rec_valor_secuencial
+					rec_delta_secuencial
+					---
+					contador
+				*/
+				$this->_arreglo_parametros['contador'] = $this->_arreglo_parametros['rec_valor_secuencial'];
+				//no hay conexion externa
+			break;
 		}
 	}
 
@@ -41,15 +57,17 @@ class GeneradorNumerico extends Generador
 	 */
 	function generar(&$arreglo_memoria="")
 	{
-		if($this->_debeGenerarValorNulo)
-			return "null";
 		//echo "<br>fuente: ".$this->_arreglo_parametros['rec_fue_codigo'];
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{
 			case "6"://intervalo
 				return $this->_generarDesdeIntervalo();
 			break;
-						
+
+			case "8"://secuencia
+				return $this->_generarDesdeSecuencia();
+			break;
+			
 			default:
 				return parent::generar($arreglo_memoria);
 			break;
@@ -115,6 +133,30 @@ class GeneradorNumerico extends Generador
 				}
 				break;
 		}
+	}
+	
+	/**
+	 * Se encarga de generar un dato sintético apartir de un valor base y 
+	 * siguiendo una secuencia. La función generar() hace uso de este método.
+	 * @see		generar()
+	 * @return string	Dato sintético generado. Su valor es uno de los valores 
+	 * 					contenidos en la secuencia establecida.
+	 */
+	function _generarDesdeSecuencia()
+	{
+		/*	
+			------ arreglo_parametros -----
+			rec_usu_login
+			rec_fue_codigo
+			rec_porcentaje_nulos
+			rec_valor_secuencial
+			rec_delta_secuencial
+			---
+			contador => rec_valor_secuencial
+		*/
+		$dato = $this->_arreglo_parametros['contador'];
+		$this->_arreglo_parametros['contador'] += $this->_arreglo_parametros['rec_delta_secuencial'];
+		return $dato;
 	}
 }
 ?>

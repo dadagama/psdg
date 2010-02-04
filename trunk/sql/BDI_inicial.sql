@@ -93,7 +93,7 @@ INSERT INTO PSDG_fuentes VALUES(4,'Lista de valores','f');
 INSERT INTO PSDG_fuentes VALUES(5,'Constante','f');
 INSERT INTO PSDG_fuentes VALUES(6,'Intervalo','f');
 INSERT INTO PSDG_fuentes VALUES(7,'Archivo','t');
-
+INSERT INTO PSDG_fuentes VALUES(8,'Secuencia','f');
 
 CREATE TABLE `BDI`.`PSDG_fuentes_de_tipos` (
 	`fdt_motor` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
@@ -108,6 +108,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',7);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','char',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',2);
@@ -115,6 +116,16 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',7);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',8);
+
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',1);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',2);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',3);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',4);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',5);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',6);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',7);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',2);
@@ -122,7 +133,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',3);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',7);
-
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','text',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',2);
@@ -131,7 +142,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',6);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',7);
-
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','int',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',2);
@@ -140,7 +151,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',6);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',7);
-
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',2);
@@ -149,7 +160,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',6);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',7);
-
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',8);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',2);
@@ -158,8 +169,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',6);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',7);
-
-
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','timestamp',8);
 
 
 CREATE TABLE IF NOT EXISTS `PSDG_conexion` (
