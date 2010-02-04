@@ -286,7 +286,8 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','es','Valores');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_desde','es','Desde');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','es','Hasta');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_constante','es','Valor');
-
+INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_secuencial','es','Valor inicial');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_delta_secuencial','es','Delta');
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','es','Base de datos');
@@ -295,6 +296,7 @@ INSERT INTO PSDG_idioma VALUES('select_Lista de valores','es','Lista de valores'
 INSERT INTO PSDG_idioma VALUES('select_Constante','es','Constante');
 INSERT INTO PSDG_idioma VALUES('select_Intervalo','es','Intérvalo');
 INSERT INTO PSDG_idioma VALUES('select_Ninguna','es','Ninguna');
+INSERT INTO PSDG_idioma VALUES('select_Secuencia','es','Secuencia');
 
 INSERT INTO PSDG_idioma VALUES('select_Secuencial','es','Secuencial');
 INSERT INTO PSDG_idioma VALUES('select_Aleatorio','es','Aleatorio');
@@ -413,7 +415,8 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','en','Values');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_desde','en','From');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','en','to');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_constante','en','Value');
-
+INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_secuencial','en','Initial value');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_delta_secuencial','en','Delta');
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','en','File');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','en','Database');
@@ -422,6 +425,7 @@ INSERT INTO PSDG_idioma VALUES('select_Lista de valores','en','Value list');
 INSERT INTO PSDG_idioma VALUES('select_Constante','en','Constant');
 INSERT INTO PSDG_idioma VALUES('select_Intervalo','en','Interval');
 INSERT INTO PSDG_idioma VALUES('select_Ninguna','en','None');
+INSERT INTO PSDG_idioma VALUES('select_Secuencia','en','Sequence');
 
 INSERT INTO PSDG_idioma VALUES('select_Secuencial','en','Sequential');
 INSERT INTO PSDG_idioma VALUES('select_Aleatorio','en','Random');
@@ -457,6 +461,12 @@ INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','en','Run');
 INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','en','Start');
 
 INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','en','Set output type');
+
+INSERT INTO PSDG_idioma VALUES('eje_lbl_inicializando','en','Initialization stage');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_ordenando_tablas','en','Prioritizing tables');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_generar_datos','en','Data generation stage');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_generando_tabla','en','Generating synthetic data for table');
+
 
 
 
