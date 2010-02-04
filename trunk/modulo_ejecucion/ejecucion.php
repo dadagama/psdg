@@ -40,7 +40,7 @@ switch($_REQUEST['funcion'])
 			else if($_SESSION['estado'] == "fin_generar")
 			{
 				$_SESSION['estado'] = "mostrar_errores";
-				if($_SESSION['estado'])
+				if($_SESSION['errores'])
 					echo "PSDG_WARNING";
 				else
 					echo "PSDG_OK";
