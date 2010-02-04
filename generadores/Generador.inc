@@ -86,7 +86,6 @@ abstract class Generador
 		$this->_conexion_BDI = $conexion_BDI;
 		//para inicializar acceso por SECUENCIA
 		$this->_arreglo_parametros['contador'] = 0;
-		
 		require_once ("../distribuciones/DistribucionUniformeAleatoria.inc");
 		$this->_generador_probabilidad_nulo = new DistribucionUniformeAleatoria(16807, 0, 2147483641, rand(1,123456789));
 		//echo "<br>pruebaxxx".$this->_arreglo_parametros['rec_fue_codigo'];
@@ -211,22 +210,7 @@ abstract class Generador
 				$this->_valor_constante = $this->_arreglo_parametros['rec_valor_constante'];
 				//no hay conexion externa
 			break;
-			
-			case "8"://secuencia
-				/*	
-					------ arreglo_parametros -----
-					rec_usu_login
-					rec_fue_codigo
-					rec_porcentaje_nulos
-					rec_valor_secuencial
-					rec_delta_secuencial
-					---
-					contador
-				*/
-				$this->_arreglo_parametros['contador'] = $this->_arreglo_parametros['rec_valor_secuencial'];
-				//no hay conexion externa
-			break;
-			
+						
 			case "9"://condicionales
 				//:S
 				//$this->_es_fuente_de_rango_dinamico = true;
@@ -308,10 +292,6 @@ abstract class Generador
 
 			case "7"://archivo
 				return $this->_generarDesdeArchivo();
-			break;
-
-			case "8"://secuencia
-				return $this->_generarDesdeSecuencia();
 			break;
 			
 			case "9"://condicionales
@@ -562,30 +542,6 @@ abstract class Generador
 			rec_valor_constante
 		 */
 		return $this->_arreglo_parametros['rec_valor_constante'];
-	}
-	
-	/**
-	 * Se encarga de generar un dato sintético apartir de un valor base y 
-	 * siguiendo una secuencia. La función generar() hace uso de este método.
-	 * @see		generar()
-	 * @return string	Dato sintético generado. Su valor es uno de los valores 
-	 * 					contenidos en la secuencia establecida.
-	 */
-	function _generarDesdeSecuencia()
-	{
-		/*	
-			------ arreglo_parametros -----
-			rec_usu_login
-			rec_fue_codigo
-			rec_porcentaje_nulos
-			rec_valor_secuencial
-			rec_delta_secuencial
-			---
-			contador => rec_valor_secuencial
-		*/
-		$dato = $this->_arreglo_parametros['contador'];
-		$this->_arreglo_parametros['contador'] += $this->_arreglo_parametros['rec_delta_secuencial'];
-		return $dato;
 	}
 }
 ?>

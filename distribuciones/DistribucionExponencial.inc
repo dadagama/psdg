@@ -20,6 +20,8 @@ class DistribucionExponencial
 		return $a;
 	}
 }
-//$x = new DistribucionExponencial(1);
-//echo $x->generar();
+////0.00000000001 => lambda para timestamp decentes
+//$x = new DistribucionExponencial(0.00000000001);
+//for($y=0;$y<50;$y++)
+//	echo "<br>".floor($x->generar());
 ?>

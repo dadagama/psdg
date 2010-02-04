@@ -324,15 +324,20 @@ class Ejecucion
 		switch($tipo_dato)
 		{
 			case "char":
+				require_once('../generadores/GeneradorCaracter.inc');
+				$generador = new GeneradorCaracter();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "varchar":
-				require_once('../generadores/GeneradorNumerico.inc');
-				$generador = new GeneradorNumerico();
+				require_once('../generadores/GeneradorCadena.inc');
+				$generador = new GeneradorCadena();
 				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "text":
+				$generador = new GeneradorCadena();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "int":
@@ -342,18 +347,27 @@ class Ejecucion
 				break;
 			
 			case "bigint":
-				//echo "<pre>";
-				//echo "<br>BIGINT! $nombre_tabla, $nombre_campo";
-				//print_r($restricciones_campo);
 				require_once('../generadores/GeneradorNumerico.inc');
 				$generador = new GeneradorNumerico();
 				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
+			case "tinyint":
+				require_once('../generadores/GeneradorBooleano.inc');
+				$generador = new GeneradorBooleano();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
+				break;	
+			
 			case "date":
+				require_once('../generadores/GeneradorFecha.inc');
+				$generador = new GeneradorFecha();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 			
 			case "timestamp":
+				require_once('../generadores/GeneradorFecha.inc');
+				$generador = new GeneradorFecha();
+				$generador->_inicializarVariables($restricciones_campo, $this->conexionBDI);
 				break;
 
 		}
