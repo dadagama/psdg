@@ -2,7 +2,7 @@
 session_start();
 
 require_once("../modulo_ejecucion/Ejecucion.inc");
-$objetoEjecucion = new Ejecucion($_SESSION['conexionBDI'],$_SESSION['usu_login']);
+$objetoEjecucion = new Ejecucion($_SESSION['conexionBDI'],$_SESSION['usu_login'], $_SESSION['lang']);
 
 switch($_REQUEST['funcion'])
 {		

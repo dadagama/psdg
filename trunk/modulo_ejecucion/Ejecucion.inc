@@ -12,7 +12,7 @@ class Ejecucion
 	var $_arreglo_generadores;
 	var $warnings;
 	
-	function __construct($parametrosConexion,$login)
+	function __construct($parametrosConexion, $login, $lang)
 	{
 		$this->conexionBDI = new ConexionBDMySQL($parametrosConexion);
   		$this->conexionBDI->conectar();
