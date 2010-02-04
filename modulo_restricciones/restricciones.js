@@ -195,7 +195,7 @@ function actualizarArbolBDO(arbolBDO)
 										max_children : 0,
 										max_depth :0,
 										icon :	{ 
-													image : "../imagenes/error.png"
+													image : "../imagenes/fkey.png"
 												}
 									},
 						"unico" :	{

@@ -27,7 +27,8 @@ var lang_en = new Array(
 		"",//25 - para uso de info externa.
 		"Constraint set correctly.",//26
 		"If this value is set to zero, tables that depend on this will also be excluded. Are you sure?",//27
-		"Output type established correctly."//28
+		"Output type established correctly.",//28
+		"Process successfully completed!"//29
 	);
 
 var lang_es = new Array(
@@ -59,7 +60,8 @@ var lang_es = new Array(
 		"",//25 - para uso de info externa.
 		"Restricción establecida correctamente.",//26
 		"Si este valor se establece en cero, las tablas que dependan de esta tambien seran excluídas. ¿Esta seguro?",//27
-		"Formato de salida establecido correctamente."//28
+		"Formato de salida establecido correctamente.",//28
+		"Proceso terminado satisfactoriamente!"//29
 	);
 
 var lang = "en";

@@ -102,7 +102,7 @@ function recibirLog(log)
 	//alert(log);
 	if(log == "PSDG_EOF")
 	{
-		log_nuevo = "Process Completed!";
+		log_nuevo = lang_js[29];
 		$('#div_log').append(log_nuevo);		
 		elm.scrollTop = elm.scrollHeight;
 		ajaxSuccess();
@@ -117,7 +117,7 @@ function recibirLog(log)
 	}
 	else if(log == "PSDG_WARNING")
 	{
-		log_nuevo = '<img src="../imagenes/warning.png"/><br/>';
+		log_nuevo = '<img src="../imagenes/warning.gif"/><br/>';
 		//log_nuevo = log_nuevo.replace(/@br2n/g,"\n");
 		$('#div_log').append(log_nuevo);
 		elm.scrollTop = elm.scrollHeight;

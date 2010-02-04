@@ -310,6 +310,10 @@ INSERT INTO PSDG_idioma VALUES('select_Independiente','es','Independiente');
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','es','Si');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','es','No');
 
+INSERT INTO PSDG_idioma VALUES('rec_lbl_media','es','Media');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_desviacion_estandar','es','Desviación Estandar');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_lambda','es','Lambda');
+
 /*salida*/
 INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','es','Establecer formato de salida');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','es','Exportar datos a la BDO');
@@ -327,6 +331,11 @@ INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','es','Ejecutar');
 INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','es','Iniciar');
 
 INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','es','Configurar formato de salida');
+
+INSERT INTO PSDG_idioma VALUES('eje_lbl_inicializando','es','Etapa de inicialización');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_ordenando_tablas','es','Priorizando tablas');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_generar_datos','es','Etapa de generación de datos');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_generando_tabla','es','Generando datos sintéticos para la tabla');
 
 /**************************************************************************************************************/
 /*INGLES*/
@@ -428,6 +437,10 @@ INSERT INTO PSDG_idioma VALUES('select_Independiente','en','Independent');
 INSERT INTO PSDG_idioma VALUES('res_nulo_YES','en','Yes');
 INSERT INTO PSDG_idioma VALUES('res_nulo_NO','en','No');
 
+INSERT INTO PSDG_idioma VALUES('rec_lbl_media','en','Mean');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_desviacion_estandar','en','Standard deviation');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_lambda','en','Lambda');
+
 /*salida*/
 INSERT INTO PSDG_idioma VALUES('sal_lgn_tipo_salida','en','Output type');
 INSERT INTO PSDG_idioma VALUES('sal_ttp_bd','en','Export data to BDO');
@@ -444,6 +457,7 @@ INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','en','Run');
 INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','en','Start');
 
 INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','en','Set output type');
+
 
 
 CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
