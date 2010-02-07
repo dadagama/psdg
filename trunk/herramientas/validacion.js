@@ -110,31 +110,15 @@ function validarInput(idInput, nombreInput, tipoInput, admitirVacio)
   {
     case "email":
       filtro = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-      error = "no es una dirección válida.";
+      error = 30;
     break;
     case "texto":
       filtro = /^(([A-Za-z\ñ]+)(\s){0,})*$/; //cualquier secuencia de letras y espacios en blanco. se debe utilizar trim de php para quitar sobrantes
-      error = "solo puede contener letras.";
+      error = 31;
     break;
     case "numero":
       filtro = /^\d+$/;//cualquier secuencia de numeros
-      error = "solo puede contener números.";
-    break;
-    case "cedulaONit":
-      filtro = /^\d+(\-\d+){0,1}$/;//cualquier secuencia de numeros, o numeros separados por un guion y mas numeros
-      error = "solo puede contener números.";
-    break;
-    case "numeroSeperadorComa":
-      filtro = /^\d+(\,\d+)*$/;//cualquier secuencia de numeros y la coma para separar
-      error = "solo puede contener números separados por comas.";
-    break;
-    case "numeroSeperadorGuion":
-      filtro = /^\d+(\-\d+)*$/;//cualquier secuencia de numeros y el guión para separar
-      error = "solo puede contener números separados por guiones.";
-    break;
-    case "telefono":
-      filtro = /^(\(\d+\)){0,1}\d+(\-(\(\d+\)){0,1}\d+)*$/;//[(##)]########[-######]
-      error = "solo puede contener números separados por guiones.";
+      error = 32;
     break;
     case "fecha":
       if (!validarCampoFecha(idInput, nombreInput, admitirVacio))
@@ -144,19 +128,22 @@ function validarInput(idInput, nombreInput, tipoInput, admitirVacio)
     break;
     default:
       filtro = "";
-      error = "error.";
+      error = 99;
     break;
   }
   if (!admitirVacio && !(idInput.value.length > 0))
   { 
-    alert("Contenido del campo ["+nombreInput+"] no puede esta vacío");
+	  var mensaje = lang_js[8].replace("%v", nombreInput);
+	  idInput.focus();
+	alert(mensaje);
     return false;
   }  
   else if (!filtro.test(idInput.value))
   {
-    alert("Contenido del campo ["+nombreInput+"] "+error+"\nElimine cualquier espacio antes y despues del campo.");
-    idInput.focus();
-    return false;
+	var mensaje = lang_js[error].replace("%v", nombreInput);
+	idInput.focus();
+	alert(mensaje);
+	return false;
   }
   return true;
 }

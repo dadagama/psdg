@@ -2,8 +2,6 @@
 require_once('../generadores/Generador.inc');
 class GeneradorNumerico extends Generador
 {
-	var $_minimo;
-	var $_maximo;
 	
 	/**
 	 * Se encarga de inicializar las variables de la clase
@@ -66,6 +64,10 @@ class GeneradorNumerico extends Generador
 
 			case "8"://secuencia
 				return $this->_generarDesdeSecuencia();
+			break;
+			
+			case "9"://funcion
+				return $this->_generarDesdeFuncion();
 			break;
 			
 			default:
@@ -158,5 +160,6 @@ class GeneradorNumerico extends Generador
 		$this->_arreglo_parametros['contador'] += $this->_arreglo_parametros['rec_delta_secuencial'];
 		return $dato;
 	}
+
 }
 ?>

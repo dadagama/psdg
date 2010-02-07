@@ -48,6 +48,12 @@ abstract class Generador
 	 */
 	var $_generador_probabilidad_nulo;
 	
+	/**
+	 * Objeto de la clase Funcion para generar valores apartir de una funcion
+	 * prestablecida.
+	 * @var	Funcion
+	 */
+	var $_funcion;
 	
 	/**
 	 * Decide si este generador debe retornar un valor nulo como dato sintético. 
@@ -66,7 +72,7 @@ abstract class Generador
 			//porcentaje permitido de nulos, se asume entonces que el resultado
 			//deberá ser representación nula. en caso contrario, el generador
 			//deberá tomar algun valor.
-			if($this->_generador_probabilidad_nulo->generar() < $this->_arreglo_parametros['rec_porcentaje_nulos'])
+			if(($this->_generador_probabilidad_nulo->generar()*100) < $this->_arreglo_parametros['rec_porcentaje_nulos'])
 				return true;
 			else
 				return false;
@@ -210,11 +216,37 @@ abstract class Generador
 				$this->_valor_constante = $this->_arreglo_parametros['rec_valor_constante'];
 				//no hay conexion externa
 			break;
-						
-			case "9"://condicionales
-				//:S
-				//$this->_es_fuente_de_rango_dinamico = true;
+			
+			case "9"://funcion
+				/*	
+					------ arreglo_parametros -----
+					rec_usu_login
+					rec_fue_codigo
+					rec_porcentaje_nulos
+					rec_fun_codigo
+				*/
+				switch($this->_arreglo_parametros['rec_fun_codigo'])
+				{
+					case 1://luhn bigint
+					case 2://luhn varchar
+						require_once ("../funciones/Luhn.inc");
+						$this->_funcion = new Luhn();
+					break;
+					
+					case 3://gibberish text
+					case 4://gibberish varchar
+						/*
+						 	rec_markov_order
+							rec_markov_length
+							rec_markov_input
+						 */
+						require_once ("../funciones/Markov.inc");
+						$this->_funcion = new Markov($this->_arreglo_parametros['rec_markov_order'], $this->_arreglo_parametros['rec_markov_length'], $this->_arreglo_parametros['rec_markov_input']);
+					break;
+				}
+				//no hay conexion externa
 			break;
+						
 		}
 		if($this->_arreglo_parametros['rec_fup_codigo'] == 1)//Uniforme
 		{
@@ -265,7 +297,7 @@ abstract class Generador
 	 */
 	function generar(&$arreglo_memoria="")
 	{
-		if($this->_debeGenerarValorNulo)
+		if($this->_debeGenerarValorNulo())
 			return "null";
 			
 		//echo "<br>FUENTE: ".$this->_arreglo_parametros['rec_fue_codigo'];
@@ -294,8 +326,8 @@ abstract class Generador
 				return $this->_generarDesdeArchivo();
 			break;
 			
-			case "9"://condicionales
-				return $this->generarDesdeCondicionesAvanzadas();
+			case "9"://funcion
+				return $this->_generarDesdeFuncion();
 			break;
 		}
 	}
@@ -442,10 +474,10 @@ abstract class Generador
 	 * @return	string	Dato sintético generado. Su valor es el primero de la 
 	 * 					lista de valores que satisface la condición establecida.
 	 */
-	function generarDesdeCondicionesAvanzadas()
-	{
-		//:S
-	}
+//	function generarDesdeCondicionesAvanzadas()
+//	{
+//		//:S
+//	}
 	
 	/**
 	 * Se encarga de generar un dato sintético utilizando el objeto de la clase 
@@ -542,6 +574,17 @@ abstract class Generador
 			rec_valor_constante
 		 */
 		return $this->_arreglo_parametros['rec_valor_constante'];
+	}
+	
+	/**
+	 * Se encarga de generar un dato sintético apartir de una funcion. 
+	 * La función generar() hace uso de este método.
+	 * @see		generar()
+	 * @return string	Dato sintético generado.
+	 */
+	function _generarDesdeFuncion()
+	{
+		return $this->_funcion->generar();
 	}
 }
 ?>

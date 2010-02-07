@@ -61,7 +61,11 @@ var lang_es = new Array(
 		"Restricción establecida correctamente.",//26
 		"Si este valor se establece en cero, las tablas que dependan de esta tambien seran excluídas. ¿Esta seguro?",//27
 		"Formato de salida establecido correctamente.",//28
-		"Proceso terminado satisfactoriamente!"//29
+		"Proceso terminado satisfactoriamente!",//29
+		"no es una dirección válida.",//30
+		"solo puede contener letras.",//31
+		"solo puede contener números.",//32
+		
 	);
 
 var lang = "en";

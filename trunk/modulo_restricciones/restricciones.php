@@ -120,9 +120,20 @@ switch($_REQUEST['funcion'])
 				$rec_parametros_tipo_fuente = '{"rec_conexion_archivo":"'.$_REQUEST['rec_conexion_archivo'].'","rec_tia_codigo":"'.$_REQUEST['rec_tia_codigo'].'"'.$rec_fup_codigo.'}';
 				break;
 
-         case "8"://Secuencial
-            $rec_parametros_tipo_fuente = '{"rec_valor_secuencial":"'.$_REQUEST['rec_valor_secuencial'].'","rec_delta_secuencial":"'.$_REQUEST['rec_delta_secuencial'].'"}';
-            break;
+			case "8"://Secuencial
+				$rec_parametros_tipo_fuente = '{"rec_valor_secuencial":"'.$_REQUEST['rec_valor_secuencial'].'","rec_delta_secuencial":"'.$_REQUEST['rec_delta_secuencial'].'"}';
+				break;
+			
+			case "9"://Funcion
+				switch($_REQUEST['rec_fun_codigo'])
+				{
+					case 3://gibberish text
+					case 4://gibberish varchar
+						$rec_parametros_funcion = ',"rec_markov_order":"'.$_REQUEST['rec_markov_order'].'","rec_markov_length":"'.$_REQUEST['rec_markov_length'].'","rec_markov_input":"'.$_REQUEST['rec_markov_input'].'"';
+						break;
+				}
+				$rec_parametros_tipo_fuente = '{"rec_fun_codigo":"'.$_REQUEST['rec_fun_codigo'].'"'.$rec_parametros_funcion.'}';
+				break;
 		}
 		$objetoRestricciones->actualizarRestriccionCampo(	$_REQUEST['rec_nombre_tabla_origen'],
 															$_REQUEST['rec_nombre_campo_origen'],
