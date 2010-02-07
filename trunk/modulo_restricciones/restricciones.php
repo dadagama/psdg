@@ -1,16 +1,6 @@
 <?php 
 session_start();
 
-require_once '../herramientas/FirePHPCore/FirePHP.class.php';
-$firephp = FirePHP::getInstance(true);
-ob_start();
-
-function debug($var,$nombre="")
-{
-  global $firephp;  
-  $firephp->log($var, $nombre);
-}
-
 require_once("../modulo_restricciones/Restricciones.inc");
 $objetoRestricciones = new Restricciones($_SESSION['conexionBDI'], $_SESSION['usu_login'], $_SESSION['lang']);
 
@@ -142,8 +132,7 @@ switch($_REQUEST['funcion'])
 															$_REQUEST['rec_porcentaje_nulos']);
 
 
-      /// Verificar si se puede seguir al step 2
-          debug('Verificando');
+      /// Verificar si se puede seguir al step 2          
           echo json_encode($objetoRestricciones->verificarStepCompleto());
 
       /// Fin verificador

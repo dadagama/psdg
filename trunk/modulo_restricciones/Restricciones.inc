@@ -412,7 +412,6 @@ class Restricciones
 			$readonly = "readonly";
 			$blur = "this.blur();";
 		}
-		debug($this->arreglo_restricciones,'$this->arreglo_restricciones 415');
 		$porcentaje_nulos = 0;
 		if($this->arreglo_restricciones['rec_porcentaje_nulos'])
 			$porcentaje_nulos = $this->arreglo_restricciones['rec_porcentaje_nulos'];	
@@ -653,7 +652,7 @@ class Restricciones
 //
 //						case 6://Intervalo
 							$valor_desde = 0;
-							$valor_hasta = 0;debug($parametros_conexion,'INTERVALO 641');
+							$valor_hasta = 0;
 							if(isset($parametros_conexion['rec_valor_desde']) && isset($parametros_conexion['rec_valor_hasta']))
 							{
 								$valor_desde = $parametros_conexion['rec_valor_desde'];
@@ -713,8 +712,7 @@ class Restricciones
 //							break;
 
 
-//                case 8://Secuencial
-	                     debug($parametros_conexion,'$parametros_conexion');
+//                case 8://Secuencial	                     
 	                     $valor_secuencial = "1";
 	                     $delta_secuencial = "1";
 	                     if($parametros_conexion['rec_valor_secuencial'])
@@ -1320,7 +1318,6 @@ class Restricciones
     $count = 0;$campos= $arreglotmp =array();$ultimaTabla='';
     while ($arreglo_restricciones_tabla = $this->conexionBDI->obtenerFilaComoArregloAsociativo())
     {
-      //debug($arreglo_restricciones_tabla,'$arreglo_restricciones_tabla');
       if($ultimaTabla!=$arreglo_restricciones_tabla['rec_nombre_tabla'])
       {
         if(count($arreglotmp) > 0)
@@ -1353,16 +1350,12 @@ class Restricciones
     if($count == 0)
       return false;
 
-    debug($campos,'$campos !!!');
-
     foreach($campos as $k  => $v)
     {
       $sql = 'DESCRIBE '.$k;
-      //debug($sql,'SQL');
       $this->conexionBDO->ejecutarSQL($sql); 
       while ($arreglo_meta_datos_campo = $this->conexionBDO->obtenerFilaComoArregloAsociativo())
       {
-        //debug($arreglo_meta_datos_campo,'$arreglo_meta_datos_campo');
         if($arreglo_meta_datos_campo['Null']=='NO')
         {
           
