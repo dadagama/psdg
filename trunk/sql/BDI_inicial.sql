@@ -319,6 +319,10 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','es','Hasta');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_constante','es','Valor');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_secuencial','es','Valor inicial');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_delta_secuencial','es','Delta');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion','es','Nombre de la función');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_order','es','Orden');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_length','es','Logitud');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_input','es','Texto de entrada');
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','es','Base de datos');
@@ -450,6 +454,11 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_hasta','en','to');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_constante','en','Value');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_secuencial','en','Initial value');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_delta_secuencial','en','Delta');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion','en','Function name');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_order','en','Order');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_length','en','Length');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_input','en','Input text');
+
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','en','File');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','en','Database');
