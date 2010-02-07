@@ -1,0 +1,62 @@
+///////////////////////////////////////////////////////
+//      PSDG - A PHP Synthetic Data Generator        //
+//                VERSION 1.02                       //
+///////////////////////////////////////////////////////
+
+//////////////////////////
+//      Abstract        //
+//////////////////////////
+
+PHP Synthetic Data Generator (PSDG) is a tool which facilitates the generation 
+of random data in a very flexible and powerful way given a target database.
+
+PSDG is based in probabilistic algorithms, substitution, NULL'ing out, 
+Gibberish, Functions and shuffling techniques to populate the target database 
+given an set of constraints.
+
+This tool work over MySQL databases and the InnoDB engine to ensure relational 
+consistency.
+
+release version 1.02 available!
+
+Notice: Be careful when setting the restrictions, form fields are not validated.
+
+
+/////////////////////////////
+//      Instalación        //
+/////////////////////////////
+
+1) Copiar toda el contenido en un sitio donde pueda ser interpretado el código 
+PHP. Se debe mantener la estructura de directorios dentro de la carpeta.
+
+2) Crear una Base de datos Mysql con el nombre: BDI
+por defecto, en esta versión de prueba se espera que el usuario y contraseña 
+para acceder a esa base de datos sean los siguientes:
+--------------------
+Usuario: root
+Contraseña: root
+--------------------
+
+3)Importar los script sql que se encuentran en el directorio aplicacion/sql/ 
+ala base de datos que se acaba de crear (BDI)
+
+
+//////////////////////////
+//      Ejecutar        //
+//////////////////////////
+
+Para empezar a utilizar la herramienta, basta con dirigirse al archivo index.php
+que se encuentra en la carpeta /modulo_login/ usando el navegador (Firefox, 
+Chrome son los mas recomendados), a través del navegador de ficheros del apache.
+
+El usuario por defecto para acceder a la aplicación es:
+--------------------
+Usuario: demo
+contraseña: demo
+--------------------
+
+A trabajar!
+Cualquier sugerencia o bug, porfavor reportelo en el repositorio svn o a este
+correo:
+
+dadagama@gmail.com
