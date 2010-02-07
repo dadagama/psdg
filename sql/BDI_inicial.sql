@@ -12,6 +12,33 @@ DROP TABLE IF EXISTS `PSDG_dependencias_de_tablas`;
 DROP TABLE IF EXISTS `PSDG_dependencias_de_campos`;
 DROP TABLE IF EXISTS `PSDG_usuario`;
 DROP TABLE IF EXISTS `PSDG_tipo_salida_escogida`;
+DROP TABLE IF EXISTS `PSDG_funcion`;
+DROP TABLE IF EXISTS `PSDG_fuente_markov`;
+
+
+CREATE TABLE `BDI`.`PSDG_fuente_markov` (
+	`fum_codigo` varchar( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo del tipo de fuente markov para gibberish',
+	`fum_nombre` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la fuente para el select',
+	PRIMARY KEY ( `fum_codigo`)
+) ENGINE = InnoDB COMMENT = 'Almacena las distintas fuentes de markov que puede utilizar el usuario para generar datos utilizando tecnica gibberish';
+
+INSERT INTO PSDG_fuente_markov VALUES('alice','Alice\'s Adventures in Wonderland, by Lewis Carroll');
+INSERT INTO PSDG_fuente_markov VALUES('calvin','The Wikipedia article on Calvin and Hobbes');
+INSERT INTO PSDG_fuente_markov VALUES('kant','The Critique of Pure Reason by Immanuel Kant');
+
+
+CREATE TABLE `BDI`.`PSDG_funcion` (
+	`fun_codigo` INTEGER COLLATE utf8_unicode_ci NOT NULL COMMENT 'codigo del tipo de funcion',
+	`fun_nombre` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre de la funcion',
+	`fun_tipo_dato` VARCHAR( 100 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'tipo de dato que soporta el uso de esta funcion',
+	PRIMARY KEY ( `fun_nombre`, `fun_tipo_dato`)
+) ENGINE = InnoDB COMMENT = 'Almacena las distintas funciones que puede utilizar el usuario para generar datos deacuerdo al tipo de dato del campo';
+
+INSERT INTO PSDG_funcion VALUES(1,'Luhn','bigint');
+INSERT INTO PSDG_funcion VALUES(2,'Luhn','varchar');
+INSERT INTO PSDG_funcion VALUES(3,'Gibberish-Markov','text');
+INSERT INTO PSDG_funcion VALUES(4,'Gibberish-Markov','varchar');
+
 
 CREATE TABLE `BDI`.`PSDG_tipo_salida_escogida` (
 	`tis_usu_login` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'login del usuario',
@@ -94,6 +121,7 @@ INSERT INTO PSDG_fuentes VALUES(5,'Constante','f');
 INSERT INTO PSDG_fuentes VALUES(6,'Intervalo','f');
 INSERT INTO PSDG_fuentes VALUES(7,'Archivo','t');
 INSERT INTO PSDG_fuentes VALUES(8,'Secuencia','f');
+INSERT INTO PSDG_fuentes VALUES(9,'Funcion','f');
 
 CREATE TABLE `BDI`.`PSDG_fuentes_de_tipos` (
 	`fdt_motor` VARCHAR( 50 ) COLLATE utf8_unicode_ci NOT NULL COMMENT 'nombre del SMBD al que pertenece el tipo de dato',
@@ -117,6 +145,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',4);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',7);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',8);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','varchar',9);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','tinyint',2);
@@ -152,6 +181,7 @@ INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',5);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',6);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',7);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',8);
+INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','bigint',9);
 
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',1);
 INSERT INTO PSDG_fuentes_de_tipos VALUES('mysql','date',2);
@@ -279,6 +309,7 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_archivo','es','Conexión archiv
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_biblioteca','es','Conexión biblioteca');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','es','Tipo de campo orígen');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','es','Nombre del campo orígen');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_independiente','es','Campo independiente');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','es','Conexión base de datos');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','es','Tipo de acceso');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','es','Función de probabilidad');
@@ -297,6 +328,7 @@ INSERT INTO PSDG_idioma VALUES('select_Constante','es','Constante');
 INSERT INTO PSDG_idioma VALUES('select_Intervalo','es','Intérvalo');
 INSERT INTO PSDG_idioma VALUES('select_Ninguna','es','Ninguna');
 INSERT INTO PSDG_idioma VALUES('select_Secuencia','es','Secuencia');
+INSERT INTO PSDG_idioma VALUES('select_Funcion','es','Función');
 
 INSERT INTO PSDG_idioma VALUES('select_Secuencial','es','Secuencial');
 INSERT INTO PSDG_idioma VALUES('select_Aleatorio','es','Aleatorio');
@@ -408,6 +440,7 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_archivo','en','Link file');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_biblioteca','en','Link library');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','en','Source field type');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','en','Source field name');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_independiente','en','Independent field');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','en','Link database');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','en','Access type');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','en','Probability function');
@@ -426,6 +459,8 @@ INSERT INTO PSDG_idioma VALUES('select_Constante','en','Constant');
 INSERT INTO PSDG_idioma VALUES('select_Intervalo','en','Interval');
 INSERT INTO PSDG_idioma VALUES('select_Ninguna','en','None');
 INSERT INTO PSDG_idioma VALUES('select_Secuencia','en','Sequence');
+INSERT INTO PSDG_idioma VALUES('select_Funcion','en','Function');
+
 
 INSERT INTO PSDG_idioma VALUES('select_Secuencial','en','Sequential');
 INSERT INTO PSDG_idioma VALUES('select_Aleatorio','en','Random');

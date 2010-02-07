@@ -287,6 +287,7 @@ function actualizarFormularioFuenteDeDatos()
 function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 {
 	$("#rec_tabla_restricciones").children().hide();
+	//alert(1);
 	switch(tipo_conexion)
 	{
 		case '1': //ninguna
@@ -314,15 +315,27 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 			$("#rec_tabla_archivo").show();
 			$("#rec_probabilidades").show();
 			break;
-      case '8'://secuencial
-         $("#rec_tabla_secuencial").show();
-         //$("#rec_probabilidades").show();/// hay esto?
-         break;
+		case '8'://secuencial
+			$("#rec_tabla_secuencial").show();
+			break;
+		case '9'://funcion
+			$("#rec_tabla_funcion").show();
+			break;
 	}
+}
+
+function actualizarVisibilidadParametrosFuncion()
+{
+	//alert(2);
+	$("#rec_tabla_markov").hide();
+	var tipo_funcion = $("#rec_fun_codigo").val();
+	if(tipo_funcion == 3 || tipo_funcion == 4)//gibberish
+		$("#rec_tabla_markov").show();
 }
 
 function actualizarVisibilidadCampoFuncionProbabilidad()
 {
+	//alert(3);
 	$("#rec_fila_funcion_probabilidad").children().hide();
 	var tipo_acceso = $("#rec_tia_codigo").val();
 	if(tipo_acceso == 3)//probabilistico
@@ -331,33 +344,34 @@ function actualizarVisibilidadCampoFuncionProbabilidad()
 
 function actualizarVisibilidadCamposDistribucion()
 {
-  $("#rec_fila_lambda").children().hide();
-  $("#rec_fila_media").children().hide();
-  $("#rec_fila_desviacion_estandar").children().hide();
-  var tipo_distribucion = $("#rec_fup_codigo").val();
-  if(tipo_distribucion == 3)//exponencial
-      $("#rec_fila_lambda").children().show();
+	//alert(4);
+	$("#rec_fila_lambda").children().hide();
+	$("#rec_fila_media").children().hide();
+	$("#rec_fila_desviacion_estandar").children().hide();
+	var tipo_distribucion = $("#rec_fup_codigo").val();
+	if(tipo_distribucion == 3)//exponencial
+		$("#rec_fila_lambda").children().show();
 
-  if(tipo_distribucion == 2)//normal
-  {
-      $("#rec_fila_media").children().show();
-      $("#rec_fila_desviacion_estandar").children().show();
-  }
+	if(tipo_distribucion == 2)//normal
+	{
+		$("#rec_fila_media").children().show();
+		$("#rec_fila_desviacion_estandar").children().show();
+	}
 
 }
 
 function actualizarVisibilidadCampoIndependiente()
 {
+	//alert(5);
 	$("#rec_fila_campo_independiente").children().hide();
-
 	var tipo_campo = $('#rec_tipo_campo_biblioteca').val();
-
 	if(tipo_campo == 2)//dependiente
 		$("#rec_fila_campo_independiente").children().show();
 }
 
 function actualizarOpcionTipoCampo()
 {
+	//alert(6);
 	if(!$("#rec_conexion_biblioteca").val())
 	{
 		$("select#rec_tipo_campo_biblioteca option[selected]").removeAttr("selected");
@@ -369,6 +383,7 @@ function actualizarOpcionTipoCampo()
 
 function actualizarVisibilidadTipoAcceso()
 {
+	//alert(7);
 	$("#rec_probabilidades").children().hide();
 	var tipo_campo_biblioteca = $("#rec_tipo_campo_biblioteca").val();
 	if(tipo_campo_biblioteca != 2)//no sea dependiente
@@ -377,12 +392,14 @@ function actualizarVisibilidadTipoAcceso()
 
 function actualizarDivDetalle(formulario)
 {
+	//alert(8);
 	setTimeout('efecto("res_div_detalle","fadeOut")',0);//slideToggle
 	setTimeout('mostrarFormularioDetalle(\''+formulario+'\')',500);
 }
 
 function mostrarFormularioDetalle(formulario)
 {
+	//alert(9);
 	formulario = formulario.replace(/@br2n/g,"\n");
 	$('#res_div_detalle').addClass("oculto");
 	$('#res_div_detalle').html(formulario);
@@ -393,6 +410,7 @@ function mostrarFormularioDetalle(formulario)
 	actualizarVisibilidadCamposDistribucion();
 	actualizarVisibilidadCampoIndependiente();
 	actualizarVisibilidadTipoAcceso();
+	actualizarVisibilidadParametrosFuncion();
 }
 
 function actualizarCampoTablasBD()

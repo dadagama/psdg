@@ -58,13 +58,13 @@
 								
 								$html->tag("div", array("class"=>"fila"));
 								
-									$html->tag("div", array("class"=>"celda alto_30 vertical_centro"));
+									$html->tag("div", array("class"=>"celda vertical_centro"));
 										$html->tag("label", array("class"=>"etiqueta"));
 											$html->printText("sal_lbl_bd");
 										$html->end("label");
 									$html->end("div");
 										
-									$html->tag("div", array("class"=>"celda alto_30 vertical_centro"));
+									$html->tag("div", array("class"=>"celda vertical_centro"));
 										$html->tag("label", array("class"=>"etiqueta alto_30"));
 											$html->printText("sal_lbl_text"); 
 										$html->end("label");
