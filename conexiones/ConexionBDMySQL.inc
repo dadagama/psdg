@@ -1,3 +1,4 @@
+<?php
 /*
  This file is part of PSDG.
 
@@ -16,7 +17,6 @@
 
 */
 
-<?php
 
 require_once("ConexionBD.inc");
 class ConexionBDMySQL extends ConexionBD

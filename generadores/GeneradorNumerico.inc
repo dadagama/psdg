@@ -1,3 +1,4 @@
+<?php
 /*
  This file is part of PSDG.
 
@@ -12,11 +13,10 @@
     GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with PSDG.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-<?php
 require_once('../generadores/Generador.inc');
 class GeneradorNumerico extends Generador
 {
