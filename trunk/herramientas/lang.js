@@ -12,7 +12,7 @@
     GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with PSDG.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
@@ -46,7 +46,10 @@ var lang_en = new Array(
 		"Constraint set correctly.",//26
 		"If this value is set to zero, tables that depend on this will also be excluded. Are you sure?",//27
 		"Output type established correctly.",//28
-		"Process successfully completed!"//29
+		"Process successfully completed!",//29
+		"Not a valid direction.",//30
+		"can contain only letters.",//31
+		"can contain only numbers."//32
 	);
 
 var lang_es = new Array(
@@ -82,7 +85,7 @@ var lang_es = new Array(
 		"Proceso terminado satisfactoriamente!",//29
 		"no es una dirección válida.",//30
 		"solo puede contener letras.",//31
-		"solo puede contener números.",//32
+		"solo puede contener números."//32
 		
 	);
 

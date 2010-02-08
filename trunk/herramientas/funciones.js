@@ -12,20 +12,20 @@
     GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+    along with PSDG.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
 function establecerPosicionSecuencia(secuencia_activa)
 {
-	for ( var int = 1; int <= 4; int++) 
+	for ( var ints = 1; ints <= 4; ints++) 
 	{
-		if(int < secuencia_activa)
-			$("#step_"+int).attr("src","../imagenes/step_"+int+"_on.png");
-		else if(int == secuencia_activa)
-			$("#step_"+int).attr("src","../imagenes/step_"+int+"_on.png");
+		if(ints < secuencia_activa)
+			$("#step_"+ints).attr("src","../imagenes/step_"+ints+"_on.png");
+		else if(ints == secuencia_activa)
+			$("#step_"+ints).attr("src","../imagenes/step_"+ints+"_on.png");
 		else
-			$("#step_"+int).attr("src","../imagenes/step_"+int+"_off.png");
+			$("#step_"+ints).attr("src","../imagenes/step_"+ints+"_off.png");
 	}
 	mostrarBotonLogout(secuencia_activa);
 }

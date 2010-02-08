@@ -1,3 +1,4 @@
+<?php
 /*
  This file is part of PSDG.
 
@@ -16,7 +17,6 @@
 
 */
 
-<?php
 /**
  * Clase para generar una distribución uniforme de números aleatorios
  * @author	Darwin Garcia (dadagama@gmail.com) - Carlos Guzman(caralbgm@gmail.com)
