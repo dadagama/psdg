@@ -991,13 +991,14 @@ class Restricciones
 					AND con_usu_login = '".$this->usu_login."'
 					AND con_fue_codigo = '2'
 					LIMIT 1";
+			//echo $sql;
 			$this->conexionBDI->ejecutarSQL($sql);
 			$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
 			$arreglo_parametros = json_decode($con_parametros, true);
 			//establezco la conexion con la bd de la conexion
 			$conexion_auxiliar = new ConexionBDMySQL($arreglo_parametros);
 			$conexion_auxiliar->conectar();
-			$arreglo_nombres_tablas = $conexion_auxiliar->obtenerNombresTablasBD($nombre_tabla_actual);
+			$arreglo_nombres_tablas = $conexion_auxiliar->obtenerNombresTablasBD(/*$nombre_tabla_actual*/);
 		}
 		$this->html->arregloAOpciones($arreglo_nombres_tablas,$opcion_seleccionada,"select_seleccione", false);
 	}
@@ -1029,10 +1030,17 @@ class Restricciones
 					AND rec_usu_login = '".$this->usu_login."'";
 				$this->conexionBDI->ejecutarSQL($sql);
 				$arreglo_campos_definidos = $this->conexionBDI->obtenerResultadoComoArreglo();
-				//print_r($arreglo_nombres_campos);
-				//echo "----";
-				//print_r($arreglo_campos_definidos);
+//				print_r($arreglo_nombres_campos);
+//				echo "----";
+//				print_r($arreglo_campos_definidos);
 				$arreglo_nombres_campos = $this->intersectArreglos($arreglo_nombres_campos, $arreglo_campos_definidos);
+			}
+			else
+			{
+				//si no es una conexion a ella misma (BDO) entonces no deberia desabilitar ningun campo
+				//esto se coloca para que no desabilite el campo de una conexion BDE si el campo
+				//tiene el mismo nombre del campo a poblar
+				$campo_deshabilitado = "";
 			}
 		}
 		$this->html->arregloAOpciones($arreglo_nombres_campos,$opcion_seleccionada ,"select_seleccione", false, $campo_deshabilitado);
@@ -1286,7 +1294,7 @@ class Restricciones
 		foreach($arreglo_valores as $valor)
 		{		
 			$sql = "INSERT INTO ".$this->usu_login."_4_".$rec_nombre_tabla_origen."_".$rec_nombre_campo_origen."(valores)
-					VALUES ('$valor')";
+					VALUES ('".utf8_decode($valor)."')";
 			$this->conexionBDI->ejecutarSQL($sql);
 		}
 	}

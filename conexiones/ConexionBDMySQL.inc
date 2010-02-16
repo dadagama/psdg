@@ -144,13 +144,33 @@ class ConexionBDMySQL extends ConexionBD
 		return $this->obtenerNumeroFilas();
 	}
 	
-	function obtenerNombresTablasBD($nombre_tabla_actual)
+	function obtenerNombresTablasBD($nombre_tabla_actua="")
 	{
 		$arreglo_tablas = array();
-		$this->consultarDependenciasForaneas($nombre_tabla_actual, $arreglo_tablas);
+		/*DEPRECATED, SE ESPERA QUE EN UNA VERSION POSTERIOR SE PUEDAN RESTRINGIR
+		 * CORRECTAMENTE LAS TABLAS DE DONDE PUEDEN TOMAR DATOS
+		 * EN SU LUGAR SE UTILIZARA LA FUNCION consultarTablasBD*/
+		if($nombre_tabla_actual)
+			$this->consultarDependenciasForaneas($nombre_tabla_actual, $arreglo_tablas);
+		else
+			$this->consultarTablasBD($arreglo_tablas);
 		return $arreglo_tablas;
 	}
 	
+	function consultarTablasBD(&$arreglo_tablas)
+	{
+		$nombre_bd = $this->_parametrosConexion['con_nombre_bd'];
+		$sql = "SELECT TABLES.TABLE_NAME
+				FROM TABLES
+				WHERE TABLES.TABLE_SCHEMA = '$nombre_bd'";
+		$this->establecer_bd("information_schema");
+		$this->ejecutarSQL($sql);
+		$arreglo_tablas = $this->obtenerResultadoComoArreglo();
+		$this->restablecer_bd_original();
+	}
+	
+	/*DEPRECATED, SE ESPERA QUE EN UNA VERSION POSTERIOR SE PUEDAN RESTRINGIR
+	 * CORRECTAMENTE LAS TABLAS DE DONDE PUEDEN TOMAR DATOS*/
 	function consultarDependenciasForaneas($nombre_tabla_actual, &$arreglo_tablas)
 	{
 		//print_r($arreglo_tablas);
@@ -162,6 +182,7 @@ class ConexionBDMySQL extends ConexionBD
 				AND KEY_COLUMN_USAGE.REFERENCED_TABLE_NAME IS NOT NULL
 				AND KEY_COLUMN_USAGE.REFERENCED_COLUMN_NAME IS NOT NULL)";
 		$this->establecer_bd("information_schema");
+		//echo "---".$sql;
 		$this->ejecutarSQL($sql);
 		$arreglo_nombres_tablas = $this->obtenerResultadoComoArreglo();
 		if($arreglo_nombres_tablas)
@@ -189,7 +210,12 @@ class ConexionBDMySQL extends ConexionBD
 		$nombre_bd = $this->_parametrosConexion['con_nombre_bd'];
 		if($tipo_campo_actual)
 		{
-			$tipo_dato = substr($tipo_campo_actual,0,strpos($tipo_campo_actual, "("));
+			$pos_parentesis = strpos($tipo_campo_actual, "(");
+			if ($pos_parentesis === false)
+				$tipo_dato = substr($tipo_campo_actual,0);
+			else
+				$tipo_dato = substr($tipo_campo_actual,0,$pos_parentesis);
+				
 			$sql_tipo = "AND DATA_TYPE = '$tipo_dato'";
 		}
 		$sql = "SELECT COLUMN_NAME 
@@ -198,6 +224,7 @@ class ConexionBDMySQL extends ConexionBD
 				AND TABLE_SCHEMA = '$nombre_bd'
 				$sql_tipo";
 		$this->establecer_bd("information_schema");
+		//echo $sql;
 		$this->ejecutarSQL($sql);
 		$arreglo_nombres_campos = $this->obtenerResultadoComoArreglo();
 		$this->restablecer_bd_original();

@@ -36,7 +36,7 @@
 <html>
 	<head>
 		<title>PSDG</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<script type="text/javascript" src="../herramientas/validacion.js"></script>
 		<script type="text/javascript" src="../herramientas/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="../herramientas/funciones.js"></script>
