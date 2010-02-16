@@ -40,7 +40,7 @@ CREATE TABLE `BDI`.`PSDG_fuente_markov` (
 	PRIMARY KEY ( `fum_codigo`)
 ) ENGINE = InnoDB COMMENT = 'Almacena las distintas fuentes de markov que puede utilizar el usuario para generar datos utilizando tecnica gibberish';
 
-INSERT INTO PSDG_fuente_markov VALUES('alice','Alice\'s Adventures in Wonderland, by Lewis Carroll');
+INSERT INTO PSDG_fuente_markov VALUES('alice','Alice\\'s Adventures in Wonderland, by Lewis Carroll');
 INSERT INTO PSDG_fuente_markov VALUES('calvin','The Wikipedia article on Calvin and Hobbes');
 INSERT INTO PSDG_fuente_markov VALUES('kant','The Critique of Pure Reason by Immanuel Kant');
 
@@ -317,7 +317,7 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_dato','es','Tipo de dato');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_permite_nulos','es','Permite valores nulos');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_llave','es','Tipo de llave');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_PRIMARY KEY','es','Primaria');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_FOREIGN KEY','es','Foránea');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_FOREIGN KEY','es','Foranea');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_UNIQUE','es','Única');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_valor_default','es','Valor por defecto');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_extras','es','Extra');

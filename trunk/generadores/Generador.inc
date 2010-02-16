@@ -414,16 +414,17 @@ abstract class Generador
 					else if($this->_arreglo_parametros['rec_fup_codigo'] == 2)//Normal estandar
 					{
 						do
-							$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
+							$this->_arreglo_parametros['contador'] = floor($this->_generador_numero_aleatorio->generar());
 						while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
 					}
 					else if($this->_arreglo_parametros['rec_fup_codigo'] == 3)//Exponencial
 					{
 						do
-							$this->_arreglo_parametros['contador'] = $this->_generador_numero_aleatorio->generar();
+							$this->_arreglo_parametros['contador'] = floor($this->_generador_numero_aleatorio->generar());
 						while($this->_arreglo_parametros['contador'] < 0 || $this->_arreglo_parametros['contador'] >= $this->_arreglo_parametros['numero_valores_posibles']);
 					}
 					$sql = "SELECT $nombre_campo FROM $nombre_tabla LIMIT ".$this->_arreglo_parametros['contador'].",1";
+//					echo "************".$sql;
 					$this->_conexion_fuente_externa->ejecutarSQL($sql);
 					return $this->_conexion_fuente_externa->obtenerFilaComoCadena();
 					break;

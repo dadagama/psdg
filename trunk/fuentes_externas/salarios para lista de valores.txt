@@ -1,0 +1,19 @@
+500000
+750000
+800000
+970000
+1200000
+1500000
+2000000
+2500000
+3000000
+3500000
+
+////////////////////////////////////////////
+
+para consultar los salarios distribuidos
+
+
+SELECT ingreso_mensual, count( ingreso_mensual ) as cantidad
+FROM afiliado
+group by ingreso_mensual
