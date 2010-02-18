@@ -40,7 +40,7 @@ CREATE TABLE `BDI`.`PSDG_fuente_markov` (
 	PRIMARY KEY ( `fum_codigo`)
 ) ENGINE = InnoDB COMMENT = 'Almacena las distintas fuentes de markov que puede utilizar el usuario para generar datos utilizando tecnica gibberish';
 
-INSERT INTO PSDG_fuente_markov VALUES('alice','Alice\\'s Adventures in Wonderland, by Lewis Carroll');
+INSERT INTO PSDG_fuente_markov VALUES('alice','Alices Adventures in Wonderland, by Lewis Carroll');
 INSERT INTO PSDG_fuente_markov VALUES('calvin','The Wikipedia article on Calvin and Hobbes');
 INSERT INTO PSDG_fuente_markov VALUES('kant','The Critique of Pure Reason by Immanuel Kant');
 
