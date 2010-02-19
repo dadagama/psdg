@@ -68,8 +68,19 @@
 				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"paso 4", "title"=>"Run"));
 				$html->end("img");
 				
+				$html->br();
+				
+				$html->tag("div", array("class"=>"tabla"));
+					$html->tag("div", array("class"=>"fila"));
+						$html->tag("div", array("id"=>"div_titulo_step", "class"=>"celda vertical_centro centrado alto_30"));
+								$html->tag("label", array("id"=>"lbl_titulo_step", "class"=>"etiqueta"));
+								$html->end("label");
+						$html->end("div");
+					$html->end("div");
+				$html->end("div");
+				
 				$html->tag("div", array("id"=>"div_logout"));
-					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "onmouseover"=>"this.src='../imagenes/btn_logout_2.png'", "onmouseout"=>"this.src='../imagenes/btn_logout_1.png'", "alt"=>"logout", "title"=>"logout"));
+					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "onmouseover"=>"this.src='../imagenes/btn_logout_2.png'", "onmouseout"=>"this.src='../imagenes/btn_logout_1.png'", "alt"=>"Cerrar sesión/Logout", "title"=>"Cerrar sesión/Logout"));
 					$html->end("input");
 				$html->end("div");
 					
