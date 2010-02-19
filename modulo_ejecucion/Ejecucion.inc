@@ -281,7 +281,10 @@ class Ejecucion
 			{
 				$valor = $generador->generar($arreglo_memoria);
 				$arreglo_memoria[$arreglo_campos[$pos]] = $valor;
-				$valores[] = "'".$valor."'";
+				if($valor == "@null")
+					$valores[] = "null";
+				else
+					$valores[] = "'".$valor."'";
 			}
 			//echo "<br>---".$valores[0];
 			$valores = implode(",", $valores);

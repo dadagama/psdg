@@ -27,7 +27,24 @@ function establecerPosicionSecuencia(secuencia_activa)
 		else
 			$("#step_"+ints).attr("src","../imagenes/step_"+ints+"_off.png");
 	}
+	mostrarTituloSecuenciaActiva(secuencia_activa);
 	mostrarBotonLogout(secuencia_activa);
+}
+
+function mostrarTituloSecuenciaActiva(secuencia_activa)
+{
+	if(secuencia_activa == 0)
+		$("#lbl_titulo_step").html(""); 	
+	else
+	{
+		switch(secuencia_activa)
+		{
+			case 1: $("#lbl_titulo_step").html(lang_js[14]); break;
+			case 2: $("#lbl_titulo_step").html(lang_js[15]); break;
+			case 3: $("#lbl_titulo_step").html(lang_js[16]); break;
+			case 4: $("#lbl_titulo_step").html(lang_js[17]); break;
+		}
+	}
 }
 
 function mostrarBotonLogout(secuencia_activa)
