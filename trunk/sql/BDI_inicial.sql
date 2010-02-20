@@ -297,6 +297,7 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_archivo','es','Ruta del archivo d
 INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_biblioteca','es','Biblioteca');
 INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_biblioteca','es','Ruta de la biblioteca a importar');
 INSERT INTO PSDG_idioma VALUES('con_btn_establecer','es','Añadir');
+INSERT INTO PSDG_idioma VALUES('con_lgn_conexiones_bdo_establecida','es','Conexión Establecida a BDO');
 INSERT INTO PSDG_idioma VALUES('con_lgn_conexiones_establecidas','es','Conexiones establecidas');
 INSERT INTO PSDG_idioma VALUES('con_ttp_siguiente','es','Establecer restricciones');
 /*restricciones*/
@@ -341,6 +342,20 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion','es','Nombre de la función');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_order','es','Orden');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_length','es','Logitud');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_input','es','Texto de entrada');
+
+INSERT INTO PSDG_idioma VALUES('rec_ttp_numero_tuplas','es','Número de registros a generar');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fue_codigo','es','Seleccione de donde se obtendrán los posibles valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_conexion','es','Seleccione la conexión a la base de datos donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_tabla','es','Seleccione la tabla de la base de datos donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo','es','Seleccione el campo de la tabla donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_conexion_biblioteca','es','Seleccione la conexión a la biblioteca donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_tipo_campo_biblioteca','es','Seleccione el tipo de campo de la biblioteca');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_independiente','es','Seleccione el campo del que dependerá los valores de este campo');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_biblioteca','es','Seleccione el campo independiente de la biblioteca donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
+
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','es','Base de datos');
@@ -432,6 +447,7 @@ INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_archivo','en','URL plain text fil
 INSERT INTO PSDG_idioma VALUES('con_lbl_nombre_biblioteca','en','Library');
 INSERT INTO PSDG_idioma VALUES('con_ttp_nombre_biblioteca','en','URL library to import');
 INSERT INTO PSDG_idioma VALUES('con_btn_establecer','en','Add');
+INSERT INTO PSDG_idioma VALUES('con_lgn_conexiones_bdo_establecida','en','BDO Connection established');
 INSERT INTO PSDG_idioma VALUES('con_lgn_conexiones_establecidas','en','Established connections');
 INSERT INTO PSDG_idioma VALUES('con_ttp_siguiente','en','Set restrictions');
 /*restricciones*/
@@ -476,6 +492,8 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_funcion','en','Function name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_order','en','Order');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_length','en','Length');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_input','en','Input text');
+
+INSERT INTO PSDG_idioma VALUES('rec_ttp_numero_tuplas','en','Number of records to generate');
 
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','en','File');
@@ -543,6 +561,7 @@ CREATE TABLE IF NOT EXISTS `PSDG_mensaje_popup` (
 /*conexiones*/
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','es','Debe definir <b>almenos</b> la conexion a la Base de datos objetivo (<b>BDO</b>) que será poblada.<br/><br/>Aquí tambien se definen los parámetros para conectar con fuentes externas que proporcionen tipos de datos adicionales (bases de datos, archivos de texto plano ó bibliotecas).');
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','es','Aquí se muestran todas las conexiones que se establecieron satisfactoriamente.<br/><br/>Puede eliminar una conexión a una determinada fuente haciendo clic en su respectivo botón <b>Eliminar</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_3','es','Aquí se muestran la conexión establecida a la Base de Datos Objetivo (BDO).<br/><br/>Puede eliminar la conexión a base de datos haciendo clic en su respectivo botón <b>Eliminar</b>.');
 /*RESTRICCIONES*/
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos objetivo que será poblada (<b>BDO</b>).<br/><br/>Seleccione las tablas y campos de la BDO que desee poblar para establecer sus parámetros en la ventana <b>Detalle</b>.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar una determinada tabla de la BDO, establezca a <b>cero (0)</b> el campo <b>Cantidad de tuplas</b>.<br/><br/>Si no desea poblar un determinado campo de una tabla, establezca el valor <b>Ninguna</b> el campo <b>Fuente de datos</b>.');
@@ -556,6 +575,7 @@ INSERT INTO PSDG_mensaje_popup VALUES('eje_btn_help_1','es','Haga clic en el bot
 /*conexiones*/
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_1','en','You must define at least the connection to the target database (<b>BDO</b>) to be populated.<br/><br/>This also defines the parameters to connect to external sources to provide additional data types (databases, plain text files or libraries).');
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','en','Here are all the connections that were established successfully. You can delete a connection to a particular source by clicking on its respective <b>Remove</b> button.');
+INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_3','en','Here are the established connection to the target database (BDO).<br/><br/>You can remove the database connection by clicking its respective <b>Delete</b> button.');
 /*RESTRICCIONES*/
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Select the tables and fields you want to populate the BDO to set its parameters in the <b>Detail</b> window.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields.<br/><br/>If you do not want to populate a table in the BDO, Set  <b>zero (0)</b> in the field <b>Number of records</b>.<br/><br/>If you do not want to populate a table field, Set  <b>None</b> in the field <b>Data source</b>.');

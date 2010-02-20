@@ -49,7 +49,8 @@ var lang_en = new Array(
 		"Process successfully completed!",//29
 		"Not a valid direction.",//30
 		"can contain only letters.",//31
-		"can contain only numbers."//32
+		"can contain only numbers.",//32
+		"this connection will be remove ¿Are you sure?"//33
 	);
 
 var lang_es = new Array(
@@ -85,7 +86,8 @@ var lang_es = new Array(
 		"Proceso terminado satisfactoriamente!",//29
 		"no es una dirección válida.",//30
 		"[%v] solo puede contener letras.",//31
-		"[%v] solo puede contener números."//32
+		"[%v] solo puede contener números.",//32
+		"this connection will be remove ¿Are you sure?"//33
 	);
 
 var lang = "en";

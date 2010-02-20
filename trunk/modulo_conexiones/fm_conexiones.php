@@ -244,30 +244,64 @@
 			
 			
 			$html->tag("div", array("class"=>"celda vertical_arriba ancho_512"));
-			
-				//DIV DE CONEXIONES
-				$html->tag("div", array("id"=>"con_div_conexiones"));
-					$html->tag("fieldset");
+				$html->tag("div", array("class"=>"tabla"));
+
+					//DIV DE CONEXIONBDO
+					$html->tag("div", array("class"=>"fila"));						
+					$html->tag("div", array("class"=>"celda"));
+						$html->tag("div", array("id"=>"con_div_bdo"));
+							$html->tag("fieldset");
 						
-						//BOTON AYUDA
-						$html->botonAyuda("con_btn_help_2");
+								//BOTON AYUDA
+								$html->botonAyuda("con_btn_help_3");
 					
-						$html->tag("legend");
-							$html->tag("label");
-								$html->printText("con_lgn_conexiones_establecidas");
-							$html->end("label");
-						$html->end("legend");
+								$html->tag("legend");
+									$html->tag("label");
+										$html->printText("con_lgn_conexiones_bdo_establecida");
+									$html->end("label");
+								$html->end("legend");
 						
-						//TABLA
-						$html->tag("div", array("class"=>"tabla", "id"=>"con_div_conexiones_establecidas"));
-						$html->end("div");	
-						//FIN TABLA
+								//TABLA
+								$html->tag("div", array("class"=>"tabla", "id"=>"con_div_conexion_bdo"));
+								$html->end("div");	
+								//FIN TABLA
 						
-					$html->end("fieldset");
+							$html->end("fieldset");
+						$html->end("div");
+					$html->end("div");
+					$html->end("div");
+					//FIN DIV DE CONEXIONBDO
+
+
+					//DIV DE CONEXIONES
+					$html->tag("div", array("class"=>"fila"));						
+					$html->tag("div", array("class"=>"celda"));
+						$html->tag("div", array("id"=>"con_div_conexiones"));
+							$html->tag("fieldset");
+						
+								//BOTON AYUDA
+								$html->botonAyuda("con_btn_help_2");
+					
+								$html->tag("legend");
+									$html->tag("label");
+										$html->printText("con_lgn_conexiones_establecidas");
+									$html->end("label");
+								$html->end("legend");
+						
+								//TABLA
+								$html->tag("div", array("class"=>"tabla", "id"=>"con_div_conexiones_establecidas"));
+								$html->end("div");	
+								//FIN TABLA
+						
+							$html->end("fieldset");
+						$html->end("div");
+					$html->end("div");
+					$html->end("div");
+					//FIN DIV DE CONEXIONES
+					
 				$html->end("div");
-				//FIN DIV DE CONEXIONES
-				
 			$html->end("div");
+			
 		$html->end("div");
 	$html->end("div");
 	//FIN DIV GENERAL
