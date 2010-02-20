@@ -322,7 +322,9 @@ function mostrarConexiones(conexiones)
 {
 	var json_data_object = eval("(" + conexiones + ")");
 	var div_conexiones_establecidas = $('#con_div_conexiones_establecidas');
+	var div_conexion_bdo = $('#con_div_conexion_bdo');
 	div_conexiones_establecidas.empty();
+	div_conexion_bdo.empty();
 	for(var x = 0; x < json_data_object.length; x++)
 	{
 		var con_nombre = json_data_object[x][0];
@@ -355,8 +357,10 @@ function mostrarConexiones(conexiones)
 								"		<input type='image' title='"+lang_js[21]+"' alt='eliminar_conexion' src='"+imagen_eliminar+"' onmouseout='this.src=\""+imagen_eliminar+"\"' onmouseover='this.src=\""+imagen_eliminar_over+"\"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
 								"	</div>" +
 								"</div>";
-
-		div_conexiones_establecidas.append(div);
+		if(con_nombre != "BDO")
+			div_conexiones_establecidas.append(div);
+		else
+			div_conexion_bdo.append(div);
 	}
 }
 
@@ -369,7 +373,7 @@ function eliminarConexion(con_nombre, con_tipo)
 		contentType:"application/x-www-form-urlencoded",
 		url:		"../modulo_conexiones/conexiones.php",
 		data:		"funcion=eliminarConexion&con_nombre="+con_nombre+"&con_tipo="+con_tipo,
-		beforeSend:	confirmarEliminada(con_nombre),
+		beforeSend:	confirmarEliminada,
 		success:	conexionEliminada,
 		timeout:	10000,
 		error:		ajaxError(12)
@@ -377,14 +381,15 @@ function eliminarConexion(con_nombre, con_tipo)
 	return false;
 }
 
-function confirmarEliminada(con_nombre)
+function confirmarEliminada()
 {
 	ajaxSend();
-	if(!confirm("se eliminará la conexion ["+con_nombre+"] ¿Esta seguro?"))
+	if(!confirm("se eliminará esta la conexion ¿Esta seguro?"))
 	{
 		ajaxSuccess();
-		exit();
+		return false;
 	}
+	return true;
 }
 
 function conexionEliminada(eliminada)

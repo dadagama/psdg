@@ -90,7 +90,7 @@ body
 {height: 120px;}
 
 .alto_200
-{height: 400px;}
+{height: 200px;}
 
 .ancho_20
 {width: 20px;}
@@ -190,6 +190,15 @@ fieldset
 	position: relative;
 }
 
+#con_div_bdo
+{
+	width: 400px;
+	height: 90px;
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+}
+
 #res_div_general
 {
 	text-align: center;
@@ -234,7 +243,7 @@ fieldset
 
 #eje_div_consola
 {
-	width: 600px;
+	width: 700px;
 	text-align: center;
 	margin: 0 auto;
 	position: relative;

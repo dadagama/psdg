@@ -152,7 +152,7 @@ class Restricciones
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
 							$this->html->tag("label", array("class"=>"etiqueta"));
-								$this->html->printText("ret_lbl_nombre_tabla");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+								$this->html->printText("ret_lbl_nombre_tabla");
 							$this->html->end("label");
 						$this->html->end("div");
 						
@@ -167,12 +167,12 @@ class Restricciones
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
 							$this->html->tag("label", array("class"=>"etiqueta"));
-								$this->html->printText("ret_lbl_cantidad_tuplas");//CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR CAMBIAR
+								$this->html->printText("ret_lbl_cantidad_tuplas");
 							$this->html->end("label");
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("input", array("id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo ancho_50", "maxlength"=>"5", "onchange"=>"validarInput(this, \\\'".$this->html->getText("ret_lbl_cantidad_tuplas")."\\\', \\\'numero\\\', true);"));
+							$this->html->tag("input", array("title"=>$this->html->getText("rec_ttp_numero_tuplas"), "id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo ancho_50", "maxlength"=>"5", "onchange"=>"validarInput(this, \\\'".$this->html->getText("ret_lbl_cantidad_tuplas")."\\\', \\\'numero\\\', true);"));
 						$this->html->end("div");
 					$this->html->end("div");
 		$this->html->end("div");
@@ -479,7 +479,7 @@ class Restricciones
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo")); 
-						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("id"=>"rec_fue_codigo", "onchange"=>"actualizarFormularioFuenteDeDatos();", "class"=>"valor_campo color_letra_campo ancho_150", $readonly=>$readonly, "onFocus"=>$blur), "");
+						$this->html->printSelect($this->conexionBDI, "fue_codigo", "fue_nombre", "PSDG_fuentes, PSDG_fuentes_de_tipos", "fdt_fue_codigo = fue_codigo AND fdt_tipo_de_dato = '".$tipo_de_dato."'" , $this->arreglo_restricciones['rec_fue_codigo'], array("title"=>$this->html->getText('rec_ttp_fue_codigo'), "id"=>"rec_fue_codigo", "onchange"=>"actualizarFormularioFuenteDeDatos();", "class"=>"valor_campo color_letra_campo ancho_150", $readonly=>$readonly, "onFocus"=>$blur), "");
 					$this->html->end("div");
 				$this->html->end("div");
 				//FIN DIV FUENTE DE DATOS
@@ -517,7 +517,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '2'", $parametros_conexion['rec_nombre_conexion'], array("name"=>"rec_nombre_conexion", "id"=>"rec_nombre_conexion", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoTablasBD();", $readonly=>$readonly, "onFocus"=>$blur), "", "select_seleccione", false);
+											$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '2'", $parametros_conexion['rec_nombre_conexion'], array("title"=>$this->html->getText('rec_ttp_nombre_conexion'), "name"=>"rec_nombre_conexion", "id"=>"rec_nombre_conexion", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoTablasBD();", $readonly=>$readonly, "onFocus"=>$blur), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 								
@@ -533,7 +533,7 @@ class Restricciones
 										 * es porque tambien hay una tabla seleccionada, debo buscar las tablas donde
 										 * apunta la conexion
 										 */	
-											$this->html->tag("select", array("name"=>"rec_nombre_tabla", "id"=>"rec_nombre_tabla", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBD();", $readonly=>$readonly, "onFocus"=>$blur));
+											$this->html->tag("select", array("title"=>$this->html->getText('rec_ttp_nombre_tabla'), "name"=>"rec_nombre_tabla", "id"=>"rec_nombre_tabla", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBD();", $readonly=>$readonly, "onFocus"=>$blur));
 												//if($parametros_conexion['rec_nombre_conexion'])
 													$this->actualizarCampoTablasBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla'], $this->arreglo_restricciones['rec_nombre_tabla']);
 											$this->html->end("select");
@@ -548,7 +548,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->tag("select", array("name"=>"rec_nombre_campo", "id"=>"rec_nombre_campo", "class"=>"valor_campo color_letra_campo ancho_150", $readonly=>$readonly, "onFocus"=>$blur));
+											$this->html->tag("select", array("title"=>$this->html->getText('rec_ttp_nombre_campo'), "name"=>"rec_nombre_campo", "id"=>"rec_nombre_campo", "class"=>"valor_campo color_letra_campo ancho_150", $readonly=>$readonly, "onFocus"=>$blur));
 												//if($parametros_conexion['rec_nombre_tabla'])
 													$this->actualizarCampoCamposBD($parametros_conexion['rec_nombre_conexion'], $parametros_conexion['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo'], $parametros_conexion['rec_nombre_campo'], $this->arreglo_restricciones['rec_tipo_dato']);
 											$this->html->end("select");
@@ -571,7 +571,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '3'", $parametros_conexion['rec_conexion_biblioteca'], array("name"=>"rec_conexion_biblioteca", "id"=>"rec_conexion_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarOpcionTipoCampo(); actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca();"), "", "select_seleccione", false);
+												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '3'", $parametros_conexion['rec_conexion_biblioteca'], array("title"=>$this->html->getText('rec_ttp_conexion_biblioteca'), "name"=>"rec_conexion_biblioteca", "id"=>"rec_conexion_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarOpcionTipoCampo(); actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca();"), "", "select_seleccione", false);
 											$this->html->end("div");
 										$this->html->end("div");
 										//{"rec_conexion_biblioteca":"bib1","rec_tipo_campo_biblioteca":"1","rec_nombre_campo_biblioteca":"nivel","rec_tia_codigo":"1"}
@@ -583,7 +583,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "tcb_codigo", "tcb_nombre", "PSDG_tipo_campo_biblioteca", "", $parametros_conexion['rec_tipo_campo_biblioteca'], array("name"=>"rec_tipo_campo_biblioteca", "id"=>"rec_tipo_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca(); actualizarVisibilidadTipoAcceso();"), "", "select_seleccione", true);
+												$this->html->printSelect($this->conexionBDI, "tcb_codigo", "tcb_nombre", "PSDG_tipo_campo_biblioteca", "", $parametros_conexion['rec_tipo_campo_biblioteca'], array("title"=>$this->html->getText('rec_ttp_tipo_campo_biblioteca'), "name"=>"rec_tipo_campo_biblioteca", "id"=>"rec_tipo_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarCampoCamposBiblioteca(); actualizarCampoIndependienteBiblioteca(); actualizarVisibilidadTipoAcceso();"), "", "select_seleccione", true);
 											$this->html->end("div");
 										$this->html->end("div");
 										
@@ -595,7 +595,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("select", array("name"=>"rec_nombre_campo_independiente", "id"=>"rec_nombre_campo_independiente", "class"=>"valor_campo color_letra_campo ancho_150"));
+												$this->html->tag("select", array("title"=>$this->html->getText('rec_ttp_nombre_campo_independiente'), "name"=>"rec_nombre_campo_independiente", "id"=>"rec_nombre_campo_independiente", "class"=>"valor_campo color_letra_campo ancho_150"));
 												//$nombre_tabla, $opcion_seleccionada=""
 													$this->actualizarCampoIndependienteBiblioteca($this->arreglo_restricciones['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo_independiente']);
 												$this->html->end("select");
@@ -610,7 +610,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("select", array("name"=>"rec_nombre_campo_biblioteca", "id"=>"rec_nombre_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150"));
+												$this->html->tag("select", array("title"=>$this->html->getText('rec_ttp_nombre_campo_biblioteca'), "name"=>"rec_nombre_campo_biblioteca", "id"=>"rec_nombre_campo_biblioteca", "class"=>"valor_campo color_letra_campo ancho_150"));
 												//($nombre_conexion, $tipo_campo)
 													$this->actualizarCampoCamposBiblioteca($parametros_conexion['rec_conexion_biblioteca'], $parametros_conexion['rec_tipo_campo_biblioteca'], $parametros_conexion['rec_nombre_campo_biblioteca']);
 												$this->html->end("select");
