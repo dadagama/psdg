@@ -114,34 +114,37 @@ function mostrarDetalleTabla(nombre_tabla)
 
 function establecerRestriccionTabla()
 {
-	nombre_tabla = $('#rec_lbl_nombre_tabla').html();
-	numero_tuplas = $('#rec_txt_numero_tuplas').val();
-	var acepta_eliminacion = true;
-	if(numero_tuplas == 0)
-		acepta_eliminacion = mensajeConfirmacion(27);
+	if(validarInput($('#rec_txt_numero_tuplas'), $('#ret_lbl_cantidad_tuplas').html(), 'numero', true))
+	{
+		nombre_tabla = $('#rec_lbl_nombre_tabla').html();
+		numero_tuplas = $('#rec_txt_numero_tuplas').val();
+		var acepta_eliminacion = true;
+		if(numero_tuplas == 0)
+			acepta_eliminacion = mensajeConfirmacion(27);
+		
+		if(acepta_eliminacion)
+		{
+			$.ajax({
+				async:		false,
+				type: 		"POST",
+				dataType:	"html",
+				contentType:"application/x-www-form-urlencoded",
+				url:		"../modulo_restricciones/restricciones.php",
+				data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
+				beforeSend:	ajaxSend,
+				success:	construirArbolBDO,
+				timeout:	10000,
+				error:		ajaxError(12)
+			});
+		}
+		else
+		{
+			ajaxSuccess();
+			return false;
+		}
 	
-	if(acepta_eliminacion)
-	{
-		$.ajax({
-			async:		false,
-			type: 		"POST",
-			dataType:	"html",
-			contentType:"application/x-www-form-urlencoded",
-			url:		"../modulo_restricciones/restricciones.php",
-			data:		"funcion=establecerRestriccionTabla&numero_tuplas="+numero_tuplas+"&nombre_tabla="+nombre_tabla,
-			beforeSend:	ajaxSend,
-			success:	construirArbolBDO,
-			timeout:	10000,
-			error:		ajaxError(12)
-		});
+	  verificarStep();
 	}
-	else
-	{
-		ajaxSuccess();
-		return false;
-	}
-
-  verificarStep();
 }
 
 function construirArbolBDO(establecida)
@@ -261,26 +264,110 @@ function mostrarDetalleCampo(nombre_tabla, nombre_campo, tipo_dato, permite_nulo
 
 function establecerRestriccionCampo()
 {
+	if(validarCamposFormulario())
+	{
+		var rec_fue_codigo = $('#rec_fue_codigo').val();
+		var rec_nombre_conexion = $('#rec_nombre_conexion').val();
+		var rec_nombre_tabla_origen = $('#rec_lbl_nombre_tabla_info').html();
+		var rec_nombre_campo_origen = $('#rec_lbl_nombre_campo_info').html();
+		var rec_parametros_tipo_fuente = $("#fm_parametros_tipo_fuente").serialize();
+		var rec_porcentaje_nulos = $('#rec_porcentaje_nulos').val();
+	//alert(rec_parametros_tipo_fuente);
+		$.ajax({
+			async:		false,
+			type: 		"POST",
+			dataType:	"html",
+			contentType:"application/x-www-form-urlencoded",
+			url:		"../modulo_restricciones/restricciones.php",
+			data:		"funcion=establecerRestriccionCampo&rec_nombre_tabla_origen="+rec_nombre_tabla_origen+"&rec_nombre_campo_origen="+rec_nombre_campo_origen+"&rec_fue_codigo="+rec_fue_codigo+"&rec_nombre_conexion="+rec_nombre_conexion+"&rec_porcentaje_nulos="+rec_porcentaje_nulos+"&"+rec_parametros_tipo_fuente,
+			beforeSend:	ajaxSend,
+			success:	restriccionEstablecidaCorrecta,
+			timeout:	10000,
+			error:		ajaxError(12)
+		}); 
+		return false;
+	}
+}
+
+function validarCamposFormulario()
+{
+	var validacion = false;
 	var rec_fue_codigo = $('#rec_fue_codigo').val();
-	var rec_nombre_conexion = $('#rec_nombre_conexion').val();
-	var rec_nombre_tabla_origen = $('#rec_lbl_nombre_tabla').html();
-	var rec_nombre_campo_origen = $('#rec_lbl_nombre_campo').html();
-	var rec_parametros_tipo_fuente = $("#fm_parametros_tipo_fuente").serialize();
-	var rec_porcentaje_nulos = $('#rec_porcentaje_nulos').val();
-//alert(rec_parametros_tipo_fuente);
-	$.ajax({
-		async:		false,
-		type: 		"POST",
-		dataType:	"html",
-		contentType:"application/x-www-form-urlencoded",
-		url:		"../modulo_restricciones/restricciones.php",
-		data:		"funcion=establecerRestriccionCampo&rec_nombre_tabla_origen="+rec_nombre_tabla_origen+"&rec_nombre_campo_origen="+rec_nombre_campo_origen+"&rec_fue_codigo="+rec_fue_codigo+"&rec_nombre_conexion="+rec_nombre_conexion+"&rec_porcentaje_nulos="+rec_porcentaje_nulos+"&"+rec_parametros_tipo_fuente,
-		beforeSend:	ajaxSend,
-		success:	restriccionEstablecidaCorrecta,
-		timeout:	10000,
-		error:		ajaxError(12)
-	}); 
-	return false;
+	if(validarInputRangoPermitido($('#rec_porcentaje_nulos'), $('#rec_lbl_porcentaje_nulos').html(), 0, 100, false))
+	{
+		switch(rec_fue_codigo)
+		{
+			case '1': //ninguna
+				break;
+			case '2'://bd
+				if(validarSeleccionComboBox($('#rec_nombre_conexion'), $('#rec_lbl_conexion_bd').html(), false)
+				&& validarSeleccionComboBox($('#rec_nombre_tabla'), $('#rec_lbl_nombre_tabla').html(), false)
+				&& validarSeleccionComboBox($('#rec_nombre_campo'), $('#rec_lbl_nombre_campo').html(), false))
+					validacion = true;
+				break;
+			case '3'://bilbioteca
+				if(validarSeleccionComboBox($('#rec_conexion_biblioteca'), $('#rec_lbl_conexion_biblioteca').html(), false)
+				&& validarSeleccionComboBox($('#rec_tipo_campo_biblioteca'), $('#rec_lbl_tipo_campo_biblioteca').html(), false))
+					if(($('#rec_tipo_campo_biblioteca').val() == 1 //independiente
+					&& validarSeleccionComboBox($('#rec_nombre_campo_biblioteca'), $('#rec_lbl_nombre_campo_biblioteca').html(), false))
+					||
+					($('#rec_tipo_campo_biblioteca').val() == 2 //dependiente
+					&& validarSeleccionComboBox($('#rec_nombre_campo_independiente'), $('#rec_lbl_nombre_campo_independiente').html(), false)
+					&& validarSeleccionComboBox($('#rec_nombre_campo_biblioteca'), $('#rec_lbl_nombre_campo_biblioteca').html(), false)))
+					validacion = true;
+				break;
+			case '4'://lista de valores
+				if(validarCampoNoVacio($('#rec_lista_valores'), $('#rec_lbl_lista_valores').html(), true))
+					validacion = true;
+				break;
+			case '5'://constante
+				if(validarCampoNoVacio($('#rec_valor_constante'), $('#rec_lbl_valor_constante').html(), true))
+					validacion = true;
+				break;
+			case '6'://intervalo
+				var tipo_dato = obtenerTipoDeDato();
+				if(tipo_dato == "date" || tipo_dato == "timestamp")
+				{
+					if(validarInput($('#rec_valor_desde'), $('#rec_lbl_desde').html(), "fecha", false)
+					&& validarInput($('#rec_valor_hasta'), $('#rec_lbl_hasta').html(), "fecha", false))
+					{
+						if(validarRangoFechas($('#rec_valor_desde'), $('#rec_valor_hasta'), $('#rec_lbl_desde').html(), $('#rec_lbl_hasta').html()))
+							validacion = true;
+					}
+				}
+				else if(validarInput($('#rec_valor_desde'), $('#rec_lbl_desde').html(), "numero", false)
+				&& validarInput($('#rec_valor_hasta'), $('#rec_lbl_hasta').html(), "numero", false))
+				{
+					if(validarRango($('#rec_valor_desde'), $('#rec_valor_hasta'), $('#rec_lbl_desde').html(), $('#rec_lbl_hasta').html()))
+						validacion = true;
+				}
+				break;
+			case '7'://archivo
+				if(validarSeleccionComboBox($('#rec_conexion_archivo'), $('#rec_lbl_conexion_archivo').html(), false))
+					validacion = true;
+				break;
+			case '8'://secuencial
+				var tipo_dato = obtenerTipoDeDato();
+				if(tipo_dato == "date" || tipo_dato == "timestamp")
+				{
+					if(validarInput($('#rec_valor_secuencial'), $('#rec_lbl_valor_secuencial').html(), "fecha", false)
+					&& validarInput($('#rec_delta_secuencial'), $('#rec_lbl_delta_secuencial').html(), "numero", false))
+						validacion = true;
+				}
+				else if(validarInput($('#rec_valor_secuencial'), $('#rec_lbl_valor_secuencial').html(), "numero", false)
+				&& validarInput($('#rec_delta_secuencial'), $('#rec_lbl_delta_secuencial').html(), "numero", false))
+				{
+					validacion = true;
+				}
+				break;
+			case '9'://funcion
+				if(validarSeleccionComboBox($('#rec_fun_codigo'), $('#rec_lbl_funcion').html(), false))
+					validacion = true;
+				break;
+		}
+	}
+		//alert(validacion);
+		return validacion;
 }
 
 function verificarStepCompleto(dato)
@@ -290,6 +377,7 @@ function verificarStepCompleto(dato)
    else
     habilitarSiguienteEtapa(false);
 }
+
 function restriccionEstablecidaCorrecta(dato)
 {
 	ajaxSuccess();
@@ -538,7 +626,7 @@ function actualizarCampoCamposBD()
 {
 	var nombre_conexion = $('#rec_nombre_conexion').val();
 	var nombre_tabla = $('#rec_nombre_tabla').val();
-	var nombre_campo_actual = $('#rec_lbl_nombre_campo').html();
+	var nombre_campo_actual = $('#rec_lbl_nombre_campo_info').html();//se cambio por suposicion, si no funciona hay q confirmar
 	var tipo_campo_actual = $('#rec_lbl_tipo_dato').html();
 	$('#rec_nombre_campo').html("");
 	$.ajax({
@@ -591,7 +679,7 @@ function actualizarSelectCampoBiblioteca(opciones)
 
 function actualizarCampoIndependienteBiblioteca()
 {
-	var nombre_tabla = $('#rec_lbl_nombre_tabla').html();
+	var nombre_tabla = $('#rec_lbl_nombre_tabla_info').html();
 	//$this->arreglo_restricciones['rec_nombre_tabla'], $parametros_conexion['rec_nombre_campo_independiente']
 	$('#rec_nombre_campo_independiente').html("");
 	//alert(nombre_conexion+","+tipo_campo);

@@ -41,17 +41,43 @@ function validarCampoNoVacio(campoNoVacio, nombreCampo, mostrarMensaje)
 	}
 }
 
+function validarTextAreaNoVacio(campoNoVacio, nombreCampo, mostrarMensaje) 
+{
+	var letra = false;
+	for (var i = 0; i < campoNoVacio.value.length; i++ ) 
+	{
+		if ( campoNoVacio.value.charAt(i) != " " ) 
+		{
+			letra = true;
+		}
+	}
+	if(!letra)
+	{
+		if(mostrarMensaje)
+		{
+			var mensaje = lang_js[8].replace("%v", nombreCampo);
+			alert(mensaje);
+		}
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 function validarCampoFecha(campoFecha, nombreCampo, admitirVacio)
 {
   //alert("validando "+nombreCampo);
-  if (!admitirVacio && !(campoFecha.value.length > 0))
+  if (!admitirVacio && !(campoFecha.val().length > 0))
   { 
-    alert("El campo ["+nombreCampo+"] no puede estar vacío.");
+		var mensaje = lang_js[8].replace("%v", nombreCampo);
+		alert(mensaje);
     return false;
   }  
   
   // Crea un string
-  var Fecha= new String(campoFecha.value);   
+  var Fecha= new String(campoFecha.val());   
   // Para sacar la fecha de hoy
   var RealFecha= new Date();  
   // Cadena Año
@@ -64,26 +90,30 @@ function validarCampoFecha(campoFecha, nombreCampo, admitirVacio)
   //TIMESTAMP no pueden ser anteriores a 1970 o posteriores a 2037.
   if (isNaN(Ano) || Ano.length<4 || parseInt(Ano, 10) < 1970 || parseInt(Ano, 10) > 2037)
   {
-    alert("El año del campo ["+nombreCampo+"] no es válido.");
+		var mensaje = lang_js[41].replace("%v", nombreCampo);
+		alert(mensaje);
     return false;
   }
   // Valido el Mes
   if (isNaN(Mes) || parseInt(Mes, 10)<1 || parseInt(Mes, 10)>12)
   {
-    alert("El mes del campo ["+nombreCampo+"] no es válido.");
+		var mensaje = lang_js[42].replace("%v", nombreCampo);
+		alert(mensaje);
     return false;
   }
   // Valido el Dia
   if (isNaN(Dia) || parseInt(Dia, 10)<1 || parseInt(Dia, 10)>31)
   {
-    alert("El día del campo ["+nombreCampo+"] no es válido.");
+		var mensaje = lang_js[43].replace("%v", nombreCampo);
+		alert(mensaje);
     return false;
   }
   if (parseInt(Mes, 10)==4 || parseInt(Mes, 10)==6 || parseInt(Mes, 10)==9 || parseInt(Mes, 10)==11 || parseInt(Mes, 10)==2) 
   {
     if (parseInt(Mes, 10)==2 && parseInt(Dia, 10) > 28 || parseInt(Dia, 10)>30) 
     {
-      alert("El día del campo ["+nombreCampo+"] no es válido.");
+		var mensaje = lang_js[43].replace("%v", nombreCampo);
+		alert(mensaje);
       return false;
     }
   }
@@ -92,13 +122,13 @@ function validarCampoFecha(campoFecha, nombreCampo, admitirVacio)
 
 function validarRangoFechas(campoFechaInicial, campoFechaFinal, nombreCampoFechaInicial, nombreCampoFechaFinal)
 {
-  var DiaInicial= new String(campoFechaInicial.value.substring(campoFechaInicial.value.lastIndexOf("-")+1,campoFechaInicial.value.length));
-  var MesInicial= new String(campoFechaInicial.value.substring(campoFechaInicial.value.indexOf("-")+1,campoFechaInicial.value.lastIndexOf("-")));
-  var AnoInicial= new String(campoFechaInicial.value.substring(0,campoFechaInicial.value.indexOf("-")));
+  var DiaInicial= new String(campoFechaInicial.val().substring(campoFechaInicial.val().lastIndexOf("-")+1,campoFechaInicial.val().length));
+  var MesInicial= new String(campoFechaInicial.val().substring(campoFechaInicial.val().indexOf("-")+1,campoFechaInicial.val().lastIndexOf("-")));
+  var AnoInicial= new String(campoFechaInicial.val().substring(0,campoFechaInicial.val().indexOf("-")));
   
-  var DiaFinal= new String(campoFechaFinal.value.substring(campoFechaFinal.value.lastIndexOf("-")+1,campoFechaFinal.value.length));
-  var MesFinal= new String(campoFechaFinal.value.substring(campoFechaFinal.value.indexOf("-")+1,campoFechaFinal.value.lastIndexOf("-")));
-  var AnoFinal= new String(campoFechaFinal.value.substring(0,campoFechaFinal.value.indexOf("-")));
+  var DiaFinal= new String(campoFechaFinal.val().substring(campoFechaFinal.val().lastIndexOf("-")+1,campoFechaFinal.val().length));
+  var MesFinal= new String(campoFechaFinal.val().substring(campoFechaFinal.val().indexOf("-")+1,campoFechaFinal.val().lastIndexOf("-")));
+  var AnoFinal= new String(campoFechaFinal.val().substring(0,campoFechaFinal.val().indexOf("-")));
   
   var fechaInicial = new Date();
   var fechaFinal = new Date();
@@ -106,19 +136,60 @@ function validarRangoFechas(campoFechaInicial, campoFechaFinal, nombreCampoFecha
   fechaInicial.setFullYear(AnoInicial,MesInicial,DiaInicial);
   fechaFinal.setFullYear(AnoFinal,MesFinal,DiaFinal);
 
-  if(fechaInicial<fechaFinal)
+  if(fechaInicial <= fechaFinal)
     return true;
   else
   {
-    alert("El campo ["+nombreCampoFechaInicial+"] debe contener una fecha menor a la del campo ["+nombreCampoFechaFinal+"]");
+	  var mensaje = lang_js[44].replace("%v1", nombreCampoFechaInicial);
+	  mensaje = mensaje.replace("%v2", nombreCampoFechaFinal);
+	  alert(mensaje);
     return false;
   }
 }
 
 
+function validarRango(campoInicial, campoFinal, nombreCampoInicial, nombreCampoFinal)
+{
+  if(campoInicial.val() <= campoFinal.val())
+    return true;
+  else
+  {
+	  var mensaje = lang_js[44].replace("%v1", nombreCampoInicial);
+	  mensaje = mensaje.replace("%v2", nombreCampoFinal);
+	  alert(mensaje);
+    return false;
+  }
+}
+
+
+function validarInputRangoPermitido(idInput, nombreInput, minimo, maximo, admitirVacio)
+{
+	if (admitirVacio && !(idInput.val().length > 0))
+		return true;
+	else if(!admitirVacio && idInput.val().length == 0)
+	{
+		var mensaje = lang_js[8].replace("%v", nombreInput);
+		idInput.focus();
+		alert(mensaje);
+		return false;
+	}
+	
+	if(idInput.val() >= minimo && idInput.val() <= maximo)
+		return true;
+	else
+	{
+		var mensaje = lang_js[45].replace("%v1", nombreInput);
+		mensaje = mensaje.replace("%v2", minimo);
+		mensaje = mensaje.replace("%v3", maximo);
+		idInput.focus();
+		alert(mensaje);
+		return false;
+	}
+}
+
 function validarInput(idInput, nombreInput, tipoInput, admitirVacio)
 {
-  if (admitirVacio && !(idInput.value.length > 0))
+  if (admitirVacio && !(idInput.val().length > 0))
     return true;
  
   var filtro = "";
@@ -149,14 +220,14 @@ function validarInput(idInput, nombreInput, tipoInput, admitirVacio)
       error = 99;
     break;
   }
-  if (!admitirVacio && !(idInput.value.length > 0))
+  if (!admitirVacio && !(idInput.val().length > 0))
   { 
-	  var mensaje = lang_js[8].replace("%v", nombreInput);
-	  idInput.focus();
+	var mensaje = lang_js[8].replace("%v", nombreInput);
+	idInput.focus();
 	alert(mensaje);
-    return false;
+	return false;
   }  
-  else if (!filtro.test(idInput.value))
+  else if (!filtro.test(idInput.val()))
   {
 	var mensaje = lang_js[error].replace("%v", nombreInput);
 	idInput.focus();
@@ -168,12 +239,14 @@ function validarInput(idInput, nombreInput, tipoInput, admitirVacio)
 
 function validarSeleccionComboBox(comboBox, nombreCampo, admitirVacio)
 {
-  if (comboBox.selectedIndex == 0)
+  if (comboBox.val() == 0)
   { 
     if(!admitirVacio)
     {
-      alert("Debe escoger una opción en el campo ["+nombreCampo+"].");
-      return false;
+		var mensaje = lang_js[40].replace("%v", nombreCampo);
+		comboBox.focus();
+		alert(mensaje);
+		return false;
     }
     else
       return true;
