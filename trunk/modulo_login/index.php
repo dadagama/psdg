@@ -41,8 +41,13 @@
 		<script type="text/javascript" src="../herramientas/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="../herramientas/funciones.js"></script>
 		<script type="text/javascript" src="../herramientas/lang.js"></script>
-		<link rel="stylesheet" type="text/css" href="../estilos/formulario.css">
-		<link rel="stylesheet" type="text/css" href="../estilos/general.css">
+		<script type="text/javascript" src="../herramientas/ui.core.js"></script>
+		<script type="text/javascript" src="../herramientas/ui.datepicker.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../estilos/redmond/ui.all.css" />
+		<link rel="stylesheet" type="text/css" href="../estilos/redmond/ui.datepicker.css" />
+		<link rel="stylesheet" type="text/css" href="../estilos/formulario.css"/>
+		<link rel="stylesheet" type="text/css" href="../estilos/general.css"/>
 	</head>
 	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>); mostrarBotonLogout(<?php echo $_SESSION['step']; ?>); establecerIdioma('<?php echo $idioma; ?>')">
 		<?php
@@ -73,7 +78,7 @@
 				$html->tag("div", array("class"=>"tabla"));
 					$html->tag("div", array("class"=>"fila"));
 						$html->tag("div", array("id"=>"div_titulo_step", "class"=>"celda vertical_centro centrado alto_30"));
-								$html->tag("label", array("id"=>"lbl_titulo_step", "class"=>"etiqueta"));
+								$html->tag("label", array("id"=>"lbl_titulo_step", "class"=>"etiqueta fuente_18"));
 								$html->end("label");
 						$html->end("div");
 					$html->end("div");

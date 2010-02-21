@@ -265,9 +265,9 @@ INSERT INTO PSDG_idioma VALUES('ttp_help','es','Haga clic para obtener ayuda sob
 INSERT INTO PSDG_idioma VALUES('select_seleccione','es','Elija una');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','es','Iniciar Sesión');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Usuario');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','es','Sesión');
 INSERT INTO PSDG_idioma VALUES('lbl_usu_password','es','Contraseña');
-INSERT INTO PSDG_idioma VALUES('ttp_usu_login','es','Digite su nombre de usuario');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_login','es','Digite el nombre de su sesión de trabajo');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_password','es','Digite su contraseña');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','es','Inglés');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','es','Español');
@@ -352,10 +352,15 @@ INSERT INTO PSDG_idioma VALUES('rec_ttp_conexion_biblioteca','es','Seleccione la
 INSERT INTO PSDG_idioma VALUES('rec_ttp_tipo_campo_biblioteca','es','Seleccione el tipo de campo de la biblioteca');
 INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_independiente','es','Seleccione el campo del que dependerá los valores de este campo');
 INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_biblioteca','es','Seleccione el campo independiente de la biblioteca donde se encuentran los valores');
-INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
-INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
-INSERT INTO PSDG_idioma VALUES('rec_ttp_','es','');
-
+INSERT INTO PSDG_idioma VALUES('rec_en_dias','es','en días');
+INSERT INTO PSDG_idioma VALUES('rec_posicion','es','posición');
+INSERT INTO PSDG_idioma VALUES('rec_fecha','es','fecha');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_conexion_archivo','es','Seleccione la conexión al archivo donde se encuentran los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fun_codigo','es','Seleccione la función a utilizar que se encargará de crear los valores');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_markov_input','es','Seleccione el texto que se utilizará como base para generar las cadenas de Markov');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_tia_codigo','es','Seleccione la forma en que serán tomados los valores de la fuente de datos');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fup_codigo','es','Seleccione la función de probabilidad a la que se adaptarán los datos');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_btn_establecer','es','Guardar la configuración de este campo');
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','es','Archivo');
 INSERT INTO PSDG_idioma VALUES('select_Base de datos','es','Base de datos');
@@ -408,6 +413,10 @@ INSERT INTO PSDG_idioma VALUES('eje_lbl_ordenando_tablas','es','Priorizando tabl
 INSERT INTO PSDG_idioma VALUES('eje_lbl_generar_datos','es','Etapa de generación de datos');
 INSERT INTO PSDG_idioma VALUES('eje_lbl_generando_tabla','es','Generando datos sintéticos para la tabla');
 
+INSERT INTO PSDG_idioma VALUES('eje_lbl_resumen','es','Resúmen de toda la configuración');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_conexiones','es','Conexiones establecidas');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_num_tuplas','es','Cantidad de registros a generar por tabla');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_tipo_salida','es','Tipos de salida seleccionados');
 /**************************************************************************************************************/
 /*INGLES*/
 /*general*/
@@ -415,9 +424,9 @@ INSERT INTO PSDG_idioma VALUES('ttp_help','en','Click for help on this section.'
 INSERT INTO PSDG_idioma VALUES('select_seleccione','en','Choose one');
 /*login*/
 INSERT INTO PSDG_idioma VALUES('lbl_login','en','Log in');
-INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','User');
+INSERT INTO PSDG_idioma VALUES('lbl_usu_login','en','Workspace');
 INSERT INTO PSDG_idioma VALUES('lbl_usu_password','en','Password');
-INSERT INTO PSDG_idioma VALUES('ttp_usu_login','en','Type your user name');
+INSERT INTO PSDG_idioma VALUES('ttp_usu_login','en','Type your workspace name');
 INSERT INTO PSDG_idioma VALUES('ttp_usu_password','en','Type your password');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_en','en','English');
 INSERT INTO PSDG_idioma VALUES('ttp_chk_lang_es','en','Spanish');
@@ -494,6 +503,23 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_length','en','Length');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_markov_input','en','Input text');
 
 INSERT INTO PSDG_idioma VALUES('rec_ttp_numero_tuplas','en','Number of records to generate');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fue_codigo','en','Select where will obtain the possible values');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_conexion','en','Select connection to the database where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_tabla','en','Select the database table where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo','en','Select field of table where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_conexion_biblioteca','en','Select connection to the library where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_tipo_campo_biblioteca','en','Select field type of library');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_independiente','en','Select the field that depends on the values of this field');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_nombre_campo_biblioteca','en','Select the independent field of the library where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_en_dias','en','in days');
+INSERT INTO PSDG_idioma VALUES('rec_posicion','en','position');
+INSERT INTO PSDG_idioma VALUES('rec_fecha','en','date');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_conexion_archivo','en','Select connection to the file where the values are obtained');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fun_codigo','en','Select the function used to be in charge of setting the values');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_markov_input','en','Select the text to be used as a basis for generating Markov chain');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_tia_codigo','en','Choose how you will be taken the values of the data source');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_fup_codigo','en','Select the probability function for adjusting the data');
+INSERT INTO PSDG_idioma VALUES('rec_ttp_btn_establecer','en','Save settings for this field');
 
 
 INSERT INTO PSDG_idioma VALUES('select_Archivo','en','File');
@@ -547,6 +573,10 @@ INSERT INTO PSDG_idioma VALUES('eje_lbl_ordenando_tablas','en','Prioritizing tab
 INSERT INTO PSDG_idioma VALUES('eje_lbl_generar_datos','en','Data generation stage');
 INSERT INTO PSDG_idioma VALUES('eje_lbl_generando_tabla','en','Generating synthetic data for table');
 
+INSERT INTO PSDG_idioma VALUES('eje_lbl_resumen','en','Summary of all configuration');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_conexiones','en','Connections established');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_num_tuplas','en','Number of records to generate per table');
+INSERT INTO PSDG_idioma VALUES('eje_lbl_tipo_salida','en','Selected Output Types');
 
 
 
@@ -564,8 +594,22 @@ INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_2','es','Aquí se muestran t
 INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_3','es','Aquí se muestran la conexión establecida a la Base de Datos Objetivo (BDO).<br/><br/>Puede eliminar la conexión a base de datos haciendo clic en su respectivo botón <b>Eliminar</b>.');
 /*RESTRICCIONES*/
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','es','Esta es la estructura de la base de datos objetivo que será poblada (<b>BDO</b>).<br/><br/>Seleccione las tablas y campos de la BDO que desee poblar para establecer sus parámetros en la ventana <b>Detalle</b>.');
-INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar una determinada tabla de la BDO, establezca a <b>cero (0)</b> el campo <b>Cantidad de tuplas</b>.<br/><br/>Si no desea poblar un determinado campo de una tabla, establezca el valor <b>Ninguna</b> el campo <b>Fuente de datos</b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','es','Aquí se establecen los parámetros para poblar cada una de las tablas y campos.<br/><br/>Si no desea poblar una determinada tabla de la BDO, establezca a <b>cero (0)</b> el campo <b>Cantidad de tuplas</b>.<br/><br/>Si no desea poblar un determinado campo de una tabla, establezca el valor <b>Ninguna</b> en el campo <b>Fuente de datos</b>.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','es','La operación no se pudo completar. Se necesita establecer primero las condiciones de las siguientes tablas para cumplir las restricciones de llaves foráneas:<br/><b>%v</b>.');
+
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_lista_valores','es','Ingrese los posibles valores a generar separados por un salto de linea.<br/><br/><b>Advertencia:</b> los valores deben cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> deben ser <b><i>sólo números</i></b>, si es <b><i>fecha</i></b> deben tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_constante','es','Ingrese el único valor a generar en todos los registros.<br/><br/><b>Advertencia:</b> El valor debe cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> deben ser un <b><i>número</i></b>, si es <b><i>fecha</i></b> debe tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_desde','es','Ingrese el mínimo valor que se puede generar.<br/><br/><b>Advertencia:</b> El valor debe cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> deben ser un <b><i>número</i></b>, si es <b><i>fecha</i></b> debe tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_hasta','es','Ingrese el máximo valor que se puede generar.<br/><br/><b>Advertencia:</b> El valor debe cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> deben ser un <b><i>número</i></b>, si es <b><i>fecha</i></b> debe tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_secuencial','es','Ingrese el valor inicial de la secuencia a generar.<br/><br/><b>Advertencia:</b> El valor debe cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> deben ser un <b><i>número</i></b>, si es <b><i>fecha</i></b> debe tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_delta_secuencial','es','Ingrese el valor a incrementar/decrementar en la secuencia.<br/><br/><b>Advertencia:</b> El valor debe ser un <b><i>numéro</i></b>, si el tipo de dato es <b><i>fecha</i></b> se toma como <b><i>Número de días</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_markov_order','es','Este valor establece la longitud esperada de las palabras del texto para inicializar la tabla de markov.<br/><br/>El valor debe ser un <b><i>numéro</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_markov_length','es','Ingrese la longitud que tendrá la cadena de markov.<br/><br/>El valor debe ser un <b><i>numéro</i></b>. Tenga cuidado en no sobrepasar la longitud máxima que acepta el campo en la base de datos.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_lambda','es','Ingrese el parámetro <b><i>lambda</b></i> para la distribución exponencial.<br/><br/>El valor debe ser un <b><i>numéro</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_media','es','Ingrese el parámetro <b><i>media</b></i> para la distribución normal.<br/><br/>Si el tipo de fuente es <b>[<i>Base de datos, Biblioteca, Lista de valores ó Archivo</i>]</b> el valor simboliza la <b><i>posición</i></b> que será tomada como <b><i>media</i></b>. Si el tipo de fuente es <b>[<i>Intérvalo</i>]</b> será tomado como un valor y debe cumplir con el formato del tipo de dato, si es <b><i>numérico</i></b> debe ser un <b><i>número</i></b>, si es <b><i>fecha</i></b> debe tener el formato ISO-8601: <b><i>AAAA-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_desviacion_estandar','es','Ingrese el parámetro <b><i>desviación estandar</b></i> que tendrá la distribución normal.<br/>Si el tipo de fuente es <b>[<i>Base de datos, Biblioteca, Lista de valores ó Archivo</i></b>] simbolizará el <b><i>delta de posición </b></i>que será tomado como <b><i>desviación</b></i>. Si el tipo de fuente es <b>[<i>Intérvalo</i>]</b> debe cumplir con el formato del tipo de dato: si es <b><i>numérico</i></b> indica el <b><i>delta de valor</b></i> que será tomado como <b><i>desviación</b></i>, si es <b><i>fecha</i></b> indica el <b><i>delta en días</b></i> que tomará como desviación.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_porcentaje_nulos','es','Ingrese la probabilidad de que el valor generado sea un valor nulo. Valores entre [0-100].');
+
 /*salida*/
 INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','es','Seleccione una de las opciones del panel para migrar los datos sintéticos generados hacia ese destino.');
 /*Ejecución*/
@@ -580,6 +624,21 @@ INSERT INTO PSDG_mensaje_popup VALUES('con_btn_help_3','en','Here are the establ
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_1','en','This is the structure of the database to be populated (<b>BDO</b>). Select the tables and fields you want to populate the BDO to set its parameters in the <b>Detail</b> window.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_btn_help_2','en','Here you set the parameters to populate each of the tables and fields.<br/><br/>If you do not want to populate a table in the BDO, Set  <b>zero (0)</b> in the field <b>Number of records</b>.<br/><br/>If you do not want to populate a table field, Set  <b>None</b> in the field <b>Data source</b>.');
 INSERT INTO PSDG_mensaje_popup VALUES('res_error_1','en','Operation could not be completed. You need first establish conditions on the following tables to meet the foreign key constraints:<br/><b>%v</b>.');
+
+
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_lista_valores','en','Enter possible values that can be generated separated by a newline.<br/><br/><b>Note:</b> Values must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_constante','en','Enter the unique value that can be generated in all records.<br/><br/><b>Note:</b> Value must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_desde','en','Enter the minimum value that can be generated.<br/><br/><b>Note:</b> Value must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_hasta','en','Enter the maximum value that can be generated.<br/><br/><b>Note:</b> Value must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_valor_secuencial','en','Enter the initial value that can be generated by sequence.<br/><br/><b>Note:</b> Value must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_delta_secuencial','en','Enter the value to increase/decrease in the sequence.<br/><br/><b>Note:</b> The value must be a <b><i>number</i></b>, if the data type is <b><i>date</i></b> is taken as <b><i>number of days</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_markov_order','en','This sets the expected length of words in the text to initialize the Markov table.<br/><br/>Value must be a <b><i>number</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_markov_length','en','Enter length that will the Markov chan.<br/><br/>Value must be a <b><i>number</i></b>. Be careful not to exceed the maximum length accepted the field in the database.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_lambda','en','Enter the <b><i>lambda</b></i> parameter for the exponential distribution.<br/><br/>Value must be a <b><i>number</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_media','en',' Enter the <b><i>mean</b></i> parameter for normal distribution.<br/><br/>If source is <b>[<i>Database, Library, Archive or List values</i>]</b> the value represents the position to be taken as <b><i>mean</i></b>. If source is <b>[<i>Interval</i>]</b> is taken as a value and must comply with the format of data type, if <b><i>numeric</i></b> must be <b><i>only numbers</i></b>, if <b><i>date</i></b> should be ISO-8601 format: <b><i>YYYY-MM-DD</i></b>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_desviacion_estandar','en','Enter the <b><i>standar deviation</b></i> parameter for the exponential distribution.<br/>If source is <b>[<i>Database, Library, Archive or List values</i>]</b> the value represents the <b><i>delta position</b></i> to be taken as <b><i>deviation</i></b>. If source is <b>[<i>Interval</i>]</b> is taken as a value and must comply with the format of data type, if <b><i>numeric</i></b> represents the <b><i>delta value</b></i> is taken as a <b><i>deviation</b></i>, if <b><i>date</i></b> indicates the <b><i>delta in days</b></i> taken as a <b><i>deviation</b></i>.');
+INSERT INTO PSDG_mensaje_popup VALUES('rec_pop_porcentaje_nulos','en','Enter the probability that the generated value is null. Values between [0-100].');
+
 /*salida*/
 INSERT INTO PSDG_mensaje_popup VALUES('sal_btn_help_1','en','Select a option from panel to migrate generated synthetic data to that destination.');
 /*Ejecución*/

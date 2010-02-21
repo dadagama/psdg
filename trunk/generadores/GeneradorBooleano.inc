@@ -39,7 +39,9 @@ class GeneradorBooleano extends Generador
 	 */
 	function generar(&$arreglo_memoria="")
 	{
-		
+		if($this->_debeGenerarValorNulo())
+			return "@null";
+			
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{
 			default:

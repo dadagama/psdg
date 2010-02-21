@@ -28,6 +28,8 @@ function inicializar()
 	$('#eje_div_botones_secuencia').removeClass("oculto");
 	setTimeout('efecto("eje_div_botones_secuencia","fadeIn")',2000);
 	
+	mostrarResumen();
+	
 	establecerPosicionSecuencia(4);
 }
 
@@ -77,6 +79,23 @@ function desplegarModulo(modulo)
 	$("#div_cuerpo").append(modulo);
 }
 
+function mostrarResumen()
+{
+	$.ajax({
+		async:		false,
+		type: 		"POST",
+		dataType:	"html",
+		contentType:"application/x-www-form-urlencoded",
+		url:		"../modulo_ejecucion/ejecucion.php",
+		data:		"funcion=mostrarResumen",
+		beforeSend:	ajaxSend,
+		success:	recibirResumen,
+		timeout:	10000,
+		error:		ajaxError(12)
+	}); 
+	return false;
+}
+
 function iniciar()
 {
 	
@@ -112,6 +131,14 @@ function ejecutar()
 	}); 
 	return false;
 }
+
+function recibirResumen(log)
+{
+	var elm = document.getElementById('div_log');
+	$('#div_log').append(log);
+	elm.scrollTop = elm.scrollHeight;
+}
+
 
 function recibirLog(log)
 {
