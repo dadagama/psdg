@@ -28,6 +28,10 @@ switch($_REQUEST['funcion'])
 		require_once("../modulo_salida/fm_salida.php");
 		break;
 	
+	case "mostrarResumen":
+		$objetoEjecucion->mostrarResumen();
+		break;
+		
 	case "iniciar":
 			$_SESSION['nombres_tablas_ordenadas'] = $objetoEjecucion->crearArregloTablasOrdenadas();
 			$_SESSION['estado'] = "mensaje_tabla";

@@ -80,6 +80,15 @@ body
 	margin: 0 auto;
 }
 
+.fuente_18
+{font-size: 18px;}
+
+.cursiva
+{
+	font-style: italic;
+	font-size: 12px;
+}
+
 .alto_30
 {height: 30px;}
 
@@ -107,8 +116,14 @@ body
 .ancho_70
 {width: 70px;}
 
+.ancho_85
+{width: 85px;}
+
 .ancho_100
 {width: 100px;}
+
+.ancho_120
+{width: 120px;}
 
 .ancho_130
 {width: 130px;}

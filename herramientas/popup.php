@@ -35,5 +35,5 @@
 		echo utf8_encode($mensaje);
 	}
 	else
-		echo "No existe ayuda para este módulo :(";
+		echo "No existe ayuda para este módulo [".$_REQUEST['accion']."][".$_SESSION['lang']."] :(";
 ?>

@@ -105,7 +105,7 @@ function mostrarDetalleTabla(nombre_tabla)
 		url:		"../modulo_restricciones/restricciones.php",
 		data:		"funcion=mostrarDetalleTabla&nombre_tabla="+nombre_tabla,
 		beforeSend:	ajaxSend,
-		success:	actualizarDivDetalle,
+		success:	actualizarDivDetalleTabla,
 		timeout:	10000,
 		error:		ajaxError(12)
 	}); 
@@ -340,6 +340,8 @@ function hacerVisibleCamposFormularioFuenteDeDatos(tipo_conexion)
 			$("#rec_tabla_funcion").show();
 			break;
 	}
+	actualizarVisibilidadCampoFuncionProbabilidad();
+	actualizarEtiquetasAuxiliaresMediaYDesviacion();
 }
 
 function actualizarVisibilidadParametrosFuncion()
@@ -347,7 +349,7 @@ function actualizarVisibilidadParametrosFuncion()
 	//alert(2);
 	$("#rec_tabla_markov").hide();
 	var tipo_funcion = $("#rec_fun_codigo").val();
-	if(tipo_funcion == 3 || tipo_funcion == 4)//gibberish
+	if(tipo_funcion == 3 || tipo_funcion == 4)//gibberish varchar o text
 		$("#rec_tabla_markov").show();
 }
 
@@ -358,6 +360,7 @@ function actualizarVisibilidadCampoFuncionProbabilidad()
 	var tipo_acceso = $("#rec_tia_codigo").val();
 	if(tipo_acceso == 3)//probabilistico
 		$("#rec_fila_funcion_probabilidad").children().show();
+	actualizarVisibilidadCamposDistribucion();
 }
 
 function actualizarVisibilidadCamposDistribucion()
@@ -367,15 +370,71 @@ function actualizarVisibilidadCamposDistribucion()
 	$("#rec_fila_media").children().hide();
 	$("#rec_fila_desviacion_estandar").children().hide();
 	var tipo_distribucion = $("#rec_fup_codigo").val();
-	if(tipo_distribucion == 3)//exponencial
-		$("#rec_fila_lambda").children().show();
-
-	if(tipo_distribucion == 2)//normal
+	var tipo_acceso = $("#rec_tia_codigo").val();
+	if(tipo_acceso == 3)//probabilistico
 	{
-		$("#rec_fila_media").children().show();
-		$("#rec_fila_desviacion_estandar").children().show();
+		if(tipo_distribucion == 3)//exponencial
+			$("#rec_fila_lambda").children().show();
+	
+		if(tipo_distribucion == 2)//normal
+		{
+			$("#rec_fila_media").children().show();//mostrar el campo MEDIA
+			$("#rec_fila_desviacion_estandar").children().show();
+		}
 	}
 
+}
+
+function actualizarEtiquetasAuxiliaresMediaYDesviacion()
+{
+	/* Si el tipo de fuente es [Base de datos, Biblioteca, Lista de 
+	 * valores ó Archivo] la media simboliza la POSICION del valor que 
+	 * será tomado como media. Si el tipo de fuente es [Intérvalo] será 
+	 * tomado como un VALOR y debe cumplir con el formato del tipo de 
+	 * dato, si es numérico debe ser un número, si es fecha simboliza una FECHA
+	 * y debe tener el formato ISO-8601: AAAA-MM-DD.*/
+	var fue_codigo = $("#rec_fue_codigo").val();
+	var tipo_dato = obtenerTipoDeDato();
+	$('#rec_media').datepicker( 'destroy' );//quitar funcionalidad datepicker
+	//alert(fue_codigo+","+tipo_dato);
+	switch(fue_codigo)
+	{
+		case '2'://bd
+		case '3'://biblioteca
+		case '4'://lista de valores
+		case '7'://archivo
+			$('#rec_lbl_auxiliar_media').html(lang_js[34]);//actualizo el mensaje auxiliar
+			$('#rec_lbl_auxiliar_desviacion').html(lang_js[35]);
+			break;
+			
+		case '6'://intervalo
+			if(tipo_dato == "date" || tipo_dato == "timestamp")
+			{
+				$('#rec_lbl_auxiliar_media').html(lang_js[36]);
+				$('#rec_lbl_auxiliar_desviacion').html(lang_js[37]);
+				$('#rec_media').datepicker({ dateFormat: 'yy-mm-dd' });
+			}
+			else
+			{
+				$('#rec_lbl_auxiliar_media').html(lang_js[38]);
+				$('#rec_lbl_auxiliar_desviacion').html(lang_js[39]);
+			}
+			break;
+	}
+}
+
+function obtenerTipoDeDato()
+{
+	var tipo_dato_extendido = $("#rec_lbl_tipo_dato").html();
+	var posicion_parentesis = tipo_dato_extendido.search(/\(/);
+	//alert(posicion_parentesis);
+	var tipo = "";
+	if(posicion_parentesis != -1)
+		tipo = tipo_dato_extendido.substr(0,posicion_parentesis);
+	else
+		tipo = tipo_dato_extendido;
+	//alert(tipo);
+	return tipo;
 }
 
 function actualizarVisibilidadCampoIndependiente()
@@ -406,6 +465,23 @@ function actualizarVisibilidadTipoAcceso()
 	var tipo_campo_biblioteca = $("#rec_tipo_campo_biblioteca").val();
 	if(tipo_campo_biblioteca != 2)//no sea dependiente
 		$("#rec_probabilidades").children().show();
+}
+
+function actualizarDivDetalleTabla(formulario)
+{
+	//alert(8);
+	setTimeout('efecto("res_div_detalle","fadeOut")',0);//slideToggle
+	setTimeout('mostrarFormularioDetalleTabla(\''+formulario+'\')',500);
+}
+
+function mostrarFormularioDetalleTabla(formulario)
+{
+	//alert(9);
+	formulario = formulario.replace(/@br2n/g,"\n");
+	$('#res_div_detalle').addClass("oculto");
+	$('#res_div_detalle').html(formulario);
+	$('#res_div_detalle').removeClass("oculto");
+	setTimeout('efecto("res_div_detalle","fadeIn")',0);//slideDown
 }
 
 function actualizarDivDetalle(formulario)

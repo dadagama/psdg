@@ -73,6 +73,8 @@ class GeneradorNumerico extends Generador
 	 */
 	function generar(&$arreglo_memoria="")
 	{
+		if($this->_debeGenerarValorNulo())
+			return "@null";
 		//echo "<br>fuente: ".$this->_arreglo_parametros['rec_fue_codigo'];
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{

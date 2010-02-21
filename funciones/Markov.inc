@@ -36,20 +36,26 @@ var $_order;
 var $_length;
 var $_input;
 var $_text;
+var $_markov_table;
 
 function __construct($order, $length, $input)
 {
 	$this->_order  = $order;
     $this->_length = $length;
     $this->_text = utf8_encode(file_get_contents("../funciones/text/".$input.".txt"));
+    //Darwin Garcia[2010-02-20]: se inicializa la tabla aca para optimizar el proceso.
+    if(isset($this->_text)) 
+    {
+		$this->_markov_table = $this->generate_markov_table($this->_text, $this->_order);
+    }
 }
 
 function generar()
 {
     if(isset($this->_text)) 
     {
-        $markov_table = $this->generate_markov_table($this->_text, $this->_order);
-        $markov = $this->generate_markov_text($this->_length, $markov_table, $this->_order);
+        //$markov_table = $this->generate_markov_table($this->_text, $this->_order);
+        $markov = $this->generate_markov_text($this->_length, $this->_markov_table, $this->_order);
         if (get_magic_quotes_gpc()) 
         	$markov = stripslashes($markov);
     }

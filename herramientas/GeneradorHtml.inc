@@ -44,7 +44,7 @@ class GeneradorHtml
 		return $this->traductor->traducir($texto);
 	}
 
-	function tag($tag, $arrayAtributosAsociativos="", $arrayAtributos="")
+	function tag($tag, $arrayAtributosAsociativos="", $arrayAtributos="", $tag_una_linea = false)
 	{
 		if($arrayAtributosAsociativos)
 			foreach($arrayAtributosAsociativos as $tipo => $valor)
@@ -52,7 +52,9 @@ class GeneradorHtml
 		if($arrayAtributos)
 			foreach($arrayAtributos as $pos => $valor)
 				$atributos .= " $valor";
-		echo "<".stripslashes($tag)." ".stripslashes($atributosAsociativos)." ".stripslashes($atributos).">";
+		if($tag_una_linea)
+			$fin_tag = "/";
+		echo "<".stripslashes($tag)." ".stripslashes($atributosAsociativos)." ".stripslashes($atributos)." $fin_tag>";
 	}
 	
 	function botonAyuda($nombreBoton)

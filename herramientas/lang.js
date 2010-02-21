@@ -18,8 +18,8 @@
 
 var lang_en = new Array(
 		"Log in",//0
-		"User",//1
-		"Type your user name",//2
+		"Workspace",//1
+		"Type your workspace name",//2
 		"Password",//3
 		"Type your password",//4
 		"English",//5
@@ -46,17 +46,23 @@ var lang_en = new Array(
 		"Constraint set correctly.",//26
 		"If this value is set to zero, tables that depend on this will also be excluded. Are you sure?",//27
 		"Output type established correctly.",//28
-		"Process successfully completed!",//29
+		"Process completed!",//29
 		"Not a valid direction.",//30
 		"can contain only letters.",//31
 		"can contain only numbers.",//32
-		"this connection will be remove ¿Are you sure?"//33
+		"this connection will be remove ¿Are you sure?",//33
+		"position",//34
+		"delta of position",//35
+		"date",//36
+		"delta in days",//37
+		"value",//38
+		"delta value"//39
 	);
 
 var lang_es = new Array(
 		"Iniciar sesión",//0
-		"Usuario",//1
-		"Digite su nombre de usuario",//2
+		"Sesión",//1
+		"Digite el nombre de su sesión de trabajo",//2
 		"Contraseña",//3
 		"Digite su contraseña",//4
 		"Inglés",//5
@@ -81,13 +87,19 @@ var lang_es = new Array(
 		"Advertencia",//24
 		"",//25 - para uso de info externa.
 		"Restricción establecida correctamente.",//26
-		"Si este valor se establece en cero, las tablas que dependan de esta tambien seran excluídas. ¿Esta seguro?",//27
+		"Si este valor se establece en cero, las tablas que dependan de esta también serán excluídas. ¿Esta seguro?",//27
 		"Formato de salida establecido correctamente.",//28
-		"Proceso terminado satisfactoriamente!",//29
+		"Proceso finalizado",//29
 		"no es una dirección válida.",//30
 		"[%v] solo puede contener letras.",//31
 		"[%v] solo puede contener números.",//32
-		"this connection will be remove ¿Are you sure?"//33
+		"Esta conexión será eliminada ¿Está seguro?",//33
+		"posición",//34
+		"delta de posición",//35
+		"fecha",//36
+		"delta en días",//37
+		"valor",//38
+		"delta de valor"//39
 	);
 
 var lang = "en";

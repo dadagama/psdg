@@ -317,7 +317,6 @@ abstract class Generador
 	{
 		if($this->_debeGenerarValorNulo())
 			return "@null";
-			
 		//echo "<br>FUENTE: ".$this->_arreglo_parametros['rec_fue_codigo'];
 		switch($this->_arreglo_parametros['rec_fue_codigo'])
 		{

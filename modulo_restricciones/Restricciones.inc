@@ -424,7 +424,10 @@ class Restricciones
 		////////////////////////////////////// CONSULTA DE INFORMACION PREVIA SI EXISTE
 		
 		$tipo_de_dato = $this->obtenerTipoDeDato($this->arreglo_restricciones['rec_tipo_dato']);
-		
+		if($this->esTipoFecha($tipo_de_dato))
+			$es_tipo_fecha = true;
+		$es_fuente_intervalo = $this->esFuenteIntervalo();
+			
 		if($es_foranea = $this->arreglo_restricciones['rec_es_foranea'])
 		{
 			$readonly = "readonly";
@@ -466,7 +469,7 @@ class Restricciones
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("input", array("id"=>"rec_porcentaje_nulos", "type"=>"text", "maxlength"=>"3", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo ancho_35", $permite_nulos=>$permite_nulos));
+							$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_porcentaje_nulos\\\');", "id"=>"rec_porcentaje_nulos", "type"=>"text", "maxlength"=>"3", "value"=>$porcentaje_nulos, "class"=>"valor_campo color_letra_campo ancho_35", $permite_nulos=>$permite_nulos));
 					$this->html->end("div");
 				$this->html->end("div");
 			
@@ -633,7 +636,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("textarea", array("name"=>"rec_lista_valores", "id"=>"rec_lista_valores", "class"=>"valor_campo color_letra_campo ancho_150 alto_120", "wrap"=>"off"));
+												$this->html->tag("textarea", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_lista_valores\\\');", "name"=>"rec_lista_valores", "id"=>"rec_lista_valores", "class"=>"valor_campo color_letra_campo ancho_150 alto_120", "wrap"=>"off"));
 													$lista_valores = $this->obtenerValoresTablaListaDeValores($parametros_conexion['rec_nombre_tabla_lista_valores']);
 													$this->html->printStaticText($lista_valores);
 												$this->html->end("textarea");
@@ -660,7 +663,9 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("input", array("name"=>"rec_valor_constante", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$valor_constante, "class"=>"valor_campo color_letra_campo ancho_150"));
+												$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_valor_constante\\\');", "name"=>"rec_valor_constante", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$valor_constante, "class"=>"ancho_85"));
+												if($es_tipo_fecha)
+													$this->integrarDatePicker('rec_valor_constante');
 											$this->html->end("div");
 										$this->html->end("div");
 							$this->html->end("div");
@@ -669,8 +674,16 @@ class Restricciones
 //							break;
 //
 //						case 6://Intervalo
-							$valor_desde = 0;
-							$valor_hasta = 0;
+							if($es_tipo_fecha)
+							{
+								$valor_desde = date("Y-m-d");
+								$valor_hasta = date("Y-m-d");
+							}
+							else
+							{
+								$valor_desde = 0;
+								$valor_hasta = 0;
+							}
 							if(isset($parametros_conexion['rec_valor_desde']) && isset($parametros_conexion['rec_valor_hasta']))
 							{
 								$valor_desde = $parametros_conexion['rec_valor_desde'];
@@ -688,7 +701,9 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("input", array("name"=>"rec_valor_desde", "id"=>"rec_valor_desde", "type"=>"text", "value"=>$valor_desde, "class"=>"valor_campo color_letra_campo ancho_70"));
+												$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_valor_desde\\\');", "name"=>"rec_valor_desde", "id"=>"rec_valor_desde", "type"=>"text", "value"=>$valor_desde, "class"=>"valor_campo color_letra_campo ancho_85"));
+												if($es_tipo_fecha)
+													$this->integrarDatePicker('rec_valor_desde');
 											$this->html->end("div");
 										$this->html->end("div");
 										
@@ -700,7 +715,9 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->tag("input", array("name"=>"rec_valor_hasta", "id"=>"rec_valor_hasta", "type"=>"text", "value"=>$valor_hasta, "class"=>"valor_campo color_letra_campo ancho_70"));
+												$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_valor_hasta\\\');", "name"=>"rec_valor_hasta", "id"=>"rec_valor_hasta", "type"=>"text", "value"=>$valor_hasta, "class"=>"valor_campo color_letra_campo ancho_85"));
+												if($es_tipo_fecha)
+													$this->integrarDatePicker('rec_valor_hasta');
 											$this->html->end("div");
 										$this->html->end("div");
 							$this->html->end("div");
@@ -721,7 +738,7 @@ class Restricciones
 											$this->html->end("div");
 											
 											$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '7'", $parametros_conexion['rec_conexion_archivo'], array("name"=>"rec_conexion_archivo", "id"=>"rec_conexion_archivo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
+												$this->html->printSelect($this->conexionBDI, "con_nombre", "con_nombre", "PSDG_conexion", "con_usu_login = '".$this->usu_login."' AND con_fue_codigo = '7'", $parametros_conexion['rec_conexion_archivo'], array("title"=>$this->html->getText('rec_ttp_conexion_archivo'), "name"=>"rec_conexion_archivo", "id"=>"rec_conexion_archivo", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
 											$this->html->end("div");
 										$this->html->end("div");
 							$this->html->end("div");
@@ -730,8 +747,11 @@ class Restricciones
 //							break;
 
 
-//                case 8://Secuencial	                     
-	                     $valor_secuencial = "1";
+//                case 8://Secuencial	
+						 if($es_tipo_fecha)
+							$valor_secuencial = date("Y-m-d");
+						 else
+	                     	$valor_secuencial = "1";
 	                     $delta_secuencial = "1";
 	                     if($parametros_conexion['rec_valor_secuencial'])
 	                        $valor_secuencial = $parametros_conexion['rec_valor_secuencial'];   
@@ -751,7 +771,9 @@ class Restricciones
 	                                 $this->html->end("div");
 	                                 
 	                                 $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-	                                    $this->html->tag("input", array("name"=>"rec_valor_secuencial", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$valor_secuencial, "class"=>"valor_campo color_letra_campo ancho_150"));
+	                                    $this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_valor_secuencial\\\');", "name"=>"rec_valor_secuencial", "id"=>"rec_valor_secuencial", "type"=>"text", "value"=>$valor_secuencial, "class"=>"valor_campo color_letra_campo ancho_85"));
+	                                 	if($es_tipo_fecha)
+											$this->integrarDatePicker('rec_valor_secuencial'); 
 	                                 $this->html->end("div");
 	
 	                              $this->html->end("div");
@@ -764,8 +786,14 @@ class Restricciones
 	                                 $this->html->end("div");
 	
 	                                $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-	                                    $this->html->tag("input", array("name"=>"rec_delta_secuencial", "id"=>"rec_valor_constante", "type"=>"text", "value"=>$delta_secuencial, "class"=>"valor_campo color_letra_campo ancho_150"));
-	                                 $this->html->end("div");
+	                                    $this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_delta_secuencial\\\');", "name"=>"rec_delta_secuencial", "id"=>"rec_delta_secuencial", "type"=>"text", "value"=>$delta_secuencial, "class"=>"valor_campo color_letra_campo ancho_85"));
+	                                    if($es_tipo_fecha)
+	                                    {
+	                                    	$this->html->tag("label", array("class"=>"cursiva"));
+	                                    		$this->html->printText('rec_en_dias');
+	                                    	$this->html->end("label");
+	                                    }
+									$this->html->end("div");
 	
 	                              $this->html->end("div");
 	                     $this->html->end("div");
@@ -785,7 +813,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->printSelect($this->conexionBDI, "fun_codigo", "fun_nombre", "PSDG_funcion", "fun_tipo_dato = '".$tipo_de_dato."'", $parametros_conexion['rec_fun_codigo'], array("name"=>"rec_fun_codigo", "id"=>"rec_fun_codigo", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarVisibilidadParametrosFuncion();"), "", "select_seleccione", false);
+											$this->html->printSelect($this->conexionBDI, "fun_codigo", "fun_nombre", "PSDG_funcion", "fun_tipo_dato = '".$tipo_de_dato."'", $parametros_conexion['rec_fun_codigo'], array("title"=>$this->html->getText('rec_ttp_fun_codigo'), "name"=>"rec_fun_codigo", "id"=>"rec_fun_codigo", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarVisibilidadParametrosFuncion();"), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 						$this->html->end("div");
@@ -795,11 +823,11 @@ class Restricciones
 //						
 //						rec_markov_input
 						//GIBBERISH - MARKOV PARAMETROS
-						//$rec_markov_order = 4;
+						$rec_markov_order = 4;
 						if($parametros_conexion['rec_markov_order'])
 	                        $rec_markov_order = $parametros_conexion['rec_markov_order']; 
 	                    
-	                   // $rec_markov_length = 100;
+	                    //$rec_markov_length = 100;
 						if($parametros_conexion['rec_markov_length'])
 	                        $rec_markov_length = $parametros_conexion['rec_markov_length'];
 	                        
@@ -814,7 +842,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->tag("input", array("name"=>"rec_markov_order", "id"=>"rec_markov_order", "type"=>"text", "value"=>$rec_markov_order, "class"=>"valor_campo color_letra_campo ancho_150"));
+											$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_markov_order\\\');", "name"=>"rec_markov_order", "id"=>"rec_markov_order", "type"=>"text", "value"=>$rec_markov_order, "class"=>"valor_campo color_letra_campo ancho_150"));
 										$this->html->end("div");
 									$this->html->end("div");
 									
@@ -826,7 +854,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->tag("input", array("name"=>"rec_markov_length", "id"=>"rec_markov_length", "type"=>"text", "value"=>$rec_markov_length, "class"=>"valor_campo color_letra_campo ancho_150"));
+											$this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_markov_length\\\');", "name"=>"rec_markov_length", "id"=>"rec_markov_length", "type"=>"text", "value"=>$rec_markov_length, "class"=>"valor_campo color_letra_campo ancho_150"));
 										$this->html->end("div");
 									$this->html->end("div");
 									
@@ -838,7 +866,7 @@ class Restricciones
 										$this->html->end("div");
 										
 										$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-											$this->html->printSelect($this->conexionBDI, "fum_codigo", "fum_nombre", "PSDG_fuente_markov", "", $parametros_conexion['rec_markov_input'], array("name"=>"rec_markov_input", "id"=>"rec_markov_input", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
+											$this->html->printSelect($this->conexionBDI, "fum_codigo", "fum_nombre", "PSDG_fuente_markov", "", $parametros_conexion['rec_markov_input'], array("title"=>$this->html->getText('rec_ttp_markov_input'), "name"=>"rec_markov_input", "id"=>"rec_markov_input", "class"=>"valor_campo color_letra_campo ancho_150"), "", "select_seleccione", false);
 										$this->html->end("div");
 									$this->html->end("div");
 						$this->html->end("div");
@@ -863,7 +891,7 @@ class Restricciones
 												$this->html->end("div");
 												
 												$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-													$this->html->printSelect($this->conexionBDI, "tia_codigo", "tia_nombre", "PSDG_tipo_acceso", "", $parametros_conexion['rec_tia_codigo'], array("name"=>"rec_tia_codigo", "id"=>"rec_tia_codigo", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarVisibilidadCampoFuncionProbabilidad();"), "", "", true);
+													$this->html->printSelect($this->conexionBDI, "tia_codigo", "tia_nombre", "PSDG_tipo_acceso", "", $parametros_conexion['rec_tia_codigo'], array("title"=>$this->html->getText('rec_ttp_tia_codigo'), "name"=>"rec_tia_codigo", "id"=>"rec_tia_codigo", "class"=>"valor_campo color_letra_campo ancho_150", "onchange"=>"actualizarVisibilidadCampoFuncionProbabilidad();"), "", "", true);
 												$this->html->end("div");
 											$this->html->end("div");
 								$this->html->end("div");
@@ -881,7 +909,7 @@ class Restricciones
 												$this->html->end("div");
 												
 												$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150" , "onchange"=>"actualizarVisibilidadCamposDistribucion();"), "", "", true);
+													$this->html->printSelect($this->conexionBDI, "fup_codigo", "fup_nombre", "PSDG_funcion_probabilidad", "", $parametros_conexion['rec_fup_codigo'], array("title"=>$this->html->getText('rec_ttp_fup_codigo'), "name"=>"rec_fup_codigo", "id"=>"rec_fup_codigo", "class"=>"valor_campo color_letra_campo ancho_150" , "onchange"=>"actualizarVisibilidadCamposDistribucion();"), "", "", true);
 												$this->html->end("div");
 											$this->html->end("div");
 								$this->html->end("div");
@@ -903,7 +931,7 @@ class Restricciones
                                     $this->html->end("div");
                                     
                                     $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-                                       $this->html->tag("input", array("name"=>"rec_lambda", "id"=>"rec_lambda", "type"=>"text", "value"=>$valor_lambda, "class"=>"valor_campo color_letra_campo ancho_150"));
+                                       $this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_lambda\\\');", "name"=>"rec_lambda", "id"=>"rec_lambda", "type"=>"text", "value"=>$valor_lambda, "class"=>"valor_campo color_letra_campo ancho_85"));
                                     $this->html->end("div");
                                  $this->html->end("div");
                         $this->html->end("div");
@@ -925,9 +953,18 @@ class Restricciones
                                        $this->html->end("label");
                                     $this->html->end("div");
                                     
-                                    $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-                                       $this->html->tag("input", array("name"=>"rec_media", "id"=>"rec_media", "type"=>"text", "value"=>$valor_media, "class"=>"valor_campo color_letra_campo ancho_150"));
-                                    $this->html->end("div");
+                                    $this->html->tag("div", array("id"=>"div_celda_rec_media", "class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
+                                       $this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_media\\\');", "name"=>"rec_media", "id"=>"rec_media", "type"=>"text", "value"=>$valor_media, "class"=>"valor_campo color_letra_campo ancho_85"));
+                                    	$this->html->tag("label", array("id"=>"rec_lbl_auxiliar_media", "class"=>"cursiva"));
+                                       	/*if($es_tipo_fecha && $es_fuente_intervalo)
+                                    	{
+											$this->integrarDatePicker('rec_media');
+		                                    $this->html->printText('rec_fecha');
+                                    	}
+                                    	else
+                                    		$this->html->printText('rec_posicion');*/
+                                    	$this->html->end("label");	
+									$this->html->end("div");
                                  $this->html->end("div");
                         $this->html->end("div");
                         $this->html->end("div");
@@ -948,7 +985,16 @@ class Restricciones
                                     $this->html->end("div");
                                     
                                     $this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-                                       $this->html->tag("input", array("name"=>"rec_desviacion_estandar", "id"=>"rec_desviacion_estandar", "type"=>"text", "value"=>$valor_desviacion, "class"=>"valor_campo color_letra_campo ancho_150"));
+                                       $this->html->tag("input", array("ondblclick"=>"mostrarPopupAyuda(\\\'rec_pop_desviacion_estandar\\\');", "name"=>"rec_desviacion_estandar", "id"=>"rec_desviacion_estandar", "type"=>"text", "value"=>$valor_desviacion, "class"=>"valor_campo color_letra_campo ancho_85"));
+										//if($es_tipo_fecha && $es_fuente_intervalo)
+										//{
+											$this->html->tag("label", array("id"=>"rec_lbl_auxiliar_desviacion", "class"=>"cursiva"));
+	                                      	//if($es_tipo_fecha && $es_fuente_intervalo)
+		                                    	//$this->html->printText('rec_en_dias');
+											/*else
+												$this->html->printText('rec_posicion');*/
+		                                    $this->html->end("label");
+										//}
                                     $this->html->end("div");
                                  $this->html->end("div");
                         $this->html->end("div");
@@ -973,7 +1019,7 @@ class Restricciones
 			//BOTON
 			$this->html->tag("div", array("class"=>"fila"));
 				$this->html->tag("div", array("class"=>"celda"));
-					$this->html->tag("input", array("name"=>"rec_btn_establecer","id"=>"rec_btn_establecer", "type"=>"button", "value"=>"Establecer", "onclick"=>"establecerRestriccionCampo();", "class"=>"valor_campo color_letra_campo margin_arriba_10"));
+					$this->html->tag("input", array("title"=>$this->html->getText('rec_ttp_btn_establecer'), "name"=>"rec_btn_establecer","id"=>"rec_btn_establecer", "type"=>"button", "value"=>"Establecer", "onclick"=>"establecerRestriccionCampo();", "class"=>"valor_campo color_letra_campo margin_arriba_10"));
 				$this->html->end("div");
 			$this->html->end("div");
 			$this->html->end("form");
@@ -1397,5 +1443,29 @@ class Restricciones
 
     return true;
   }
+  
+  function esTipoFecha($tipo_de_dato)
+  {
+  	$arreglo_tipos_fecha = array("date","timestamp");
+  	if(in_array($tipo_de_dato, $arreglo_tipos_fecha))
+  		return true;
+  	else
+  		return false;
+  }
+  
+	function integrarDatePicker($nombre_campo)
+	{
+		$this->html->tag("script", array("languaje"=>"javascript"));
+			$this->html->printText("$(\\\'#$nombre_campo\\\').datepicker({ dateFormat: \\\'yy-mm-dd\\\' });");
+		$this->html->end("script");
+	}
+	
+	function esFuenteIntervalo()
+	{
+		if($this->arreglo_restricciones['rec_fue_codigo'] == "6")//es fuente intervalo
+			return true;
+		else
+			return false;
+	}
 }
 ?>

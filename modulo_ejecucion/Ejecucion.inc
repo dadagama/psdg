@@ -55,6 +55,87 @@ class Ejecucion
 		$this->conexionBDO->conectar();
 	}
 	
+	function mostrarResumen()
+	{
+		$this->html->tag("label", array("class"=>"etiqueta"));
+			$this->html->printText("eje_lbl_resumen");
+		$this->html->end("label");
+		$this->html->br();
+		$this->html->espacios(4);
+		$this->html->tag("label", array("class"=>"etiqueta"));
+			$this->html->printText("eje_lbl_conexiones");
+		$this->html->end("label");
+		$this->html->br();
+		
+		$sql = "SELECT con_nombre
+				FROM PSDG_conexion
+				WHERE con_usu_login = '".$this->usu_login."'";
+		$this->conexionBDI->ejecutarSQL($sql);
+		$info_conexiones = $this->conexionBDI->obtenerResultadoComoArreglo();
+		
+		foreach($info_conexiones AS $pos => $info_conexion)
+		{
+			$this->html->espacios(8);
+			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
+				$this->html->tag("img", array("src"=>"../imagenes/ok.png"),"",true);
+				$this->html->espacios(2);
+				$this->html->printStaticText($info_conexion[0]);
+			$this->html->end("label");
+			$this->html->br();
+		}
+		
+		$this->html->espacios(4);
+		$this->html->tag("label", array("class"=>"etiqueta"));
+			$this->html->printText("eje_lbl_num_tuplas");
+		$this->html->end("label");
+		$this->html->br();
+		
+		$sql = "SELECT ret_nombre_tabla, ret_numero_tuplas_a_generar
+				FROM PSDG_restricciones_tablas
+				WHERE ret_usu_login = '".$this->usu_login."'";
+		$this->conexionBDI->ejecutarSQL($sql);
+		$info_tablas = $this->conexionBDI->obtenerResultadoComoArreglo();
+		
+		foreach($info_tablas AS $pos => $info_tabla)
+		{
+			$this->html->espacios(8);
+			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
+				$this->html->tag("img", array("src"=>"../imagenes/key.png"),"",true);	
+				$this->html->espacios(2);
+				$this->html->printStaticText($info_tabla[0].":");
+				$this->html->espacios(2);
+				$this->html->printStaticText($info_tabla[1]);
+			$this->html->end("label");
+			$this->html->br();
+		}
+		
+		$this->html->espacios(4);
+		$this->html->tag("label", array("class"=>"etiqueta"));
+			$this->html->printText("eje_lbl_tipo_salida");
+		$this->html->end("label");
+		$this->html->br();
+		
+		$sql = "SELECT tis_codigo
+				FROM PSDG_tipo_salida_escogida
+				WHERE tis_usu_login = '".$this->usu_login."'";
+		$this->conexionBDI->ejecutarSQL($sql);
+		$info_salidas = $this->conexionBDI->obtenerResultadoComoArreglo();
+		
+		foreach($info_salidas AS $pos => $info_salida)
+		{
+			$this->html->espacios(8);
+			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
+				switch($info_salida[0])
+				{
+					case "1": $salida = $this->html->printText("sal_ttp_bd"); break;
+					case "2": $salida = $this->html->printText("sal_ttp_text"); break;
+				}
+				$this->html->printStaticText($salida);
+			$this->html->end("label");
+			$this->html->br();
+		}
+	}
+	
 	function crearArregloTablasOrdenadas()
 	{	
 		$arreglo_tablas_ordenadas = array();
@@ -280,6 +361,7 @@ class Ejecucion
 			foreach($this->_arreglo_generadores AS $pos => $generador)
 			{
 				$valor = $generador->generar($arreglo_memoria);
+				//echo "<br>$valor";
 				$arreglo_memoria[$arreglo_campos[$pos]] = $valor;
 				if($valor == "@null")
 					$valores[] = "null";
