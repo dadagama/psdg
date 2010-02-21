@@ -62,7 +62,7 @@
 																	"onmouseover"=>"this.src='../imagenes/btn_db_2.png'",
 																	"onmouseout"=>"this.src='../imagenes/btn_db_1.png'"));
 									$html->end("div");
-									$html->tag("div", array("class"=>"celda"));
+									/*$html->tag("div", array("class"=>"celda"));
 										$html->tag("input", array("id" => "btn_tis_sql",
 																	"onclick"=>"alert('no implementado aún');", 
 																	"type"=>"image", 
@@ -71,7 +71,7 @@
 																	"title"=>$html->getText("sal_ttp_text"),
 																	"onmouseover"=>"this.src='../imagenes/btn_text_2.png'",
 																	"onmouseout"=>"this.src='../imagenes/btn_text_1.png'"));
-									$html->end("div");
+									$html->end("div");*/
 								$html->end("div");
 								
 								$html->tag("div", array("class"=>"fila"));
@@ -82,11 +82,11 @@
 										$html->end("label");
 									$html->end("div");
 										
-									$html->tag("div", array("class"=>"celda vertical_centro"));
+									/*$html->tag("div", array("class"=>"celda vertical_centro"));
 										$html->tag("label", array("class"=>"etiqueta alto_30"));
 											$html->printText("sal_lbl_text"); 
 										$html->end("label");
-									$html->end("div");
+									$html->end("div");*/
 									
 								$html->end("div");
 							$html->end("div");
