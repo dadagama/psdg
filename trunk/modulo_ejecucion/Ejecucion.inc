@@ -61,7 +61,7 @@ class Ejecucion
 			$this->html->printText("eje_lbl_resumen");
 		$this->html->end("label");
 		$this->html->br();
-		$this->html->espacios(4);
+		$this->html->espacios(8);
 		$this->html->tag("label", array("class"=>"etiqueta"));
 			$this->html->printText("eje_lbl_conexiones");
 		$this->html->end("label");
@@ -75,7 +75,7 @@ class Ejecucion
 		
 		foreach($info_conexiones AS $pos => $info_conexion)
 		{
-			$this->html->espacios(8);
+			$this->html->espacios(16);
 			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
 				$this->html->tag("img", array("src"=>"../imagenes/ok.png"),"",true);
 				$this->html->espacios(2);
@@ -84,7 +84,7 @@ class Ejecucion
 			$this->html->br();
 		}
 		
-		$this->html->espacios(4);
+		$this->html->espacios(8);
 		$this->html->tag("label", array("class"=>"etiqueta"));
 			$this->html->printText("eje_lbl_num_tuplas");
 		$this->html->end("label");
@@ -98,7 +98,7 @@ class Ejecucion
 		
 		foreach($info_tablas AS $pos => $info_tabla)
 		{
-			$this->html->espacios(8);
+			$this->html->espacios(16);
 			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
 				$this->html->tag("img", array("src"=>"../imagenes/key.png"),"",true);	
 				$this->html->espacios(2);
@@ -109,7 +109,7 @@ class Ejecucion
 			$this->html->br();
 		}
 		
-		$this->html->espacios(4);
+		$this->html->espacios(8);
 		$this->html->tag("label", array("class"=>"etiqueta"));
 			$this->html->printText("eje_lbl_tipo_salida");
 		$this->html->end("label");
@@ -123,7 +123,7 @@ class Ejecucion
 		
 		foreach($info_salidas AS $pos => $info_salida)
 		{
-			$this->html->espacios(8);
+			$this->html->espacios(16);
 			$this->html->tag("label", array("class"=>"etiqueta_cursiva"));
 				switch($info_salida[0])
 				{

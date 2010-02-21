@@ -312,7 +312,7 @@ INSERT INTO PSDG_idioma VALUES('ret_lbl_cantidad_tuplas','es','Numero de registr
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','es','Establecer restricciones');
 INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','es','Información del campo');
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_setup_fuente','es','Configuración de fuente de datos');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','es','Nombre de la tabla');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla_info','es','Nombre de la tabla');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo','es','Nombre del campo');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_dato','es','Tipo de dato');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_permite_nulos','es','Permite valores nulos');
@@ -330,6 +330,7 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','es','Tipo de cam
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','es','Nombre del campo orígen');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_independiente','es','Campo independiente');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','es','Conexión base de datos');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','es','Nombre de la tabla');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','es','Tipo de acceso');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','es','Función de probabilidad');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','es','Valores');
@@ -471,7 +472,7 @@ INSERT INTO PSDG_idioma VALUES('ret_lbl_cantidad_tuplas','en','Number of records
 INSERT INTO PSDG_idioma VALUES('res_lgn_info_detalle','en','Field information');
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_restricciones','en','Set restrictions');
 INSERT INTO PSDG_idioma VALUES('res_lgn_titulo_setup_fuente','en','Setup data source');
-INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','en','Table name');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla_info','en','Table name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo','en','Field name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_dato','en','Data type');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_permite_nulos','en','Allow null value');
@@ -489,6 +490,7 @@ INSERT INTO PSDG_idioma VALUES('rec_lbl_tipo_campo_biblioteca','en','Source fiel
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_biblioteca','en','Source field name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_campo_independiente','en','Independent field');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_conexion_bd','en','Link database');
+INSERT INTO PSDG_idioma VALUES('rec_lbl_nombre_tabla','en','Table name');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_tia_codigo','en','Access type');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_fup_codigo','en','Probability function');
 INSERT INTO PSDG_idioma VALUES('rec_lbl_lista_valores','en','Values');

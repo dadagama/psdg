@@ -47,16 +47,22 @@ var lang_en = new Array(
 		"If this value is set to zero, tables that depend on this will also be excluded. Are you sure?",//27
 		"Output type established correctly.",//28
 		"Process completed!",//29
-		"Not a valid direction.",//30
-		"can contain only letters.",//31
-		"can contain only numbers.",//32
+		"[%v] Not a valid direction.",//30
+		"[%v] can contain only letters.",//31
+		"[%v] can contain only numbers.",//32
 		"this connection will be remove ¿Are you sure?",//33
 		"position",//34
 		"delta of position",//35
 		"date",//36
 		"delta in days",//37
 		"value",//38
-		"delta value"//39
+		"delta value",//39
+		"[%v] must choose one option",//40
+		"[%v] invalid year",//41
+		"[%v] invalid month",//42
+		"[%v] invalid day",//43
+		"Field [%v1] greater than [%v2]",//44
+		"Field [%v1] out of range [%v2-%v3]"//45
 	);
 
 var lang_es = new Array(
@@ -90,7 +96,7 @@ var lang_es = new Array(
 		"Si este valor se establece en cero, las tablas que dependan de esta también serán excluídas. ¿Esta seguro?",//27
 		"Formato de salida establecido correctamente.",//28
 		"Proceso finalizado",//29
-		"no es una dirección válida.",//30
+		"[%v] no es una dirección válida.",//30
 		"[%v] solo puede contener letras.",//31
 		"[%v] solo puede contener números.",//32
 		"Esta conexión será eliminada ¿Está seguro?",//33
@@ -99,7 +105,13 @@ var lang_es = new Array(
 		"fecha",//36
 		"delta en días",//37
 		"valor",//38
-		"delta de valor"//39
+		"delta de valor",//39
+		"[%v] debe escoger una opción",//40
+		"[%v] El año no es válido.",//41
+		"[%v] El mes no es válido.",//42
+		"[%v] El día no es válido.",//43
+		"Campo [%v1] es mayor que [%v2]",//44
+		"Campo [%v1] fuera del rango [%v2-%v3]"//45
 	);
 
 var lang = "en";

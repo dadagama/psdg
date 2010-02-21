@@ -166,13 +166,13 @@ class Restricciones
 					//NUMERO DE TUPLAS
 					$this->html->tag("div", array("class"=>"fila"));
 						$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p"));
-							$this->html->tag("label", array("class"=>"etiqueta"));
+							$this->html->tag("label", array("id"=>"ret_lbl_cantidad_tuplas", "class"=>"etiqueta"));
 								$this->html->printText("ret_lbl_cantidad_tuplas");
 							$this->html->end("label");
 						$this->html->end("div");
 						
 						$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro alto_30 valor_campo color_letra_campo"));
-							$this->html->tag("input", array("title"=>$this->html->getText("rec_ttp_numero_tuplas"), "id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo ancho_50", "maxlength"=>"5", "onchange"=>"validarInput(this, \\\'".$this->html->getText("ret_lbl_cantidad_tuplas")."\\\', \\\'numero\\\', true);"));
+							$this->html->tag("input", array("title"=>$this->html->getText("rec_ttp_numero_tuplas"), "id"=>"rec_txt_numero_tuplas" ,"type"=>"text", "value"=>$numero_tuplas, "class"=>"valor_campo color_letra_campo ancho_50", "maxlength"=>"5"));
 						$this->html->end("div");
 					$this->html->end("div");
 		$this->html->end("div");
@@ -307,7 +307,7 @@ class Restricciones
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro valor_campo color_letra_campo"));
-						$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla"));
+						$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla_info"));
 							$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_tabla']);
 						$this->html->end("label");
 					$this->html->end("div");
@@ -322,7 +322,7 @@ class Restricciones
 					$this->html->end("div");
 					
 					$this->html->tag("div", array("class"=>"celda alineacion_izquierda vertical_centro ancho_200 valor_campo color_letra_campo"));
-						$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo"));
+						$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo_info"));
 							$this->html->printStaticText($this->arreglo_restricciones['rec_nombre_campo']);
 						$this->html->end("label");
 					$this->html->end("div");
@@ -463,7 +463,7 @@ class Restricciones
 				//NULOS
 				$this->html->tag("div", array("class"=>"fila"));
 					$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-						$this->html->tag("label", array("class"=>"etiqueta"));
+						$this->html->tag("label", array("id"=>"rec_lbl_porcentaje_nulos", "class"=>"etiqueta"));
 							$this->html->printText("rec_lbl_porcentaje_nulos");
 						$this->html->end("label");
 					$this->html->end("div");
@@ -514,7 +514,7 @@ class Restricciones
 							
 									$this->html->tag("div", array("class"=>"fila"));
 										$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-											$this->html->tag("label", array("class"=>"etiqueta"));
+											$this->html->tag("label", array("id"=>"rec_lbl_conexion_bd", "class"=>"etiqueta"));
 												$this->html->printText("rec_lbl_conexion_bd");
 											$this->html->end("label");
 										$this->html->end("div");
@@ -526,7 +526,7 @@ class Restricciones
 								
 									$this->html->tag("div", array("class"=>"fila"));
 										$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-											$this->html->tag("label", array("class"=>"etiqueta"));
+											$this->html->tag("label", array("id"=>"rec_lbl_nombre_tabla", "class"=>"etiqueta"));
 												$this->html->printText("rec_lbl_nombre_tabla");
 											$this->html->end("label");
 										$this->html->end("div");
@@ -545,7 +545,7 @@ class Restricciones
 									
 									$this->html->tag("div", array("class"=>"fila"));
 										$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-											$this->html->tag("label", array("class"=>"etiqueta"));
+											$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo", "class"=>"etiqueta"));
 												$this->html->printText("rec_lbl_nombre_campo");
 											$this->html->end("label");
 										$this->html->end("div");
@@ -568,7 +568,7 @@ class Restricciones
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_conexion_biblioteca", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_conexion_biblioteca");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -580,7 +580,7 @@ class Restricciones
 										//{"rec_conexion_biblioteca":"bib1","rec_tipo_campo_biblioteca":"1","rec_nombre_campo_biblioteca":"nivel","rec_tia_codigo":"1"}
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_tipo_campo_biblioteca", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_tipo_campo_biblioteca");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -592,7 +592,7 @@ class Restricciones
 										
 										$this->html->tag("div", array("class"=>"fila", "id"=>"rec_fila_campo_independiente"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo_independiente", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_nombre_campo_independiente");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -607,7 +607,7 @@ class Restricciones
 										
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_nombre_campo_biblioteca", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_nombre_campo_biblioteca");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -630,7 +630,7 @@ class Restricciones
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_lista_valores", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_lista_valores");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -657,7 +657,7 @@ class Restricciones
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_valor_constante", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_valor_constante");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -695,7 +695,7 @@ class Restricciones
 							$this->html->tag("div", array("class"=>"tabla"));	
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_desde", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_desde");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -709,7 +709,7 @@ class Restricciones
 										
 										$this->html->tag("div", array("class"=>"fila"));	
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_hasta", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_hasta");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -732,7 +732,7 @@ class Restricciones
 							$this->html->tag("div", array("class"=>"tabla"));
 										$this->html->tag("div", array("class"=>"fila"));
 											$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-												$this->html->tag("label", array("class"=>"etiqueta"));
+												$this->html->tag("label", array("id"=>"rec_lbl_conexion_archivo", "class"=>"etiqueta"));
 													$this->html->printText("rec_lbl_conexion_archivo");
 												$this->html->end("label");
 											$this->html->end("div");
@@ -765,7 +765,7 @@ class Restricciones
 	                     $this->html->tag("div", array("class"=>"tabla"));  
 	                              $this->html->tag("div", array("class"=>"fila"));
 	                                 $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-	                                    $this->html->tag("label", array("class"=>"etiqueta"));
+	                                    $this->html->tag("label", array("id"=>"rec_lbl_valor_secuencial", "class"=>"etiqueta"));
 	                                       $this->html->printText("rec_lbl_valor_secuencial");
 	                                    $this->html->end("label");
 	                                 $this->html->end("div");
@@ -780,7 +780,7 @@ class Restricciones
 	                              $this->html->tag("div", array("class"=>"fila"));
 	
 	                                $this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-	                                    $this->html->tag("label", array("class"=>"etiqueta"));
+	                                    $this->html->tag("label", array("id"=>"rec_lbl_delta_secuencial", "class"=>"etiqueta"));
 	                                       $this->html->printText("rec_lbl_delta_secuencial");
 	                                    $this->html->end("label");
 	                                 $this->html->end("div");
@@ -807,7 +807,7 @@ class Restricciones
 						$this->html->tag("div", array("class"=>"tabla"));
 									$this->html->tag("div", array("class"=>"fila"));
 										$this->html->tag("div", array("class"=>"celda alineacion_derecha vertical_centro ancho_50p alto_30"));
-											$this->html->tag("label", array("class"=>"etiqueta"));
+											$this->html->tag("label", array("id"=>"rec_lbl_funcion", "class"=>"etiqueta"));
 												$this->html->printText("rec_lbl_funcion");
 											$this->html->end("label");
 										$this->html->end("div");
