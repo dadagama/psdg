@@ -57,7 +57,7 @@
 			//FIN DIV LOGO
 			
 			//DIV SECUENCIA
-			$html->tag("div", array("id"=>"div_secuencia", "class"=>"alineacion_centrado"));
+			$html->tag("div", array("id"=>"div_secuencia", "class"=>"alineacion_centrado alto_70"));
 				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Set connections"));
 				$html->end("img");
 				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
@@ -87,6 +87,12 @@
 				$html->tag("div", array("id"=>"div_logout"));
 					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "onmouseover"=>"this.src='../imagenes/btn_logout_2.png'", "onmouseout"=>"this.src='../imagenes/btn_logout_1.png'", "alt"=>"Cerrar sesión/Logout", "title"=>"Cerrar sesión/Logout"));
 					$html->end("input");
+				$html->end("div");
+				
+				$html->tag("div", array("id"=>"div_manual"));
+					$html->tag("a", array("href"=>"../manual_de_usuario/index.php", "target"=>"_blank"));
+						$html->tag("img", array("id"=>"btn_manual", "src"=>"../imagenes/manual.png", "alt"=>"Guía del usuario/User Guide", "title"=>"Guía del usuario/User Guide", "class"=>"sin_borde"), "", true);
+					$html->end("a");
 				$html->end("div");
 					
 			$html->end("div");
