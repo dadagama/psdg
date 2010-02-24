@@ -1,0 +1,86 @@
+#div_cuerpo_grafo
+{
+	margin: 0 auto;
+	width: 1024px;
+	/*overflow: scroll;*/
+}
+
+#div_grafo
+{
+	height: 580px;
+	width: 1024px;
+	/*background: #eee;*/
+	position: absolute;
+	top: 150px;
+	/*overflow: auto;*/
+}
+
+canvas
+{
+	top: 150px;
+	background-image: url("../imagenes/grid.png");
+	back
+	margin: 0 auto;position: absolute;
+	top:0px;
+}
+
+.imagen_campo
+{
+	margin-right: 3px;
+}
+
+.tabla
+{
+	border-width: 2px;
+	border-style: outset;
+	border-color: #ccc;
+	position: absolute;
+	border-spacing: 1px;
+}
+
+.titulo_tabla
+{
+	/*height: 25px;*/
+	background-color: #0084ce; /*#2a7bb3;*/
+}
+
+.nombre_tabla
+{
+	color: #fff;
+	vertical-align:middle;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	padding: 5px;
+}
+
+.titulo_tabla_bde
+{
+	/*height: 25px;*/
+	background-color: #e2e2e2;
+}
+
+.nombre_tabla_bde
+{
+	color: #0084ce;/*#2a7bb3;*/
+	vertical-align:middle;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 15px;
+	padding: 5px;
+}
+
+.campo_tabla
+{
+	height: 18px;
+	border-width: 1px;
+	border-style: dotted;
+	border-color: #c7c7c7;
+	background-color: #fafafa;
+	padding: 3px;
+}
+
+.nombre_campo
+{
+	color: #626262;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}

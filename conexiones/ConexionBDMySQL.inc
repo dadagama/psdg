@@ -230,5 +230,13 @@ class ConexionBDMySQL extends ConexionBD
 		$this->restablecer_bd_original();
 		return $arreglo_nombres_campos;
 	}
+	
+	function obtenerArregloInfoCamposDeTabla($nombre_tabla)
+	{
+		$sql = "describe $nombre_tabla";
+		$this->ejecutarSQL($sql);
+		$arreglo_info_campos = $this->obtenerResultadoComoArreglo();
+		return $arreglo_info_campos;
+	}
 }
 ?>
