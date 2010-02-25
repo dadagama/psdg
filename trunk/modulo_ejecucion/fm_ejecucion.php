@@ -54,6 +54,8 @@
 							$html->tag("div", array("class"=>"fila"));
 								$html->tag("div", array("class"=>"celda centrado"));
 									$html->tag("input", array("id"=>"eje_btn_iniciar" ,"type"=>"button", "value"=>$html->getText("eje_btn_iniciar"), "onclick"=>"iniciar()", "class"=>"color_letra_campo margin_arriba_10"));
+									$html->espacios(4);
+									$html->tag("input", array("id"=>"eje_btn_grafo" ,"type"=>"button", "value"=>$html->getText("eje_btn_grafo"), "onclick"=>"newPage('../modulo_grafo/fm_grafo.php');", "class"=>"color_letra_campo margin_arriba_10"));
 								$html->end("div");
 							$html->end("div");
 							

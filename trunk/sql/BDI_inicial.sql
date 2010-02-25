@@ -406,6 +406,7 @@ INSERT INTO PSDG_idioma VALUES('sal_ttp_siguiente','es','Ejecutar');
 /*ejecucion*/
 INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','es','Ejecutar');
 INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','es','Iniciar');
+INSERT INTO PSDG_idioma VALUES('eje_btn_grafo','es','Ver grafo');
 
 INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','es','Configurar formato de salida');
 
@@ -567,6 +568,7 @@ INSERT INTO PSDG_idioma VALUES('sal_ttp_siguiente','en','Run');
 /*ejecucion*/
 INSERT INTO PSDG_idioma VALUES('eje_lgn_consola','en','Run');
 INSERT INTO PSDG_idioma VALUES('eje_btn_iniciar','en','Start');
+INSERT INTO PSDG_idioma VALUES('eje_btn_grafo','en','View graph');
 
 INSERT INTO PSDG_idioma VALUES('eje_ttp_anterior','en','Set output type');
 

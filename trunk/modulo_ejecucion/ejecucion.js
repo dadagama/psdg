@@ -18,6 +18,11 @@
 
 $(document).ready(inicializar);
 
+function newPage(url)
+{
+	window.open(url,'_blank',"");
+}
+
 function inicializar()
 {
 	$('#eje_div_general').hide();
