@@ -171,11 +171,22 @@ class Grafo
 		$this->conexionBDI->ejecutarSQL($sql);
 		$arreglo_info_campos = $this->conexionBDI->obtenerResultadoComoArreglo();
 		
+		//consulto los parametros de la BDO para obtener el nombre de la BD
+		$sql = "SELECT con_parametros
+					FROM PSDG_conexion
+					WHERE con_usu_login = '$this->usu_login'
+					AND con_nombre = 'BDO'";
+		$this->conexionBDI->ejecutarSQL($sql);
+		$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
+		$arreglo_parametros = json_decode($con_parametros, true);
+		//{"con_servidor":"186.80.78.233","con_nombre_bd":"bd_eps_real","con_usuario":"user","con_password":"user"}			
+		
 		foreach($arreglo_info_campos AS $pos => $arreglo_info_campo)
 		{
 			$debe_guardar = false;
 			$arreglo_campos_tabla = array();
 			$arreglo_campos_tabla['fue_codigo'] = $arreglo_info_campo[2];//rec_fue_codigo
+			$arreglo_campos_tabla['bd_origen'] = $arreglo_parametros['con_nombre_bd']; // nombre de la BDO
 			$arreglo_campos_tabla['tabla_origen'] = $arreglo_info_campo[0];//rec_nombre_tabla
 			$arreglo_campos_tabla['campo_origen'] = $arreglo_info_campo[1];//rec_nombre_campo
 			
