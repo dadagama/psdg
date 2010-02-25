@@ -167,7 +167,7 @@ class Grafo
 		$sql = "SELECT rec_nombre_tabla, rec_nombre_campo, rec_fue_codigo, rec_parametros_tipo_fuente
 				FROM PSDG_restricciones_campos
 				WHERE rec_usu_login = '$this->usu_login'
-				AND rec_fue_codigo IN (2,3)";
+				AND rec_fue_codigo IN (2,3) ORDER BY rec_fue_codigo DESC";
 		$this->conexionBDI->ejecutarSQL($sql);
 		$arreglo_info_campos = $this->conexionBDI->obtenerResultadoComoArreglo();
 		

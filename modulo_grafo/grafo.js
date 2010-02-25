@@ -255,7 +255,7 @@ function recibirJSONRelaciones(info_relaciones)
 		 {"fue_codigo":"3","bd_origen":"bd_eps_real","tabla_origen":"afiliado","campo_origen":"sexo","tabla_destino":"afiliado","campo_destino":"nombre"}
 	 ]
 	*/
-	alert(info_relaciones);
+	//alert(info_relaciones);
 	arreglo_info_relaciones = eval("("+info_relaciones+")");
 	repaint();
 }
