@@ -22,9 +22,72 @@ var mitad_campo = 15;//los div_campo son de 30px de alto
 var border_campo = 3;//cada div_campo esta separado por 3px entre ellos
 var longitud_guion = 15;//fragmento recto que sale del campo
 var grosor_linea = 1;//grueso de las lineas
+var arreglo_info_relaciones;//arreglo JSon de las relaciones
+var drawingCanvas;
+var context;
+
+function repaint()
+{
+		drawingCanvas.width = drawingCanvas.width;//reinicio el canvas
+		
+		context.beginPath();
+		//[{"fue_codigo":"2","bd_origen":"bd_eps_sintetica","tabla_origen":"medico","campo_origen":"nombre","bd_destino":"bd_eps_real","tabla_destino":"medico","campo_destino":"nombre"}]
+		for(var indice = 0; indice < arreglo_info_relaciones.length; indice++)
+		{
+			dibujarRelacion(arreglo_info_relaciones[indice]);
+		}
+}
+
+function dibujarRelacion(relacion)
+{
+	//calculo ubicacion canvas
+	var posicion_canvas = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).offset();
+	var top_canvas = posicion_canvas.top;
+	var left_canvas = posicion_canvas.left;
+	
+	alert("posicion origen canvas = "+left_canvas+","+top_canvas);
+	
+	//calculo las posicion campo origen
+	var ancho_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).width();//NO PARECE NECESITARSE
+	var alto_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).height();
+	var posicion_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).offset();
+	var top_origen = posicion_origen.top;
+	var left_origen = posicion_origen.left;
+	
+	alert(relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']+" = "+ancho_origen+","+alto_origen+"-"+top_origen+","+left_origen);
+	//calculo posicion campo destino
+	var ancho_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).width();;
+	var alto_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).height();
+	var posicion_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).position();
+	var top_destino = posicion_destino.top;
+	var left_destino = posicion_destino.left;
+	
+	
+	
+	//asigno color de linea deacuerdo a la fuente
+	if(relacion['fue_codigo'] == "3")
+		context.strokeStyle = "#00f";
+	else //if(relacion['fue_codigo'] == "2")
+		context.strokeStyle = "#f00";
+
+	//iniciar fragmento recto desde origen 
+	punto_choque_origen = (top_origen + (alto_origen / 2));
+	alert(left_origen+"choque="+punto_choque_origen);
+	context.moveTo(left_origen,punto_choque_origen);
+	context.lineTo((left_origen - longitud_guion), (top_origen + (alto_origen / 2)));
+	context.lineTo(0,0);
+	context.lineTo(50,50);
+	context.stroke();
+}
 
 function inicializar()
 {
+	drawingCanvas = document.getElementById('area_dibujo');
+	if(drawingCanvas.getContext) 
+	{
+		context = drawingCanvas.getContext('2d');
+		context.lineWidth = grosor_linea;
+	}
 	obtenerEstructuraTablas();
 	obtenerRelaciones();
 }
@@ -62,6 +125,7 @@ function recibirJSONTablas(info_tablas)
 	for(var indice = 0; indice < arreglo_info_tablas.length; indice++)
 	{
 		crearDivTabla(arreglo_info_tablas[indice], indice);
+		alert('u');
 	}
 	
 //	$("#tablita").draggable({	containment: '#cuerpito',
@@ -92,7 +156,7 @@ function crearDivTabla(obj_tabla, indice_tabla)
 	}
 	
 	//se crea el div tabla
-	var div_tabla = "<div class='tabla' id='"+nombre_bd+"_"+nombre_tabla+"'>"+
+	var div_tabla = "<div class='div_tabla' id='"+nombre_bd+"_"+nombre_tabla+"'>"+
 						"<table class='tabla'>"+
 							"<thead>"+
 								"<tr>"+
@@ -115,7 +179,7 @@ function crearDivTabla(obj_tabla, indice_tabla)
 		var imagen_tipo_llave = "<img src='../imagenes/"+tipo_llave+".png' class='vertical_centro imagen_campo'/>";
 		
 		div_tabla += "<tr>"+
-						"<th class='nombre_campo campo_tabla alineacion_izquierda'>"+imagen_tipo_llave+
+						"<th id='"+nombre_bd+"_"+nombre_tabla+"_"+arreglo_campos_tabla[indice][0]+"' class='nombre_campo campo_tabla alineacion_izquierda'>"+imagen_tipo_llave+
 						"<label>"+arreglo_campos_tabla[indice][0]+"</label></th>"+
 					"</tr>";
 	}
@@ -127,14 +191,19 @@ function crearDivTabla(obj_tabla, indice_tabla)
 	//se añade al DOM
 	$('#div_grafo').append(div_tabla);
 	//alert(indice_tabla+","+nombre_tabla);
-	$("#"+nombre_bd+"_"+nombre_tabla).css("left",(indice_tabla * 50)+"px");
+	$("#"+nombre_bd+"_"+nombre_tabla).css("left",((indice_tabla + 1) * 250)+"px");
 	//se le añade movilidad
 	$("#"+nombre_bd+"_"+nombre_tabla).draggable({	containment: '#div_grafo',
-											//scroll:true,
-											scrollSensitivity: 1,
-											grid: [10,10],
-											opacity: 0.7,
-											stack: {group: '#div_grafo div',min: 1} });
+													//scroll:true,
+													scrollSensitivity: 1,
+													grid: [10,10],
+													opacity: 0.7,
+													stack: {group: '#div_grafo div',min: 1}//,
+//													drag: function() 
+//													{
+//														//alert('x');
+//													} 
+												});
 }
 
 function obtenerRelaciones()
@@ -154,42 +223,9 @@ function obtenerRelaciones()
 
 function recibirJSONRelaciones(info_relaciones)
 {
-	alert(info_relaciones);
-}
-
-function repaint()
-{
-	var drawingCanvas = document.getElementById('area_dibujo');
-	if(drawingCanvas.getContext) 
-	{
-		var context = drawingCanvas.getContext('2d');
-		drawingCanvas.width = drawingCanvas.width;//reinicio el canvas
-		//context.lineWidth = grosor_linea;
-
-		
-		//var top_absoluto =  $('#c1').offset().top;
-		//var left_absoluto =  $('#c1').offset().left;
-		
-		//var x0 = left_absoluto;
-		//var y0 = top_absoluto + delta_campo;
-		//var x1 = left_absoluto - longitud_guion;
-		//var y1 = top_absoluto + delta_campo;
-		
-		//alert("move ("+x0+","+y0+") - ("+x1+","+y1+")");
-		context.beginPath();
-		//de donde sale
-		//context.moveTo(x0, y0);
-		//context.lineTo(x1, y1);
-		//context.lineTo(0, 0);
-
-		//context.moveTo(x0, y0 + 2 * delta_campo);
-		//context.lineTo(x1, y0 + 2 * delta_campo);
-		//context.lineTo(0, 300);
-		//context.strokeStyle = "#00f";
-		//context.stroke();
-		context.moveTo(10, 10);
-		context.lineTo(50,50);
-		context.strokeStyle = "#f00";
-		context.stroke();
-	}
+	//[{"fue_codigo":"3","tabla_origen":"afiliado","campo_origen":"sexo","tabla_destino":"afiliado","campo_destino":"nombre"},
+	// {...}]
+	//alert(info_relaciones);
+	arreglo_info_relaciones = eval("("+info_relaciones+")");
+	repaint();
 }
