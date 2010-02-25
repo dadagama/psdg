@@ -298,6 +298,7 @@ function validarCamposFormulario()
 		switch(rec_fue_codigo)
 		{
 			case '1': //ninguna
+				validacion = true;
 				break;
 			case '2'://bd
 				if(validarSeleccionComboBox($('#rec_nombre_conexion'), $('#rec_lbl_conexion_bd').html(), false)
