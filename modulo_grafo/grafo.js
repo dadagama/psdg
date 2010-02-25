@@ -18,8 +18,8 @@
 
 $(document).ready(inicializar);
 
-var mitad_campo = 15;//los div_campo son de 30px de alto
-var border_campo = 3;//cada div_campo esta separado por 3px entre ellos
+//var mitad_campo = 15;//los div_campo son de 30px de alto
+var padding_campo = 3;//cada div_campo tiene 3px de padding
 var longitud_guion = 15;//fragmento recto que sale del campo
 var grosor_linea = 1;//grueso de las lineas
 var arreglo_info_relaciones;//arreglo JSon de las relaciones
@@ -29,8 +29,6 @@ var context;
 function repaint()
 {
 		drawingCanvas.width = drawingCanvas.width;//reinicio el canvas
-		
-		context.beginPath();
 		//[{"fue_codigo":"2","bd_origen":"bd_eps_sintetica","tabla_origen":"medico","campo_origen":"nombre","bd_destino":"bd_eps_real","tabla_destino":"medico","campo_destino":"nombre"}]
 		for(var indice = 0; indice < arreglo_info_relaciones.length; indice++)
 		{
@@ -41,43 +39,67 @@ function repaint()
 function dibujarRelacion(relacion)
 {
 	//calculo ubicacion canvas
-	var posicion_canvas = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).offset();
+	var posicion_canvas = $('#area_dibujo').offset();
 	var top_canvas = posicion_canvas.top;
 	var left_canvas = posicion_canvas.left;
 	
-	alert("posicion origen canvas = "+left_canvas+","+top_canvas);
+	//alert("canvas: "+left_canvas+","+top_canvas);
 	
 	//calculo las posicion campo origen
-	var ancho_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).width();//NO PARECE NECESITARSE
-	var alto_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).height();
+	var ancho_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).outerWidth();//NO PARECE NECESITARSE
+	var alto_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).outerHeight();
 	var posicion_origen = $('#'+relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']).offset();
-	var top_origen = posicion_origen.top;
-	var left_origen = posicion_origen.left;
+	var top_origen = (posicion_origen.top - top_canvas);
+	var left_origen = (posicion_origen.left - left_canvas /*- padding_campo*/);
 	
-	alert(relacion['bd_origen']+"_"+relacion['tabla_origen']+"_"+relacion['campo_origen']+" = "+ancho_origen+","+alto_origen+"-"+top_origen+","+left_origen);
+	//alert("origen: "+ancho_origen+","+alto_origen+"-"+top_origen+","+left_origen);
+	//origen: 177,16-55,253
 	//calculo posicion campo destino
-	var ancho_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).width();;
-	var alto_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).height();
-	var posicion_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).position();
-	var top_destino = posicion_destino.top;
-	var left_destino = posicion_destino.left;
+	var ancho_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).outerWidth();
+	var alto_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).outerHeight();
+	var posicion_destino = $('#'+relacion['bd_destino']+"_"+relacion['tabla_destino']+"_"+relacion['campo_destino']).offset();
+	var top_destino = (posicion_destino.top - top_canvas);
+	var left_destino = (posicion_destino.left - left_canvas);
 	
-	
+	//alert("destino: "+ancho_destino+","+alto_destino+"-"+top_destino+","+left_destino);
 	
 	//asigno color de linea deacuerdo a la fuente
+	var estilo_stroke = "";
+	var punto_choque_horizontal_origen = 0;
 	if(relacion['fue_codigo'] == "3")
-		context.strokeStyle = "#00f";
-	else //if(relacion['fue_codigo'] == "2")
-		context.strokeStyle = "#f00";
-
-	//iniciar fragmento recto desde origen 
-	punto_choque_origen = (top_origen + (alto_origen / 2));
-	alert(left_origen+"choque="+punto_choque_origen);
-	context.moveTo(left_origen,punto_choque_origen);
-	context.lineTo((left_origen - longitud_guion), (top_origen + (alto_origen / 2)));
-	context.lineTo(0,0);
-	context.lineTo(50,50);
+	{
+		estilo_stroke = "#f00";
+		punto_choque_horizontal_origen = left_origen + ancho_origen + padding_campo;
+		delta_guion = longitud_guion * -1;
+	}
+	else if(relacion['fue_codigo'] == "2")
+	{
+		estilo_stroke = "#00f";
+		punto_choque_horizontal_origen = left_origen;
+		delta_guion = longitud_guion;
+	}
+		
+	context.beginPath();
+	context.strokeStyle = estilo_stroke;
+	//iniciar fragmento recto del origen 
+	punto_choque_vertical_origen = (top_origen + (alto_origen / 2));
+	context.moveTo(punto_choque_horizontal_origen, punto_choque_vertical_origen);
+	context.lineTo((punto_choque_horizontal_origen - delta_guion), punto_choque_vertical_origen);
+	//trazar linea
+	punto_choque_destino = (top_destino + (alto_destino / 2));
+	context.lineTo((left_destino + ancho_destino + padding_campo + longitud_guion), punto_choque_destino);
+	//iniciar fragmento recto del destino
+	context.lineTo((left_destino + ancho_destino + padding_campo),punto_choque_destino);
 	context.stroke();
+	context.closePath();
+	
+	//crear semicirculo
+	context.beginPath();
+	context.fillStyle = estilo_stroke;
+	context.arc((left_destino + ancho_destino + padding_campo),punto_choque_destino,5,-Math.PI/2,Math.PI/2,false);
+	context.fill();
+	context.stroke();
+	context.closePath();
 }
 
 function inicializar()
@@ -95,7 +117,7 @@ function inicializar()
 function obtenerEstructuraTablas()
 {
 	$.ajax({
-		async:		true,
+		async:		false,
 		type: 		"POST",
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
@@ -125,7 +147,7 @@ function recibirJSONTablas(info_tablas)
 	for(var indice = 0; indice < arreglo_info_tablas.length; indice++)
 	{
 		crearDivTabla(arreglo_info_tablas[indice], indice);
-		alert('u');
+		//alert('u');
 	}
 	
 //	$("#tablita").draggable({	containment: '#cuerpito',
@@ -144,20 +166,23 @@ function crearDivTabla(obj_tabla, indice_tabla)
 	var arreglo_campos_tabla = obj_tabla['campos_tabla'];
 	var clase_titulo = "";
 	var clase_nombre = "";
+	var clase_tabla = "";
 	if(pertenece_a_bdo)
 	{
 		clase_titulo = "titulo_tabla";
 		clase_nombre = "nombre_tabla";
+		clase_tabla = "tabla_bdo";
 	}
 	else
 	{
 		clase_titulo = "titulo_tabla_bde";
 		clase_nombre = "nombre_tabla_bde";
+		clase_tabla = "tabla_bde";
 	}
 	
 	//se crea el div tabla
 	var div_tabla = "<div class='div_tabla' id='"+nombre_bd+"_"+nombre_tabla+"'>"+
-						"<table class='tabla'>"+
+						"<table class='tabla "+clase_tabla+"'>"+
 							"<thead>"+
 								"<tr>"+
 									"<th class='"+clase_nombre+" "+clase_titulo+"'>"+
@@ -191,25 +216,25 @@ function crearDivTabla(obj_tabla, indice_tabla)
 	//se añade al DOM
 	$('#div_grafo').append(div_tabla);
 	//alert(indice_tabla+","+nombre_tabla);
-	$("#"+nombre_bd+"_"+nombre_tabla).css("left",((indice_tabla + 1) * 250)+"px");
+	$("#"+nombre_bd+"_"+nombre_tabla).css("left",((indice_tabla) * 50)+"px");
 	//se le añade movilidad
 	$("#"+nombre_bd+"_"+nombre_tabla).draggable({	containment: '#div_grafo',
 													//scroll:true,
 													scrollSensitivity: 1,
 													grid: [10,10],
 													opacity: 0.7,
-													stack: {group: '#div_grafo div',min: 1}//,
-//													drag: function() 
-//													{
-//														//alert('x');
-//													} 
+													stack: {group: '#div_grafo div',min: 1},
+													drag: function() 
+													{
+														repaint();
+													} 
 												});
 }
 
 function obtenerRelaciones()
 {
 	$.ajax({
-		async:		true,
+		async:		false,
 		type: 		"POST",
 		dataType:	"html",
 		contentType:"application/x-www-form-urlencoded",
@@ -223,9 +248,14 @@ function obtenerRelaciones()
 
 function recibirJSONRelaciones(info_relaciones)
 {
-	//[{"fue_codigo":"3","tabla_origen":"afiliado","campo_origen":"sexo","tabla_destino":"afiliado","campo_destino":"nombre"},
-	// {...}]
-	//alert(info_relaciones);
+	/*
+	 [
+		 {"fue_codigo":"2","bd_origen":"bd_eps_sintetica","tabla_origen":"medico","campo_origen":"id","bd_destino":"bd_eps_real","tabla_destino":"medico","campo_destino":"id"},
+		 {"fue_codigo":"2","bd_origen":"bd_eps_real","tabla_origen":"medico","campo_origen":"nombre","bd_destino":"bd_eps_real","tabla_destino":"medico","campo_destino":"nombre"},
+		 {"fue_codigo":"3","bd_origen":"bd_eps_real","tabla_origen":"afiliado","campo_origen":"sexo","tabla_destino":"afiliado","campo_destino":"nombre"}
+	 ]
+	*/
+	alert(info_relaciones);
 	arreglo_info_relaciones = eval("("+info_relaciones+")");
 	repaint();
 }

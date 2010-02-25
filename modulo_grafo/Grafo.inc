@@ -178,32 +178,34 @@ class Grafo
 					AND con_nombre = 'BDO'";
 		$this->conexionBDI->ejecutarSQL($sql);
 		$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
-		$arreglo_parametros = json_decode($con_parametros, true);
-		//{"con_servidor":"186.80.78.233","con_nombre_bd":"bd_eps_real","con_usuario":"user","con_password":"user"}			
+		$arreglo_parametros_bdo = json_decode($con_parametros, true);
+		//{"con_servidor":"localhost","con_nombre_bd":"bd_eps_sintetica","con_usuario":"root","con_password":"root"}			
 		
 		foreach($arreglo_info_campos AS $pos => $arreglo_info_campo)
 		{
 			$debe_guardar = false;
 			$arreglo_campos_tabla = array();
 			$arreglo_campos_tabla['fue_codigo'] = $arreglo_info_campo[2];//rec_fue_codigo
-			$arreglo_campos_tabla['bd_origen'] = $arreglo_parametros['con_nombre_bd']; // nombre de la BDO
+			$arreglo_campos_tabla['bd_origen'] = $arreglo_parametros_bdo['con_nombre_bd']; // nombre de la BDO
 			$arreglo_campos_tabla['tabla_origen'] = $arreglo_info_campo[0];//rec_nombre_tabla
 			$arreglo_campos_tabla['campo_origen'] = $arreglo_info_campo[1];//rec_nombre_campo
 			
 			$arreglo_parametros_destino = json_decode($arreglo_info_campo[3], true);//rec_parametros_tipo_fuente
-			
+
+
 			switch($arreglo_info_campo[2])//rec_fue_codigo
 			{
 				case "2"://bd
-					//{"rec_nombre_conexion":"BDO","rec_nombre_tabla":"afiliado","rec_nombre_campo":"id","rec_tia_codigo":"2"}
+					//$arreglo_parametros => {"con_servidor":"186.80.78.233","con_nombre_bd":"bd_eps_real","con_usuario":"user","con_password":"user"}
+					//$arreglo_parametros_destino => {"rec_nombre_conexion":"BDO","rec_nombre_tabla":"afiliado","rec_nombre_campo":"id","rec_tia_codigo":"2"}
 					$sql = "SELECT con_parametros
 							FROM PSDG_conexion
 							WHERE con_usu_login = '$this->usu_login'
 							AND con_nombre = '".$arreglo_parametros_destino['rec_nombre_conexion']."'";
 					$this->conexionBDI->ejecutarSQL($sql);
 					$con_parametros = $this->conexionBDI->obtenerResultadoComoCadena();
-					$arreglo_parametros = json_decode($con_parametros, true);
-					//{"con_servidor":"186.80.78.233","con_nombre_bd":"bd_eps_real","con_usuario":"user","con_password":"user"}
+					$arreglo_parametros = json_decode($con_parametros, true);	
+				
 					$arreglo_campos_tabla['bd_destino'] = $arreglo_parametros['con_nombre_bd'];
 					$arreglo_campos_tabla['tabla_destino'] = $arreglo_parametros_destino['rec_nombre_tabla'];//rec_nombre_tabla
 					$arreglo_campos_tabla['campo_destino'] = $arreglo_parametros_destino['rec_nombre_campo'];//rec_nombre_campo
@@ -211,9 +213,10 @@ class Grafo
 					break; 
 					
 				case "3"://biblioteca
-					//{"rec_conexion_biblioteca":"nombres_sexo","rec_tipo_campo_biblioteca":"2","rec_nombre_campo_independiente":"nombre","rec_nombre_campo_biblioteca":"Genero","rec_tia_codigo":"1"}
+					//$arreglo_parametros_destino => {"rec_conexion_biblioteca":"nombres_sexo","rec_tipo_campo_biblioteca":"2","rec_nombre_campo_independiente":"nombre","rec_nombre_campo_biblioteca":"Genero","rec_tia_codigo":"1"}
 					if($arreglo_parametros_destino['rec_tipo_campo_biblioteca'] == 2)//si es campo dependiente
 					{
+						$arreglo_campos_tabla['bd_destino'] = $arreglo_parametros_bdo['con_nombre_bd']; // nombre de la BDO
 						$arreglo_campos_tabla['tabla_destino'] = $arreglo_campos_tabla['tabla_origen'];//rec_nombre_tabla (LA MISMA TABLA DE ORIGEN)
 						$arreglo_campos_tabla['campo_destino'] = $arreglo_parametros_destino['rec_nombre_campo_independiente'];//rec_nombre_campo
 						$debe_guardar = true;

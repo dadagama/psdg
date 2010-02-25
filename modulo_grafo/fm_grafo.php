@@ -31,8 +31,6 @@
 		<link rel="stylesheet" type="text/css" href="../estilos/grafo.css"/>
 	</head>
 	<body>
-	
-	echo "<div id='prueba'></div>";
 	<?php	
 		$html->cargarHerramientaJS("jquery-ui-1.7.2.custom.min");
 		$html->cargarModuloJS("grafo");
