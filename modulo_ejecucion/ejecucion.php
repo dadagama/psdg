@@ -21,7 +21,7 @@ session_start();
 
 require_once("../modulo_ejecucion/Ejecucion.inc");
 $objetoEjecucion = new Ejecucion($_SESSION['conexionBDI'],$_SESSION['usu_login'], $_SESSION['lang']);
-
+function getmicrotime() { list($usec, $sec) = explode(" ", microtime()); return ((float)$usec + (float)$sec); }
 switch($_REQUEST['funcion'])
 {		
 	case "anterior":
@@ -55,9 +55,12 @@ switch($_REQUEST['funcion'])
 			}
 			else if($_SESSION['estado'] == "generar")
 			{
+				$starttime = getmicrotime();
 				$objetoEjecucion->generarDatosTabla($_SESSION['nombres_tablas_ordenadas'][$_SESSION['indice_tablas']], $_SESSION['num_registros'],$_SESSION['nombres_campos_ordenados']);
 				$_SESSION['errores'] = $objetoEjecucion->obtenerErrores();
 				$_SESSION['estado'] = "fin_generar";
+				$endtime = getmicrotime();
+				echo ' ('.number_format(($endtime-$starttime)*1000,3).' ms)';
 			}
 			else if($_SESSION['estado'] == "fin_generar")
 			{
