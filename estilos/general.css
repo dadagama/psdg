@@ -16,9 +16,15 @@
 
 */
 
-.sin_borde
+img
 {
-	border: 0px;
+  border: 0px;
+}
+
+.boton:hover
+{
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .error
@@ -28,9 +34,9 @@
 
 #div_logo 
 {
-	background: url("../imagenes/psdg.png");
-	height: 151px;
-	width: 1024px;
+	/*background: url("../imagenes/psdg.png");*/
+	height: 98px;
+	width: 800px;
 }
 
 body
@@ -52,8 +58,8 @@ body
 	text-align: center;
 	margin: 0 auto;
 	width: 1024px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	/*margin-top: 10px;*/
+	margin-bottom: 5px;
 	position: relative;
 }
 
@@ -291,7 +297,7 @@ fieldset
 	height: 20px;
 	position: fixed;
 	bottom: 0px;
-	background: #0089ce;
+	background: #0072E4;
 	color: #fff;
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 14px;

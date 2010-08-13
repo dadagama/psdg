@@ -62,11 +62,10 @@ class GeneradorHtml
 		$this->tag("div", array("class"=>"div_help"));
 			$this->tag("input", array(	"onclick"=>"mostrarPopupAyuda('$nombreBoton');", 
 												"type"=>"image", 
-												"src"=>"../imagenes/btn_help_1.png", 
+												"src"=>"../imagenes/help.png", 
 												"alt"=>"Ayuda", 
 												"title"=>$this->getText("ttp_help"),
-												"onmouseover"=>"this.src='../imagenes/btn_help_2.png'",
-												"onmouseout"=>"this.src='../imagenes/btn_help_1.png'"));
+                        "class"=>"boton"));
 		$this->end("div");
 	}
 	
@@ -215,9 +214,9 @@ class GeneradorHtml
 		$this->tag("div", array("class"=>"fila"));
 			$this->tag("div", array("class"=>"celda vertical_arriba ancho_1024"));
 				if($atras)
-					$this->tag("input", array("id"=>$prefijo."_btn_anterior", "type"=>"image", "src"=>"../imagenes/btn_back_1.png", "onmouseover"=>"this.src='../imagenes/btn_back_2.png'", "onmouseout"=>"this.src='../imagenes/btn_back_1.png'", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$this->getText($prefijo.'_ttp_anterior'), "title"=>$this->getText($prefijo.'_ttp_anterior')));
+					$this->tag("input", array("id"=>$prefijo."_btn_anterior", "type"=>"image", "src"=>"../imagenes/back.png", "class"=>"boton", "onclick"=>"mostrarEtapa('anterior');", "alt"=>$this->getText($prefijo.'_ttp_anterior'), "title"=>$this->getText($prefijo.'_ttp_anterior')));
 				if($adelante)
-					$this->tag("input", array("id"=>$prefijo."_btn_siguiente", "type"=>"image", "src"=>"../imagenes/btn_next_1.png", "onmouseover"=>"this.src='../imagenes/btn_next_2.png'", "onmouseout"=>"this.src='../imagenes/btn_next_1.png'", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$this->getText($prefijo.'_ttp_siguiente'), "title"=>$this->getText($prefijo.'_ttp_siguiente')));
+					$this->tag("input", array("id"=>$prefijo."_btn_siguiente", "type"=>"image", "src"=>"../imagenes/next.png", "class"=>"boton", "onclick"=>"mostrarEtapa('siguiente');", "alt"=>$this->getText($prefijo.'_ttp_siguiente'), "title"=>$this->getText($prefijo.'_ttp_siguiente')));
 			$this->end("div");
 		$this->end("div");
 		$this->end("div");

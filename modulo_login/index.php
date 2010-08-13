@@ -35,8 +35,11 @@
 ?>
 <html>
 	<head>
-		<title>PSDG</title>
+		<title direction='left' align='center'>
+      PSDG Synthetic Data Generator
+    </title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="icon" type="image/gif" href="../imagenes/favicon.gif"/>
 		<script type="text/javascript" src="../herramientas/validacion.js"></script>
 		<script type="text/javascript" src="../herramientas/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="../herramientas/funciones.js"></script>
@@ -50,27 +53,34 @@
 		<link rel="stylesheet" type="text/css" href="../estilos/general.css"/>
 	</head>
 	<body onload="establecerPosicionSecuencia(<?php echo $_SESSION['step']; ?>); mostrarBotonLogout(<?php echo $_SESSION['step']; ?>); establecerIdioma('<?php echo $idioma; ?>')">
-		<?php
+
+  <map name="mapa_logo">
+    <area shape="rect" alt="Universidad del Valle" coords="702,5,750,70" href="http://www.univalle.edu.co" title="Universidad del Valle"/>
+  </map>
+    
+    <?php
 			//DIV LOGO
 			$html->tag("div", array("id"=>"div_logo", "class"=>"alineacion_centrado"));
+        $html->tag("img", array("src"=>"../imagenes/psdg.png", "alt"=>"PSDG Logo", "usemap"=>"#mapa_logo"));
+				$html->end("img");
 			$html->end("div");
 			//FIN DIV LOGO
 			
 			//DIV SECUENCIA
 			$html->tag("div", array("id"=>"div_secuencia", "class"=>"alineacion_centrado alto_70"));
-				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Set connections"));
+				$html->tag("img", array("id"=>"step_1", "src"=>"../imagenes/step_1_off.png", "alt"=>"paso 1", "title"=>"Set connections", "class"=>"boton"));
 				$html->end("img");
-				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->tag("img", array("src"=>"../imagenes/arrow.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_2", "src"=>"../imagenes/step_2_off.png", "alt"=>"paso 2", "title"=>"Set restrictions"));
+				$html->tag("img", array("id"=>"step_2", "src"=>"../imagenes/step_2_off.png", "alt"=>"paso 2", "title"=>"Set restrictions", "class"=>"boton"));
 				$html->end("img");
-				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->tag("img", array("src"=>"../imagenes/arrow.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_3", "src"=>"../imagenes/step_3_off.png", "alt"=>"paso 3", "title"=>"Set output type"));
+				$html->tag("img", array("id"=>"step_3", "src"=>"../imagenes/step_3_off.png", "alt"=>"paso 3", "title"=>"Set output type", "class"=>"boton"));
 				$html->end("img");
-				$html->tag("img", array("src"=>"../imagenes/next.png", "alt"=>"next"));
+				$html->tag("img", array("src"=>"../imagenes/arrow.png", "alt"=>"next"));
 				$html->end("img");
-				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"paso 4", "title"=>"Run"));
+				$html->tag("img", array("id"=>"step_4", "src"=>"../imagenes/step_4_off.png", "alt"=>"paso 4", "title"=>"Run", "class"=>"boton"));
 				$html->end("img");
 				
 				$html->br();
@@ -85,13 +95,13 @@
 				$html->end("div");
 				
 				$html->tag("div", array("id"=>"div_logout"));
-					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "onmouseover"=>"this.src='../imagenes/btn_logout_2.png'", "onmouseout"=>"this.src='../imagenes/btn_logout_1.png'", "alt"=>"Cerrar sesión/Logout", "title"=>"Cerrar sesión/Logout"));
+					$html->tag("input", array("id"=>"btn_logout", "type"=>"image", "onclick"=>"cerrarSesion();", "src"=>"../imagenes/btn_logout_1.png", "alt"=>"Cerrar sesión/Logout", "title"=>"Cerrar sesión/Logout", "class"=>"boton"));
 					$html->end("input");
 				$html->end("div");
 				
 				$html->tag("div", array("id"=>"div_manual"));
 					$html->tag("a", array("href"=>"../manual_de_usuario/index.php", "target"=>"_blank"));
-						$html->tag("img", array("id"=>"btn_manual", "src"=>"../imagenes/manual.png", "alt"=>"Guía del usuario/User Guide", "title"=>"Guía del usuario/User Guide", "class"=>"sin_borde"), "", true);
+						$html->tag("img", array("id"=>"btn_manual", "src"=>"../imagenes/manual.png", "alt"=>"Guía del usuario/User Guide", "title"=>"Guía del usuario/User Guide", "class"=>"boton"), "", true);
 					$html->end("a");
 				$html->end("div");
 					

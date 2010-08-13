@@ -56,13 +56,13 @@ function habilitarSiguienteEtapa(habilitar)
 	{
 		$('#con_btn_siguiente').removeAttr("disabled");
 		setTimeout('efecto("con_btn_siguiente","hide")',0);
-		$('#con_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
+		$('#con_btn_siguiente').attr("src","../imagenes/next.png");
 		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
 	}
 	else
 	{
 		setTimeout('efecto("con_btn_siguiente","hide")',0);
-		$('#con_btn_siguiente').attr("src","../imagenes/btn_next_3.png");
+		$('#con_btn_siguiente').attr("src","../imagenes/next_off.png");
 		setTimeout('efecto("con_btn_siguiente","fadeIn")',0);
 		$('#con_btn_siguiente').attr("disabled","disabled");
 	}
@@ -330,8 +330,7 @@ function mostrarConexiones(conexiones)
 		var con_nombre = json_data_object[x][0];
 		var con_tipo = json_data_object[x][1];
 		var imagen_tipo = "../imagenes/";
-		var imagen_eliminar = "../imagenes/btn_delete_1.png";
-		var imagen_eliminar_over = "../imagenes/btn_delete_2.png";
+		var imagen_eliminar = "../imagenes/delete.png";
 		
 		switch(con_tipo)
 		{
@@ -354,7 +353,7 @@ function mostrarConexiones(conexiones)
 								"		<label>"+con_nombre+"</label>" +
 								"	</div>" +
 								"	<div class='ancho_50 celda vertical_centro alto_40 conexion_establecida borde_inferior'>" +
-								"		<input type='image' title='"+lang_js[21]+"' alt='eliminar_conexion' src='"+imagen_eliminar+"' onmouseout='this.src=\""+imagen_eliminar+"\"' onmouseover='this.src=\""+imagen_eliminar_over+"\"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
+								"		<input type='image' title='"+lang_js[21]+"' class='boton' alt='eliminar_conexion' src='"+imagen_eliminar+"' onmouseout='this.src=\""+imagen_eliminar+"\"' onclick='eliminarConexion(\""+con_nombre+"\",\""+con_tipo+"\");'" +
 								"	</div>" +
 								"</div>";
 		if(con_nombre != "BDO")
