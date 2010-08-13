@@ -56,13 +56,13 @@ function habilitarSiguienteEtapa(habilitar)
 	{
 		$('#res_btn_siguiente').removeAttr("disabled");
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_1.png");
+		$('#res_btn_siguiente').attr("src","../imagenes/next.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 	}
 	else
 	{
 		setTimeout('efecto("res_btn_siguiente","hide")',0);
-		$('#res_btn_siguiente').attr("src","../imagenes/btn_next_3.png");
+		$('#res_btn_siguiente').attr("src","../imagenes/next_off.png");
 		setTimeout('efecto("res_btn_siguiente","fadeIn")',0);
 		$('#res_btn_siguiente').attr("disabled","disabled");
 	}
