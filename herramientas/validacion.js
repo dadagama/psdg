@@ -150,7 +150,7 @@ function validarRangoFechas(campoFechaInicial, campoFechaFinal, nombreCampoFecha
 
 function validarRango(campoInicial, campoFinal, nombreCampoInicial, nombreCampoFinal)
 {
-  if(campoInicial.val() <= campoFinal.val())
+  if(parseInt(campoInicial.val()) <= parseInt(campoFinal.val()))
     return true;
   else
   {
